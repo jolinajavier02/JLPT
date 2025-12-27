@@ -177,7 +177,37 @@
         </div>
         <div id="grammar-content">
             <div class="container" style="max-width: 900px;">
-                <h2 style="text-align: center; margin-bottom: 3rem;">Grammar Sentences</h2>
+                <h2 style="text-align: center; margin-bottom: 2rem;">Grammar Sentences</h2>
+
+                <!-- Sentence Constructor -->
+                <div class="info-card"
+                    style="padding: 2rem; margin-bottom: 3rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem; color: white;">✨ Sentence Constructor</h3>
+                    <p style="text-align: center; margin-bottom: 1.5rem; opacity: 0.9;">Type an English sentence and see
+                        it in Japanese!</p>
+
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <input type="text" id="english-input" placeholder="e.g., I want to go to the park"
+                            style="flex: 1; padding: 1rem; border-radius: 8px; border: none; font-size: 1rem;">
+                        <button onclick="constructSentence()" class="btn"
+                            style="background: white; color: #667eea; padding: 1rem 2rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Translate
+                        </button>
+                    </div>
+
+                    <div id="constructed-output"
+                        style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; min-height: 150px; display: none;">
+                        <div id="japanese-output"
+                            style="font-size: 2rem; font-family: var(--font-jp); text-align: center; margin-bottom: 1rem; line-height: 2.5;">
+                        </div>
+                        <div id="romaji-output"
+                            style="font-size: 1.2rem; text-align: center; margin-bottom: 0.5rem; opacity: 0.9;"></div>
+                        <div id="english-output" style="font-size: 1.1rem; text-align: center; font-weight: 600;"></div>
+                    </div>
+                </div>
+
+                <!-- Example Sentences Title -->
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Example Sentences</h3>
 
                 <!-- Grammar Sentence Cards -->
                 <div style="display: flex; flex-direction: column; gap: 2rem;">
@@ -499,6 +529,99 @@
             if (event && event.target !== event.currentTarget && event.target.className !== 'close-modal') return;
             document.getElementById('modal-container').classList.remove('active');
         }
+
+        // Sentence Constructor
+        const sentenceDictionary = {
+            "i want to go to the park": {
+                japanese: "<ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>公園</rb><rt>こうえん</rt></ruby>に<ruby><rb>行</rb><rt>い</rt></ruby>きたいです。",
+                romaji: "Watashi wa kōen ni ikitai desu.",
+                english: "I want to go to the park."
+            },
+            "i am a student": {
+                japanese: "<ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>学生</rb><rt>がくせい</rt></ruby>です。",
+                romaji: "Watashi wa gakusei desu.",
+                english: "I am a student."
+            },
+            "i like japanese food": {
+                japanese: "<ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>日本</rb><rt>にほん</rt></ruby>の<ruby><rb>料理</rb><rt>りょうり</rt></ruby>が<ruby><rb>好</rb><rt>す</rt></ruby>きです。",
+                romaji: "Watashi wa nihon no ryōri ga suki desu.",
+                english: "I like Japanese food."
+            },
+            "the weather is nice today": {
+                japanese: "<ruby><rb>今日</rb><rt>きょう</rt></ruby>は<ruby><rb>天気</rb><rt>てんき</rt></ruby>がいいです。",
+                romaji: "Kyō wa tenki ga ii desu.",
+                english: "The weather is nice today."
+            },
+            "i study japanese every day": {
+                japanese: "<ruby><rb>毎日</rb><rt>まいにち</rt></ruby><ruby><rb>日本語</rb><rt>にほんご</rt></ruby>を<ruby><rb>勉強</rb><rt>べんきょう</rt></ruby>します。",
+                romaji: "Mainichi nihongo o benkyō shimasu.",
+                english: "I study Japanese every day."
+            },
+            "i want to eat sushi": {
+                japanese: "<ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>寿司</rb><rt>すし</rt></ruby>を<ruby><rb>食</rb><rt>た</rt></ruby>べたいです。",
+                romaji: "Watashi wa sushi o tabetai desu.",
+                english: "I want to eat sushi."
+            },
+            "i go to school tomorrow": {
+                japanese: "<ruby><rb>明日</rb><rt>あした</rt></ruby><ruby><rb>学校</rb><rt>がっこう</rt></ruby>に<ruby><rb>行</rb><rt>い</rt></ruby>きます。",
+                romaji: "Ashita gakkō ni ikimasu.",
+                english: "I go to school tomorrow."
+            },
+            "i read books at the library": {
+                japanese: "<ruby><rb>図書館</rb><rt>としょかん</rt></ruby>で<ruby><rb>本</rb><rt>ほん</rt></ruby>を<ruby><rb>読</rb><rt>よ</rt></ruby>みます。",
+                romaji: "Toshokan de hon o yomimasu.",
+                english: "I read books at the library."
+            },
+            "i watched a movie with my friend": {
+                japanese: "<ruby><rb>友達</rb><rt>ともだち</rt></ruby>と<ruby><rb>映画</rb><rt>えいが</rt></ruby>を<ruby><rb>見</rb><rt>み</rt></ruby>ました。",
+                romaji: "Tomodachi to eiga o mimashita.",
+                english: "I watched a movie with my friend."
+            },
+            "this food is delicious": {
+                japanese: "この<ruby><rb>料理</rb><rt>りょうり</rt></ruby>は<ruby><rb>美味</rb><rt>おい</rt></ruby>しいです。",
+                romaji: "Kono ryōri wa oishii desu.",
+                english: "This food is delicious."
+            }
+        };
+
+        function constructSentence() {
+            const input = document.getElementById('english-input').value.toLowerCase().trim();
+            const output = document.getElementById('constructed-output');
+            const japaneseOutput = document.getElementById('japanese-output');
+            const romajiOutput = document.getElementById('romaji-output');
+            const englishOutput = document.getElementById('english-output');
+
+            if (!input) {
+                alert('Please enter an English sentence!');
+                return;
+            }
+
+            const result = sentenceDictionary[input];
+
+            if (result) {
+                japaneseOutput.innerHTML = result.japanese;
+                romajiOutput.textContent = result.romaji;
+                englishOutput.textContent = result.english;
+                output.style.display = 'block';
+            } else {
+                japaneseOutput.innerHTML = '❌ Sentence not found';
+                romajiOutput.textContent = 'Try one of these examples:';
+                englishOutput.innerHTML = '<div style="text-align: left; font-size: 0.9rem; margin-top: 1rem;">' +
+                    '• I want to go to the park<br>' +
+                    '• I am a student<br>' +
+                    '• I like Japanese food<br>' +
+                    '• The weather is nice today<br>' +
+                    '• I study Japanese every day<br>' +
+                    '• I want to eat sushi<br>' +
+                    '• I go to school tomorrow<br>' +
+                    '• I read books at the library<br>' +
+                    '• I watched a movie with my friend<br>' +
+                    '• This food is delicious' +
+                    '</div>';
+                output.style.display = 'block';
+            }
+        }
+
     </script>
 </body>
 
