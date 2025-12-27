@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - NihongoMastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">NihongoMastery</a>
+                <a href="index.html" class="btn" style="color: var(--primary-color);">Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <header class="dashboard-header animate-fade-in">
+            <h1>Your Learning Path</h1>
+            <p>Select a module to begin your study session.</p>
+        </header>
+
+        <div class="learning-grid animate-fade-in">
+            <div class="learn-box" onclick="toggleSection('hiragana')">
+                <span class="icon-placeholder">あ</span>
+                <h3>Learn Hiragana</h3>
+                <p>The foundation of Japanese reading.</p>
+            </div>
+            <div class="learn-box" onclick="toggleSection('katakana')">
+                <span class="icon-placeholder">ア</span>
+                <h3>Learn Katakana</h3>
+                <p>For foreign words and emphasis.</p>
+            </div>
+            <div class="learn-box">
+                <span class="icon-placeholder">漢</span>
+                <h3>Learn Kanji</h3>
+                <p>Master the Chinese characters.</p>
+            </div>
+            <div class="learn-box">
+                <span class="icon-placeholder">文</span>
+                <h3>Learn Grammar</h3>
+                <p>Sentence structures and rules.</p>
+            </div>
+            <div class="learn-box">
+                <span class="icon-placeholder">は</span>
+                <h3>Learn Particles</h3>
+                <p>Connect your words correctly.</p>
+            </div>
+            <div class="learn-box">
+                <span class="icon-placeholder">⚡</span>
+                <h3>Test Flashcard</h3>
+                <p>Review what you've learned.</p>
+            </div>
+        </div>
+
+        <!-- Hiragana Section -->
+        <section id="hiragana-section" class="alphabet-section alphabet-container">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Hiragana Chart</h2>
+                <div class="kana-grid" id="hiragana-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Katakana Section -->
+        <section id="katakana-section" class="alphabet-section alphabet-container">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Katakana Chart</h2>
+                <div class="kana-grid" id="katakana-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
