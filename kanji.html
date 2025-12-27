@@ -13,17 +13,16 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            overflow: hidden;
-            /* Prevent scrolling for the single-screen feel */
-            height: 100vh;
+            overflow-x: hidden;
+            min-height: 100vh;
             background: #f8f9fa;
         }
 
         /* Grid View (Scrollable) */
         .grid-view {
-            height: 100vh;
+            min-height: 100vh;
             overflow-y: auto;
-            padding: 2rem 1rem 4rem;
+            padding: 80px 1rem 4rem;
             display: none;
         }
 
@@ -314,6 +313,27 @@
             border-color: var(--primary-color);
         }
 
+        .load-more-btn {
+            display: block;
+            margin: 3rem auto;
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .load-more-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .detail-card {
@@ -364,7 +384,7 @@
     </header>
 
     <!-- Grid View -->
-    <div id="grid-view" class="grid-view active" style="margin-top: 60px;">
+    <div id="grid-view" class="grid-view active">
         <div class="container">
             <header style="text-align: center; margin-bottom: 2rem;">
                 <h1>Kanji Library</h1>
@@ -378,8 +398,8 @@
 
             <div id="loading-indicator" class="loading-spinner" style="margin: 2rem auto;"></div>
             <div class="kanji-grid" id="kanji-grid"></div>
-            <button id="load-more" class="load-more-btn" onclick="loadMoreKanji()"
-                style="display: none; margin: 2rem auto;">Load More</button>
+            <button id="load-more" class="load-more-btn" onclick="loadMoreKanji()" style="display: none;">Load
+                More</button>
         </div>
     </div>
 
@@ -499,38 +519,116 @@
             return romaji;
         }
 
-        // Local Data with SVGs
+        // Local Data with SVGs - N5 Kanji Origins & Mnemonics
         const localKanjiData = {
-            '一': {
-                origin: "Represents one finger held up, or a single line.",
-                svg: `<svg viewBox="0 0 100 100"><line x1="20" y1="50" x2="80" y2="50" stroke="black" stroke-width="5"/></svg>`
+            // Numbers
+            '一': { origin: "Represents one finger held up, or a single line.", svg: `<svg viewBox="0 0 100 100"><line x1="20" y1="50" x2="80" y2="50" stroke="#333" stroke-width="8" stroke-linecap="round"/></svg>` },
+            '二': { origin: "Two lines representing the number two.", svg: `<svg viewBox="0 0 100 100"><line x1="30" y1="35" x2="70" y2="35" stroke="#333" stroke-width="8"/><line x1="20" y1="65" x2="80" y2="65" stroke="#333" stroke-width="8"/></svg>` },
+            '三': { origin: "Three lines representing the number three.", svg: `<svg viewBox="0 0 100 100"><line x1="30" y1="25" x2="70" y2="25" stroke="#333" stroke-width="8"/><line x1="40" y1="50" x2="60" y2="50" stroke="#333" stroke-width="8"/><line x1="20" y1="75" x2="80" y2="75" stroke="#333" stroke-width="8"/></svg>` },
+            '四': { origin: "Originally a pictograph of a nose breathing (two lines inside a mouth). Later borrowed for 'four'." },
+            '五': { origin: "Originally an X, representing crossing numbers. Later added lines to look like a spool of thread." },
+            '六': { origin: "A pictograph of a hut or tent. Borrowed for the number six." },
+            '七': { origin: "A cut line. The vertical line cuts the horizontal one. Represents the number seven." },
+            '八': { origin: "Two lines dividing or separating. Represents the number eight.", svg: `<svg viewBox="0 0 100 100"><path d="M50 20 L20 80 M50 20 L80 80" fill="none" stroke="#333" stroke-width="6"/></svg>` },
+            '九': { origin: "A pictograph of a bent arm showing muscle. Borrowed for nine." },
+            '十': { origin: "A needle (vertical) piercing a bead (horizontal). Represents ten or completeness.", svg: `<svg viewBox="0 0 100 100"><line x1="10" y1="50" x2="90" y2="50" stroke="#333" stroke-width="8"/><line x1="50" y1="10" x2="50" y2="90" stroke="#333" stroke-width="8"/></svg>` },
+            '百': { origin: "One (一) white (白) thumb. Represents a hundred." },
+            '千': { origin: "A person (人) with a line through it, representing a thousand people." },
+            '万': { origin: "A scorpion. Borrowed for ten thousand because scorpions swarm in large numbers." },
+
+            // Nature & Elements
+            '日': { origin: "A pictograph of the sun. Originally a circle with a dot inside.", svg: `<svg viewBox="0 0 100 100"><rect x="25" y="20" width="50" height="60" fill="none" stroke="#ff9800" stroke-width="6"/><line x1="25" y1="50" x2="75" y2="50" stroke="#ff9800" stroke-width="6"/></svg>` },
+            '月': { origin: "A pictograph of a crescent moon with clouds passing in front.", svg: `<svg viewBox="0 0 100 100"><path d="M30 10 Q20 50 30 90 Q60 90 60 60 Q60 30 30 10 M30 40 L60 40 M30 60 L60 60" fill="none" stroke="#333" stroke-width="6"/></svg>` },
+            '火': { origin: "A pictograph of flames rising from a fire.", svg: `<svg viewBox="0 0 100 100"><path d="M20 80 Q30 50 20 20 M80 80 Q70 50 80 20 M50 20 L40 60 L60 60 Z" fill="none" stroke="#e53935" stroke-width="4"/></svg>` },
+            '水': { origin: "A pictograph of flowing water. The center line is the stream, sides are ripples.", svg: `<svg viewBox="0 0 100 100"><path d="M50 10 L50 90 M20 30 Q30 50 20 80 M80 20 Q70 50 80 70" fill="none" stroke="#1e88e5" stroke-width="5"/></svg>` },
+            '木': { origin: "A pictograph of a tree with branches and roots.", svg: `<svg viewBox="0 0 100 100"><line x1="50" y1="10" x2="50" y2="90" stroke="#4caf50" stroke-width="6"/><line x1="20" y1="40" x2="80" y2="40" stroke="#4caf50" stroke-width="6"/><line x1="50" y1="40" x2="20" y2="90" stroke="#4caf50" stroke-width="6"/><line x1="50" y1="40" x2="80" y2="90" stroke="#4caf50" stroke-width="6"/></svg>` },
+            '金': {
+                origin: "Gold/Metal. A roof (top), layers of earth (lines), and nuggets of gold (dots) buried underneath. Like a king's treasure.",
+                imageUrl: "https://raw.githubusercontent.com/kanjialive/kanji-data-media/master/language-data/ka/金.png"
             },
-            '二': {
-                origin: "Two lines representing the number two.",
-                svg: `<svg viewBox="0 0 100 100"><line x1="30" y1="30" x2="70" y2="30" stroke="black" stroke-width="5"/><line x1="20" y1="70" x2="80" y2="70" stroke="black" stroke-width="5"/></svg>`
-            },
-            '三': {
-                origin: "Three lines representing the number three.",
-                svg: `<svg viewBox="0 0 100 100"><line x1="30" y1="20" x2="70" y2="20" stroke="black" stroke-width="5"/><line x1="40" y1="50" x2="60" y2="50" stroke="black" stroke-width="5"/><line x1="20" y1="80" x2="80" y2="80" stroke="black" stroke-width="5"/></svg>`
-            },
-            '山': {
-                origin: "A pictograph of a mountain with three peaks.",
-                svg: `<svg viewBox="0 0 100 100"><path d="M20 80 L20 40 L50 10 L80 40 L80 80 Z" fill="none" stroke="black" stroke-width="3"/><text x="35" y="95" font-size="10">Mountain</text></svg>`
-            },
-            '川': {
-                origin: "A pictograph of a flowing river.",
-                svg: `<svg viewBox="0 0 100 100"><path d="M20 10 Q30 50 20 90 M50 10 Q60 50 50 90 M80 10 Q90 50 80 90" fill="none" stroke="blue" stroke-width="3"/></svg>`
-            },
-            '日': { origin: "A pictograph of the sun." },
-            '月': { origin: "A pictograph of a crescent moon." },
-            '木': { origin: "A pictograph of a tree." },
-            '人': { origin: "A pictograph of a person standing sideways." },
-            '口': { origin: "A pictograph of an open mouth." },
-            '田': { origin: "A pictograph of a divided rice field." },
-            '火': { origin: "A pictograph of flames." },
-            '水': { origin: "A pictograph of flowing water." },
-            '金': { origin: "Represents metal or gold hidden under the earth." },
-            '土': { origin: "A sprout growing out of the ground." }
+            '土': { origin: "A sprout growing out of the ground.", svg: `<svg viewBox="0 0 100 100"><line x1="20" y1="80" x2="80" y2="80" stroke="#795548" stroke-width="6"/><line x1="50" y1="80" x2="50" y2="30" stroke="#795548" stroke-width="6"/><line x1="30" y1="50" x2="70" y2="50" stroke="#795548" stroke-width="6"/></svg>` },
+            '山': { origin: "A pictograph of a mountain with three peaks.", svg: `<svg viewBox="0 0 100 100"><path d="M20 70 L20 40 L50 10 L80 40 L80 70 Z" fill="none" stroke="#333" stroke-width="5"/></svg>` },
+            '川': { origin: "A pictograph of a flowing river with three streams.", svg: `<svg viewBox="0 0 100 100"><path d="M25 10 Q35 50 25 90 M50 10 Q60 50 50 90 M75 10 Q85 50 75 90" fill="none" stroke="#2196f3" stroke-width="5"/></svg>` },
+            '田': { origin: "A pictograph of a rice field divided into four plots.", svg: `<svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" fill="none" stroke="#333" stroke-width="5"/><line x1="50" y1="20" x2="50" y2="80" stroke="#333" stroke-width="5"/><line x1="20" y1="50" x2="80" y2="50" stroke="#333" stroke-width="5"/></svg>` },
+            '雨': { origin: "Rain falling from a cloud (top line) through a window (box)." },
+            '空': { origin: "A hole (穴) + Work (工). The vast empty space above where work is done." },
+            '天': { origin: "A person (大) with a line above their head, representing the sky/heavens." },
+
+            // People & Body
+            '人': { origin: "A pictograph of a person standing sideways.", svg: `<svg viewBox="0 0 100 100"><path d="M50 20 L20 80 M50 20 L80 80" fill="none" stroke="#333" stroke-width="6"/></svg>` },
+            '口': { origin: "A pictograph of an open mouth.", svg: `<svg viewBox="0 0 100 100"><rect x="25" y="30" width="50" height="40" fill="none" stroke="#333" stroke-width="6"/></svg>` },
+            '目': { origin: "A pictograph of an eye turned vertically.", svg: `<svg viewBox="0 0 100 100"><rect x="30" y="20" width="40" height="60" fill="none" stroke="#333" stroke-width="5"/><line x1="30" y1="40" x2="70" y2="40" stroke="#333" stroke-width="5"/><line x1="30" y1="60" x2="70" y2="60" stroke="#333" stroke-width="5"/></svg>` },
+            '耳': { origin: "A pictograph of an ear." },
+            '手': { origin: "A pictograph of a hand with five fingers." },
+            '足': { origin: "A mouth (口) + a person stopping (止). The foot is used to stop." },
+            '力': { origin: "A pictograph of a flexing arm/muscle showing strength." },
+            '女': { origin: "A pictograph of a kneeling woman." },
+            '男': { origin: "Rice field (田) + Power (力). Men worked powerfully in the fields." },
+            '子': { origin: "A pictograph of a baby with a large head and waving arms." },
+            '父': { origin: "A hand holding a stone axe. The father is the leader/worker." },
+            '母': { origin: "A woman (女) with two dots representing breasts for nursing." },
+
+            // Directions & Locations
+            '上': { origin: "A line above a baseline. Indicates 'up'.", svg: `<svg viewBox="0 0 100 100"><line x1="20" y1="80" x2="80" y2="80" stroke="#333" stroke-width="6"/><line x1="50" y1="80" x2="50" y2="20" stroke="#333" stroke-width="6"/><line x1="50" y1="40" x2="80" y2="40" stroke="#333" stroke-width="6"/></svg>` },
+            '下': { origin: "A line below a baseline. Indicates 'down'.", svg: `<svg viewBox="0 0 100 100"><line x1="20" y1="20" x2="80" y2="20" stroke="#333" stroke-width="6"/><line x1="50" y1="20" x2="50" y2="80" stroke="#333" stroke-width="6"/><line x1="50" y1="60" x2="80" y2="60" stroke="#333" stroke-width="6"/></svg>` },
+            '中': { origin: "A line passing through the center of a circle/square.", svg: `<svg viewBox="0 0 100 100"><rect x="25" y="30" width="50" height="40" fill="none" stroke="#333" stroke-width="5"/><line x1="50" y1="10" x2="50" y2="90" stroke="#333" stroke-width="5"/></svg>` },
+            '外': { origin: "Evening (夕) + Divination (卜). Divination was done outside in the evening." },
+            '右': { origin: "Hand (no) + Mouth (口). The hand used to eat (right hand)." },
+            '左': { origin: "Hand (no) + Work (工). The hand used to hold tools (left hand)." },
+            '北': { origin: "Two people sitting back to back. Cold wind comes from the North." },
+            '西': { origin: "A bird returning to its nest at sunset (West)." },
+            '南': { origin: "A lush plant growing in the warm South." },
+            '東': { origin: "Sun (日) rising behind a Tree (木). The East." },
+
+            // Verbs & Actions
+            '見': { origin: "Eye (目) + Legs (儿). An eye on legs, going to see." },
+            '聞': { origin: "Ear (耳) inside a Gate (門). Listening through the door to hear." },
+            '言': { origin: "Words coming out of a mouth (口)." },
+            '話': { origin: "Words (言) + Tongue (舌). Speaking with the tongue." },
+            '読': { origin: "Words (言) + Sell (売). Reading aloud was like selling words." },
+            '書': { origin: "A hand holding a brush writing on paper." },
+            '食': { origin: "A person (人) + Good (良). Eating good food." },
+            '飲': { origin: "Eat (食) + Yawn (欠). Opening mouth to drink." },
+            '行': { origin: "A crossroad. To go." },
+            '来': { origin: "A wheat plant. Wheat came from across the sea." },
+            '出': { origin: "Something emerging from a container. To exit/come out." },
+            '入': { origin: "An arrow entering a target. To enter." },
+            '立': { origin: "A person standing on the ground." },
+            '休': { origin: "A person (人) leaning against a tree (木) to rest." },
+
+            // Adjectives & States
+            '大': { origin: "A person stretching arms and legs wide. Big.", svg: `<svg viewBox="0 0 100 100"><path d="M50 20 L20 80 M50 20 L80 80 M20 40 L80 40" fill="none" stroke="#333" stroke-width="6"/></svg>` },
+            '小': { origin: "Three small dots/grains. Small.", svg: `<svg viewBox="0 0 100 100"><line x1="50" y1="20" x2="50" y2="80" stroke="#333" stroke-width="6"/><circle cx="30" cy="50" r="5" fill="#333"/><circle cx="70" cy="50" r="5" fill="#333"/></svg>` },
+            '高': { origin: "A tall tower or building. High/Expensive." },
+            '安': { origin: "A woman (女) under a roof (宀). Peaceful and cheap." },
+            '新': { origin: "Stand (立) + Tree (木) + Axe (斤). Cutting a tree to make something new." },
+            '古': { origin: "Ten (十) + Mouth (口). A story told for ten generations is old." },
+            '多': { origin: "Two moons (夕). Many nights passed." },
+            '少': { origin: "Small (小) + a slash. Cutting something small makes it fewer." },
+            '長': { origin: "Long hair flowing down. Long." },
+            '白': { origin: "The sun (日) with a ray coming out. White/Bright." },
+            '赤': { origin: "Earth (土) + Fire (火). Red hot earth." },
+            '青': { origin: "Growing plants. Blue/Green (young color)." },
+            '黒': { origin: "Soot from fire. Black." },
+
+            // Time
+            '今': { origin: "A lid closing now. The present moment." },
+            '年': { origin: "A person carrying grain on their back. Annual harvest." },
+            '毎': { origin: "A mother (母) with decorative marks. Every (day she works)." },
+            '朝': { origin: "Moon (月) + Sun (日) + Plants. Morning when sun rises." },
+            '昼': { origin: "Sun (日) at its highest. Noon/Daytime." },
+            '夜': { origin: "Person (人) under a roof at night. Night." },
+            '前': { origin: "A boat moving forward. Before/Front." },
+            '後': { origin: "A person walking behind. After/Back." },
+
+            // Learning & School
+            '学': { origin: "A child (子) under a roof (宀) with learning symbols. Study." },
+            '校': { origin: "Tree (木) + Exchange (交). A school where knowledge is exchanged." },
+            '先': { origin: "A cow (牛) + legs (儿). The cow leads ahead. Before/Teacher." },
+            '生': { origin: "A plant sprouting from the ground. Life/Birth." },
+            '本': { origin: "Tree (木) with a mark at the base. Origin/Book." },
+            '名': { origin: "Evening (夕) + Mouth (口). Calling someone's name in the dark." },
+            '字': { origin: "A child (子) under a roof (宀). Written character." }
         };
 
         document.addEventListener('DOMContentLoaded', () => { fetchJoyoKanji(); });
@@ -600,7 +698,15 @@
 
                 if (local) {
                     originText.textContent = local.origin;
-                    originImg.innerHTML = local.svg ? local.svg : '<span style="color: #ccc; font-size: 0.8rem;">Visual Coming Soon</span>';
+
+                    // Priority: imageUrl > svg > placeholder
+                    if (local.imageUrl) {
+                        originImg.innerHTML = `<img src="${local.imageUrl}" alt="Mnemonic for ${char}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.parentElement.innerHTML='<span style=\\'color: #ccc; font-size: 0.8rem;\\'>Image failed to load</span>'">`;
+                    } else if (local.svg) {
+                        originImg.innerHTML = local.svg;
+                    } else {
+                        originImg.innerHTML = '<span style="color: #ccc; font-size: 0.8rem;">Visual Coming Soon</span>';
+                    }
                 } else {
                     originText.textContent = "Origin data not available for this Kanji.";
                     originImg.innerHTML = '<span style="color: #ccc; font-size: 0.8rem;">No Visual Available</span>';
