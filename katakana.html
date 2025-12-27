@@ -302,8 +302,18 @@
                     return response.text();
                 })
                 .then(svgData => {
-                    container.innerHTML = svgData;
-                    animateStrokes();
+                    // Parse the SVG data to extract only the <svg> element
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(svgData, "image/svg+xml");
+                    const svgElement = doc.querySelector("svg");
+
+                    if (svgElement) {
+                        container.innerHTML = ""; // Clear loading text
+                        container.appendChild(svgElement);
+                        animateStrokes();
+                    } else {
+                        throw new Error("Invalid SVG data");
+                    }
                 })
                 .catch(error => {
                     console.error('Error loading SVG:', error);
