@@ -33,7 +33,7 @@ function populateGrid(gridId, data) {
     data.forEach(item => {
         const card = document.createElement('div');
         card.className = 'kana-card';
-        
+
         if (item.char) {
             card.innerHTML = `
                 <span class="kana-char">${item.char}</span>
@@ -42,7 +42,7 @@ function populateGrid(gridId, data) {
         } else {
             card.style.visibility = 'hidden'; // Placeholder for empty spots
         }
-        
+
         grid.appendChild(card);
     });
 }
@@ -62,8 +62,46 @@ function toggleSection(type) {
     }
 }
 
+// Flashcard Logic
+let currentCard = null;
+
+function getRandomChar() {
+    // Combine both datasets, filtering out empty placeholders
+    const allChars = [...hiraganaData, ...katakanaData].filter(item => item.char !== '');
+    const randomIndex = Math.floor(Math.random() * allChars.length);
+    return allChars[randomIndex];
+}
+
+function nextCard() {
+    const cardElement = document.getElementById('flashcard');
+
+    // Reset flip state if flipped
+    if (cardElement.classList.contains('flipped')) {
+        cardElement.classList.remove('flipped');
+        // Wait for flip animation to finish before changing content
+        setTimeout(() => {
+            updateCardContent();
+        }, 300);
+    } else {
+        updateCardContent();
+    }
+}
+
+function updateCardContent() {
+    currentCard = getRandomChar();
+    document.getElementById('flashcard-char').textContent = currentCard.char;
+    document.getElementById('flashcard-romaji').textContent = currentCard.romaji;
+}
+
+function flipCard() {
+    document.getElementById('flashcard').classList.toggle('flipped');
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     populateGrid('hiragana-grid', hiraganaData);
     populateGrid('katakana-grid', katakanaData);
+
+    // Initialize first flashcard
+    nextCard();
 });
