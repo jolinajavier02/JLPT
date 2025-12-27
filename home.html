@@ -18,61 +18,66 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-
-        header {
-            position: relative;
-            /* Make header part of the flow */
-            background: transparent;
-            border: none;
-            padding: 1rem 0;
-            flex-shrink: 0;
-            backdrop-filter: none;
-            /* Remove blur effect */
-            box-shadow: none;
-            /* Remove any shadow */
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
         }
 
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            /* Align to top */
-            padding: 4rem 2rem 2rem;
-            /* Add top padding */
-            overflow: hidden;
+            padding: 2rem;
+            overflow-y: auto;
+            margin-top: 60px;
+            /* Space for fixed header */
         }
 
         .dashboard-header {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-            /* Remove inherited top padding */
-            padding-bottom: 4rem !important;
-            /* Increase space for hover effect */
+            text-align: center;
+            padding: 3rem 0;
             flex-shrink: 0;
+        }
+
+        .dashboard-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary-color), #2c3e50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .learning-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            /* Reduce gap */
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
             margin: 0 auto;
             width: 100%;
-            height: auto;
+            padding-bottom: 4rem;
         }
 
         .learn-box {
-            padding: 1.5rem;
-            /* Reduce padding to save space */
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .learn-box:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
 
         .icon-placeholder {
-            font-size: 2.5rem;
-            /* Slightly smaller icons */
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
         }
     </style>
 </head>
@@ -88,10 +93,12 @@
     </header>
 
     <div class="main-content">
-        <header class="dashboard-header">
+        <div class="dashboard-header">
             <h1>Your Learning Modules</h1>
-            <p>Select a module to open its content.</p>
-        </header>
+            <p style="color: var(--text-light); font-size: 1.1rem;">Select a module to begin your journey to mastery.
+            </p>
+        </div>
+
 
         <div class="learning-grid animate-fade-in">
             <div class="learn-box" onclick="window.location.href='hiragana.html'">
@@ -177,45 +184,127 @@
         </div>
         <div id="grammar-content">
             <div class="container" style="max-width: 900px;">
-                <h2 style="text-align: center; margin-bottom: 2rem;">Grammar Sentences</h2>
+                <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">Japanese Grammar
+                    Mastery</h2>
+
+                <!-- Grammar Building Blocks -->
+                <div class="info-card"
+                    style="padding: 2rem; margin-bottom: 3rem; border-left: 5px solid var(--secondary-color);">
+                    <h3 style="margin-bottom: 1.5rem;">🏗️ How Sentences are Built</h3>
+                    <p style="margin-bottom: 1rem;">Japanese follows a <strong>Subject - Object - Verb (SOV)</strong>
+                        structure. Unlike English, the verb <em>always</em> comes at the end.</p>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                        <div style="background: #fdf2f2; padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">1. The Topic (は)</h4>
+                            <p style="font-size: 0.9rem;">Marks what the sentence is about. <br><strong>私 は...</strong>
+                                (As for me...)</p>
+                        </div>
+                        <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: #166534; margin-bottom: 0.5rem;">2. The Object (を)</h4>
+                            <p style="font-size: 0.9rem;">Marks the thing receiving the action. <br><strong>寿司
+                                    を...</strong> (...sushi [object])</p>
+                        </div>
+                        <div style="background: #eff6ff; padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: #1e40af; margin-bottom: 0.5rem;">3. The Verb</h4>
+                            <p style="font-size: 0.9rem;">The action. Always at the end! <br><strong>...食べます</strong>
+                                (...eat.)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vocabulary Changes (Conjugation) -->
+                <div class="info-card"
+                    style="padding: 2rem; margin-bottom: 3rem; border-left: 5px solid var(--primary-color); background: #fffaf0;">
+                    <h3 style="margin-bottom: 1.5rem;">🔄 How Vocabulary Changes</h3>
+                    <p style="margin-bottom: 1rem;">In Japanese, verbs and adjectives change their endings based on
+                        <strong>tense</strong> (past/present), <strong>politeness</strong>, and <strong>purpose</strong>
+                        (want to, can do, etc.).
+                    </p>
+
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #eee;">
+                                <th style="text-align: left; padding: 1rem;">Purpose</th>
+                                <th style="text-align: left; padding: 1rem;">Ending</th>
+                                <th style="text-align: left; padding: 1rem;">Example (Eat)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 1rem;">Polite Present</td>
+                                <td style="padding: 1rem; color: var(--primary-color); font-weight: 600;">-ます (-masu)
+                                </td>
+                                <td style="padding: 1rem;">食べ<strong>ます</strong></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 1rem;">Polite Past</td>
+                                <td style="padding: 1rem; color: var(--primary-color); font-weight: 600;">-ました
+                                    (-mashita)</td>
+                                <td style="padding: 1rem;">食べ<strong>ました</strong></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 1rem;">Desire (Want to)</td>
+                                <td style="padding: 1rem; color: var(--primary-color); font-weight: 600;">-たい (-tai)
+                                </td>
+                                <td style="padding: 1rem;">食べ<strong>たい</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem;">Negative (Don't)</td>
+                                <td style="padding: 1rem; color: var(--primary-color); font-weight: 600;">-ません (-masen)
+                                </td>
+                                <td style="padding: 1rem;">食べ<strong>ません</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
 
                 <!-- Sentence Constructor -->
                 <div class="info-card"
-                    style="padding: 2rem; margin-bottom: 3rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                    <h3 style="text-align: center; margin-bottom: 1.5rem; color: white;">✨ Sentence Constructor</h3>
-                    <p style="text-align: center; margin-bottom: 1.5rem; opacity: 0.9;">Type an English sentence and see
-                        it in Japanese!</p>
+                    style="padding: 2rem; margin-bottom: 3rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; box-shadow: 0 10px 20px rgba(118, 75, 162, 0.3);">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem; color: white;">✨ Interactive Sentence
+                        Constructor</h3>
+                    <p style="text-align: center; margin-bottom: 1.5rem; opacity: 0.9;">Type a sentence to see how
+                        vocabulary and particles change!</p>
 
                     <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
                         <input type="text" id="english-input" placeholder="e.g., I want to go to the park"
-                            style="flex: 1; padding: 1rem; border-radius: 8px; border: none; font-size: 1rem;">
+                            style="flex: 1; padding: 1rem; border-radius: 8px; border: none; font-size: 1rem; color: #333;">
                         <button onclick="constructSentence()" class="btn"
-                            style="background: white; color: #667eea; padding: 1rem 2rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-                            Translate
+                            style="background: white; color: #667eea; padding: 1rem 2rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: transform 0.2s;">
+                            Construct
                         </button>
                     </div>
 
                     <div id="constructed-output"
-                        style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; min-height: 150px; display: none;">
+                        style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px; min-height: 150px; display: none; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2);">
                         <div id="japanese-output"
-                            style="font-size: 2rem; font-family: var(--font-jp); text-align: center; margin-bottom: 1rem; line-height: 2.5;">
+                            style="font-size: 2.2rem; font-family: var(--font-jp); text-align: center; margin-bottom: 1rem; line-height: 2.5;">
                         </div>
                         <div id="romaji-output"
-                            style="font-size: 1.2rem; text-align: center; margin-bottom: 0.5rem; opacity: 0.9;"></div>
-                        <div id="english-output" style="font-size: 1.1rem; text-align: center; font-weight: 600;"></div>
+                            style="font-size: 1.2rem; text-align: center; margin-bottom: 0.5rem; opacity: 0.9; font-style: italic;">
+                        </div>
+                        <div id="english-output"
+                            style="font-size: 1.1rem; text-align: center; font-weight: 600; color: #fff;"></div>
                     </div>
                 </div>
 
-                <!-- Example Sentences Title -->
-                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Example Sentences</h3>
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Core Grammar Patterns
+                </h3>
 
-                <!-- Grammar Sentence Cards -->
                 <div style="display: flex; flex-direction: column; gap: 2rem;">
-
                     <!-- Sentence 1 -->
-                    <div class="info-card" style="padding: 2rem;">
+                    <div class="info-card" style="padding: 2rem; transition: transform 0.3s;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                            <span
+                                style="background: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Pattern:
+                                A は B です</span>
+                        </div>
                         <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
+                            <ruby style="font-size: 2.2rem; font-family: var(--font-jp); line-height: 2.5;">
                                 <rb>勉強</rb>
                                 <rt style="font-size: 1rem;">べんきょう</rt>
                                 <rb>は</rb>
@@ -226,246 +315,56 @@
                                 <rt></rt>
                             </ruby>
                         </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Benkyō wa taisetsu desu.
-                        </p>
                         <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            Studying is important.
-                        </p>
+                            style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 0.5rem 0; font-style: italic;">
+                            Benkyō wa taisetsu desu.</p>
+                        <p
+                            style="text-align: center; font-size: 1.2rem; font-weight: 600; color: var(--primary-color);">
+                            Studying is important.</p>
+                        <div
+                            style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee; font-size: 0.9rem; color: #666;">
+                            <strong>Grammar Note:</strong> The vocabulary <strong>勉強 (studying)</strong> acts as the
+                            topic. <strong>大切 (important)</strong> is the adjective. <strong>です</strong> makes it
+                            polite.
+                        </div>
                     </div>
 
                     <!-- Sentence 2 -->
                     <div class="info-card" style="padding: 2rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                            <span
+                                style="background: var(--secondary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Pattern:
+                                Subject は Object を Verb</span>
+                        </div>
                         <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
+                            <ruby style="font-size: 2.2rem; font-family: var(--font-jp); line-height: 2.5;">
                                 <rb>私</rb>
                                 <rt style="font-size: 1rem;">わたし</rt>
                                 <rb>は</rb>
                                 <rt></rt>
-                                <rb>学生</rb>
-                                <rt style="font-size: 1rem;">がくせい</rt>
-                                <rb>です。</rb>
-                                <rt></rt>
-                            </ruby>
-                        </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Watashi wa gakusei desu.
-                        </p>
-                        <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            I am a student.
-                        </p>
-                    </div>
-
-                    <!-- Sentence 3 -->
-                    <div class="info-card" style="padding: 2rem;">
-                        <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
-                                <rb>今日</rb>
-                                <rt style="font-size: 1rem;">きょう</rt>
-                                <rb>は</rb>
-                                <rt></rt>
-                                <rb>天気</rb>
-                                <rt style="font-size: 1rem;">てんき</rt>
-                                <rb>が</rb>
-                                <rt></rt>
-                                <rb>いいです。</rb>
-                                <rt></rt>
-                            </ruby>
-                        </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Kyō wa tenki ga ii desu.
-                        </p>
-                        <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            The weather is nice today.
-                        </p>
-                    </div>
-
-                    <!-- Sentence 4 -->
-                    <div class="info-card" style="padding: 2rem;">
-                        <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
-                                <rb>毎日</rb>
-                                <rt style="font-size: 1rem;">まいにち</rt>
-                                <rb>日本語</rb>
-                                <rt style="font-size: 1rem;">にほんご</rt>
+                                <rb>寿司</rb>
+                                <rt style="font-size: 1rem;">すし</rt>
                                 <rb>を</rb>
                                 <rt></rt>
-                                <rb>勉強</rb>
-                                <rt style="font-size: 1rem;">べんきょう</rt>
-                                <rb>します。</rb>
+                                <rb>食</rb>
+                                <rt style="font-size: 1rem;">た</rt>
+                                <rb>べます。</rb>
                                 <rt></rt>
                             </ruby>
                         </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Mainichi nihongo o benkyō shimasu.
-                        </p>
                         <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            I study Japanese every day.
-                        </p>
-                    </div>
-
-                    <!-- Sentence 5 -->
-                    <div class="info-card" style="padding: 2rem;">
-                        <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
-                                <rb>図書館</rb>
-                                <rt style="font-size: 1rem;">としょかん</rt>
-                                <rb>で</rb>
-                                <rt></rt>
-                                <rb>本</rb>
-                                <rt style="font-size: 1rem;">ほん</rt>
-                                <rb>を</rb>
-                                <rt></rt>
-                                <rb>読</rb>
-                                <rt style="font-size: 1rem;">よ</rt>
-                                <rb>みます。</rb>
-                                <rt></rt>
-                            </ruby>
+                            style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 0.5rem 0; font-style: italic;">
+                            Watashi wa sushi o tabemasu.</p>
+                        <p
+                            style="text-align: center; font-size: 1.2rem; font-weight: 600; color: var(--primary-color);">
+                            I eat sushi.</p>
+                        <div
+                            style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee; font-size: 0.9rem; color: #666;">
+                            <strong>Grammar Note:</strong> The particle <strong>を</strong> connects the object (sushi)
+                            to the verb (eat). Notice how the verb <strong>食べます</strong> changes to its polite form.
                         </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Toshokan de hon o yomimasu.
-                        </p>
-                        <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            I read books at the library.
-                        </p>
                     </div>
-
-                    <!-- Sentence 6 -->
-                    <div class="info-card" style="padding: 2rem;">
-                        <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
-                                <rb>友達</rb>
-                                <rt style="font-size: 1rem;">ともだち</rt>
-                                <rb>と</rb>
-                                <rt></rt>
-                                <rb>映画</rb>
-                                <rt style="font-size: 1rem;">えいが</rt>
-                                <rb>を</rb>
-                                <rt></rt>
-                                <rb>見</rb>
-                                <rt style="font-size: 1rem;">み</rt>
-                                <rb>ました。</rb>
-                                <rt></rt>
-                            </ruby>
-                        </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Tomodachi to eiga o mimashita.
-                        </p>
-                        <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            I watched a movie with my friend.
-                        </p>
-                    </div>
-
-                    <!-- Sentence 7 -->
-                    <div class="info-card" style="padding: 2rem;">
-                        <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
-                                <rb>明日</rb>
-                                <rt style="font-size: 1rem;">あした</rt>
-                                <rb>学校</rb>
-                                <rt style="font-size: 1rem;">がっこう</rt>
-                                <rb>に</rb>
-                                <rt></rt>
-                                <rb>行</rb>
-                                <rt style="font-size: 1rem;">い</rt>
-                                <rb>きます。</rb>
-                                <rt></rt>
-                            </ruby>
-                        </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Ashita gakkō ni ikimasu.
-                        </p>
-                        <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            I will go to school tomorrow.
-                        </p>
-                    </div>
-
-                    <!-- Sentence 8 -->
-                    <div class="info-card" style="padding: 2rem;">
-                        <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
-                                <rb>この</rb>
-                                <rt></rt>
-                                <rb>料理</rb>
-                                <rt style="font-size: 1rem;">りょうり</rt>
-                                <rb>は</rb>
-                                <rt></rt>
-                                <rb>美味</rb>
-                                <rt style="font-size: 1rem;">おい</rt>
-                                <rb>しいです。</rb>
-                                <rt></rt>
-                            </ruby>
-                        </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Kono ryōri wa oishii desu.
-                        </p>
-                        <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            This food is delicious.
-                        </p>
-                    </div>
-
-                    <!-- Sentence 9 -->
-                    <div class="info-card" style="padding: 2rem;">
-                        <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
-                                <rb>日本</rb>
-                                <rt style="font-size: 1rem;">にほん</rt>
-                                <rb>の</rb>
-                                <rt></rt>
-                                <rb>文化</rb>
-                                <rt style="font-size: 1rem;">ぶんか</rt>
-                                <rb>が</rb>
-                                <rt></rt>
-                                <rb>好</rb>
-                                <rt style="font-size: 1rem;">す</rt>
-                                <rb>きです。</rb>
-                                <rt></rt>
-                            </ruby>
-                        </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Nihon no bunka ga suki desu.
-                        </p>
-                        <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            I like Japanese culture.
-                        </p>
-                    </div>
-
-                    <!-- Sentence 10 -->
-                    <div class="info-card" style="padding: 2rem;">
-                        <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <ruby style="font-size: 2rem; font-family: var(--font-jp); line-height: 2.5;">
-                                <rb>週末</rb>
-                                <rt style="font-size: 1rem;">しゅうまつ</rt>
-                                <rb>に</rb>
-                                <rt></rt>
-                                <rb>買</rb>
-                                <rt style="font-size: 1rem;">か</rt>
-                                <rb>い</rb>
-                                <rt></rt>
-                                <rb>物</rb>
-                                <rt style="font-size: 1rem;">もの</rt>
-                                <rb>をします。</rb>
-                                <rt></rt>
-                            </ruby>
-                        </div>
-                        <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin: 1rem 0;">
-                            Shūmatsu ni kaimono o shimasu.
-                        </p>
-                        <p
-                            style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">
-                            I go shopping on weekends.
-                        </p>
-                    </div>
-
                 </div>
             </div>
         </div>
