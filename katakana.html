@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Katakana - NihongoMastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            overflow-y: auto;
+            height: auto;
+            min-height: 100vh;
+        }
+
+        .detail-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-align: center;
+        }
+
+        .detail-view.active {
+            display: flex;
+        }
+
+        .detail-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .detail-char {
+            font-size: 8rem;
+            font-family: var(--font-jp);
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .detail-romaji {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .stroke-order-box {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .stroke-placeholder {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .grid-view {
+            display: none;
+        }
+
+        .grid-view.active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 2rem 0 1rem;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+        }
+
+        .chart-section {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header style="position: sticky; top: 0; background: rgba(255,255,255,0.95);">
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">NihongoMastery</a>
+                <a href="home.html" class="btn" style="color: var(--primary-color); font-size: 0.9rem;">Back to
+                    Modules</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+
+        <!-- Grid View -->
+        <div id="grid-view" class="grid-view active">
+            <header style="text-align: center; margin-bottom: 3rem; position: static;">
+                <h1>Katakana Chart</h1>
+                <p>Click on a character to learn more.</p>
+            </header>
+
+            <div class="chart-section">
+                <h2 class="section-title">Basic (Gojūon)</h2>
+                <div class="kana-grid" id="basic-grid"></div>
+            </div>
+
+            <div class="chart-section">
+                <h2 class="section-title">Dakuten (Voiced)</h2>
+                <div class="kana-grid" id="dakuten-grid"></div>
+            </div>
+
+            <div class="chart-section">
+                <h2 class="section-title">Yōon (Combination)</h2>
+                <div class="kana-grid" id="yoon-grid"></div>
+            </div>
+        </div>
+
+        <!-- Detail View -->
+        <div id="detail-view" class="detail-view">
+            <div class="detail-card">
+                <span id="detail-char" class="detail-char">ア</span>
+                <span id="detail-romaji" class="detail-romaji">A</span>
+
+                <div class="stroke-order-box">
+                    <p style="margin-bottom: 0.5rem; font-weight: 600;">Writing Pattern</p>
+                    <div class="stroke-placeholder">
+                        Stroke Order Visualization
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn" style="background: #eee;" onclick="prevChar()">Previous</button>
+                <button class="btn btn-primary" onclick="showGrid()">Back to Chart</button>
+                <button class="btn btn-primary" onclick="nextChar()">Next</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Data
+        const basicData = [
+            { char: 'ア', romaji: 'a' }, { char: 'イ', romaji: 'i' }, { char: 'ウ', romaji: 'u' }, { char: 'エ', romaji: 'e' }, { char: 'オ', romaji: 'o' },
+            { char: 'カ', romaji: 'ka' }, { char: 'キ', romaji: 'ki' }, { char: 'ク', romaji: 'ku' }, { char: 'ケ', romaji: 'ke' }, { char: 'コ', romaji: 'ko' },
+            { char: 'サ', romaji: 'sa' }, { char: 'シ', romaji: 'shi' }, { char: 'ス', romaji: 'su' }, { char: 'セ', romaji: 'se' }, { char: 'ソ', romaji: 'so' },
+            { char: 'タ', romaji: 'ta' }, { char: 'チ', romaji: 'chi' }, { char: 'ツ', romaji: 'tsu' }, { char: 'テ', romaji: 'te' }, { char: 'ト', romaji: 'to' },
+            { char: 'ナ', romaji: 'na' }, { char: 'ニ', romaji: 'ni' }, { char: 'ヌ', romaji: 'nu' }, { char: 'ネ', romaji: 'ne' }, { char: 'ノ', romaji: 'no' },
+            { char: 'ハ', romaji: 'ha' }, { char: 'ヒ', romaji: 'hi' }, { char: 'フ', romaji: 'fu' }, { char: 'ヘ', romaji: 'he' }, { char: 'ホ', romaji: 'ho' },
+            { char: 'マ', romaji: 'ma' }, { char: 'ミ', romaji: 'mi' }, { char: 'ム', romaji: 'mu' }, { char: 'メ', romaji: 'me' }, { char: 'モ', romaji: 'mo' },
+            { char: 'ヤ', romaji: 'ya' }, { char: '', romaji: '' }, { char: 'ユ', romaji: 'yu' }, { char: '', romaji: '' }, { char: 'ヨ', romaji: 'yo' },
+            { char: 'ラ', romaji: 'ra' }, { char: 'リ', romaji: 'ri' }, { char: 'ル', romaji: 'ru' }, { char: 'レ', romaji: 're' }, { char: 'ロ', romaji: 'ro' },
+            { char: 'ワ', romaji: 'wa' }, { char: '', romaji: '' }, { char: '', romaji: '' }, { char: '', romaji: '' }, { char: 'ヲ', romaji: 'wo' },
+            { char: 'ン', romaji: 'n' }
+        ];
+
+        const dakutenData = [
+            { char: 'ガ', romaji: 'ga' }, { char: 'ギ', romaji: 'gi' }, { char: 'グ', romaji: 'gu' }, { char: 'ゲ', romaji: 'ge' }, { char: 'ゴ', romaji: 'go' },
+            { char: 'ザ', romaji: 'za' }, { char: 'ジ', romaji: 'ji' }, { char: 'ズ', romaji: 'zu' }, { char: 'ゼ', romaji: 'ze' }, { char: 'ゾ', romaji: 'zo' },
+            { char: 'ダ', romaji: 'da' }, { char: 'ヂ', romaji: 'ji' }, { char: 'ヅ', romaji: 'zu' }, { char: 'デ', romaji: 'de' }, { char: 'ド', romaji: 'do' },
+            { char: 'バ', romaji: 'ba' }, { char: 'ビ', romaji: 'bi' }, { char: 'ブ', romaji: 'bu' }, { char: 'ベ', romaji: 'be' }, { char: 'ボ', romaji: 'bo' },
+            { char: 'パ', romaji: 'pa' }, { char: 'ピ', romaji: 'pi' }, { char: 'プ', romaji: 'pu' }, { char: 'ペ', romaji: 'pe' }, { char: 'ポ', romaji: 'po' }
+        ];
+
+        const yoonData = [
+            { char: 'キャ', romaji: 'kya' }, { char: 'キュ', romaji: 'kyu' }, { char: 'キョ', romaji: 'kyo' },
+            { char: 'シャ', romaji: 'sha' }, { char: 'シュ', romaji: 'shu' }, { char: 'ショ', romaji: 'sho' },
+            { char: 'チャ', romaji: 'cha' }, { char: 'チュ', romaji: 'chu' }, { char: 'チョ', romaji: 'cho' },
+            { char: 'ニャ', romaji: 'nya' }, { char: 'ニュ', romaji: 'nyu' }, { char: 'ニョ', romaji: 'nyo' },
+            { char: 'ヒャ', romaji: 'hya' }, { char: 'ヒュ', romaji: 'hyu' }, { char: 'ヒョ', romaji: 'hyo' },
+            { char: 'ミャ', romaji: 'mya' }, { char: 'ミュ', romaji: 'myu' }, { char: 'ミョ', romaji: 'myo' },
+            { char: 'リャ', romaji: 'rya' }, { char: 'リュ', romaji: 'ryu' }, { char: 'リョ', romaji: 'ryo' },
+            { char: 'ギャ', romaji: 'gya' }, { char: 'ギュ', romaji: 'gyu' }, { char: 'ギョ', romaji: 'gyo' },
+            { char: 'ジャ', romaji: 'ja' }, { char: 'ジュ', romaji: 'ju' }, { char: 'ジョ', romaji: 'jo' },
+            { char: 'ビャ', romaji: 'bya' }, { char: 'ビュ', romaji: 'byu' }, { char: 'ビョ', romaji: 'byo' },
+            { char: 'ピャ', romaji: 'pya' }, { char: 'ピュ', romaji: 'pyu' }, { char: 'ピョ', romaji: 'pyo' }
+        ];
+
+        // Combine for navigation, filtering empty
+        const allData = [...basicData, ...dakutenData, ...yoonData].filter(item => item.char !== '');
+        let currentIndex = 0;
+
+        function populateGrid(gridId, data) {
+            const grid = document.getElementById(gridId);
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'kana-card';
+                if (item.char) {
+                    card.innerHTML = `<span class="kana-char">${item.char}</span><span class="kana-romaji">${item.romaji}</span>`;
+                    card.onclick = () => openDetail(item.char);
+                } else {
+                    card.style.visibility = 'hidden';
+                }
+                grid.appendChild(card);
+            });
+        }
+
+        function openDetail(char) {
+            const index = allData.findIndex(item => item.char === char);
+            if (index !== -1) {
+                currentIndex = index;
+                updateDetailView();
+                document.getElementById('grid-view').classList.remove('active');
+                document.getElementById('detail-view').classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function showGrid() {
+            document.getElementById('detail-view').classList.remove('active');
+            document.getElementById('grid-view').classList.add('active');
+        }
+
+        function updateDetailView() {
+            const item = allData[currentIndex];
+            document.getElementById('detail-char').textContent = item.char;
+            document.getElementById('detail-romaji').textContent = item.romaji;
+        }
+
+        function nextChar() {
+            currentIndex = (currentIndex + 1) % allData.length;
+            updateDetailView();
+        }
+
+        function prevChar() {
+            currentIndex = (currentIndex - 1 + allData.length) % allData.length;
+            updateDetailView();
+        }
+
+        // Initialize
+        populateGrid('basic-grid', basicData);
+        populateGrid('dakuten-grid', dakutenData);
+        populateGrid('yoon-grid', yoonData);
+
+    </script>
+</body>
+
+</html>
