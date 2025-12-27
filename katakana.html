@@ -66,7 +66,7 @@
         }
 
         .stroke-placeholder {
-            height: 150px;
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -74,6 +74,38 @@
             border: 2px dashed #ddd;
             border-radius: 8px;
             font-size: 0.9rem;
+            background: white;
+            overflow: hidden;
+        }
+
+        .stroke-placeholder svg {
+            width: 100%;
+            height: 100%;
+            max-width: 150px;
+            max-height: 150px;
+        }
+
+        .stroke-placeholder path {
+            stroke: var(--primary-color) !important;
+            stroke-width: 4 !important;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 2s linear forwards;
+        }
+
+        .stroke-placeholder text {
+            display: none;
+            fill: var(--secondary-color) !important;
+            font-size: 8px;
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
         .nav-buttons {
@@ -151,9 +183,12 @@
 
                 <div class="stroke-order-box">
                     <p style="margin-bottom: 0.5rem; font-weight: 600;">Writing Pattern</p>
-                    <div class="stroke-placeholder">
-                        Stroke Order Visualization
+                    <div class="stroke-placeholder" id="stroke-container">
+                        <!-- SVG injected here -->
+                        Loading...
                     </div>
+                    <button class="btn" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.8rem;"
+                        onclick="replayAnimation()">Replay Animation</button>
                 </div>
             </div>
 
@@ -243,6 +278,58 @@
             const item = allData[currentIndex];
             document.getElementById('detail-char').textContent = item.char;
             document.getElementById('detail-romaji').textContent = item.romaji;
+            loadStrokeOrder(item.char);
+        }
+
+        function getUnicodeHex(char) {
+            let hex = char.charCodeAt(0).toString(16);
+            while (hex.length < 5) {
+                hex = "0" + hex;
+            }
+            return hex;
+        }
+
+        function loadStrokeOrder(char) {
+            const container = document.getElementById('stroke-container');
+            container.innerHTML = '<span style="color: #ccc;">Loading...</span>';
+
+            const hex = getUnicodeHex(char);
+            const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                })
+                .then(svgData => {
+                    container.innerHTML = svgData;
+                    animateStrokes();
+                })
+                .catch(error => {
+                    console.error('Error loading SVG:', error);
+                    container.innerHTML = '<span style="color: #ccc;">No animation available</span>';
+                });
+        }
+
+        function animateStrokes() {
+            const paths = document.querySelectorAll('.stroke-placeholder path');
+            paths.forEach((path, index) => {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                // Stagger animation
+                path.style.animation = `draw 1s linear forwards ${index * 0.8}s`;
+            });
+        }
+
+        function replayAnimation() {
+            const container = document.getElementById('stroke-container');
+            const svg = container.innerHTML;
+            container.innerHTML = ''; // Clear to force reflow
+            setTimeout(() => {
+                container.innerHTML = svg;
+                animateStrokes();
+            }, 10);
         }
 
         function nextChar() {
