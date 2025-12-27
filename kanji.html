@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Kanji - NihongoMastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            overflow-y: auto;
+            height: auto;
+            min-height: 100vh;
+        }
+
+        .detail-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-align: center;
+        }
+
+        .detail-view.active {
+            display: flex;
+        }
+
+        .detail-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 500px;
+            /* Slightly wider for Kanji info */
+            border: 2px solid var(--primary-color);
+        }
+
+        .detail-char {
+            font-size: 8rem;
+            font-family: var(--font-jp);
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-meaning {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: capitalize;
+        }
+
+        .readings-box {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            width: 100%;
+        }
+
+        .reading-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .reading-value {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-jp);
+        }
+
+        .stroke-order-box {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .stroke-placeholder {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: white;
+            overflow: hidden;
+        }
+
+        .stroke-placeholder svg {
+            width: 100%;
+            height: 100%;
+            max-width: 150px;
+            max-height: 150px;
+        }
+
+        .stroke-placeholder path {
+            stroke: var(--primary-color) !important;
+            stroke-width: 4 !important;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 2s linear forwards;
+        }
+
+        .stroke-placeholder text {
+            display: none;
+            fill: var(--secondary-color) !important;
+            font-size: 8px;
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .grid-view {
+            display: none;
+        }
+
+        .grid-view.active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 2rem 0 1rem;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+        }
+
+        .chart-section {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .kanji-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .kanji-card {
+            background: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .kanji-card:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .kanji-card:hover .kanji-meaning {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .kanji-char {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: var(--font-jp);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .kanji-meaning {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header style="position: sticky; top: 0; background: rgba(255,255,255,0.95); z-index: 100;">
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">NihongoMastery</a>
+                <a href="home.html" class="btn" style="color: var(--primary-color); font-size: 0.9rem;">Back to
+                    Modules</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+
+        <!-- Grid View -->
+        <div id="grid-view" class="grid-view active">
+            <header style="text-align: center; margin-bottom: 3rem; position: static;">
+                <h1>Kanji Library</h1>
+                <p>Essential JLPT N5 Kanji. Click to learn readings and stroke order.</p>
+            </header>
+
+            <div class="chart-section">
+                <h2 class="section-title">Numbers & Time</h2>
+                <div class="kanji-grid" id="numbers-grid"></div>
+            </div>
+
+            <div class="chart-section">
+                <h2 class="section-title">Nature & Elements</h2>
+                <div class="kanji-grid" id="nature-grid"></div>
+            </div>
+
+            <div class="chart-section">
+                <h2 class="section-title">People & Directions</h2>
+                <div class="kanji-grid" id="people-grid"></div>
+            </div>
+            <div class="chart-section">
+                <h2 class="section-title">Verbs & Adjectives</h2>
+                <div class="kanji-grid" id="verbs-grid"></div>
+            </div>
+        </div>
+
+        <!-- Detail View -->
+        <div id="detail-view" class="detail-view">
+            <div class="detail-card">
+                <span id="detail-char" class="detail-char">一</span>
+                <span id="detail-meaning" class="detail-meaning">One</span>
+
+                <div class="readings-box">
+                    <span class="reading-label">Onyomi (Chinese Reading)</span>
+                    <div id="detail-onyomi" class="reading-value">ICHI, ITSU</div>
+
+                    <span class="reading-label">Kunyomi (Japanese Reading)</span>
+                    <div id="detail-kunyomi" class="reading-value">hito(tsu)</div>
+                </div>
+
+                <div class="stroke-order-box">
+                    <p style="margin-bottom: 0.5rem; font-weight: 600;">Writing Pattern</p>
+                    <div class="stroke-placeholder" id="stroke-container">
+                        Loading...
+                    </div>
+                    <button class="btn" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.8rem;"
+                        onclick="replayAnimation()">Replay Animation</button>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn" style="background: #eee;" onclick="prevChar()">Previous</button>
+                <button class="btn btn-primary" onclick="showGrid()">Back to Library</button>
+                <button class="btn btn-primary" onclick="nextChar()">Next</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // JLPT N5 Kanji Data
+        const numbersData = [
+            { char: '一', meaning: 'One', onyomi: 'ICHI, ITSU', kunyomi: 'hito(tsu)' },
+            { char: '二', meaning: 'Two', onyomi: 'NI', kunyomi: 'futa(tsu)' },
+            { char: '三', meaning: 'Three', onyomi: 'SAN', kunyomi: 'mit(tsu)' },
+            { char: '四', meaning: 'Four', onyomi: 'SHI', kunyomi: 'yon, yot(tsu)' },
+            { char: '五', meaning: 'Five', onyomi: 'GO', kunyomi: 'itsu(tsu)' },
+            { char: '六', meaning: 'Six', onyomi: 'ROKU', kunyomi: 'mut(tsu)' },
+            { char: '七', meaning: 'Seven', onyomi: 'SHICHI', kunyomi: 'nana(tsu)' },
+            { char: '八', meaning: 'Eight', onyomi: 'HACHI', kunyomi: 'yat(tsu)' },
+            { char: '九', meaning: 'Nine', onyomi: 'KYUU, KU', kunyomi: 'kokono(tsu)' },
+            { char: '十', meaning: 'Ten', onyomi: 'JUU', kunyomi: 'tou' },
+            { char: '百', meaning: 'Hundred', onyomi: 'HYAKU', kunyomi: 'momo' },
+            { char: '千', meaning: 'Thousand', onyomi: 'SEN', kunyomi: 'chi' },
+            { char: '万', meaning: 'Ten Thousand', onyomi: 'MAN, BAN', kunyomi: '-' },
+            { char: '円', meaning: 'Yen, Circle', onyomi: 'EN', kunyomi: 'maru(i)' },
+            { char: '時', meaning: 'Time', onyomi: 'JI', kunyomi: 'toki' },
+        ];
+
+        const natureData = [
+            { char: '日', meaning: 'Day, Sun', onyomi: 'NICHI, JITSU', kunyomi: 'hi, ka' },
+            { char: '月', meaning: 'Month, Moon', onyomi: 'GETSU, GATSU', kunyomi: 'tsuki' },
+            { char: '火', meaning: 'Fire', onyomi: 'KA', kunyomi: 'hi' },
+            { char: '水', meaning: 'Water', onyomi: 'SUI', kunyomi: 'mizu' },
+            { char: '木', meaning: 'Tree', onyomi: 'MOKU, BOKU', kunyomi: 'ki' },
+            { char: '金', meaning: 'Gold, Money', onyomi: 'KIN, KON', kunyomi: 'kane' },
+            { char: '土', meaning: 'Soil, Earth', onyomi: 'DO, TO', kunyomi: 'tsuchi' },
+            { char: '山', meaning: 'Mountain', onyomi: 'SAN', kunyomi: 'yama' },
+            { char: '川', meaning: 'River', onyomi: 'SEN', kunyomi: 'kawa' },
+            { char: '田', meaning: 'Rice Field', onyomi: 'DEN', kunyomi: 'ta' },
+            { char: '空', meaning: 'Sky, Empty', onyomi: 'KUU', kunyomi: 'sora, a(ku)' },
+            { char: '雨', meaning: 'Rain', onyomi: 'U', kunyomi: 'ame' },
+        ];
+
+        const peopleData = [
+            { char: '人', meaning: 'Person', onyomi: 'JIN, NIN', kunyomi: 'hito' },
+            { char: '男', meaning: 'Man', onyomi: 'DAN, NAN', kunyomi: 'otoko' },
+            { char: '女', meaning: 'Woman', onyomi: 'JO', kunyomi: 'onna' },
+            { char: '子', meaning: 'Child', onyomi: 'SHI, SU', kunyomi: 'ko' },
+            { char: '父', meaning: 'Father', onyomi: 'FU', kunyomi: 'chichi' },
+            { char: '母', meaning: 'Mother', onyomi: 'BO', kunyomi: 'haha' },
+            { char: '友', meaning: 'Friend', onyomi: 'YUU', kunyomi: 'tomo' },
+            { char: '上', meaning: 'Up, Above', onyomi: 'JOU', kunyomi: 'ue, a(geru)' },
+            { char: '下', meaning: 'Down, Below', onyomi: 'KA, GE', kunyomi: 'shita, sa(geru)' },
+            { char: '中', meaning: 'Inside, Middle', onyomi: 'CHUU', kunyomi: 'naka' },
+            { char: '外', meaning: 'Outside', onyomi: 'GAI, GE', kunyomi: 'soto' },
+            { char: '右', meaning: 'Right', onyomi: 'U, YUU', kunyomi: 'migi' },
+            { char: '左', meaning: 'Left', onyomi: 'SA', kunyomi: 'hidari' },
+        ];
+
+        const verbsData = [
+            { char: '見', meaning: 'To See', onyomi: 'KEN', kunyomi: 'mi(ru)' },
+            { char: '聞', meaning: 'To Listen', onyomi: 'BUN, MON', kunyomi: 'ki(ku)' },
+            { char: '書', meaning: 'To Write', onyomi: 'SHO', kunyomi: 'ka(ku)' },
+            { char: '読', meaning: 'To Read', onyomi: 'DOKU', kunyomi: 'yo(mu)' },
+            { char: '食', meaning: 'To Eat', onyomi: 'SHOKU', kunyomi: 'ta(beru)' },
+            { char: '飲', meaning: 'To Drink', onyomi: 'IN', kunyomi: 'no(mu)' },
+            { char: '行', meaning: 'To Go', onyomi: 'KOU, GYOU', kunyomi: 'i(ku)' },
+            { char: '来', meaning: 'To Come', onyomi: 'RAI', kunyomi: 'ku(ru)' },
+            { char: '大', meaning: 'Big', onyomi: 'DAI, TAI', kunyomi: 'oo(kii)' },
+            { char: '小', meaning: 'Small', onyomi: 'SHOU', kunyomi: 'chii(sai)' },
+            { char: '新', meaning: 'New', onyomi: 'SHIN', kunyomi: 'atara(shii)' },
+            { char: '古', meaning: 'Old', onyomi: 'KO', kunyomi: 'furu(i)' },
+            { char: '高', meaning: 'High, Expensive', onyomi: 'KOU', kunyomi: 'taka(i)' },
+            { char: '安', meaning: 'Cheap, Safe', onyomi: 'AN', kunyomi: 'yasu(i)' },
+        ];
+
+        // Combine for navigation
+        const allData = [...numbersData, ...natureData, ...peopleData, ...verbsData];
+        let currentIndex = 0;
+
+        function populateGrid(gridId, data) {
+            const grid = document.getElementById(gridId);
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'kanji-card';
+                card.innerHTML = `
+                    <span class="kanji-char">${item.char}</span>
+                    <span class="kanji-meaning">${item.meaning}</span>
+                `;
+                card.onclick = () => openDetail(item.char);
+                grid.appendChild(card);
+            });
+        }
+
+        function openDetail(char) {
+            const index = allData.findIndex(item => item.char === char);
+            if (index !== -1) {
+                currentIndex = index;
+                updateDetailView();
+                document.getElementById('grid-view').classList.remove('active');
+                document.getElementById('detail-view').classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function showGrid() {
+            document.getElementById('detail-view').classList.remove('active');
+            document.getElementById('grid-view').classList.add('active');
+        }
+
+        function updateDetailView() {
+            const item = allData[currentIndex];
+            document.getElementById('detail-char').textContent = item.char;
+            document.getElementById('detail-meaning').textContent = item.meaning;
+            document.getElementById('detail-onyomi').textContent = item.onyomi;
+            document.getElementById('detail-kunyomi').textContent = item.kunyomi;
+            loadStrokeOrder(item.char);
+        }
+
+        function getUnicodeHex(char) {
+            let hex = char.charCodeAt(0).toString(16);
+            while (hex.length < 5) {
+                hex = "0" + hex;
+            }
+            return hex;
+        }
+
+        function loadStrokeOrder(char) {
+            const container = document.getElementById('stroke-container');
+            container.innerHTML = '<span style="color: #ccc;">Loading...</span>';
+
+            const hex = getUnicodeHex(char);
+            const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                })
+                .then(svgData => {
+                    // Parse the SVG data to extract only the <svg> element
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(svgData, "image/svg+xml");
+                    const svgElement = doc.querySelector("svg");
+
+                    if (svgElement) {
+                        container.innerHTML = ""; // Clear loading text
+                        container.appendChild(svgElement);
+                        animateStrokes();
+                    } else {
+                        throw new Error("Invalid SVG data");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading SVG:', error);
+                    container.innerHTML = '<span style="color: #ccc;">No animation available</span>';
+                });
+        }
+
+        function animateStrokes() {
+            const paths = document.querySelectorAll('.stroke-placeholder path');
+            paths.forEach((path, index) => {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                // Stagger animation
+                path.style.animation = `draw 1s linear forwards ${index * 0.8}s`;
+            });
+        }
+
+        function replayAnimation() {
+            const container = document.getElementById('stroke-container');
+            const svg = container.innerHTML;
+            container.innerHTML = ''; // Clear to force reflow
+            setTimeout(() => {
+                container.innerHTML = svg;
+                animateStrokes();
+            }, 10);
+        }
+
+        function nextChar() {
+            currentIndex = (currentIndex + 1) % allData.length;
+            updateDetailView();
+        }
+
+        function prevChar() {
+            currentIndex = (currentIndex - 1 + allData.length) % allData.length;
+            updateDetailView();
+        }
+
+        // Initialize
+        populateGrid('numbers-grid', numbersData);
+        populateGrid('nature-grid', natureData);
+        populateGrid('people-grid', peopleData);
+        populateGrid('verbs-grid', verbsData);
+
+    </script>
+</body>
+
+</html>
