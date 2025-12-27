@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - NihongoMastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            overflow: hidden;
+            /* Enforce one screen */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .learning-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            border-radius: 24px;
+            padding: 2rem;
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: #f0f0f0;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .close-modal:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">NihongoMastery</a>
+                <a href="index.html" class="btn" style="color: var(--primary-color); font-size: 0.9rem;">Back to
+                    Landing</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <header class="dashboard-header" style="padding: 0 0 3rem; margin-top: 4rem;">
+            <h1>Your Learning Modules</h1>
+            <p>Select a module to open its content.</p>
+        </header>
+
+        <div class="learning-grid animate-fade-in">
+            <div class="learn-box" onclick="openModal('hiragana')">
+                <span class="icon-placeholder">あ</span>
+                <h3>Hiragana</h3>
+                <p>Basic Alphabet</p>
+            </div>
+            <div class="learn-box" onclick="openModal('katakana')">
+                <span class="icon-placeholder">ア</span>
+                <h3>Katakana</h3>
+                <p>Foreign Alphabet</p>
+            </div>
+            <div class="learn-box" onclick="openModal('kanji')">
+                <span class="icon-placeholder">漢</span>
+                <h3>Kanji</h3>
+                <p>Chinese Characters</p>
+            </div>
+            <div class="learn-box" onclick="openModal('grammar')">
+                <span class="icon-placeholder">文</span>
+                <h3>Grammar</h3>
+                <p>Sentence Rules</p>
+            </div>
+            <div class="learn-box" onclick="openModal('particle')">
+                <span class="icon-placeholder">は</span>
+                <h3>Particles</h3>
+                <p>Sentence Connectors</p>
+            </div>
+            <div class="learn-box" onclick="openModal('flashcard')">
+                <span class="icon-placeholder">⚡</span>
+                <h3>Flashcards</h3>
+                <p>Test Yourself</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals Container -->
+    <div id="modal-container" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <div id="modal-body">
+                <!-- Content injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Content Templates -->
+    <div style="display: none;">
+        <div id="hiragana-content">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Hiragana Chart</h2>
+            <div class="kana-grid" id="hiragana-grid"></div>
+        </div>
+        <div id="katakana-content">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Katakana Chart</h2>
+            <div class="kana-grid" id="katakana-grid"></div>
+        </div>
+        <div id="kanji-content">
+            <div class="container" style="text-align: center;">
+                <h2>Kanji Learning</h2>
+                <p style="margin-top: 1rem; color: var(--text-light);">Start with the basics. Here are the first 5
+                    numbers.</p>
+                <div class="kana-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                    <div class="kana-card"><span class="kana-char">一</span><span class="kana-romaji">Ichi (One)</span>
+                    </div>
+                    <div class="kana-card"><span class="kana-char">二</span><span class="kana-romaji">Ni (Two)</span>
+                    </div>
+                    <div class="kana-card"><span class="kana-char">三</span><span class="kana-romaji">San (Three)</span>
+                    </div>
+                    <div class="kana-card"><span class="kana-char">四</span><span class="kana-romaji">Yon (Four)</span>
+                    </div>
+                    <div class="kana-card"><span class="kana-char">五</span><span class="kana-romaji">Go (Five)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="grammar-content">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Basic Grammar</h2>
+                <div class="info-card" style="max-width: 800px; margin: 0 auto;">
+                    <h3>Sentence Structure: SOV</h3>
+                    <p>Japanese uses a Subject-Object-Verb structure.</p>
+                    <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p><strong>English:</strong> I eat sushi.</p>
+                        <p><strong>Japanese:</strong> Watashi wa sushi o tabemasu.</p>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">(I [topic] sushi [object] eat)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="particle-content">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Essential Particles</h2>
+                <div class="section-grid">
+                    <div class="info-card">
+                        <h3>は (Wa)</h3>
+                        <p>Topic Marker. Indicates what the sentence is about.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>を (O)</h3>
+                        <p>Object Marker. Indicates the direct object of an action.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>が (Ga)</h3>
+                        <p>Subject Marker. Identifies the subject of the verb.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="flashcard-content">
+            <div class="container" style="text-align: center;">
+                <h2 style="margin-bottom: 2rem;">Flashcard Challenge</h2>
+                <div class="flashcard-container">
+                    <div class="flashcard" id="flashcard" onclick="flipCard()">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <span id="flashcard-char" class="kana-char" style="font-size: 5rem;">?</span>
+                                <p style="margin-top: 1rem; color: var(--text-light);">Click to Reveal</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <span id="flashcard-romaji" class="kana-char" style="font-size: 3rem;">?</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flashcard-controls">
+                        <button class="btn btn-primary" onclick="nextCard()">Next Card</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Modal Logic
+        function openModal(type) {
+            const content = document.getElementById(`${type}-content`).innerHTML;
+            document.getElementById('modal-body').innerHTML = content;
+            document.getElementById('modal-container').classList.add('active');
+
+            // Re-initialize dynamic content if needed
+            if (type === 'hiragana') populateGrid('hiragana-grid', hiraganaData);
+            if (type === 'katakana') populateGrid('katakana-grid', katakanaData);
+            if (type === 'flashcard') nextCard();
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget && event.target.className !== 'close-modal') return;
+            document.getElementById('modal-container').classList.remove('active');
+        }
+    </script>
+</body>
+
+</html>

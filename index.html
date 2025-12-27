@@ -11,91 +11,133 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            overflow: hidden;
+            /* Enforce one screen */
+            height: 100vh;
+        }
+
+        .hero {
+            height: 100vh;
+            padding: 0;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            z-index: 2;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 2rem;
+            background: var(--primary-color);
+            overflow: hidden;
+        }
+
+        .visual-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .visual-card:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .visual-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .visual-label {
+            font-family: var(--font-jp);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Decorative Circle */
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            top: -25%;
+            left: -25%;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 
 <body>
 
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">NihongoMastery</div>
-                <a href="learn.html" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Start
-                    Learning</a>
-            </nav>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="container hero-content animate-fade-in">
-            <h1>Master the Art of Japanese</h1>
-            <p>Immerse yourself in the language, culture, and beauty of Japan. From Hiragana to advanced Kanji, your
-                journey to fluency starts here.</p>
-            <a href="learn.html" class="btn btn-primary">Start to Learn</a>
-        </div>
-    </section>
-
-    <section class="info-section">
-        <div class="container">
-            <div class="section-grid">
-                <div class="info-card">
-                    <h3>The Language</h3>
-                    <p>Japanese (Nihongo) is spoken by over 125 million people. It is known for its complex writing
-                        system combining Kanji, Hiragana, and Katakana.</p>
+    <div class="hero">
+        <div class="hero-split">
+            <div class="hero-text animate-fade-in">
+                <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem;">
+                    Master the Art of <span style="color: var(--primary-color);">Japanese</span>
+                </h1>
+                <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 2.5rem; max-width: 500px;">
+                    Immerse yourself in a journey through language, culture, and tradition. Your path to fluency begins
+                    with a single step.
+                </p>
+                <div>
+                    <a href="home.html" class="btn btn-primary" style="padding: 1.2rem 3rem; font-size: 1.2rem;">Start
+                        Learning</a>
                 </div>
-                <div class="info-card">
-                    <h3>The Culture</h3>
-                    <p>From the serenity of tea ceremonies to the vibrant energy of anime. Learning the language unlocks
-                        a deeper understanding of these traditions.</p>
+            </div>
+
+            <div class="hero-visual">
+                <div class="visual-card">
+                    <span class="visual-icon">🌸</span>
+                    <span class="visual-label">CULTURE</span>
+                    <span style="font-size: 0.8rem; opacity: 0.8;">Bunka</span>
                 </div>
-                <div class="info-card">
-                    <h3>The Opportunity</h3>
-                    <p>Whether for travel, career advancement, or personal growth, mastering Japanese opens doors to one
-                        of the world's largest economies.</p>
+                <div class="visual-card">
+                    <span class="visual-icon">あ</span>
+                    <span class="visual-label">LANGUAGE</span>
+                    <span style="font-size: 0.8rem; opacity: 0.8;">Gengo</span>
+                </div>
+                <div class="visual-card">
+                    <span class="visual-icon">⛩️</span>
+                    <span class="visual-label">TRADITION</span>
+                    <span style="font-size: 0.8rem; opacity: 0.8;">Dentō</span>
+                </div>
+                <div class="visual-card">
+                    <span class="visual-icon">🗻</span>
+                    <span class="visual-label">NATURE</span>
+                    <span style="font-size: 0.8rem; opacity: 0.8;">Shizen</span>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="modules-section" style="padding: 6rem 0; background-color: var(--bg-color);">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Our Curriculum</h2>
-            <div class="learning-grid">
-                <div class="learn-box">
-                    <span class="icon-placeholder">あ</span>
-                    <h3>Hiragana</h3>
-                    <p>Master the 46 basic phonetic characters.</p>
-                </div>
-                <div class="learn-box">
-                    <span class="icon-placeholder">ア</span>
-                    <h3>Katakana</h3>
-                    <p>Learn the alphabet for foreign words.</p>
-                </div>
-                <div class="learn-box">
-                    <span class="icon-placeholder">漢</span>
-                    <h3>Kanji</h3>
-                    <p>Understand the meaning behind characters.</p>
-                </div>
-                <div class="learn-box">
-                    <span class="icon-placeholder">文</span>
-                    <h3>Grammar</h3>
-                    <p>Build sentences with proper structure.</p>
-                </div>
-                <div class="learn-box">
-                    <span class="icon-placeholder">は</span>
-                    <h3>Particles</h3>
-                    <p>The glue that holds Japanese sentences together.</p>
-                </div>
-                <div class="learn-box">
-                    <span class="icon-placeholder">⚡</span>
-                    <h3>Flashcards</h3>
-                    <p>Test your knowledge and memory.</p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="learn.html" class="btn btn-primary">Start Learning Now</a>
-            </div>
-        </div>
-    </section>
+    </div>
 
 </body>
 
