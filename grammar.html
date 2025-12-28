@@ -617,40 +617,47 @@
         });
 
         const dictionary = {
-            "i": { jp: "私", furigana: "わたし", romaji: "watashi" },
-            "you": { jp: "あなた", furigana: "あなた", romaji: "anata" },
-            "he": { jp: "彼", furigana: "かれ", romaji: "kare" },
-            "she": { jp: "彼女", furigana: "かのじょ", romaji: "kanojo" },
-            "this": { jp: "これ", furigana: "これ", romaji: "kore" },
-            "that": { jp: "それ", furigana: "それ", romaji: "sore" },
+            "i": { jp: "私", furigana: "わたし", romaji: "watashi", type: "subject" },
+            "you": { jp: "あなた", furigana: "あなた", romaji: "anata", type: "subject" },
+            "he": { jp: "彼", furigana: "かれ", romaji: "kare", type: "subject" },
+            "she": { jp: "彼女", furigana: "かのじょ", romaji: "kanojo", type: "subject" },
+            "this": { jp: "これ", furigana: "これ", romaji: "kore", type: "object" },
+            "that": { jp: "それ", furigana: "それ", romaji: "sore", type: "object" },
+            "icecream": { jp: "アイスクリーム", furigana: "あいすくりーむ", romaji: "aisukuri-mu", type: "object" },
+            "sushi": { jp: "寿司", furigana: "すし", romaji: "sushi", type: "object" },
+            "pizza": { jp: "ピザ", furigana: "ぴざ", romaji: "piza", type: "object" },
+            "ramen": { jp: "ラーメン", furigana: "らーめん", romaji: "ra-men", type: "object" },
+            "bread": { jp: "パン", furigana: "ぱん", romaji: "pan", type: "object" },
+            "water": { jp: "水", furigana: "みず", romaji: "mizu", type: "object" },
+            "coffee": { jp: "コーヒー", furigana: "こーひー", romaji: "ko-hi-", type: "object" },
+            "school": { jp: "学校", furigana: "がっこう", romaji: "gakkou", type: "object" },
+            "cat": { jp: "猫", furigana: "ねこ", romaji: "neko", type: "object" },
+            "dog": { jp: "犬", furigana: "いぬ", romaji: "inu", type: "object" },
+            "teacher": { jp: "先生", furigana: "せんせい", romaji: "sensei", type: "object" },
+            "student": { jp: "学生", furigana: "がくせい", romaji: "gakusei", type: "object" },
             "want": { jp: "欲しい", furigana: "ほしい", romaji: "hoshii", type: "adjective", particle: "が" },
-            "sushi": { jp: "寿司", furigana: "すし", romaji: "sushi" },
-            "bread": { jp: "パン", furigana: "ぱん", romaji: "pan" },
-            "water": { jp: "水", furigana: "みず", romaji: "mizu" },
-            "coffee": { jp: "コーヒー", furigana: "こーひー", romaji: "ko-hi-" },
-            "school": { jp: "学校", furigana: "がっこう", romaji: "gakkou" },
-            "cat": { jp: "猫", furigana: "ねこ", romaji: "neko" },
-            "dog": { jp: "犬", furigana: "いぬ", romaji: "inu" },
-            "teacher": { jp: "先生", furigana: "せんせい", romaji: "sensei" },
-            "student": { jp: "学生", furigana: "がくせい", romaji: "gakusei" },
             "like": { jp: "好き", furigana: "すき", romaji: "suki", type: "adjective", particle: "が" },
             "eat": { jp: "食べます", furigana: "たべます", romaji: "tabemasu", type: "verb", particle: "を" },
             "drink": { jp: "飲みます", furigana: "のみます", romaji: "nomimasu", type: "verb", particle: "を" },
             "go": { jp: "行きます", furigana: "いきます", romaji: "ikimasu", type: "verb", particle: "に" },
-            "is": { jp: "です", furigana: "です", romaji: "desu" },
-            "am": { jp: "です", furigana: "です", romaji: "desu" },
-            "are": { jp: "です", furigana: "です", romaji: "desu" }
+            "read": { jp: "読みます", furigana: "よみます", romaji: "yomimasu", type: "verb", particle: "を" },
+            "watch": { jp: "見ます", furigana: "みます", romaji: "mimasu", type: "verb", particle: "を" },
+            "is": { jp: "です", furigana: "です", romaji: "desu", type: "aux" },
+            "am": { jp: "です", furigana: "です", romaji: "desu", type: "aux" },
+            "are": { jp: "です", furigana: "です", romaji: "desu", type: "aux" }
         };
 
         function constructSentence() {
-            const input = document.getElementById('english-input').value.toLowerCase().trim();
-            const words = input.split(/\s+/);
+            const rawInput = document.getElementById('english-input').value.toLowerCase().trim();
+            // Pre-process common multi-word terms
+            const processedInput = rawInput.replace("ice cream", "icecream");
+            const words = processedInput.split(/\s+/);
             const output = document.getElementById('constructed-output');
             const japaneseOutput = document.getElementById('japanese-output');
             const romajiOutput = document.getElementById('romaji-output');
             const englishOutput = document.getElementById('english-output');
 
-            if (!input) {
+            if (!rawInput) {
                 alert('Please enter an English sentence!');
                 return;
             }
@@ -661,21 +668,29 @@
             let object = null;
             let verbOrAdj = null;
 
-            // Simple parsing logic
+            // Improved parsing logic
             for (let i = 0; i < words.length; i++) {
                 let word = words[i].replace(/[.,?!]/g, "");
                 if (dictionary[word]) {
-                    if (["i", "you", "he", "she"].includes(word)) {
+                    const entry = dictionary[word];
+                    if (entry.type === "subject" && !subject) {
                         subject = word;
-                    } else if (["this", "that", "sushi", "bread", "water", "coffee", "school", "cat", "dog", "teacher", "student"].includes(word)) {
+                    } else if (entry.type === "object" && !object) {
                         object = word;
-                    } else if (dictionary[word].type === "verb" || dictionary[word].type === "adjective") {
+                    } else if (entry.type === "verb" || entry.type === "adjective") {
                         verbOrAdj = word;
                     }
                 }
             }
 
-            // Constructing the sentence
+            // Special handling for "want to eat" -> user wants "tabemasu" as per request
+            if (rawInput.includes("want to eat")) {
+                verbOrAdj = "eat";
+            } else if (rawInput.includes("want to drink")) {
+                verbOrAdj = "drink";
+            }
+
+            // Constructing the sentence (SOV)
             if (subject) {
                 const s = dictionary[subject];
                 jpParts.push(`<ruby><rb>${s.jp}</rb><rt>${s.furigana}</rt></ruby>は`);
@@ -707,7 +722,7 @@
             if (jpParts.length > 0) {
                 japaneseOutput.innerHTML = jpParts.join("");
                 romajiOutput.textContent = romajiParts.join(" ");
-                englishOutput.textContent = input.charAt(0).toUpperCase() + input.slice(1);
+                englishOutput.textContent = rawInput.charAt(0).toUpperCase() + rawInput.slice(1);
                 output.style.display = 'block';
             } else {
                 // Fallback: Word by word translation if no pattern matches
@@ -724,11 +739,11 @@
                 if (fallbackJp.length > 0) {
                     japaneseOutput.innerHTML = fallbackJp.join("");
                     romajiOutput.textContent = fallbackRomaji.join(" ");
-                    englishOutput.textContent = input;
+                    englishOutput.textContent = rawInput;
                     output.style.display = 'block';
                 } else {
                     japaneseOutput.innerHTML = "I'm still learning that one!";
-                    romajiOutput.textContent = "Try 'I want this' or 'I like sushi'.";
+                    romajiOutput.textContent = "Try 'I want to eat ice cream' or 'I like sushi'.";
                     englishOutput.textContent = "";
                     output.style.display = 'block';
                 }
