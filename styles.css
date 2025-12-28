@@ -245,6 +245,11 @@ nav {
     box-shadow: var(--shadow-lg);
 }
 
+.learn-box.no-hover:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+}
+
 .learn-box:hover::before {
     transform: scaleX(1);
 }

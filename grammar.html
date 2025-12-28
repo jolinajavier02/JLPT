@@ -207,7 +207,7 @@
     <div class="grammar-container">
         <div style="text-align: center; margin-bottom: 4rem;" class="animate-fade-in">
             <h1
-                style="font-size: 3.5rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                style="font-size: 3.5rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
                 Grammar Lessons</h1>
             <p style="color: var(--text-light); font-size: 1.2rem;">Master the logic behind the Japanese language.</p>
         </div>
@@ -219,7 +219,8 @@
                 <h2>1. The SOV Structure</h2>
             </div>
             <p>Unlike English (SVO), Japanese follows a <strong>Subject - Object - Verb (SOV)</strong> pattern. The verb
-                <em>always</em> comes at the end of the sentence.</p>
+                <em>always</em> comes at the end of the sentence.
+            </p>
             <div class="grammar-grid">
                 <div class="example-box">
                     <h4 style="margin-bottom: 0.5rem;">English (SVO)</h4>
@@ -263,11 +264,34 @@
             </div>
         </div>
 
-        <!-- Lesson 3: Verb Conjugation -->
+        <!-- Lesson 3: Questions & Existence -->
+        <div class="lesson-card animate-fade-in">
+            <div class="lesson-header">
+                <span class="lesson-icon">❓</span>
+                <h2>3. Questions & Existence</h2>
+            </div>
+            <div class="grammar-grid">
+                <div class="example-box">
+                    <h4 style="color: var(--primary-color);">Questions (か)</h4>
+                    <p>Simply add <strong>ka</strong> at the end of a sentence to make it a question. No question mark
+                        needed!</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;"><em>Tabemasu ka?</em> (Will you eat?)</p>
+                </div>
+                <div class="example-box">
+                    <h4 style="color: var(--secondary-color);">Existence (あります/います)</h4>
+                    <p>Use <strong>Arimasu</strong> for inanimate objects and <strong>Imasu</strong> for living things.
+                    </p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;"><em>Hon ga arimasu.</em> (There is a book.)</p>
+                    <p style="font-size: 0.9rem;"><em>Neko ga imasu.</em> (There is a cat.)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 4: Verb Conjugation -->
         <div class="lesson-card animate-fade-in">
             <div class="lesson-header">
                 <span class="lesson-icon">🔄</span>
-                <h2>3. Verb Conjugation (Polite)</h2>
+                <h2>4. Verb Conjugation (Polite)</h2>
             </div>
             <p>In polite Japanese, verbs end in <strong>-masu</strong>. Here is how they change based on tense and
                 positivity.</p>
@@ -309,11 +333,11 @@
             </table>
         </div>
 
-        <!-- Lesson 4: Adjectives -->
+        <!-- Lesson 5: Adjectives -->
         <div class="lesson-card animate-fade-in">
             <div class="lesson-header">
                 <span class="lesson-icon">🎨</span>
-                <h2>4. I-Adjectives vs Na-Adjectives</h2>
+                <h2>5. I-Adjectives vs Na-Adjectives</h2>
             </div>
             <p>Japanese has two types of adjectives that behave differently when describing nouns or ending sentences.
             </p>
@@ -329,6 +353,27 @@
                     <p>Need 'na' to connect to a noun.</p>
                     <p style="margin-top: 0.5rem; font-size: 0.9rem;">Example: <strong>Kirei</strong> (Beautiful)</p>
                     <p style="font-size: 0.9rem;">Kirei na hana (Beautiful flower)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 6: Politeness Levels -->
+        <div class="lesson-card animate-fade-in">
+            <div class="lesson-header">
+                <span class="lesson-icon">🙇</span>
+                <h2>6. Politeness Levels</h2>
+            </div>
+            <p>Japanese uses different levels of politeness based on who you are talking to.</p>
+            <div class="grammar-grid">
+                <div class="example-box">
+                    <h4 style="color: var(--primary-color);">Polite (Desu/Masu)</h4>
+                    <p>Used with strangers, teachers, or coworkers. Safe for almost any situation.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;"><em>Ikimasu</em> (I go - polite)</p>
+                </div>
+                <div class="example-box">
+                    <h4 style="color: var(--secondary-color);">Casual (Dictionary Form)</h4>
+                    <p>Used with friends and family. This is the form you find in dictionaries.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;"><em>Iku</em> (I go - casual)</p>
                 </div>
             </div>
         </div>
@@ -407,6 +452,26 @@
                 japanese: "この<ruby><rb>料理</rb><rt>りょうり</rt></ruby>は<ruby><rb>美味</rb><rt>おい</rt></ruby>しいです。",
                 romaji: "Kono ryōri wa oishii desu.",
                 english: "This food is delicious."
+            },
+            "where is the bathroom?": {
+                japanese: "<ruby><rb>手洗</rb><rt>てあら</rt></ruby>いはどこですか？",
+                romaji: "Teiarai wa doko desu ka?",
+                english: "Where is the bathroom?"
+            },
+            "how much is this?": {
+                japanese: "これはいくらですか？",
+                romaji: "Kore wa ikura desu ka?",
+                english: "How much is this?"
+            },
+            "i don't understand": {
+                japanese: "わかりません。",
+                romaji: "Wakarimasen.",
+                english: "I don't understand."
+            },
+            "please say it again": {
+                japanese: "もう<ruby><rb>一度</rb><rt>いちど</rt></ruby><ruby><rb>言</rb><rt>い</rt></ruby>ってください。",
+                romaji: "Mō ichido itte kudasai.",
+                english: "Please say it again."
             }
         };
 
