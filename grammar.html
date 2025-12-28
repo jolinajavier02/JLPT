@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Mastery - NihongoMastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #f8fafc;
+        }
+
+        .grammar-container {
+            max-width: 1000px;
+            margin: 80px auto 4rem;
+            padding: 2rem;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .lesson-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .lesson-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 1rem;
+        }
+
+        .lesson-header h2 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+        }
+
+        .lesson-icon {
+            font-size: 2rem;
+        }
+
+        .grammar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .example-box {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .particle-tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 700;
+            margin: 0 0.2rem;
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        /* Sentence Constructor Styling */
+        .constructor-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #8b0000 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 30px;
+            margin-top: 4rem;
+            box-shadow: 0 20px 40px rgba(188, 0, 45, 0.2);
+        }
+
+        .constructor-input-group {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .constructor-input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            border-radius: 15px;
+            border: none;
+            font-size: 1.1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .constructor-btn {
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2.5rem;
+            border-radius: 15px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .constructor-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: #fff5f5;
+        }
+
+        .output-display {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .output-jp {
+            font-size: 2.5rem;
+            font-family: var(--font-jp);
+            text-align: center;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .output-romaji {
+            text-align: center;
+            font-style: italic;
+            opacity: 0.9;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .output-en {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .conjugation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .conjugation-table th,
+        .conjugation-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .conjugation-table th {
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .conjugation-table td strong {
+            color: var(--primary-color);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">NihongoMastery</a>
+                <a href="home.html" class="btn" style="color: var(--primary-color); font-size: 0.9rem;">Back to
+                    Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="grammar-container">
+        <div style="text-align: center; margin-bottom: 4rem;" class="animate-fade-in">
+            <h1
+                style="font-size: 3.5rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Grammar Lessons</h1>
+            <p style="color: var(--text-light); font-size: 1.2rem;">Master the logic behind the Japanese language.</p>
+        </div>
+
+        <!-- Lesson 1: Sentence Structure -->
+        <div class="lesson-card animate-fade-in">
+            <div class="lesson-header">
+                <span class="lesson-icon">🏗️</span>
+                <h2>1. The SOV Structure</h2>
+            </div>
+            <p>Unlike English (SVO), Japanese follows a <strong>Subject - Object - Verb (SOV)</strong> pattern. The verb
+                <em>always</em> comes at the end of the sentence.</p>
+            <div class="grammar-grid">
+                <div class="example-box">
+                    <h4 style="margin-bottom: 0.5rem;">English (SVO)</h4>
+                    <p>I (S) eat (V) sushi (O).</p>
+                </div>
+                <div class="example-box" style="border-left-color: var(--secondary-color);">
+                    <h4 style="margin-bottom: 0.5rem;">Japanese (SOV)</h4>
+                    <p>Watashi wa (S) sushi o (O) tabemasu (V).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 2: Essential Particles -->
+        <div class="lesson-card animate-fade-in">
+            <div class="lesson-header">
+                <span class="lesson-icon">🔗</span>
+                <h2>2. Core Particles</h2>
+            </div>
+            <p>Particles are small markers that tell you the role of each word in a sentence.</p>
+            <div class="grammar-grid">
+                <div class="example-box">
+                    <span class="particle-tag">は (Wa)</span>
+                    <strong>Topic Marker</strong>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Marks what the sentence is about. "As for..."</p>
+                </div>
+                <div class="example-box">
+                    <span class="particle-tag">を (O)</span>
+                    <strong>Object Marker</strong>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Marks the direct object receiving the action.</p>
+                </div>
+                <div class="example-box">
+                    <span class="particle-tag">に (Ni)</span>
+                    <strong>Direction/Time</strong>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Indicates destination or a specific time.</p>
+                </div>
+                <div class="example-box">
+                    <span class="particle-tag">で (De)</span>
+                    <strong>Location of Action</strong>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Where an action takes place.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 3: Verb Conjugation -->
+        <div class="lesson-card animate-fade-in">
+            <div class="lesson-header">
+                <span class="lesson-icon">🔄</span>
+                <h2>3. Verb Conjugation (Polite)</h2>
+            </div>
+            <p>In polite Japanese, verbs end in <strong>-masu</strong>. Here is how they change based on tense and
+                positivity.</p>
+            <table class="conjugation-table">
+                <thead>
+                    <tr>
+                        <th>Form</th>
+                        <th>Ending</th>
+                        <th>Example (Eat)</th>
+                        <th>Meaning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Present Positive</td>
+                        <td><strong>-masu</strong></td>
+                        <td>Tabe<strong>masu</strong></td>
+                        <td>I eat / I will eat</td>
+                    </tr>
+                    <tr>
+                        <td>Present Negative</td>
+                        <td><strong>-masen</strong></td>
+                        <td>Tabe<strong>masen</strong></td>
+                        <td>I do not eat</td>
+                    </tr>
+                    <tr>
+                        <td>Past Positive</td>
+                        <td><strong>-mashita</strong></td>
+                        <td>Tabe<strong>mashita</strong></td>
+                        <td>I ate</td>
+                    </tr>
+                    <tr>
+                        <td>Past Negative</td>
+                        <td><strong>-masen deshita</strong></td>
+                        <td>Tabe<strong>masen deshita</strong></td>
+                        <td>I did not eat</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Lesson 4: Adjectives -->
+        <div class="lesson-card animate-fade-in">
+            <div class="lesson-header">
+                <span class="lesson-icon">🎨</span>
+                <h2>4. I-Adjectives vs Na-Adjectives</h2>
+            </div>
+            <p>Japanese has two types of adjectives that behave differently when describing nouns or ending sentences.
+            </p>
+            <div class="grammar-grid">
+                <div class="example-box">
+                    <h4 style="color: var(--primary-color);">I-Adjectives (い)</h4>
+                    <p>End in 'i'. They conjugate like verbs.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Example: <strong>Oishii</strong> (Delicious)</p>
+                    <p style="font-size: 0.9rem;">Oishii desu (It is delicious)</p>
+                </div>
+                <div class="example-box">
+                    <h4 style="color: var(--secondary-color);">Na-Adjectives (な)</h4>
+                    <p>Need 'na' to connect to a noun.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Example: <strong>Kirei</strong> (Beautiful)</p>
+                    <p style="font-size: 0.9rem;">Kirei na hana (Beautiful flower)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Sentence Constructor -->
+        <div class="constructor-section animate-fade-in">
+            <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 1rem;">✨ Sentence Constructor</h2>
+            <p style="text-align: center; opacity: 0.9;">Type an English sentence to see its Japanese construction.</p>
+
+            <div class="constructor-input-group">
+                <input type="text" id="english-input" class="constructor-input" placeholder="e.g., I want to eat sushi">
+                <button onclick="constructSentence()" class="constructor-btn">Construct</button>
+            </div>
+
+            <div id="constructed-output" class="output-display">
+                <div id="japanese-output" class="output-jp"></div>
+                <div id="romaji-output" class="output-romaji"></div>
+                <div id="english-output" class="output-en"></div>
+            </div>
+
+            <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8; text-align: center;">
+                Try: "I am a student", "The weather is nice today", "I study Japanese every day", "I watched a movie
+                with my friend"
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sentenceDictionary = {
+            "i want to go to the park": {
+                japanese: "<ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>公園</rb><rt>こうえん</rt></ruby>に<ruby><rb>行</rb><rt>い</rt></ruby>きたいです。",
+                romaji: "Watashi wa kōen ni ikitai desu.",
+                english: "I want to go to the park."
+            },
+            "i am a student": {
+                japanese: "<ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>学生</rb><rt>がくせい</rt></ruby>です。",
+                romaji: "Watashi wa gakusei desu.",
+                english: "I am a student."
+            },
+            "i like japanese food": {
+                japanese: "<ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>日本</rb><rt>にほん</rt></ruby>の<ruby><rb>料理</rb><rt>りょうり</rt></ruby>が<ruby><rb>好</rb><rt>す</rt></ruby>きです。",
+                romaji: "Watashi wa nihon no ryōri ga suki desu.",
+                english: "I like Japanese food."
+            },
+            "the weather is nice today": {
+                japanese: "<ruby><rb>今日</rb><rt>きょう</rt></ruby>は<ruby><rb>天気</rb><rt>てんき</rt></ruby>がいいです。",
+                romaji: "Kyō wa tenki ga ii desu.",
+                english: "The weather is nice today."
+            },
+            "i study japanese every day": {
+                japanese: "<ruby><rb>毎日</rb><rt>まいにち</rt></ruby><ruby><rb>日本語</rb><rt>にほんご</rt></ruby>を<ruby><rb>勉強</rb><rt>べんきょう</rt></ruby>します。",
+                romaji: "Mainichi nihongo o benkyō shimasu.",
+                english: "I study Japanese every day."
+            },
+            "i want to eat sushi": {
+                japanese: "<ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>寿司</rb><rt>すし</rt></ruby>を<ruby><rb>食</rb><rt>た</rt></ruby>べたいです。",
+                romaji: "Watashi wa sushi o tabetai desu.",
+                english: "I want to eat sushi."
+            },
+            "i go to school tomorrow": {
+                japanese: "<ruby><rb>明日</rb><rt>あした</rt></ruby><ruby><rb>学校</rb><rt>がっこう</rt></ruby>に<ruby><rb>行</rb><rt>い</rt></ruby>きます。",
+                romaji: "Ashita gakkō ni ikimasu.",
+                english: "I go to school tomorrow."
+            },
+            "i read books at the library": {
+                japanese: "<ruby><rb>図書館</rb><rt>としょかん</rt></ruby>で<ruby><rb>本</rb><rt>ほん</rt></ruby>を<ruby><rb>読</rb><rt>よ</rt></ruby>みます。",
+                romaji: "Toshokan de hon o yomimasu.",
+                english: "I read books at the library."
+            },
+            "i watched a movie with my friend": {
+                japanese: "<ruby><rb>友達</rb><rt>ともだち</rt></ruby>と<ruby><rb>映画</rb><rt>えいが</rt></ruby>を<ruby><rb>見</rb><rt>み</rt></ruby>ました。",
+                romaji: "Tomodachi to eiga o mimashita.",
+                english: "I watched a movie with my friend."
+            },
+            "this food is delicious": {
+                japanese: "この<ruby><rb>料理</rb><rt>りょうり</rt></ruby>は<ruby><rb>美味</rb><rt>おい</rt></ruby>しいです。",
+                romaji: "Kono ryōri wa oishii desu.",
+                english: "This food is delicious."
+            }
+        };
+
+        function constructSentence() {
+            const input = document.getElementById('english-input').value.toLowerCase().trim();
+            const output = document.getElementById('constructed-output');
+            const japaneseOutput = document.getElementById('japanese-output');
+            const romajiOutput = document.getElementById('romaji-output');
+            const englishOutput = document.getElementById('english-output');
+
+            if (!input) {
+                alert('Please enter an English sentence!');
+                return;
+            }
+
+            const result = sentenceDictionary[input];
+
+            if (result) {
+                japaneseOutput.innerHTML = result.japanese;
+                romajiOutput.textContent = result.romaji;
+                englishOutput.textContent = result.english;
+                output.style.display = 'block';
+            } else {
+                japaneseOutput.innerHTML = '❌ Sentence not found';
+                romajiOutput.textContent = 'Try one of the examples below:';
+                englishOutput.innerHTML = '';
+                output.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

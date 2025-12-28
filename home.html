@@ -74,6 +74,11 @@
             box-shadow: var(--shadow-lg);
         }
 
+        .learn-box.no-hover:hover {
+            transform: none;
+            box-shadow: var(--shadow-sm);
+        }
+
         .icon-placeholder {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
@@ -116,7 +121,7 @@
                 <h3>Kanji</h3>
                 <p>Chinese Characters</p>
             </div>
-            <div class="learn-box" onclick="openModal('grammar')">
+            <div class="learn-box no-hover" onclick="window.location.href='grammar.html'">
                 <span class="icon-placeholder">文</span>
                 <h3>Grammar</h3>
                 <p>Sentence Rules</p>
