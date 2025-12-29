@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Challenge Your Knowledge - NihongoMastery</title>
+    <title>Challenge Mode - NihongoMastery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,81 +24,73 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            /* Center vertically */
             padding: 2rem;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
-            /* Removed top margin to allow vertical centering */
             width: 100%;
         }
 
-        .selection-screen {
+        .challenge-header {
             text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .module-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
             width: 100%;
         }
 
-        .selection-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-            width: 100%;
-        }
-
-        .test-option {
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
             background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--text-color);
+            font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
+            box-shadow: var(--shadow-sm);
         }
 
-        .test-option:hover {
-            transform: translateY(-5px);
+        .nav-btn:hover {
+            transform: translateY(-2px);
             box-shadow: var(--shadow-md);
             border-color: var(--primary-color);
         }
 
-        .test-option i {
-            font-size: 2.5rem;
-        }
-
-        .test-option h3 {
-            margin: 0;
-            color: var(--secondary-color);
-        }
-
-        .test-option p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin: 0;
+        .nav-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(188, 0, 45, 0.3);
         }
 
         /* Flashcard Styles */
-        .flashcard-screen {
-            display: none;
+        .challenge-area {
+            display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             gap: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
         }
 
-        .flashcard-screen.active {
-            display: flex;
+        .challenge-area.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .flashcard-container {
             perspective: 1000px;
             width: 100%;
-            max-width: 400px;
-            height: 300px;
+            max-width: 500px;
+            height: 350px;
             cursor: pointer;
         }
 
@@ -129,7 +121,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 24px;
-            padding: 2rem;
+            padding: 2.5rem;
             background: white;
         }
 
@@ -144,11 +136,13 @@
             font-family: var(--font-jp);
             font-weight: 700;
             margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
         .card-info {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-light);
+            max-width: 90%;
         }
 
         .flashcard-back .card-info {
@@ -172,26 +166,35 @@
             gap: 1rem;
         }
 
-        .btn-back {
-            background: #eee;
-            color: var(--text-color);
-        }
-
-        .btn-back:hover {
-            background: #ddd;
-        }
-
         .module-badge {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.5rem;
+            right: 1.5rem;
             background: rgba(0, 0, 0, 0.05);
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: var(--text-light);
+        }
+
+        .flashcard-back .module-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Grammar/Sentence specific */
+        .scrambled-box {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            background: #f1f5f9;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 2px dashed #cbd5e1;
         }
     </style>
 </head>
@@ -208,154 +211,114 @@
     </header>
 
     <div class="test-container">
-        <!-- Selection Screen -->
-        <div id="selection-screen" class="selection-screen animate-fade-in">
-            <h1 style="font-size: 3rem; margin-bottom: 0.5rem;">Challenge Mode</h1>
-            <p style="color: var(--text-light); font-size: 1.1rem;">Test your knowledge and master Japanese characters
-                and words.</p>
-
-            <div class="selection-grid">
-                <div class="test-option" onclick="startTest('hiragana')">
-                    <span>あ</span>
-                    <h3>Hiragana</h3>
-                    <p>Basic Alphabet</p>
-                </div>
-                <div class="test-option" onclick="startTest('katakana')">
-                    <span>ア</span>
-                    <h3>Katakana</h3>
-                    <p>Foreign Alphabet</p>
-                </div>
-                <div class="test-option" onclick="startTest('kanji')">
-                    <span>漢</span>
-                    <h3>Kanji</h3>
-                    <p>Chinese Characters</p>
-                </div>
-                <div class="test-option" onclick="startTest('vocabulary')">
-                    <span>📚</span>
-                    <h3>Vocabulary</h3>
-                    <p>Common Words</p>
-                </div>
-                <div class="test-option" onclick="startTest('all')"
-                    style="grid-column: 1 / -1; background: linear-gradient(135deg, var(--primary-color), #2c3e50); color: white;">
-                    <span style="font-size: 2.5rem;">🔥</span>
-                    <h3 style="color: white;">Challenge All</h3>
-                    <p style="color: rgba(255,255,255,0.8);">Mixed Random Challenge</p>
-                </div>
-            </div>
+        <div class="challenge-header">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Challenge Mode</h1>
+            <p style="color: var(--text-light);">Select a module to start your interactive practice session.</p>
         </div>
 
-        <!-- Flashcard Screen -->
-        <div id="flashcard-screen" class="flashcard-screen">
-            <div style="text-align: center;">
-                <h2 id="test-title">Hiragana Test</h2>
+        <div class="module-nav">
+            <button class="nav-btn" onclick="switchModule('hiragana', this)">Hiragana</button>
+            <button class="nav-btn" onclick="switchModule('katakana', this)">Katakana</button>
+            <button class="nav-btn" onclick="switchModule('kanji', this)">Kanji</button>
+            <button class="nav-btn" onclick="switchModule('vocabulary', this)">Vocabulary</button>
+            <button class="nav-btn" onclick="switchModule('grammar', this)">Grammar</button>
+            <button class="nav-btn" onclick="switchModule('particles', this)">Particles</button>
+            <button class="nav-btn" onclick="switchModule('all', this)">Challenge All</button>
+        </div>
+
+        <!-- Integrated Challenge Area -->
+        <div id="challenge-area" class="challenge-area">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <h2 id="current-module-title" style="color: var(--secondary-color);">Select a Module</h2>
                 <p style="color: var(--text-light);">Click the card to reveal the answer</p>
             </div>
 
             <div class="flashcard-container" onclick="flipCard()">
                 <div id="flashcard" class="flashcard">
                     <div class="flashcard-front">
-                        <div id="card-module" class="module-badge">Hiragana</div>
-                        <div id="card-front-main" class="card-char">あ</div>
-                        <div id="card-front-sub" class="card-info">What is this?</div>
+                        <div id="card-module" class="module-badge">Module</div>
+                        <div id="card-front-main" class="card-char">?</div>
+                        <div id="card-front-sub" class="card-info">Select a module above to begin</div>
                     </div>
                     <div class="flashcard-back">
-                        <div id="card-back-main" class="card-answer">a</div>
+                        <div id="card-back-main" class="card-answer">Answer</div>
                         <div id="card-back-sub" class="card-meaning">Meaning</div>
                     </div>
                 </div>
             </div>
 
             <div class="controls">
-                <button class="btn btn-back" onclick="showSelection()">Change Module</button>
-                <button class="btn btn-primary" onclick="nextCard()">Next Card</button>
+                <button class="btn btn-primary" style="padding: 1rem 3rem; border-radius: 50px;"
+                    onclick="nextCard()">Next Challenge</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Data pooled from other modules
         const hiraganaData = [
-            { char: 'あ', romaji: 'a', meaning: 'Character', type: 'Hiragana' }, { char: 'い', romaji: 'i', meaning: 'Character', type: 'Hiragana' }, { char: 'う', romaji: 'u', meaning: 'Character', type: 'Hiragana' }, { char: 'え', romaji: 'e', meaning: 'Character', type: 'Hiragana' }, { char: 'お', romaji: 'o', meaning: 'Character', type: 'Hiragana' },
-            { char: 'か', romaji: 'ka', meaning: 'Character', type: 'Hiragana' }, { char: 'き', romaji: 'ki', meaning: 'Character', type: 'Hiragana' }, { char: 'く', romaji: 'ku', meaning: 'Character', type: 'Hiragana' }, { char: 'け', romaji: 'ke', meaning: 'Character', type: 'Hiragana' }, { char: 'こ', romaji: 'ko', meaning: 'Character', type: 'Hiragana' },
-            { char: 'さ', romaji: 'sa', meaning: 'Character', type: 'Hiragana' }, { char: 'し', romaji: 'shi', meaning: 'Character', type: 'Hiragana' }, { char: 'す', romaji: 'su', meaning: 'Character', type: 'Hiragana' }, { char: 'せ', romaji: 'se', meaning: 'Character', type: 'Hiragana' }, { char: 'そ', romaji: 'so', meaning: 'Character', type: 'Hiragana' },
-            { char: 'た', romaji: 'ta', meaning: 'Character', type: 'Hiragana' }, { char: 'ち', romaji: 'chi', meaning: 'Character', type: 'Hiragana' }, { char: 'つ', romaji: 'tsu', meaning: 'Character', type: 'Hiragana' }, { char: 'て', romaji: 'te', meaning: 'Character', type: 'Hiragana' }, { char: 'と', romaji: 'to', meaning: 'Character', type: 'Hiragana' },
-            { char: 'な', romaji: 'na', meaning: 'Character', type: 'Hiragana' }, { char: 'に', romaji: 'ni', meaning: 'Character', type: 'Hiragana' }, { char: 'ぬ', romaji: 'nu', meaning: 'Character', type: 'Hiragana' }, { char: 'ね', romaji: 'ne', meaning: 'Character', type: 'Hiragana' }, { char: 'の', romaji: 'no', meaning: 'Character', type: 'Hiragana' },
-            { char: 'は', romaji: 'ha', meaning: 'Character', type: 'Hiragana' }, { char: 'ひ', romaji: 'hi', meaning: 'Character', type: 'Hiragana' }, { char: 'ふ', romaji: 'fu', meaning: 'Character', type: 'Hiragana' }, { char: 'へ', romaji: 'he', meaning: 'Character', type: 'Hiragana' }, { char: 'ほ', romaji: 'ho', meaning: 'Character', type: 'Hiragana' },
-            { char: 'ま', romaji: 'ma', meaning: 'Character', type: 'Hiragana' }, { char: 'み', romaji: 'mi', meaning: 'Character', type: 'Hiragana' }, { char: 'む', romaji: 'mu', meaning: 'Character', type: 'Hiragana' }, { char: 'め', romaji: 'me', meaning: 'Character', type: 'Hiragana' }, { char: 'も', romaji: 'mo', meaning: 'Character', type: 'Hiragana' },
-            { char: 'や', romaji: 'ya', meaning: 'Character', type: 'Hiragana' }, { char: 'ゆ', romaji: 'yu', meaning: 'Character', type: 'Hiragana' }, { char: 'よ', romaji: 'yo', meaning: 'Character', type: 'Hiragana' },
-            { char: 'ら', romaji: 'ra', meaning: 'Character', type: 'Hiragana' }, { char: 'り', romaji: 'ri', meaning: 'Character', type: 'Hiragana' }, { char: 'る', romaji: 'ru', meaning: 'Character', type: 'Hiragana' }, { char: 'れ', romaji: 're', meaning: 'Character', type: 'Hiragana' }, { char: 'ろ', romaji: 'ro', meaning: 'Character', type: 'Hiragana' },
-            { char: 'わ', romaji: 'wa', meaning: 'Character', type: 'Hiragana' }, { char: 'を', romaji: 'wo', meaning: 'Character', type: 'Hiragana' }, { char: 'ん', romaji: 'n', meaning: 'Character', type: 'Hiragana' }
+            { char: 'あ', romaji: 'a', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'い', romaji: 'i', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'う', romaji: 'u', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'え', romaji: 'e', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'お', romaji: 'o', meaning: 'Hiragana Character', type: 'Hiragana' },
+            { char: 'か', romaji: 'ka', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'き', romaji: 'ki', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'く', romaji: 'ku', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'け', romaji: 'ke', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'こ', romaji: 'ko', meaning: 'Hiragana Character', type: 'Hiragana' },
+            { char: 'さ', romaji: 'sa', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'し', romaji: 'shi', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'す', romaji: 'su', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'せ', romaji: 'se', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'そ', romaji: 'so', meaning: 'Hiragana Character', type: 'Hiragana' }
         ];
 
         const katakanaData = [
-            { char: 'ア', romaji: 'a', meaning: 'Character', type: 'Katakana' }, { char: 'イ', romaji: 'i', meaning: 'Character', type: 'Katakana' }, { char: 'ウ', romaji: 'u', meaning: 'Character', type: 'Katakana' }, { char: 'エ', romaji: 'e', meaning: 'Character', type: 'Katakana' }, { char: 'オ', romaji: 'o', meaning: 'Character', type: 'Katakana' },
-            { char: 'カ', romaji: 'ka', meaning: 'Character', type: 'Katakana' }, { char: 'キ', romaji: 'ki', meaning: 'Character', type: 'Katakana' }, { char: 'ク', romaji: 'ku', meaning: 'Character', type: 'Katakana' }, { char: 'ケ', romaji: 'ke', meaning: 'Character', type: 'Katakana' }, { char: 'コ', romaji: 'ko', meaning: 'Character', type: 'Katakana' },
-            { char: 'サ', romaji: 'sa', meaning: 'Character', type: 'Katakana' }, { char: 'シ', romaji: 'shi', meaning: 'Character', type: 'Katakana' }, { char: 'ス', romaji: 'su', meaning: 'Character', type: 'Katakana' }, { char: 'セ', romaji: 'se', meaning: 'Character', type: 'Katakana' }, { char: 'ソ', romaji: 'so', meaning: 'Character', type: 'Katakana' },
-            { char: 'タ', romaji: 'ta', meaning: 'Character', type: 'Katakana' }, { char: 'チ', romaji: 'chi', meaning: 'Character', type: 'Katakana' }, { char: 'ツ', romaji: 'tsu', meaning: 'Character', type: 'Katakana' }, { char: 'テ', romaji: 'te', meaning: 'Character', type: 'Katakana' }, { char: 'ト', romaji: 'to', meaning: 'Character', type: 'Katakana' },
-            { char: 'ナ', romaji: 'na', meaning: 'Character', type: 'Katakana' }, { char: 'ニ', romaji: 'ni', meaning: 'Character', type: 'Katakana' }, { char: 'ヌ', romaji: 'nu', meaning: 'Character', type: 'Katakana' }, { char: 'ネ', romaji: 'ne', meaning: 'Character', type: 'Katakana' }, { char: 'ノ', romaji: 'no', meaning: 'Character', type: 'Katakana' },
-            { char: 'ハ', romaji: 'ha', meaning: 'Character', type: 'Katakana' }, { char: 'ヒ', romaji: 'hi', meaning: 'Character', type: 'Katakana' }, { char: 'フ', romaji: 'fu', meaning: 'Character', type: 'Katakana' }, { char: 'ヘ', romaji: 'he', meaning: 'Character', type: 'Katakana' }, { char: 'ホ', romaji: 'ho', meaning: 'Character', type: 'Katakana' },
-            { char: 'マ', romaji: 'ma', meaning: 'Character', type: 'Katakana' }, { char: 'ミ', romaji: 'mi', meaning: 'Character', type: 'Katakana' }, { char: 'ム', romaji: 'mu', meaning: 'Character', type: 'Katakana' }, { char: 'メ', romaji: 'me', meaning: 'Character', type: 'Katakana' }, { char: 'モ', romaji: 'mo', meaning: 'Character', type: 'Katakana' },
-            { char: 'ヤ', romaji: 'ya', meaning: 'Character', type: 'Katakana' }, { char: 'ユ', romaji: 'yu', meaning: 'Character', type: 'Katakana' }, { char: 'ヨ', romaji: 'yo', meaning: 'Character', type: 'Katakana' },
-            { char: 'ラ', romaji: 'ra', meaning: 'Character', type: 'Katakana' }, { char: 'り', romaji: 'ri', meaning: 'Character', type: 'Katakana' }, { char: 'ル', romaji: 'ru', meaning: 'Character', type: 'Katakana' }, { char: 'レ', romaji: 're', meaning: 'Character', type: 'Katakana' }, { char: 'ロ', romaji: 'ro', meaning: 'Character', type: 'Katakana' },
-            { char: 'ワ', romaji: 'wa', meaning: 'Character', type: 'Katakana' }, { char: 'ヲ', romaji: 'wo', meaning: 'Character', type: 'Katakana' }, { char: 'ン', romaji: 'n', meaning: 'Character', type: 'Katakana' }
+            { char: 'ア', romaji: 'a', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'イ', romaji: 'i', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'ウ', romaji: 'u', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'エ', romaji: 'e', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'オ', romaji: 'o', meaning: 'Katakana Character', type: 'Katakana' },
+            { char: 'カ', romaji: 'ka', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'キ', romaji: 'ki', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'ク', romaji: 'ku', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'ケ', romaji: 'ke', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'コ', romaji: 'ko', meaning: 'Katakana Character', type: 'Katakana' }
         ];
 
         const kanjiData = [
             { char: '一', romaji: 'ichi', meaning: 'One', type: 'Kanji' }, { char: '二', romaji: 'ni', meaning: 'Two', type: 'Kanji' }, { char: '三', romaji: 'san', meaning: 'Three', type: 'Kanji' },
-            { char: '四', romaji: 'yon', meaning: 'Four', type: 'Kanji' }, { char: '五', romaji: 'go', meaning: 'Five', type: 'Kanji' }, { char: '六', romaji: 'roku', meaning: 'Six', type: 'Kanji' },
-            { char: '七', romaji: 'nana', meaning: 'Seven', type: 'Kanji' }, { char: '八', romaji: 'hachi', meaning: 'Eight', type: 'Kanji' }, { char: '九', romaji: 'kyuu', meaning: 'Nine', type: 'Kanji' },
-            { char: '十', romaji: 'juu', meaning: 'Ten', type: 'Kanji' }, { char: '百', romaji: 'hyaku', meaning: 'Hundred', type: 'Kanji' }, { char: '千', romaji: 'sen', meaning: 'Thousand', type: 'Kanji' },
-            { char: '万', romaji: 'man', meaning: 'Ten Thousand', type: 'Kanji' }, { char: '日', romaji: 'hi/nichi', meaning: 'Sun/Day', type: 'Kanji' }, { char: '月', romaji: 'tsuki/getsu', meaning: 'Moon/Month', type: 'Kanji' },
-            { char: '火', romaji: 'hi/ka', meaning: 'Fire', type: 'Kanji' }, { char: '水', romaji: 'mizu/sui', meaning: 'Water', type: 'Kanji' }, { char: '木', romaji: 'ki/moku', meaning: 'Tree', type: 'Kanji' },
-            { char: '金', romaji: 'kane/kin', meaning: 'Gold/Metal', type: 'Kanji' }, { char: '土', romaji: 'tsuchi/do', meaning: 'Earth/Soil', type: 'Kanji' }, { char: '山', romaji: 'yama', meaning: 'Mountain', type: 'Kanji' },
-            { char: '川', romaji: 'kawa', meaning: 'River', type: 'Kanji' }, { char: '田', romaji: 'ta', meaning: 'Rice Field', type: 'Kanji' }, { char: '人', romaji: 'hito/jin', meaning: 'Person', type: 'Kanji' },
-            { char: '口', romaji: 'kuchi', meaning: 'Mouth', type: 'Kanji' }, { char: '目', romaji: 'me', meaning: 'Eye', type: 'Kanji' }, { char: '耳', romaji: 'mimi', meaning: 'Ear', type: 'Kanji' },
-            { char: '手', romaji: 'te', meaning: 'Hand', type: 'Kanji' }, { char: '足', romaji: 'ashi', meaning: 'Foot/Leg', type: 'Kanji' }, { char: '力', romaji: 'chikara', meaning: 'Power', type: 'Kanji' }
+            { char: '日', romaji: 'hi/nichi', meaning: 'Sun/Day', type: 'Kanji' }, { char: '月', romaji: 'tsuki/getsu', meaning: 'Moon/Month', type: 'Kanji' }, { char: '火', romaji: 'hi/ka', meaning: 'Fire', type: 'Kanji' },
+            { char: '水', romaji: 'mizu/sui', meaning: 'Water', type: 'Kanji' }, { char: '木', romaji: 'ki/moku', meaning: 'Tree', type: 'Kanji' }, { char: '金', romaji: 'kane/kin', meaning: 'Gold/Metal', type: 'Kanji' },
+            { char: '土', romaji: 'tsuchi/do', meaning: 'Earth/Soil', type: 'Kanji' }, { char: '人', romaji: 'hito/jin', meaning: 'Person', type: 'Kanji' }
         ];
 
         const vocabData = [
             { char: '食べる', romaji: 'taberu', meaning: 'To eat', type: 'Vocabulary' }, { char: '飲む', romaji: 'nomu', meaning: 'To drink', type: 'Vocabulary' },
             { char: '名前', romaji: 'namae', meaning: 'Name', type: 'Vocabulary' }, { char: '先生', romaji: 'sensei', meaning: 'Teacher', type: 'Vocabulary' },
-            { char: '学生', romaji: 'gakusei', meaning: 'Student', type: 'Vocabulary' }, { char: '日本', romaji: 'nihon', meaning: 'Japan', type: 'Vocabulary' },
-            { char: '今日', romaji: 'kyou', meaning: 'Today', type: 'Vocabulary' }, { char: '明日', romaji: 'ashita', meaning: 'Tomorrow', type: 'Vocabulary' },
-            { char: '昨日', romaji: 'kinou', meaning: 'Yesterday', type: 'Vocabulary' }, { char: '猫', romaji: 'neko', meaning: 'Cat', type: 'Vocabulary' },
-            { char: '犬', romaji: 'inu', meaning: 'Dog', type: 'Vocabulary' }, { char: '鳥', romaji: 'tori', meaning: 'Bird', type: 'Vocabulary' },
-            { char: '魚', romaji: 'sakana', meaning: 'Fish', type: 'Vocabulary' }, { char: '学校', romaji: 'gakkou', meaning: 'School', type: 'Vocabulary' },
-            { char: '会社', romaji: 'kaisha', meaning: 'Company', type: 'Vocabulary' }, { char: '部屋', romaji: 'heya', meaning: 'Room', type: 'Vocabulary' },
-            { char: '椅子', romaji: 'isu', meaning: 'Chair', type: 'Vocabulary' }, { char: '机', romaji: 'tsukue', meaning: 'Desk', type: 'Vocabulary' },
-            { char: '本', romaji: 'hon', meaning: 'Book', type: 'Vocabulary' }, { char: '車', romaji: 'kuruma', meaning: 'Car', type: 'Vocabulary' }
+            { char: '学生', romaji: 'gakusei', meaning: 'Student', type: 'Vocabulary' }, { char: '日本', romaji: 'nihon', meaning: 'Japan', type: 'Vocabulary' }
+        ];
+
+        const grammarData = [
+            { char: 'です / 私 / 学生', romaji: 'Watashi wa gakusei desu', meaning: 'I am a student', type: 'Grammar' },
+            { char: 'を / 食べる / ご飯', romaji: 'Gohan o taberu', meaning: 'Eat rice/meal', type: 'Grammar' },
+            { char: 'に / 行く / 学校', romaji: 'Gakkou ni iku', meaning: 'Go to school', type: 'Grammar' },
+            { char: 'は / 綺麗 / 花', romaji: 'Hana wa kirei', meaning: 'The flower is beautiful', type: 'Grammar' },
+            { char: 'の / 本 / 私', romaji: 'Watashi no hon', meaning: 'My book', type: 'Grammar' }
+        ];
+
+        const particlesData = [
+            { char: '私 __ 学生です', romaji: 'は (wa)', meaning: 'I am a student', type: 'Particles' },
+            { char: 'りんご __ 食べます', romaji: 'を (o)', meaning: 'Eat an apple', type: 'Particles' },
+            { char: '学校 __ 行きます', romaji: 'に (ni)', meaning: 'Go to school', type: 'Particles' },
+            { char: '猫 __ います', romaji: 'が (ga)', meaning: 'There is a cat', type: 'Particles' },
+            { char: '東京 __ 住んでいます', romaji: 'に (ni)', meaning: 'Living in Tokyo', type: 'Particles' }
         ];
 
         let currentPool = [];
         let currentItem = null;
+        let currentModule = '';
 
-        function startTest(module) {
-            document.getElementById('selection-screen').style.display = 'none';
-            document.getElementById('flashcard-screen').classList.add('active');
+        function switchModule(module, btn) {
+            // Update UI
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-            if (module === 'hiragana') {
-                currentPool = [...hiraganaData];
-                document.getElementById('test-title').textContent = 'Hiragana Challenge';
-            } else if (module === 'katakana') {
-                currentPool = [...katakanaData];
-                document.getElementById('test-title').textContent = 'Katakana Challenge';
-            } else if (module === 'kanji') {
-                currentPool = [...kanjiData];
-                document.getElementById('test-title').textContent = 'Kanji Challenge';
-            } else if (module === 'vocabulary') {
-                currentPool = [...vocabData];
-                document.getElementById('test-title').textContent = 'Vocabulary Challenge';
-            } else if (module === 'all') {
-                currentPool = [...hiraganaData, ...katakanaData, ...kanjiData, ...vocabData];
-                document.getElementById('test-title').textContent = 'Ultimate Challenge';
-            }
+            const area = document.getElementById('challenge-area');
+            area.classList.add('active');
+
+            currentModule = module;
+            document.getElementById('current-module-title').textContent = module.charAt(0).toUpperCase() + module.slice(1) + ' Challenge';
+
+            if (module === 'hiragana') currentPool = [...hiraganaData];
+            else if (module === 'katakana') currentPool = [...katakanaData];
+            else if (module === 'kanji') currentPool = [...kanjiData];
+            else if (module === 'vocabulary') currentPool = [...vocabData];
+            else if (module === 'grammar') currentPool = [...grammarData];
+            else if (module === 'particles') currentPool = [...particlesData];
+            else if (module === 'all') currentPool = [...hiraganaData, ...katakanaData, ...kanjiData, ...vocabData, ...grammarData, ...particlesData];
 
             nextCard();
-        }
-
-        function showSelection() {
-            document.getElementById('flashcard-screen').classList.remove('active');
-            document.getElementById('selection-screen').style.display = 'block';
         }
 
         function nextCard() {
@@ -367,28 +330,47 @@
                 currentItem = currentPool[randomIndex];
 
                 document.getElementById('card-module').textContent = currentItem.type;
-                document.getElementById('card-front-main').textContent = currentItem.char;
+
+                const frontMain = document.getElementById('card-front-main');
+                const frontSub = document.getElementById('card-front-sub');
+
+                frontMain.textContent = currentItem.char;
+
+                // Contextual sub-text
+                if (currentItem.type === 'Grammar') {
+                    frontSub.textContent = 'Arrange these words correctly';
+                    frontMain.style.fontSize = '2.5rem';
+                } else if (currentItem.type === 'Particles') {
+                    frontSub.textContent = 'Which particle fits the blank?';
+                    frontMain.style.fontSize = '2.5rem';
+                } else {
+                    frontSub.textContent = 'What is the meaning?';
+                    frontMain.style.fontSize = currentItem.char.length > 3 ? '3.5rem' : '6rem';
+                }
+
                 document.getElementById('card-back-main').textContent = currentItem.romaji;
                 document.getElementById('card-back-sub').textContent = currentItem.meaning;
 
-                // Adjust font size for longer vocabulary
-                if (currentItem.char.length > 3) {
-                    document.getElementById('card-front-main').style.fontSize = '3.5rem';
+                // Adjust back font size
+                const backMain = document.getElementById('card-back-main');
+                if (currentItem.romaji.length > 15) {
+                    backMain.style.fontSize = '2rem';
                 } else {
-                    document.getElementById('card-front-main').style.fontSize = '6rem';
-                }
-
-                if (currentItem.romaji.length > 10) {
-                    document.getElementById('card-back-main').style.fontSize = '2.5rem';
-                } else {
-                    document.getElementById('card-back-main').style.fontSize = '3.5rem';
+                    backMain.style.fontSize = '3.5rem';
                 }
             }, card.classList.contains('flipped') ? 300 : 0);
         }
 
         function flipCard() {
+            if (!currentModule) return;
             document.getElementById('flashcard').classList.toggle('flipped');
         }
+
+        // Initialize with Hiragana
+        window.onload = () => {
+            const firstBtn = document.querySelector('.nav-btn');
+            switchModule('hiragana', firstBtn);
+        };
     </script>
 </body>
 
