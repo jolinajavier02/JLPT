@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Your Knowledge - NihongoMastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .test-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 60px auto 0;
+            width: 100%;
+        }
+
+        .selection-screen {
+            text-align: center;
+            width: 100%;
+        }
+
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .test-option {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .test-option:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .test-option i {
+            font-size: 2.5rem;
+        }
+
+        .test-option h3 {
+            margin: 0;
+            color: var(--secondary-color);
+        }
+
+        .test-option p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Flashcard Styles */
+        .flashcard-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 2rem;
+        }
+
+        .flashcard-screen.active {
+            display: flex;
+        }
+
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            cursor: pointer;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: var(--shadow-lg);
+            border-radius: 24px;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px;
+            padding: 2rem;
+            background: white;
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .card-char {
+            font-size: 6rem;
+            font-family: var(--font-jp);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .card-info {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .flashcard-back .card-info {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .card-answer {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-back {
+            background: #eee;
+            color: var(--text-color);
+        }
+
+        .btn-back:hover {
+            background: #ddd;
+        }
+
+        .module-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">NihongoMastery</a>
+                <a href="home.html" class="btn" style="color: var(--primary-color); font-size: 0.9rem;">Back to
+                    Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="test-container">
+        <!-- Selection Screen -->
+        <div id="selection-screen" class="selection-screen animate-fade-in">
+            <h1 style="font-size: 3rem; margin-bottom: 0.5rem;">Challenge Mode</h1>
+            <p style="color: var(--text-light); font-size: 1.1rem;">Test your knowledge and master Japanese characters
+                and words.</p>
+
+            <div class="selection-grid">
+                <div class="test-option" onclick="startTest('hiragana')">
+                    <span>あ</span>
+                    <h3>Hiragana</h3>
+                    <p>Basic Alphabet</p>
+                </div>
+                <div class="test-option" onclick="startTest('katakana')">
+                    <span>ア</span>
+                    <h3>Katakana</h3>
+                    <p>Foreign Alphabet</p>
+                </div>
+                <div class="test-option" onclick="startTest('kanji')">
+                    <span>漢</span>
+                    <h3>Kanji</h3>
+                    <p>Chinese Characters</p>
+                </div>
+                <div class="test-option" onclick="startTest('vocabulary')">
+                    <span>📚</span>
+                    <h3>Vocabulary</h3>
+                    <p>Common Words</p>
+                </div>
+                <div class="test-option" onclick="startTest('all')"
+                    style="grid-column: 1 / -1; background: linear-gradient(135deg, var(--primary-color), #2c3e50); color: white;">
+                    <span style="font-size: 2.5rem;">🔥</span>
+                    <h3 style="color: white;">Challenge All</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Mixed Random Challenge</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flashcard Screen -->
+        <div id="flashcard-screen" class="flashcard-screen">
+            <div style="text-align: center;">
+                <h2 id="test-title">Hiragana Test</h2>
+                <p style="color: var(--text-light);">Click the card to reveal the answer</p>
+            </div>
+
+            <div class="flashcard-container" onclick="flipCard()">
+                <div id="flashcard" class="flashcard">
+                    <div class="flashcard-front">
+                        <div id="card-module" class="module-badge">Hiragana</div>
+                        <div id="card-front-main" class="card-char">あ</div>
+                        <div id="card-front-sub" class="card-info">What is this?</div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div id="card-back-main" class="card-answer">a</div>
+                        <div id="card-back-sub" class="card-info">Romaji</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-back" onclick="showSelection()">Change Module</button>
+                <button class="btn btn-primary" onclick="nextCard()">Next Card</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data pooled from other modules
+        const hiraganaData = [
+            { char: 'あ', answer: 'a', type: 'Hiragana' }, { char: 'い', answer: 'i', type: 'Hiragana' }, { char: 'う', answer: 'u', type: 'Hiragana' }, { char: 'え', answer: 'e', type: 'Hiragana' }, { char: 'お', answer: 'o', type: 'Hiragana' },
+            { char: 'か', answer: 'ka', type: 'Hiragana' }, { char: 'き', answer: 'ki', type: 'Hiragana' }, { char: 'く', answer: 'ku', type: 'Hiragana' }, { char: 'け', answer: 'ke', type: 'Hiragana' }, { char: 'こ', answer: 'ko', type: 'Hiragana' },
+            { char: 'さ', answer: 'sa', type: 'Hiragana' }, { char: 'し', answer: 'shi', type: 'Hiragana' }, { char: 'す', answer: 'su', type: 'Hiragana' }, { char: 'せ', answer: 'se', type: 'Hiragana' }, { char: 'そ', answer: 'so', type: 'Hiragana' },
+            { char: 'た', answer: 'ta', type: 'Hiragana' }, { char: 'ち', answer: 'chi', type: 'Hiragana' }, { char: 'つ', answer: 'tsu', type: 'Hiragana' }, { char: 'て', answer: 'te', type: 'Hiragana' }, { char: 'と', answer: 'to', type: 'Hiragana' },
+            { char: 'な', answer: 'na', type: 'Hiragana' }, { char: 'に', answer: 'ni', type: 'Hiragana' }, { char: 'ぬ', answer: 'nu', type: 'Hiragana' }, { char: 'ね', answer: 'ne', type: 'Hiragana' }, { char: 'の', answer: 'no', type: 'Hiragana' },
+            { char: 'は', answer: 'ha', type: 'Hiragana' }, { char: 'ひ', answer: 'hi', type: 'Hiragana' }, { char: 'ふ', answer: 'fu', type: 'Hiragana' }, { char: 'へ', answer: 'he', type: 'Hiragana' }, { char: 'ほ', answer: 'ho', type: 'Hiragana' },
+            { char: 'ま', answer: 'ma', type: 'Hiragana' }, { char: 'み', answer: 'mi', type: 'Hiragana' }, { char: 'む', answer: 'mu', type: 'Hiragana' }, { char: 'め', answer: 'me', type: 'Hiragana' }, { char: 'も', answer: 'mo', type: 'Hiragana' },
+            { char: 'や', answer: 'ya', type: 'Hiragana' }, { char: 'ゆ', answer: 'yu', type: 'Hiragana' }, { char: 'よ', answer: 'yo', type: 'Hiragana' },
+            { char: 'ら', answer: 'ra', type: 'Hiragana' }, { char: 'り', answer: 'ri', type: 'Hiragana' }, { char: 'る', answer: 'ru', type: 'Hiragana' }, { char: 'れ', answer: 're', type: 'Hiragana' }, { char: 'ろ', answer: 'ro', type: 'Hiragana' },
+            { char: 'わ', answer: 'wa', type: 'Hiragana' }, { char: 'を', answer: 'wo', type: 'Hiragana' }, { char: 'ん', answer: 'n', type: 'Hiragana' }
+        ];
+
+        const katakanaData = [
+            { char: 'ア', answer: 'a', type: 'Katakana' }, { char: 'イ', answer: 'i', type: 'Katakana' }, { char: 'ウ', answer: 'u', type: 'Katakana' }, { char: 'エ', answer: 'e', type: 'Katakana' }, { char: 'オ', answer: 'o', type: 'Katakana' },
+            { char: 'カ', answer: 'ka', type: 'Katakana' }, { char: 'キ', answer: 'ki', type: 'Katakana' }, { char: 'ク', answer: 'ku', type: 'Katakana' }, { char: 'ケ', answer: 'ke', type: 'Katakana' }, { char: 'コ', answer: 'ko', type: 'Katakana' },
+            { char: 'サ', answer: 'sa', type: 'Katakana' }, { char: 'シ', answer: 'shi', type: 'Katakana' }, { char: 'ス', answer: 'su', type: 'Katakana' }, { char: 'セ', answer: 'se', type: 'Katakana' }, { char: 'ソ', answer: 'so', type: 'Katakana' },
+            { char: 'タ', answer: 'ta', type: 'Katakana' }, { char: 'チ', answer: 'chi', type: 'Katakana' }, { char: 'ツ', answer: 'tsu', type: 'Katakana' }, { char: 'テ', answer: 'te', type: 'Katakana' }, { char: 'ト', answer: 'to', type: 'Katakana' },
+            { char: 'ナ', answer: 'na', type: 'Katakana' }, { char: 'ニ', answer: 'ni', type: 'Katakana' }, { char: 'ヌ', answer: 'nu', type: 'Katakana' }, { char: 'ネ', answer: 'ne', type: 'Katakana' }, { char: 'ノ', answer: 'no', type: 'Katakana' },
+            { char: 'ハ', answer: 'ha', type: 'Katakana' }, { char: 'ヒ', answer: 'hi', type: 'Katakana' }, { char: 'フ', answer: 'fu', type: 'Katakana' }, { char: 'ヘ', answer: 'he', type: 'Katakana' }, { char: 'ホ', answer: 'ho', type: 'Katakana' },
+            { char: 'マ', answer: 'ma', type: 'Katakana' }, { char: 'ミ', answer: 'mi', type: 'Katakana' }, { char: 'ム', answer: 'mu', type: 'Katakana' }, { char: 'メ', answer: 'me', type: 'Katakana' }, { char: 'モ', answer: 'mo', type: 'Katakana' },
+            { char: 'ヤ', answer: 'ya', type: 'Katakana' }, { char: 'ユ', answer: 'yu', type: 'Katakana' }, { char: 'ヨ', answer: 'yo', type: 'Katakana' },
+            { char: 'ラ', answer: 'ra', type: 'Katakana' }, { char: 'り', answer: 'ri', type: 'Katakana' }, { char: 'ル', answer: 'ru', type: 'Katakana' }, { char: 'レ', answer: 're', type: 'Katakana' }, { char: 'ロ', answer: 'ro', type: 'Katakana' },
+            { char: 'ワ', answer: 'wa', type: 'Katakana' }, { char: 'ヲ', answer: 'wo', type: 'Katakana' }, { char: 'ン', answer: 'n', type: 'Katakana' }
+        ];
+
+        const kanjiData = [
+            { char: '一', answer: 'One', type: 'Kanji' }, { char: '二', answer: 'Two', type: 'Kanji' }, { char: '三', answer: 'Three', type: 'Kanji' },
+            { char: '四', answer: 'Four', type: 'Kanji' }, { char: '五', answer: 'Five', type: 'Kanji' }, { char: '六', answer: 'Six', type: 'Kanji' },
+            { char: '七', answer: 'Seven', type: 'Kanji' }, { char: '八', answer: 'Eight', type: 'Kanji' }, { char: '九', answer: 'Nine', type: 'Kanji' },
+            { char: '十', answer: 'Ten', type: 'Kanji' }, { char: '百', answer: 'Hundred', type: 'Kanji' }, { char: '千', answer: 'Thousand', type: 'Kanji' },
+            { char: '万', answer: 'Ten Thousand', type: 'Kanji' }, { char: '日', answer: 'Sun/Day', type: 'Kanji' }, { char: '月', answer: 'Moon/Month', type: 'Kanji' },
+            { char: '火', answer: 'Fire', type: 'Kanji' }, { char: '水', answer: 'Water', type: 'Kanji' }, { char: '木', answer: 'Tree', type: 'Kanji' },
+            { char: '金', answer: 'Gold/Metal', type: 'Kanji' }, { char: '土', answer: 'Earth/Soil', type: 'Kanji' }, { char: '山', answer: 'Mountain', type: 'Kanji' },
+            { char: '川', answer: 'River', type: 'Kanji' }, { char: '田', answer: 'Rice Field', type: 'Kanji' }, { char: '人', answer: 'Person', type: 'Kanji' },
+            { char: '口', answer: 'Mouth', type: 'Kanji' }, { char: '目', answer: 'Eye', type: 'Kanji' }, { char: '耳', answer: 'Ear', type: 'Kanji' },
+            { char: '手', answer: 'Hand', type: 'Kanji' }, { char: '足', answer: 'Foot/Leg', type: 'Kanji' }, { char: '力', answer: 'Power', type: 'Kanji' }
+        ];
+
+        const vocabData = [
+            { char: '食べる', answer: 'To eat', type: 'Vocabulary' }, { char: '飲む', answer: 'To drink', type: 'Vocabulary' },
+            { char: '名前', answer: 'Name', type: 'Vocabulary' }, { char: '先生', answer: 'Teacher', type: 'Vocabulary' },
+            { char: '学生', answer: 'Student', type: 'Vocabulary' }, { char: '日本', answer: 'Japan', type: 'Vocabulary' },
+            { char: '今日', answer: 'Today', type: 'Vocabulary' }, { char: '明日', answer: 'Tomorrow', type: 'Vocabulary' },
+            { char: '昨日', answer: 'Yesterday', type: 'Vocabulary' }, { char: '猫', answer: 'Cat', type: 'Vocabulary' },
+            { char: '犬', answer: 'Dog', type: 'Vocabulary' }, { char: '鳥', answer: 'Bird', type: 'Vocabulary' },
+            { char: '魚', answer: 'Fish', type: 'Vocabulary' }, { char: '学校', answer: 'School', type: 'Vocabulary' },
+            { char: '会社', answer: 'Company', type: 'Vocabulary' }, { char: '部屋', answer: 'Room', type: 'Vocabulary' },
+            { char: '椅子', answer: 'Chair', type: 'Vocabulary' }, { char: '机', answer: 'Desk', type: 'Vocabulary' },
+            { char: '本', answer: 'Book', type: 'Vocabulary' }, { char: '車', answer: 'Car', type: 'Vocabulary' }
+        ];
+
+        let currentPool = [];
+        let currentItem = null;
+
+        function startTest(module) {
+            document.getElementById('selection-screen').style.display = 'none';
+            document.getElementById('flashcard-screen').classList.add('active');
+
+            if (module === 'hiragana') {
+                currentPool = [...hiraganaData];
+                document.getElementById('test-title').textContent = 'Hiragana Challenge';
+            } else if (module === 'katakana') {
+                currentPool = [...katakanaData];
+                document.getElementById('test-title').textContent = 'Katakana Challenge';
+            } else if (module === 'kanji') {
+                currentPool = [...kanjiData];
+                document.getElementById('test-title').textContent = 'Kanji Challenge';
+            } else if (module === 'vocabulary') {
+                currentPool = [...vocabData];
+                document.getElementById('test-title').textContent = 'Vocabulary Challenge';
+            } else if (module === 'all') {
+                currentPool = [...hiraganaData, ...katakanaData, ...kanjiData, ...vocabData];
+                document.getElementById('test-title').textContent = 'Ultimate Challenge';
+            }
+
+            nextCard();
+        }
+
+        function showSelection() {
+            document.getElementById('flashcard-screen').classList.remove('active');
+            document.getElementById('selection-screen').style.display = 'block';
+        }
+
+        function nextCard() {
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * currentPool.length);
+                currentItem = currentPool[randomIndex];
+
+                document.getElementById('card-module').textContent = currentItem.type;
+                document.getElementById('card-front-main').textContent = currentItem.char;
+                document.getElementById('card-back-main').textContent = currentItem.answer;
+
+                // Adjust font size for longer vocabulary
+                if (currentItem.char.length > 3) {
+                    document.getElementById('card-front-main').style.fontSize = '3.5rem';
+                } else {
+                    document.getElementById('card-front-main').style.fontSize = '6rem';
+                }
+
+                if (currentItem.answer.length > 10) {
+                    document.getElementById('card-back-main').style.fontSize = '2rem';
+                } else {
+                    document.getElementById('card-back-main').style.fontSize = '3rem';
+                }
+            }, card.classList.contains('flipped') ? 300 : 0);
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+    </script>
+</body>
+
+</html>
