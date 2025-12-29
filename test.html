@@ -24,9 +24,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            /* Center vertically */
             padding: 2rem;
             max-width: 800px;
-            margin: 60px auto 0;
+            margin: 0 auto;
+            /* Removed top margin to allow vertical centering */
             width: 100%;
         }
 
@@ -153,8 +156,15 @@
         }
 
         .card-answer {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-meaning {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
         }
 
         .controls {
@@ -250,7 +260,7 @@
                     </div>
                     <div class="flashcard-back">
                         <div id="card-back-main" class="card-answer">a</div>
-                        <div id="card-back-sub" class="card-info">Romaji</div>
+                        <div id="card-back-sub" class="card-meaning">Meaning</div>
                     </div>
                 </div>
             </div>
@@ -265,55 +275,55 @@
     <script>
         // Data pooled from other modules
         const hiraganaData = [
-            { char: 'あ', answer: 'a', type: 'Hiragana' }, { char: 'い', answer: 'i', type: 'Hiragana' }, { char: 'う', answer: 'u', type: 'Hiragana' }, { char: 'え', answer: 'e', type: 'Hiragana' }, { char: 'お', answer: 'o', type: 'Hiragana' },
-            { char: 'か', answer: 'ka', type: 'Hiragana' }, { char: 'き', answer: 'ki', type: 'Hiragana' }, { char: 'く', answer: 'ku', type: 'Hiragana' }, { char: 'け', answer: 'ke', type: 'Hiragana' }, { char: 'こ', answer: 'ko', type: 'Hiragana' },
-            { char: 'さ', answer: 'sa', type: 'Hiragana' }, { char: 'し', answer: 'shi', type: 'Hiragana' }, { char: 'す', answer: 'su', type: 'Hiragana' }, { char: 'せ', answer: 'se', type: 'Hiragana' }, { char: 'そ', answer: 'so', type: 'Hiragana' },
-            { char: 'た', answer: 'ta', type: 'Hiragana' }, { char: 'ち', answer: 'chi', type: 'Hiragana' }, { char: 'つ', answer: 'tsu', type: 'Hiragana' }, { char: 'て', answer: 'te', type: 'Hiragana' }, { char: 'と', answer: 'to', type: 'Hiragana' },
-            { char: 'な', answer: 'na', type: 'Hiragana' }, { char: 'に', answer: 'ni', type: 'Hiragana' }, { char: 'ぬ', answer: 'nu', type: 'Hiragana' }, { char: 'ね', answer: 'ne', type: 'Hiragana' }, { char: 'の', answer: 'no', type: 'Hiragana' },
-            { char: 'は', answer: 'ha', type: 'Hiragana' }, { char: 'ひ', answer: 'hi', type: 'Hiragana' }, { char: 'ふ', answer: 'fu', type: 'Hiragana' }, { char: 'へ', answer: 'he', type: 'Hiragana' }, { char: 'ほ', answer: 'ho', type: 'Hiragana' },
-            { char: 'ま', answer: 'ma', type: 'Hiragana' }, { char: 'み', answer: 'mi', type: 'Hiragana' }, { char: 'む', answer: 'mu', type: 'Hiragana' }, { char: 'め', answer: 'me', type: 'Hiragana' }, { char: 'も', answer: 'mo', type: 'Hiragana' },
-            { char: 'や', answer: 'ya', type: 'Hiragana' }, { char: 'ゆ', answer: 'yu', type: 'Hiragana' }, { char: 'よ', answer: 'yo', type: 'Hiragana' },
-            { char: 'ら', answer: 'ra', type: 'Hiragana' }, { char: 'り', answer: 'ri', type: 'Hiragana' }, { char: 'る', answer: 'ru', type: 'Hiragana' }, { char: 'れ', answer: 're', type: 'Hiragana' }, { char: 'ろ', answer: 'ro', type: 'Hiragana' },
-            { char: 'わ', answer: 'wa', type: 'Hiragana' }, { char: 'を', answer: 'wo', type: 'Hiragana' }, { char: 'ん', answer: 'n', type: 'Hiragana' }
+            { char: 'あ', romaji: 'a', meaning: 'Character', type: 'Hiragana' }, { char: 'い', romaji: 'i', meaning: 'Character', type: 'Hiragana' }, { char: 'う', romaji: 'u', meaning: 'Character', type: 'Hiragana' }, { char: 'え', romaji: 'e', meaning: 'Character', type: 'Hiragana' }, { char: 'お', romaji: 'o', meaning: 'Character', type: 'Hiragana' },
+            { char: 'か', romaji: 'ka', meaning: 'Character', type: 'Hiragana' }, { char: 'き', romaji: 'ki', meaning: 'Character', type: 'Hiragana' }, { char: 'く', romaji: 'ku', meaning: 'Character', type: 'Hiragana' }, { char: 'け', romaji: 'ke', meaning: 'Character', type: 'Hiragana' }, { char: 'こ', romaji: 'ko', meaning: 'Character', type: 'Hiragana' },
+            { char: 'さ', romaji: 'sa', meaning: 'Character', type: 'Hiragana' }, { char: 'し', romaji: 'shi', meaning: 'Character', type: 'Hiragana' }, { char: 'す', romaji: 'su', meaning: 'Character', type: 'Hiragana' }, { char: 'せ', romaji: 'se', meaning: 'Character', type: 'Hiragana' }, { char: 'そ', romaji: 'so', meaning: 'Character', type: 'Hiragana' },
+            { char: 'た', romaji: 'ta', meaning: 'Character', type: 'Hiragana' }, { char: 'ち', romaji: 'chi', meaning: 'Character', type: 'Hiragana' }, { char: 'つ', romaji: 'tsu', meaning: 'Character', type: 'Hiragana' }, { char: 'て', romaji: 'te', meaning: 'Character', type: 'Hiragana' }, { char: 'と', romaji: 'to', meaning: 'Character', type: 'Hiragana' },
+            { char: 'な', romaji: 'na', meaning: 'Character', type: 'Hiragana' }, { char: 'に', romaji: 'ni', meaning: 'Character', type: 'Hiragana' }, { char: 'ぬ', romaji: 'nu', meaning: 'Character', type: 'Hiragana' }, { char: 'ね', romaji: 'ne', meaning: 'Character', type: 'Hiragana' }, { char: 'の', romaji: 'no', meaning: 'Character', type: 'Hiragana' },
+            { char: 'は', romaji: 'ha', meaning: 'Character', type: 'Hiragana' }, { char: 'ひ', romaji: 'hi', meaning: 'Character', type: 'Hiragana' }, { char: 'ふ', romaji: 'fu', meaning: 'Character', type: 'Hiragana' }, { char: 'へ', romaji: 'he', meaning: 'Character', type: 'Hiragana' }, { char: 'ほ', romaji: 'ho', meaning: 'Character', type: 'Hiragana' },
+            { char: 'ま', romaji: 'ma', meaning: 'Character', type: 'Hiragana' }, { char: 'み', romaji: 'mi', meaning: 'Character', type: 'Hiragana' }, { char: 'む', romaji: 'mu', meaning: 'Character', type: 'Hiragana' }, { char: 'め', romaji: 'me', meaning: 'Character', type: 'Hiragana' }, { char: 'も', romaji: 'mo', meaning: 'Character', type: 'Hiragana' },
+            { char: 'や', romaji: 'ya', meaning: 'Character', type: 'Hiragana' }, { char: 'ゆ', romaji: 'yu', meaning: 'Character', type: 'Hiragana' }, { char: 'よ', romaji: 'yo', meaning: 'Character', type: 'Hiragana' },
+            { char: 'ら', romaji: 'ra', meaning: 'Character', type: 'Hiragana' }, { char: 'り', romaji: 'ri', meaning: 'Character', type: 'Hiragana' }, { char: 'る', romaji: 'ru', meaning: 'Character', type: 'Hiragana' }, { char: 'れ', romaji: 're', meaning: 'Character', type: 'Hiragana' }, { char: 'ろ', romaji: 'ro', meaning: 'Character', type: 'Hiragana' },
+            { char: 'わ', romaji: 'wa', meaning: 'Character', type: 'Hiragana' }, { char: 'を', romaji: 'wo', meaning: 'Character', type: 'Hiragana' }, { char: 'ん', romaji: 'n', meaning: 'Character', type: 'Hiragana' }
         ];
 
         const katakanaData = [
-            { char: 'ア', answer: 'a', type: 'Katakana' }, { char: 'イ', answer: 'i', type: 'Katakana' }, { char: 'ウ', answer: 'u', type: 'Katakana' }, { char: 'エ', answer: 'e', type: 'Katakana' }, { char: 'オ', answer: 'o', type: 'Katakana' },
-            { char: 'カ', answer: 'ka', type: 'Katakana' }, { char: 'キ', answer: 'ki', type: 'Katakana' }, { char: 'ク', answer: 'ku', type: 'Katakana' }, { char: 'ケ', answer: 'ke', type: 'Katakana' }, { char: 'コ', answer: 'ko', type: 'Katakana' },
-            { char: 'サ', answer: 'sa', type: 'Katakana' }, { char: 'シ', answer: 'shi', type: 'Katakana' }, { char: 'ス', answer: 'su', type: 'Katakana' }, { char: 'セ', answer: 'se', type: 'Katakana' }, { char: 'ソ', answer: 'so', type: 'Katakana' },
-            { char: 'タ', answer: 'ta', type: 'Katakana' }, { char: 'チ', answer: 'chi', type: 'Katakana' }, { char: 'ツ', answer: 'tsu', type: 'Katakana' }, { char: 'テ', answer: 'te', type: 'Katakana' }, { char: 'ト', answer: 'to', type: 'Katakana' },
-            { char: 'ナ', answer: 'na', type: 'Katakana' }, { char: 'ニ', answer: 'ni', type: 'Katakana' }, { char: 'ヌ', answer: 'nu', type: 'Katakana' }, { char: 'ネ', answer: 'ne', type: 'Katakana' }, { char: 'ノ', answer: 'no', type: 'Katakana' },
-            { char: 'ハ', answer: 'ha', type: 'Katakana' }, { char: 'ヒ', answer: 'hi', type: 'Katakana' }, { char: 'フ', answer: 'fu', type: 'Katakana' }, { char: 'ヘ', answer: 'he', type: 'Katakana' }, { char: 'ホ', answer: 'ho', type: 'Katakana' },
-            { char: 'マ', answer: 'ma', type: 'Katakana' }, { char: 'ミ', answer: 'mi', type: 'Katakana' }, { char: 'ム', answer: 'mu', type: 'Katakana' }, { char: 'メ', answer: 'me', type: 'Katakana' }, { char: 'モ', answer: 'mo', type: 'Katakana' },
-            { char: 'ヤ', answer: 'ya', type: 'Katakana' }, { char: 'ユ', answer: 'yu', type: 'Katakana' }, { char: 'ヨ', answer: 'yo', type: 'Katakana' },
-            { char: 'ラ', answer: 'ra', type: 'Katakana' }, { char: 'り', answer: 'ri', type: 'Katakana' }, { char: 'ル', answer: 'ru', type: 'Katakana' }, { char: 'レ', answer: 're', type: 'Katakana' }, { char: 'ロ', answer: 'ro', type: 'Katakana' },
-            { char: 'ワ', answer: 'wa', type: 'Katakana' }, { char: 'ヲ', answer: 'wo', type: 'Katakana' }, { char: 'ン', answer: 'n', type: 'Katakana' }
+            { char: 'ア', romaji: 'a', meaning: 'Character', type: 'Katakana' }, { char: 'イ', romaji: 'i', meaning: 'Character', type: 'Katakana' }, { char: 'ウ', romaji: 'u', meaning: 'Character', type: 'Katakana' }, { char: 'エ', romaji: 'e', meaning: 'Character', type: 'Katakana' }, { char: 'オ', romaji: 'o', meaning: 'Character', type: 'Katakana' },
+            { char: 'カ', romaji: 'ka', meaning: 'Character', type: 'Katakana' }, { char: 'キ', romaji: 'ki', meaning: 'Character', type: 'Katakana' }, { char: 'ク', romaji: 'ku', meaning: 'Character', type: 'Katakana' }, { char: 'ケ', romaji: 'ke', meaning: 'Character', type: 'Katakana' }, { char: 'コ', romaji: 'ko', meaning: 'Character', type: 'Katakana' },
+            { char: 'サ', romaji: 'sa', meaning: 'Character', type: 'Katakana' }, { char: 'シ', romaji: 'shi', meaning: 'Character', type: 'Katakana' }, { char: 'ス', romaji: 'su', meaning: 'Character', type: 'Katakana' }, { char: 'セ', romaji: 'se', meaning: 'Character', type: 'Katakana' }, { char: 'ソ', romaji: 'so', meaning: 'Character', type: 'Katakana' },
+            { char: 'タ', romaji: 'ta', meaning: 'Character', type: 'Katakana' }, { char: 'チ', romaji: 'chi', meaning: 'Character', type: 'Katakana' }, { char: 'ツ', romaji: 'tsu', meaning: 'Character', type: 'Katakana' }, { char: 'テ', romaji: 'te', meaning: 'Character', type: 'Katakana' }, { char: 'ト', romaji: 'to', meaning: 'Character', type: 'Katakana' },
+            { char: 'ナ', romaji: 'na', meaning: 'Character', type: 'Katakana' }, { char: 'ニ', romaji: 'ni', meaning: 'Character', type: 'Katakana' }, { char: 'ヌ', romaji: 'nu', meaning: 'Character', type: 'Katakana' }, { char: 'ネ', romaji: 'ne', meaning: 'Character', type: 'Katakana' }, { char: 'ノ', romaji: 'no', meaning: 'Character', type: 'Katakana' },
+            { char: 'ハ', romaji: 'ha', meaning: 'Character', type: 'Katakana' }, { char: 'ヒ', romaji: 'hi', meaning: 'Character', type: 'Katakana' }, { char: 'フ', romaji: 'fu', meaning: 'Character', type: 'Katakana' }, { char: 'ヘ', romaji: 'he', meaning: 'Character', type: 'Katakana' }, { char: 'ホ', romaji: 'ho', meaning: 'Character', type: 'Katakana' },
+            { char: 'マ', romaji: 'ma', meaning: 'Character', type: 'Katakana' }, { char: 'ミ', romaji: 'mi', meaning: 'Character', type: 'Katakana' }, { char: 'ム', romaji: 'mu', meaning: 'Character', type: 'Katakana' }, { char: 'メ', romaji: 'me', meaning: 'Character', type: 'Katakana' }, { char: 'モ', romaji: 'mo', meaning: 'Character', type: 'Katakana' },
+            { char: 'ヤ', romaji: 'ya', meaning: 'Character', type: 'Katakana' }, { char: 'ユ', romaji: 'yu', meaning: 'Character', type: 'Katakana' }, { char: 'ヨ', romaji: 'yo', meaning: 'Character', type: 'Katakana' },
+            { char: 'ラ', romaji: 'ra', meaning: 'Character', type: 'Katakana' }, { char: 'り', romaji: 'ri', meaning: 'Character', type: 'Katakana' }, { char: 'ル', romaji: 'ru', meaning: 'Character', type: 'Katakana' }, { char: 'レ', romaji: 're', meaning: 'Character', type: 'Katakana' }, { char: 'ロ', romaji: 'ro', meaning: 'Character', type: 'Katakana' },
+            { char: 'ワ', romaji: 'wa', meaning: 'Character', type: 'Katakana' }, { char: 'ヲ', romaji: 'wo', meaning: 'Character', type: 'Katakana' }, { char: 'ン', romaji: 'n', meaning: 'Character', type: 'Katakana' }
         ];
 
         const kanjiData = [
-            { char: '一', answer: 'One', type: 'Kanji' }, { char: '二', answer: 'Two', type: 'Kanji' }, { char: '三', answer: 'Three', type: 'Kanji' },
-            { char: '四', answer: 'Four', type: 'Kanji' }, { char: '五', answer: 'Five', type: 'Kanji' }, { char: '六', answer: 'Six', type: 'Kanji' },
-            { char: '七', answer: 'Seven', type: 'Kanji' }, { char: '八', answer: 'Eight', type: 'Kanji' }, { char: '九', answer: 'Nine', type: 'Kanji' },
-            { char: '十', answer: 'Ten', type: 'Kanji' }, { char: '百', answer: 'Hundred', type: 'Kanji' }, { char: '千', answer: 'Thousand', type: 'Kanji' },
-            { char: '万', answer: 'Ten Thousand', type: 'Kanji' }, { char: '日', answer: 'Sun/Day', type: 'Kanji' }, { char: '月', answer: 'Moon/Month', type: 'Kanji' },
-            { char: '火', answer: 'Fire', type: 'Kanji' }, { char: '水', answer: 'Water', type: 'Kanji' }, { char: '木', answer: 'Tree', type: 'Kanji' },
-            { char: '金', answer: 'Gold/Metal', type: 'Kanji' }, { char: '土', answer: 'Earth/Soil', type: 'Kanji' }, { char: '山', answer: 'Mountain', type: 'Kanji' },
-            { char: '川', answer: 'River', type: 'Kanji' }, { char: '田', answer: 'Rice Field', type: 'Kanji' }, { char: '人', answer: 'Person', type: 'Kanji' },
-            { char: '口', answer: 'Mouth', type: 'Kanji' }, { char: '目', answer: 'Eye', type: 'Kanji' }, { char: '耳', answer: 'Ear', type: 'Kanji' },
-            { char: '手', answer: 'Hand', type: 'Kanji' }, { char: '足', answer: 'Foot/Leg', type: 'Kanji' }, { char: '力', answer: 'Power', type: 'Kanji' }
+            { char: '一', romaji: 'ichi', meaning: 'One', type: 'Kanji' }, { char: '二', romaji: 'ni', meaning: 'Two', type: 'Kanji' }, { char: '三', romaji: 'san', meaning: 'Three', type: 'Kanji' },
+            { char: '四', romaji: 'yon', meaning: 'Four', type: 'Kanji' }, { char: '五', romaji: 'go', meaning: 'Five', type: 'Kanji' }, { char: '六', romaji: 'roku', meaning: 'Six', type: 'Kanji' },
+            { char: '七', romaji: 'nana', meaning: 'Seven', type: 'Kanji' }, { char: '八', romaji: 'hachi', meaning: 'Eight', type: 'Kanji' }, { char: '九', romaji: 'kyuu', meaning: 'Nine', type: 'Kanji' },
+            { char: '十', romaji: 'juu', meaning: 'Ten', type: 'Kanji' }, { char: '百', romaji: 'hyaku', meaning: 'Hundred', type: 'Kanji' }, { char: '千', romaji: 'sen', meaning: 'Thousand', type: 'Kanji' },
+            { char: '万', romaji: 'man', meaning: 'Ten Thousand', type: 'Kanji' }, { char: '日', romaji: 'hi/nichi', meaning: 'Sun/Day', type: 'Kanji' }, { char: '月', romaji: 'tsuki/getsu', meaning: 'Moon/Month', type: 'Kanji' },
+            { char: '火', romaji: 'hi/ka', meaning: 'Fire', type: 'Kanji' }, { char: '水', romaji: 'mizu/sui', meaning: 'Water', type: 'Kanji' }, { char: '木', romaji: 'ki/moku', meaning: 'Tree', type: 'Kanji' },
+            { char: '金', romaji: 'kane/kin', meaning: 'Gold/Metal', type: 'Kanji' }, { char: '土', romaji: 'tsuchi/do', meaning: 'Earth/Soil', type: 'Kanji' }, { char: '山', romaji: 'yama', meaning: 'Mountain', type: 'Kanji' },
+            { char: '川', romaji: 'kawa', meaning: 'River', type: 'Kanji' }, { char: '田', romaji: 'ta', meaning: 'Rice Field', type: 'Kanji' }, { char: '人', romaji: 'hito/jin', meaning: 'Person', type: 'Kanji' },
+            { char: '口', romaji: 'kuchi', meaning: 'Mouth', type: 'Kanji' }, { char: '目', romaji: 'me', meaning: 'Eye', type: 'Kanji' }, { char: '耳', romaji: 'mimi', meaning: 'Ear', type: 'Kanji' },
+            { char: '手', romaji: 'te', meaning: 'Hand', type: 'Kanji' }, { char: '足', romaji: 'ashi', meaning: 'Foot/Leg', type: 'Kanji' }, { char: '力', romaji: 'chikara', meaning: 'Power', type: 'Kanji' }
         ];
 
         const vocabData = [
-            { char: '食べる', answer: 'To eat', type: 'Vocabulary' }, { char: '飲む', answer: 'To drink', type: 'Vocabulary' },
-            { char: '名前', answer: 'Name', type: 'Vocabulary' }, { char: '先生', answer: 'Teacher', type: 'Vocabulary' },
-            { char: '学生', answer: 'Student', type: 'Vocabulary' }, { char: '日本', answer: 'Japan', type: 'Vocabulary' },
-            { char: '今日', answer: 'Today', type: 'Vocabulary' }, { char: '明日', answer: 'Tomorrow', type: 'Vocabulary' },
-            { char: '昨日', answer: 'Yesterday', type: 'Vocabulary' }, { char: '猫', answer: 'Cat', type: 'Vocabulary' },
-            { char: '犬', answer: 'Dog', type: 'Vocabulary' }, { char: '鳥', answer: 'Bird', type: 'Vocabulary' },
-            { char: '魚', answer: 'Fish', type: 'Vocabulary' }, { char: '学校', answer: 'School', type: 'Vocabulary' },
-            { char: '会社', answer: 'Company', type: 'Vocabulary' }, { char: '部屋', answer: 'Room', type: 'Vocabulary' },
-            { char: '椅子', answer: 'Chair', type: 'Vocabulary' }, { char: '机', answer: 'Desk', type: 'Vocabulary' },
-            { char: '本', answer: 'Book', type: 'Vocabulary' }, { char: '車', answer: 'Car', type: 'Vocabulary' }
+            { char: '食べる', romaji: 'taberu', meaning: 'To eat', type: 'Vocabulary' }, { char: '飲む', romaji: 'nomu', meaning: 'To drink', type: 'Vocabulary' },
+            { char: '名前', romaji: 'namae', meaning: 'Name', type: 'Vocabulary' }, { char: '先生', romaji: 'sensei', meaning: 'Teacher', type: 'Vocabulary' },
+            { char: '学生', romaji: 'gakusei', meaning: 'Student', type: 'Vocabulary' }, { char: '日本', romaji: 'nihon', meaning: 'Japan', type: 'Vocabulary' },
+            { char: '今日', romaji: 'kyou', meaning: 'Today', type: 'Vocabulary' }, { char: '明日', romaji: 'ashita', meaning: 'Tomorrow', type: 'Vocabulary' },
+            { char: '昨日', romaji: 'kinou', meaning: 'Yesterday', type: 'Vocabulary' }, { char: '猫', romaji: 'neko', meaning: 'Cat', type: 'Vocabulary' },
+            { char: '犬', romaji: 'inu', meaning: 'Dog', type: 'Vocabulary' }, { char: '鳥', romaji: 'tori', meaning: 'Bird', type: 'Vocabulary' },
+            { char: '魚', romaji: 'sakana', meaning: 'Fish', type: 'Vocabulary' }, { char: '学校', romaji: 'gakkou', meaning: 'School', type: 'Vocabulary' },
+            { char: '会社', romaji: 'kaisha', meaning: 'Company', type: 'Vocabulary' }, { char: '部屋', romaji: 'heya', meaning: 'Room', type: 'Vocabulary' },
+            { char: '椅子', romaji: 'isu', meaning: 'Chair', type: 'Vocabulary' }, { char: '机', romaji: 'tsukue', meaning: 'Desk', type: 'Vocabulary' },
+            { char: '本', romaji: 'hon', meaning: 'Book', type: 'Vocabulary' }, { char: '車', romaji: 'kuruma', meaning: 'Car', type: 'Vocabulary' }
         ];
 
         let currentPool = [];
@@ -358,7 +368,8 @@
 
                 document.getElementById('card-module').textContent = currentItem.type;
                 document.getElementById('card-front-main').textContent = currentItem.char;
-                document.getElementById('card-back-main').textContent = currentItem.answer;
+                document.getElementById('card-back-main').textContent = currentItem.romaji;
+                document.getElementById('card-back-sub').textContent = currentItem.meaning;
 
                 // Adjust font size for longer vocabulary
                 if (currentItem.char.length > 3) {
@@ -367,10 +378,10 @@
                     document.getElementById('card-front-main').style.fontSize = '6rem';
                 }
 
-                if (currentItem.answer.length > 10) {
-                    document.getElementById('card-back-main').style.fontSize = '2rem';
+                if (currentItem.romaji.length > 10) {
+                    document.getElementById('card-back-main').style.fontSize = '2.5rem';
                 } else {
-                    document.getElementById('card-back-main').style.fontSize = '3rem';
+                    document.getElementById('card-back-main').style.fontSize = '3.5rem';
                 }
             }, card.classList.contains('flipped') ? 300 : 0);
         }
