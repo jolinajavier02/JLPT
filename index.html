@@ -54,37 +54,69 @@
         }
 
         .visual-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background-size: cover;
+            background-position: center;
+            position: relative;
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             color: white;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, filter 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .visual-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+            z-index: 1;
+        }
+
+        .visual-card:hover::before {
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .visual-card:hover {
             transform: scale(1.02);
-            background: rgba(255, 255, 255, 0.2);
         }
 
-        .visual-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .visual-card > * {
+            z-index: 2;
+            position: relative;
         }
 
         .visual-label {
             font-family: var(--font-jp);
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
+        .visual-sublabel {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .card-culture { background-image: url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=1000&auto=format&fit=crop'); }
+        .card-language { background-image: url('https://images.unsplash.com/photo-1526634846531-90393439999c?q=80&w=1000&auto=format&fit=crop'); }
+        .card-tradition { background-image: url('https://images.unsplash.com/photo-1528164344705-4754268799af?q=80&w=1000&auto=format&fit=crop'); }
+        .card-nature { background-image: url('https://images.unsplash.com/photo-1490806678282-284e8971d39b?q=80&w=1000&auto=format&fit=crop'); }
+
         /* Decorative Circle */
-        .hero-visual::before {
-            content: '';
+        .hero-visual-bg {
             position: absolute;
             width: 150%;
             height: 150%;
@@ -92,6 +124,7 @@
             top: -25%;
             left: -25%;
             border-radius: 50%;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -115,25 +148,22 @@
             </div>
 
             <div class="hero-visual">
-                <div class="visual-card">
-                    <span class="visual-icon">🌸</span>
+                <div class="hero-visual-bg"></div>
+                <div class="visual-card card-culture">
                     <span class="visual-label">CULTURE</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">Bunka</span>
+                    <span class="visual-sublabel">Bunka</span>
                 </div>
-                <div class="visual-card">
-                    <span class="visual-icon">あ</span>
+                <div class="visual-card card-language">
                     <span class="visual-label">LANGUAGE</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">Gengo</span>
+                    <span class="visual-sublabel">Gengo</span>
                 </div>
-                <div class="visual-card">
-                    <span class="visual-icon">⛩️</span>
+                <div class="visual-card card-tradition">
                     <span class="visual-label">TRADITION</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">Dentō</span>
+                    <span class="visual-sublabel">Dentō</span>
                 </div>
-                <div class="visual-card">
-                    <span class="visual-icon">🗻</span>
+                <div class="visual-card card-nature">
                     <span class="visual-label">NATURE</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">Shizen</span>
+                    <span class="visual-sublabel">Shizen</span>
                 </div>
             </div>
         </div>
