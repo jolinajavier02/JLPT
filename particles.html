@@ -25,14 +25,15 @@
         }
 
         .main-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            width: 95%;
+            width: 98%;
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             flex: 1;
-            height: calc(100vh - 80px);
-            padding: 2rem 0;
+            height: calc(100vh - 100px);
+            padding: 1rem 0;
+            align-items: stretch;
         }
 
         /* Sidebar Styling */
@@ -40,13 +41,12 @@
             width: var(--sidebar-width);
             background: white;
             border-radius: 20px;
-            padding: 2rem 1.5rem;
-            height: calc(100vh - 140px);
+            padding: 1.5rem 1rem;
+            height: 100%;
             box-shadow: var(--shadow-sm);
-            position: sticky;
-            top: 100px;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(188, 0, 45, 0.1);
         }
 
         .sidebar-title {
@@ -92,17 +92,17 @@
             flex: 1;
             display: flex;
             background: white;
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            height: calc(100vh - 140px);
+            border: 1px solid rgba(188, 0, 45, 0.1);
+            height: 100%;
             position: relative;
             overflow: hidden;
         }
 
         .book-page {
             flex: 1;
-            padding: 3rem;
+            padding: 2rem;
             overflow-y: auto;
             position: relative;
             animation: pageFlip 0.6s ease-out;
@@ -144,37 +144,77 @@
         }
 
         .lesson-header {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 1rem;
+            padding-bottom: 0.5rem;
         }
 
         .lesson-header h1 {
-            color: var(--secondary-color);
-            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            background: none;
+            -webkit-text-fill-color: initial;
+        }
+
+        .book-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 1px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary-color);
+            z-index: 10;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .book-nav:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .book-nav.prev {
+            left: 10px;
+        }
+
+        .book-nav.next {
+            right: 10px;
+        }
+
+        .example-box {
+            background: #fff5f5;
+            padding: 1.2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        h3,
+        h4 {
+            color: var(--primary-color) !important;
         }
 
         .grammar-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .example-box {
-            background: #f1f5f9;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
+            gap: 1.2rem;
+            margin-top: 1.2rem;
         }
 
         .formation-box {
             background: #fff;
             border: 1px solid #eee;
-            padding: 1.2rem;
+            padding: 1rem;
             border-radius: 12px;
-            margin-top: 1rem;
-            margin-bottom: 1.5rem;
+            margin-top: 0.8rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--primary-color);
         }
 
         .mistake-tag {
@@ -184,88 +224,9 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             background: #fff5f5;
-            color: #c53030;
+            color: var(--primary-color);
             font-size: 0.8rem;
             text-transform: uppercase;
-        }
-
-        /* Sentence Constructor Styling */
-        .constructor-section {
-            background: white;
-            padding: 3rem;
-            border-radius: 24px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            margin-bottom: 4rem;
-        }
-
-        .constructor-input-group {
-            display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .constructor-input {
-            flex: 1;
-            padding: 1.2rem 1.5rem;
-            border-radius: 15px;
-            border: 1px solid #eee;
-            font-size: 1.1rem;
-            background: #f8fafc;
-            color: var(--secondary-color);
-        }
-
-        .constructor-btn {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 15px;
-            font-weight: 800;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .constructor-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(188, 0, 45, 0.2);
-            filter: brightness(1.1);
-        }
-
-        .output-display {
-            background: #f1f5f9;
-            padding: 2.5rem;
-            border-radius: 20px;
-            margin-top: 2rem;
-            display: none;
-            animation: fadeIn 0.5s ease;
-            border-left: 6px solid var(--primary-color);
-        }
-
-        .output-jp {
-            font-size: 2.5rem;
-            font-family: var(--font-jp);
-            text-align: center;
-            margin-bottom: 1rem;
-            line-height: 1.8;
-            color: var(--secondary-color);
-        }
-
-        .output-romaji {
-            text-align: center;
-            font-style: italic;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .output-en {
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.3rem;
-            color: var(--secondary-color);
         }
 
         @keyframes fadeIn {
@@ -329,7 +290,11 @@
 
         <!-- Content Area -->
         <main class="content-area" id="book-container">
-            <!-- Pages will be injected here -->
+            <div class="book-nav prev" onclick="navigateLesson(-1)">←</div>
+            <div class="book-nav next" onclick="navigateLesson(1)">→</div>
+            <div id="book-pages-wrapper" style="display: flex; width: 100%; height: 100%;">
+                <!-- Pages will be injected here -->
+            </div>
         </main>
     </div>
 
@@ -354,12 +319,12 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">私は学生です。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi wa gakusei desu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">As for me, I am a student.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">As for me, I am a student.</p>
                             </div>
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">猫がいます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Neko ga imasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">There is a cat (specifically a cat).</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">There is a cat (specifically a cat).</p>
                             </div>
                         </div>
                     </div>
@@ -384,12 +349,12 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">水を飲みます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Mizu o nomimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I drink water.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I drink water.</p>
                             </div>
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">日本に行きます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Nihon ni ikimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I go to Japan.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I go to Japan.</p>
                             </div>
                         </div>
                     </div>
@@ -414,12 +379,12 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">レストランで食べます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Resutoran de tabemasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I eat at a restaurant.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I eat at a restaurant.</p>
                             </div>
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">東京へ行きます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Toukyou e ikimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I head towards Tokyo.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I head towards Tokyo.</p>
                             </div>
                         </div>
                     </div>
@@ -444,12 +409,12 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">私の本です。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi no hon desu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">It is my book.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">It is my book.</p>
                             </div>
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">友達と行きます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tomodachi to ikimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I go with a friend.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I go with a friend.</p>
                             </div>
                         </div>
                     </div>
@@ -474,12 +439,12 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">私も学生です。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi mo gakusei desu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I am also a student.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I am also a student.</p>
                             </div>
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">お元気ですか？</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">O-genki desu ka?</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">Are you well?</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">Are you well?</p>
                             </div>
                         </div>
                     </div>
@@ -487,12 +452,19 @@
             `
         };
 
-        function showLesson(id, element) {
-            document.querySelectorAll('.topic-item').forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
+        let currentLessonIndex = 0;
+        const lessonIds = Object.keys(lessons);
 
+        function showLesson(id, element) {
+            if (!element) {
+                element = document.querySelector(`.topic-item[onclick*="'${id}'"]`);
+            }
+            document.querySelectorAll('.topic-item').forEach(item => item.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            currentLessonIndex = lessonIds.indexOf(id);
             const lesson = lessons[id];
-            const container = document.getElementById('book-container');
+            const wrapper = document.getElementById('book-pages-wrapper');
 
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = lesson;
@@ -503,17 +475,28 @@
             const grid = tempDiv.querySelector('.grammar-grid');
             const gridHtml = grid ? grid.outerHTML : '';
 
-            container.innerHTML = `
+            wrapper.innerHTML = `
                 <div class="book-page">
                     ${header}
                     ${intro}
                     ${formation}
                 </div>
                 <div class="book-page">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--secondary-color);">Examples & Usage</h3>
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Examples & Usage</h3>
                     ${gridHtml}
                 </div>
             `;
+
+            // Update nav visibility
+            document.querySelector('.book-nav.prev').style.display = currentLessonIndex > 0 ? 'flex' : 'none';
+            document.querySelector('.book-nav.next').style.display = currentLessonIndex < lessonIds.length - 1 ? 'flex' : 'none';
+        }
+
+        function navigateLesson(direction) {
+            const nextIndex = currentLessonIndex + direction;
+            if (nextIndex >= 0 && nextIndex < lessonIds.length) {
+                showLesson(lessonIds[nextIndex]);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {

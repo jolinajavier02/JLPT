@@ -27,14 +27,15 @@
 
 
         .main-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            width: 95%;
+            width: 98%;
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             flex: 1;
-            height: calc(100vh - 80px);
-            padding: 2rem 0;
+            height: calc(100vh - 100px);
+            padding: 1rem 0;
+            align-items: stretch;
         }
 
         /* Sidebar Styling */
@@ -42,13 +43,12 @@
             width: var(--sidebar-width);
             background: white;
             border-radius: 20px;
-            padding: 2rem 1.5rem;
-            height: calc(100vh - 140px);
+            padding: 1.5rem 1rem;
+            height: 100%;
             box-shadow: var(--shadow-sm);
-            position: sticky;
-            top: 100px;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(188, 0, 45, 0.1);
         }
 
         .sidebar-title {
@@ -94,17 +94,17 @@
             flex: 1;
             display: flex;
             background: white;
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            height: calc(100vh - 140px);
+            border: 1px solid rgba(188, 0, 45, 0.1);
+            height: 100%;
             position: relative;
             overflow: hidden;
         }
 
         .book-page {
             flex: 1;
-            padding: 3rem;
+            padding: 2rem;
             overflow-y: auto;
             position: relative;
             animation: pageFlip 0.6s ease-out;
@@ -146,37 +146,77 @@
         }
 
         .lesson-header {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 1rem;
+            padding-bottom: 0.5rem;
         }
 
-        .lesson-header h2 {
-            color: var(--secondary-color);
-            font-size: 1.8rem;
+        .lesson-header h1 {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            background: none;
+            -webkit-text-fill-color: initial;
+        }
+
+        .book-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 1px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary-color);
+            z-index: 10;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .book-nav:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .book-nav.prev {
+            left: 10px;
+        }
+
+        .book-nav.next {
+            right: 10px;
+        }
+
+        .example-box {
+            background: #fff5f5;
+            padding: 1.2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        h3,
+        h4 {
+            color: var(--primary-color) !important;
         }
 
         .grammar-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .example-box {
-            background: #f1f5f9;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
+            gap: 1.2rem;
+            margin-top: 1.2rem;
         }
 
         .formation-box {
             background: #fff;
             border: 1px solid #eee;
-            padding: 1.2rem;
+            padding: 1rem;
             border-radius: 12px;
-            margin-top: 1rem;
-            margin-bottom: 1.5rem;
+            margin-top: 0.8rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--primary-color);
         }
 
         .mistake-tag {
@@ -186,7 +226,7 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             background: #fff5f5;
-            color: #c53030;
+            color: var(--primary-color);
             font-size: 0.8rem;
             text-transform: uppercase;
         }
@@ -206,87 +246,8 @@
         }
 
         .conjugation-table th {
-            background: #f8fafc;
-            color: var(--secondary-color);
-        }
-
-        /* Sentence Constructor Styling */
-        .constructor-section {
-            background: white;
-            padding: 3rem;
-            border-radius: 24px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            margin-bottom: 4rem;
-        }
-
-        .constructor-input-group {
-            display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .constructor-input {
-            flex: 1;
-            padding: 1.2rem 1.5rem;
-            border-radius: 15px;
-            border: 1px solid #eee;
-            font-size: 1.1rem;
-            background: #f8fafc;
-            color: var(--secondary-color);
-        }
-
-        .constructor-btn {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 15px;
-            font-weight: 800;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .constructor-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(188, 0, 45, 0.2);
-            filter: brightness(1.1);
-        }
-
-        .output-display {
-            background: #f1f5f9;
-            padding: 2.5rem;
-            border-radius: 20px;
-            margin-top: 2rem;
-            display: none;
-            animation: fadeIn 0.5s ease;
-            border-left: 6px solid var(--primary-color);
-        }
-
-        .output-jp {
-            font-size: 2.5rem;
-            font-family: var(--font-jp);
-            text-align: center;
-            margin-bottom: 1rem;
-            line-height: 1.8;
-            color: var(--secondary-color);
-        }
-
-        .output-romaji {
-            text-align: center;
-            font-style: italic;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .output-en {
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.3rem;
-            color: var(--secondary-color);
+            background: #fff5f5;
+            color: var(--primary-color);
         }
 
         @keyframes fadeIn {
@@ -350,7 +311,11 @@
 
         <!-- Content Area -->
         <main class="content-area" id="book-container">
-            <!-- Pages will be injected here -->
+            <div class="book-nav prev" onclick="navigateLesson(-1)">←</div>
+            <div class="book-nav next" onclick="navigateLesson(1)">→</div>
+            <div id="book-pages-wrapper" style="display: flex; width: 100%; height: 100%;">
+                <!-- Pages will be injected here -->
+            </div>
         </main>
     </div>
 
@@ -378,31 +343,31 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>寿司</rb><rt>すし</rt></ruby>を<ruby><rb>食</rb><rt>た</rt></ruby>べます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi wa sushi o tabemasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I eat sushi.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I eat sushi.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>田中</rb><rt>たなか</rt></ruby>さんは<ruby><rb>本</rb><rt>ほん</rt></ruby>を<ruby><rb>読</rb><rt>よ</rt></ruby>みます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tanaka-san wa hon o yomimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">Mr. Tanaka reads a book.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">Mr. Tanaka reads a book.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>水</rb><rt>みず</rt></ruby>を<ruby><rb>飲</rb><rt>の</rt></ruby>みます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi wa mizu o nomimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I drink water.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I drink water.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>先生</rb><rt>せんせい</rt></ruby>は<ruby><rb>日本語</rb><rt>にほんご</rt></ruby>を<ruby><rb>話</rb><rt>はな</rt></ruby>します。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Sensei wa nihongo o hanashimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">The teacher speaks Japanese.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">The teacher speaks Japanese.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>映画</rb><rt>えいが</rt></ruby>を<ruby><rb>見</rb><rt>み</rt></ruby>ます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi wa eiga o mimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I watch a movie.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I watch a movie.</p>
                             </div>
                         </div>
 
@@ -443,31 +408,31 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>昨日</rb><rt>きのう</rt></ruby>、<ruby><rb>寿司</rb><rt>すし</rt></ruby>を<ruby><rb>食</rb><rt>た</rt></ruby>べました。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kinou, sushi o tabemashita.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I ate sushi yesterday.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I ate sushi yesterday.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>明日</rb><rt>あした</rt></ruby>、<ruby><rb>学校</rb><rt>がっこう</rt></ruby>に<ruby><rb>行</rb><rt>い</rt></ruby>きます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Ashita, gakkou ni ikimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I will go to school tomorrow.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I will go to school tomorrow.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>今</rb><rt>いま</rt></ruby>、コーヒーを<ruby><rb>飲</rb><rt>の</rt></ruby>みます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Ima, ko-hi- o nomimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I drink coffee now.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I drink coffee now.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>毎日</rb><rt>まいにち</rt></ruby><ruby><rb>勉強</rb><rt>べんきょう</rt></ruby>をします。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Mainichi benkyou o shimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I study every day.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I study every day.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>友達</rb><rt>ともだち</rt></ruby>が<ruby><rb>家</rb><rt>うち</rt></ruby>に<ruby><rb>来</rb><rt>き</rt></ruby>ます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tomodachi ga uchi ni kimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">A friend is coming to my house.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">A friend is coming to my house.</p>
                             </div>
                         </div>
                     </div>
@@ -493,31 +458,31 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">この<ruby><rb>寿司</rb><rt>すし</rt></ruby>はとても<ruby><rb>美味</rb><rt>おい</rt></ruby>しいです。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kono sushi wa totemo oishii desu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">This sushi is very delicious.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">This sushi is very delicious.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>綺麗</rb><rt>きれい</rt></ruby>な<ruby><rb>花</rb><rt>はな</rt></ruby>ですね。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kirei na hana desu ne.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">It's a beautiful flower, isn't it?</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">It's a beautiful flower, isn't it?</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>今日</rb><rt>きょう</rt></ruby>はとても<ruby><rb>寒</rb><rt>さむ</rt></ruby>いです。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kyou wa totemo samui desu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">Today is very cold.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">Today is very cold.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem; font-weight: 600;"><ruby><rb>静</rb><rt>しず</rt></ruby>かな<ruby><rb>部屋</rb><rt>へや</rt></ruby>が<ruby><rb>好</rb><rt>す</rt></ruby>きです。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Shizuka na heya ga suki desu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I like quiet rooms.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I like quiet rooms.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>高</rb><rt>たか</rt></ruby>い<ruby><rb>時計</rb><rt>とけい</rt></ruby>を<ruby><rb>買</rb><rt>か</rt></ruby>いました。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Takai tokei o kaimashita.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I bought an expensive watch.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I bought an expensive watch.</p>
                             </div>
                         </div>
                     </div>
@@ -543,31 +508,31 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>机</rb><rt>つくえ</rt></ruby>の<ruby><rb>上</rb><rt>うえ</rt></ruby>に<ruby><rb>本</rb><rt>ほん</rt></ruby>があります。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tsukue no ue ni hon ga arimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">There is a book on the desk.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">There is a book on the desk.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>庭</rb><rt>にわ</rt></ruby>に<ruby><rb>猫</rb><rt>ねこ</rt></ruby>がいます。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Niwa ni neko ga imasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">There is a cat in the garden.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">There is a cat in the garden.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>先生</rb><rt>せんせい</rt></ruby>はどこにいますか？</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Sensei wa doko ni imasu ka?</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">Where is the teacher?</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">Where is the teacher?</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>駅</rb><rt>えき</rt></ruby>はどこですか？</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Eki wa doko desu ka?</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">Where is the station?</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">Where is the station?</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>車</rb><rt>くるま</rt></ruby>があります。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kuruma ga arimasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">There is a car.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">There is a car.</p>
                             </div>
                         </div>
                     </div>
@@ -594,31 +559,31 @@
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">ちょっと<ruby><rb>待</rb><rt>ま</rt></ruby>ってください。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Chotto matte kudasai.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">Please wait a moment.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">Please wait a moment.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>食</rb><rt>た</rt></ruby>べてください。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tabete kudasai.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">Please eat.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">Please eat.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>行</rb><rt>い</rt></ruby>ってください。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Itte kudasai.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">Please go.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">Please go.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;">テレビを<ruby><rb>見</rb><rt>み</rt></ruby>ています。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Terebi o mite imasu.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">I am watching TV.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">I am watching TV.</p>
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>水</rb><rt>みず</rt></ruby>を<ruby><rb>飲</rb><rt>の</rt></ruby>んでください。</p>
                                 <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Mizu o nonde kudasai.</p>
-                                <p style="font-weight: 600; color: var(--secondary-color);">Please drink water.</p>
+                                <p style="font-weight: 600; color: var(--primary-color);">Please drink water.</p>
                             </div>
                         </div>
                     </div>
@@ -626,15 +591,20 @@
             `
         };
 
+        let currentLessonIndex = 0;
+        const lessonIds = Object.keys(lessons);
+
         function showLesson(id, element) {
+            if (!element) {
+                element = document.querySelector(`.topic-item[onclick*="'${id}'"]`);
+            }
             document.querySelectorAll('.topic-item').forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
+            if (element) element.classList.add('active');
 
+            currentLessonIndex = lessonIds.indexOf(id);
             const lesson = lessons[id];
-            const container = document.getElementById('book-container');
+            const wrapper = document.getElementById('book-pages-wrapper');
 
-            // Simple parser to split content into two pages
-            // We'll look for the first </div> that closes the header/intro
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = lesson;
 
@@ -642,21 +612,31 @@
             const intro = tempDiv.querySelector('p').outerHTML;
             const formation = tempDiv.querySelector('.formation-box').outerHTML;
 
-            // Everything else goes to page 2
             const grid = tempDiv.querySelector('.grammar-grid') || tempDiv.querySelector('.conjugation-table');
             const gridHtml = grid ? grid.outerHTML : '';
 
-            container.innerHTML = `
+            wrapper.innerHTML = `
                 <div class="book-page">
                     ${header}
                     ${intro}
                     ${formation}
                 </div>
                 <div class="book-page">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--secondary-color);">Examples & Usage</h3>
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Examples & Usage</h3>
                     ${gridHtml}
                 </div>
             `;
+
+            // Update nav visibility
+            document.querySelector('.book-nav.prev').style.display = currentLessonIndex > 0 ? 'flex' : 'none';
+            document.querySelector('.book-nav.next').style.display = currentLessonIndex < lessonIds.length - 1 ? 'flex' : 'none';
+        }
+
+        function navigateLesson(direction) {
+            const nextIndex = currentLessonIndex + direction;
+            if (nextIndex >= 0 && nextIndex < lessonIds.length) {
+                showLesson(lessonIds[nextIndex]);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
