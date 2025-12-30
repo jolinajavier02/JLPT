@@ -33,7 +33,17 @@ body {
 }
 
 h1,
-h2,
+h2 {
+    font-family: var(--font-jp);
+    font-weight: 800;
+    line-height: 1.2;
+    background: linear-gradient(45deg, var(--primary-color), #2c3e50);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
 h3,
 h4,
 h5,
@@ -41,6 +51,7 @@ h6 {
     font-family: var(--font-jp);
     font-weight: 700;
     line-height: 1.2;
+    color: var(--secondary-color);
 }
 
 a {
