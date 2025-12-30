@@ -53,11 +53,10 @@
             font-size: 1.5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--primary-color), #2c3e50);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            padding-left: 0.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
         }
 
         .topic-list {
@@ -92,24 +91,61 @@
         .content-area {
             flex: 1;
             display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            overflow-y: auto;
-            padding-right: 1rem;
-        }
-
-        .lesson-card {
             background: white;
             border-radius: 24px;
-            padding: 2.5rem;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(0, 0, 0, 0.05);
-            animation: fadeIn 0.4s ease;
+            height: calc(100vh - 140px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-page {
+            flex: 1;
+            padding: 3rem;
+            overflow-y: auto;
+            position: relative;
+            animation: pageFlip 0.6s ease-out;
+            background: white;
+        }
+
+        @keyframes pageFlip {
+            0% {
+                opacity: 0;
+                transform: perspective(1000px) rotateY(-10deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: perspective(1000px) rotateY(0deg);
+            }
+        }
+
+        .book-page:first-child {
+            border-right: 1px solid #eee;
+        }
+
+        /* Book Spine Effect */
+        .content-area::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            transform: translateX(-50%);
+            background: linear-gradient(to right,
+                    rgba(0, 0, 0, 0.03) 0%,
+                    rgba(0, 0, 0, 0.01) 40%,
+                    rgba(0, 0, 0, 0) 50%,
+                    rgba(0, 0, 0, 0.01) 60%,
+                    rgba(0, 0, 0, 0.03) 100%);
+            pointer-events: none;
         }
 
         .lesson-header {
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--accent-color);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--primary-color);
             padding-bottom: 1rem;
         }
 
@@ -292,12 +328,8 @@
         </aside>
 
         <!-- Content Area -->
-        <main class="content-area">
-            <div id="lesson-content">
-                <!-- Content will be injected here -->
-            </div>
-
-
+        <main class="content-area" id="book-container">
+            <!-- Pages will be injected here -->
         </main>
     </div>
 
@@ -458,9 +490,30 @@
         function showLesson(id, element) {
             document.querySelectorAll('.topic-item').forEach(item => item.classList.remove('active'));
             element.classList.add('active');
-            const content = document.getElementById('lesson-content');
-            content.innerHTML = lessons[id];
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const lesson = lessons[id];
+            const container = document.getElementById('book-container');
+
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = lesson;
+
+            const header = tempDiv.querySelector('.lesson-header').outerHTML;
+            const intro = tempDiv.querySelector('p').outerHTML;
+            const formation = tempDiv.querySelector('.formation-box').outerHTML;
+            const grid = tempDiv.querySelector('.grammar-grid');
+            const gridHtml = grid ? grid.outerHTML : '';
+
+            container.innerHTML = `
+                <div class="book-page">
+                    ${header}
+                    ${intro}
+                    ${formation}
+                </div>
+                <div class="book-page">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--secondary-color);">Examples & Usage</h3>
+                    ${gridHtml}
+                </div>
+            `;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
