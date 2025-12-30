@@ -105,21 +105,10 @@
             padding: 2rem;
             overflow-y: auto;
             position: relative;
-            animation: pageFlip 0.6s ease-out;
             background: white;
         }
 
-        @keyframes pageFlip {
-            0% {
-                opacity: 0;
-                transform: perspective(1000px) rotateY(-10deg);
-            }
 
-            100% {
-                opacity: 1;
-                transform: perspective(1000px) rotateY(0deg);
-            }
-        }
 
         .book-page:first-child {
             border-right: 1px solid #eee;
@@ -171,13 +160,18 @@
             cursor: pointer;
             color: var(--primary-color);
             z-index: 10;
-            transition: var(--transition);
             box-shadow: var(--shadow-md);
         }
 
         .book-nav:hover {
             background: var(--primary-color);
             color: white;
+            box-shadow: 0 4px 12px rgba(188, 0, 45, 0.3);
+        }
+
+        .book-nav:active {
+            background: #a00026;
+            transform: translateY(-50%) scale(0.95);
         }
 
         .book-nav.prev {
@@ -229,17 +223,7 @@
             text-transform: uppercase;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
         @media (max-width: 992px) {
             .main-container {
