@@ -187,17 +187,6 @@
             color: var(--primary-color);
         }
 
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--primary-color);
-            border-radius: 2px;
-        }
-
         .tab-btn i {
             font-size: 1.2rem;
             margin-bottom: 0.2rem;
@@ -260,23 +249,20 @@
             </div>
 
             <div class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('basic', this)">Basic</button>
-                <button class="tab-btn" onclick="switchTab('dakuten', this)">Dakuten</button>
-                <button class="tab-btn" onclick="switchTab('yoon', this)">Yōon</button>
+                <button class="tab-btn active" onclick="switchTab('basic', this)">Basic (Gojūon)</button>
+                <button class="tab-btn" onclick="switchTab('dakuten', this)">Dakuten (Voiced)</button>
+                <button class="tab-btn" onclick="switchTab('yoon', this)">Yōon (Combination)</button>
             </div>
 
             <div id="basic-section" class="chart-section active">
-                <h2 class="section-title">Basic (Gojūon)</h2>
                 <div class="kana-grid" id="basic-grid"></div>
             </div>
 
             <div id="dakuten-section" class="chart-section">
-                <h2 class="section-title">Dakuten (Voiced)</h2>
                 <div class="kana-grid" id="dakuten-grid"></div>
             </div>
 
             <div id="yoon-section" class="chart-section">
-                <h2 class="section-title">Yōon (Combination)</h2>
                 <div class="kana-grid" id="yoon-grid"></div>
             </div>
         </div>
