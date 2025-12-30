@@ -20,16 +20,19 @@
             background: #f8fafc;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .main-container {
             max-width: 1200px;
-            margin: 2rem auto;
+            margin: 0 auto;
             width: 95%;
             display: flex;
             gap: 2rem;
             flex: 1;
+            height: calc(100vh - 80px);
+            padding: 2rem 0;
         }
 
         /* Sidebar Styling */
@@ -91,6 +94,8 @@
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            overflow-y: auto;
+            padding-right: 1rem;
         }
 
         .lesson-card {
@@ -292,25 +297,7 @@
                 <!-- Content will be injected here -->
             </div>
 
-            <!-- Sentence Constructor -->
-            <div class="constructor-section">
-                <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 1rem; color: var(--secondary-color);">
-                    Sentence Constructor</h2>
-                <p style="text-align: center; color: var(--text-light);">Enter an English sentence to construct its
-                    Japanese equivalent.</p>
 
-                <div class="constructor-input-group">
-                    <input type="text" id="english-input" class="constructor-input"
-                        placeholder="Type your sentence here...">
-                    <button onclick="constructSentence()" class="constructor-btn">Construct</button>
-                </div>
-
-                <div id="constructed-output" class="output-display">
-                    <div id="japanese-output" class="output-jp"></div>
-                    <div id="romaji-output" class="output-romaji"></div>
-                    <div id="english-output" class="output-en"></div>
-                </div>
-            </div>
         </main>
     </div>
 
@@ -480,253 +467,7 @@
             showLesson('wa-ga', document.querySelector('.topic-item'));
         });
 
-        const dictionary = {
-            // Subjects
-            "i": { jp: "私", furigana: "わたし", romaji: "watashi", type: "subject" },
-            "you": { jp: "あなた", furigana: "あなた", romaji: "anata", type: "subject" },
-            "he": { jp: "彼", furigana: "かれ", romaji: "kare", type: "subject" },
-            "she": { jp: "彼女", furigana: "かのじょ", romaji: "kanojo", type: "subject" },
-            "we": { jp: "私たち", furigana: "わたしたち", romaji: "watashitachi", type: "subject" },
-            "they": { jp: "彼ら", furigana: "かれら", romaji: "karera", type: "subject" },
-            "friend": { jp: "友達", furigana: "ともだち", romaji: "tomodachi", type: "subject" },
-            "mother": { jp: "お母さん", furigana: "おかあさん", romaji: "okaasan", type: "subject" },
-            "father": { jp: "お父さん", furigana: "おとうさん", romaji: "otousan", type: "subject" },
-            "teacher": { jp: "先生", furigana: "せんせい", romaji: "sensei", type: "subject" },
-            "student": { jp: "学生", furigana: "がくせい", romaji: "gakusei", type: "subject" },
 
-            // Objects / Nouns
-            "this": { jp: "これ", furigana: "これ", romaji: "kore", type: "object" },
-            "that": { jp: "それ", furigana: "それ", romaji: "sore", type: "object" },
-            "thing": { jp: "物", furigana: "もの", romaji: "mono", type: "object" },
-            "things": { jp: "物", furigana: "もの", romaji: "mono", type: "object" },
-            "park": { jp: "公園", furigana: "こうえん", romaji: "kouen", type: "object" },
-            "icecream": { jp: "アイスクリーム", furigana: "あいすくりーむ", romaji: "aisukuri-mu", type: "object" },
-            "sushi": { jp: "寿司", furigana: "すし", romaji: "sushi", type: "object" },
-            "pizza": { jp: "ピザ", furigana: "ぴざ", romaji: "piza", type: "object" },
-            "ramen": { jp: "ラーメン", furigana: "らーめん", romaji: "ra-men", type: "object" },
-            "bread": { jp: "パン", furigana: "ぱん", romaji: "pan", type: "object" },
-            "water": { jp: "水", furigana: "みず", romaji: "mizu", type: "object" },
-            "coffee": { jp: "コーヒー", furigana: "こーひー", romaji: "ko-hi-", type: "object" },
-            "school": { jp: "学校", furigana: "がっこう", romaji: "gakkou", type: "object" },
-            "cat": { jp: "猫", furigana: "ねこ", romaji: "neko", type: "object" },
-            "dog": { jp: "犬", furigana: "いぬ", romaji: "inu", type: "object" },
-            "book": { jp: "本", furigana: "ほん", romaji: "hon", type: "object" },
-            "movie": { jp: "映画", furigana: "えいが", romaji: "eiga", type: "object" },
-            "music": { jp: "音楽", furigana: "おんがく", romaji: "ongaku", type: "object" },
-            "japanese": { jp: "日本語", furigana: "にほんご", romaji: "nihongo", type: "object" },
-            "english": { jp: "英語", furigana: "えいご", romaji: "eigo", type: "object" },
-            "tokyo": { jp: "東京", furigana: "とうきょう", romaji: "toukyou", type: "object" },
-            "house": { jp: "家", furigana: "うち", romaji: "uchi", type: "object" },
-            "car": { jp: "車", furigana: "くるま", romaji: "kuruma", type: "object" },
-            "restaurant": { jp: "レストラン", furigana: "れすとらん", romaji: "resutoran", type: "object" },
-
-            // Verbs
-            "eat": { jp: "食べます", furigana: "たべます", romaji: "tabemasu", type: "verb", particle: "を", past: "食べました", neg: "食べません" },
-            "drink": { jp: "飲みます", furigana: "のみます", romaji: "nomimasu", type: "verb", particle: "を", past: "飲みました", neg: "飲みません" },
-            "go": { jp: "行きます", furigana: "いきます", romaji: "ikimasu", type: "verb", particle: "に", past: "行きました", neg: "行きません" },
-            "read": { jp: "読みます", furigana: "よみます", romaji: "yomimasu", type: "verb", particle: "を", past: "読みました", neg: "読みません" },
-            "watch": { jp: "見ます", furigana: "みます", romaji: "mimasu", type: "verb", particle: "を", past: "見ました", neg: "見ません" },
-            "study": { jp: "勉強します", furigana: "べんきょうします", romaji: "benkyou shimasu", type: "verb", particle: "を", past: "勉強しました", neg: "勉強しません" },
-            "buy": { jp: "買います", furigana: "かいます", romaji: "kaimasu", type: "verb", particle: "を", past: "買いました", neg: "買いません" },
-            "listen": { jp: "聞きます", furigana: "ききます", romaji: "kikimasu", type: "verb", particle: "を", past: "聞きました", neg: "聞きません" },
-            "write": { jp: "書きます", furigana: "かきます", romaji: "kakimasu", type: "verb", particle: "を", past: "書きました", neg: "書きません" },
-            "speak": { jp: "話します", furigana: "はなします", romaji: "hanashimasu", type: "verb", particle: "を", past: "話しました", neg: "話しません" },
-            "understand": { jp: "分かります", furigana: "わかります", romaji: "wakarimasu", type: "verb", particle: "が", past: "分かりました", neg: "分かりません" },
-            "sleep": { jp: "寝ます", furigana: "ねます", romaji: "nemasu", type: "verb", past: "寝ました", neg: "寝ません" },
-            "meet": { jp: "会います", furigana: "あいます", romaji: "aimasu", type: "verb", particle: "に", past: "会いました", neg: "会いません" },
-
-            // Adjectives
-            "delicious": { jp: "美味しい", furigana: "おいしい", romaji: "oishii", type: "adjective" },
-            "beautiful": { jp: "綺麗", furigana: "きれい", romaji: "kirei", type: "adjective", isNa: true },
-            "cold": { jp: "寒い", furigana: "さむい", romaji: "samui", type: "adjective" },
-            "hot": { jp: "暑い", furigana: "あつい", romaji: "atsui", type: "adjective" },
-            "big": { jp: "大きい", furigana: "おおきい", romaji: "ookii", type: "adjective" },
-            "small": { jp: "小さい", furigana: "ちいさい", romaji: "chiisai", type: "adjective" },
-            "interesting": { jp: "面白い", furigana: "おもしろい", romaji: "omoshiroi", type: "adjective" },
-            "difficult": { jp: "難しい", furigana: "むずかしい", romaji: "muzukashii", type: "adjective" },
-            "easy": { jp: "簡単", furigana: "かんたん", romaji: "kantan", type: "adjective", isNa: true },
-            "good": { jp: "いい", furigana: "いい", romaji: "ii", type: "adjective" },
-            "bad": { jp: "悪い", furigana: "わるい", romaji: "warui", type: "adjective" },
-            "want": { jp: "欲しい", furigana: "ほしい", romaji: "hoshii", type: "adjective", particle: "が" },
-            "like": { jp: "好き", furigana: "すき", romaji: "suki", type: "adjective", isNa: true, particle: "が" },
-
-            // Auxiliary
-            "is": { jp: "です", furigana: "です", romaji: "です", type: "aux" },
-            "am": { jp: "です", furigana: "です", romaji: "です", type: "aux" },
-            "are": { jp: "です", furigana: "です", romaji: "です", type: "aux" },
-            "was": { jp: "でした", furigana: "でした", romaji: "deshita", type: "aux" },
-            "were": { jp: "でした", furigana: "でした", romaji: "deshita", type: "aux" }
-        };
-
-        function constructSentence() {
-            const rawInput = document.getElementById('english-input').value.toLowerCase().trim();
-            if (!rawInput) {
-                alert('Please enter an English sentence!');
-                return;
-            }
-
-            // Pre-processing
-            let processedInput = rawInput
-                .replace("ice cream", "icecream")
-                .replace("my friend", "friend")
-                .replace(/\b(drank)\b/g, "drink")
-                .replace(/\b(ate)\b/g, "eat")
-                .replace(/\b(went)\b/g, "go")
-                .replace(/\b(saw)\b/g, "watch")
-                .replace(/\b(bought)\b/g, "buy")
-                .replace(/\b(spoke)\b/g, "speak")
-                .replace(/\b(understood)\b/g, "understand")
-                .replace(/\b(the|a|an|to|do|does|did)\b/g, "")
-                .replace(/\s+/g, " ")
-                .trim();
-
-            const words = processedInput.split(/\s+/);
-            const output = document.getElementById('constructed-output');
-            const japaneseOutput = document.getElementById('japanese-output');
-            const romajiOutput = document.getElementById('romaji-output');
-            const englishOutput = document.getElementById('english-output');
-
-            let subject = null;
-            let object = null;
-            let verb = null;
-            let adjective = null;
-
-            // Improved Tense/Negation Detection
-            let isNegative = /\b(not|don't|doesn't|didn't|won't|can't)\b/.test(rawInput);
-            let isPast = /\b(ed|drank|ate|went|saw|studied|bought|listened|wrote|spoke|understood|slept|met|was|were|did|yesterday)\b/.test(rawInput) || rawInput.endsWith("ed");
-
-            // Identify grammatical roles
-            for (let i = 0; i < words.length; i++) {
-                let word = words[i].replace(/[.,?!]/g, "");
-                if (dictionary[word]) {
-                    const entry = dictionary[word];
-                    if (entry.type === "subject" && !subject) subject = entry;
-                    else if (entry.type === "object" && !object) object = entry;
-                    else if (entry.type === "verb" && !verb) verb = entry;
-                    else if (entry.type === "adjective" && !adjective) {
-                        // Don't treat "want" as adjective if "want to" is present
-                        if (word === "want" && rawInput.includes("want to")) continue;
-                        adjective = entry;
-                    }
-                }
-            }
-
-            // Special handling for "want to [verb]"
-            let isWantTo = rawInput.includes("want to");
-            if (isWantTo) {
-                const parts = rawInput.split("want to");
-                if (parts[1]) {
-                    const verbWord = parts[1].trim().split(" ")[0];
-                    if (dictionary[verbWord] && dictionary[verbWord].type === "verb") {
-                        verb = dictionary[verbWord];
-                    }
-                }
-            }
-
-            let jpParts = [];
-            let romajiParts = [];
-
-            // 1. Subject (Topic)
-            if (subject) {
-                jpParts.push(`<ruby><rb>${subject.jp}</rb><rt>${subject.furigana}</rt></ruby>は`);
-                romajiParts.push(`${subject.romaji} wa`);
-            }
-
-            // 2. Object / Adjective + Object
-            if (object) {
-                // If adjective comes before object in English, it's attributive
-                const adjIndex = words.indexOf(Object.keys(dictionary).find(k => dictionary[k] === adjective));
-                const objIndex = words.indexOf(Object.keys(dictionary).find(k => dictionary[k] === object));
-
-                if (adjective && adjIndex < objIndex && adjIndex !== -1) {
-                    const connector = adjective.isNa ? "な" : "";
-                    jpParts.push(`<ruby><rb>${adjective.jp}</rb><rt>${adjective.furigana}</rt></ruby>${connector}`);
-                    romajiParts.push(`${adjective.romaji}${connector}`);
-                    adjective = null; // Used as attributive, don't use as predicate
-                }
-
-                let particle = "は";
-                if (verb) {
-                    particle = verb.particle || "を";
-                } else if (isWantTo) {
-                    particle = "が"; // X ga hoshii / X ga [verb]tai
-                }
-
-                // Romaji for particles
-                let rParticle = particle === "を" ? "o" : (particle === "は" ? "wa" : (particle === "に" ? "ni" : (particle === "が" ? "ga" : particle)));
-
-                jpParts.push(`<ruby><rb>${object.jp}</rb><rt>${object.furigana}</rt></ruby>${particle}`);
-                romajiParts.push(`${object.romaji} ${rParticle}`);
-            }
-
-            // 3. Verb / Adjective (Predicate)
-            if (verb) {
-                let vStr = verb.jp;
-                let rStr = verb.romaji;
-                let fStr = verb.furigana;
-
-                if (isWantTo) {
-                    // Simple ~tai form simulation: replace ~masu with ~tai desu
-                    vStr = vStr.replace("ます", "たいです");
-                    rStr = rStr.replace("masu", "tai desu");
-                    fStr = fStr.replace("ます", "たいです");
-                } else if (isPast) {
-                    if (isNegative) {
-                        vStr = verb.neg ? verb.neg.replace("ません", "ませんでした") : vStr.replace("ます", "ませんでした");
-                        rStr = rStr.replace("masu", "masen deshita");
-                        fStr = fStr.replace("ます", "ませんでした");
-                    } else {
-                        vStr = verb.past || vStr.replace("ます", "ました");
-                        rStr = rStr.replace("masu", "mashita");
-                        fStr = fStr.replace("ます", "ました");
-                    }
-                } else if (isNegative) {
-                    vStr = verb.neg || vStr.replace("ます", "ません");
-                    rStr = rStr.replace("masu", "masen");
-                    fStr = fStr.replace("ます", "ません");
-                }
-
-                jpParts.push(`<ruby><rb>${vStr}</rb><rt>${fStr}</rt></ruby>。`);
-                romajiParts.push(`${rStr}.`);
-            } else if (adjective) {
-                // Adjective as predicate
-                jpParts.push(`<ruby><rb>${adjective.jp}</rb><rt>${adjective.furigana}</rt></ruby>です。`);
-                romajiParts.push(`${adjective.romaji} desu.`);
-            } else if (subject && object && !verb && !adjective) {
-                jpParts.push(`です。`);
-                romajiParts.push(`desu.`);
-            }
-
-            if (jpParts.length > 0) {
-                japaneseOutput.innerHTML = jpParts.join("");
-                romajiOutput.textContent = romajiParts.join(" ");
-                englishOutput.textContent = rawInput.charAt(0).toUpperCase() + rawInput.slice(1);
-                output.style.display = 'block';
-            } else {
-                // Fallback: Word by word translation
-                let fallbackJp = [];
-                let fallbackRomaji = [];
-                words.forEach(w => {
-                    let word = w.replace(/[.,?!]/g, "");
-                    if (dictionary[word]) {
-                        fallbackJp.push(`<ruby><rb>${dictionary[word].jp}</rb><rt>${dictionary[word].furigana}</rt></ruby>`);
-                        fallbackRomaji.push(dictionary[word].romaji);
-                    }
-                });
-
-                if (fallbackJp.length > 0) {
-                    japaneseOutput.innerHTML = fallbackJp.join("");
-                    romajiOutput.textContent = fallbackRomaji.join(" ");
-                    englishOutput.textContent = rawInput;
-                    output.style.display = 'block';
-                } else {
-                    japaneseOutput.innerHTML = "I'm still learning those words!";
-                    romajiOutput.textContent = "Try using common words like 'eat', 'sushi', 'park', or 'beautiful'.";
-                    englishOutput.textContent = "";
-                    output.style.display = 'block';
-                }
-            }
-        }
     </script>
 </body>
 
