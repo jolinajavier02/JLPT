@@ -38,10 +38,12 @@
             background: white;
             border-radius: 20px;
             padding: 2rem 1.5rem;
-            height: fit-content;
+            height: calc(100vh - 140px);
             box-shadow: var(--shadow-sm);
             position: sticky;
             top: 100px;
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar-title {
@@ -279,8 +281,7 @@
                 <li class="topic-item" onclick="showLesson('mo-ka', this)">も (Mo) & か (Ka)</li>
             </ul>
 
-            <div class="sidebar-title" style="margin-top: 2rem;">Grammar Mastery</div>
-            <ul class="topic-list">
+            <ul class="topic-list" style="margin-top: auto;">
                 <li class="topic-item" onclick="window.location.href='grammar.html'">Go to Grammar</li>
             </ul>
         </aside>
