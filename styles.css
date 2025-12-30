@@ -94,7 +94,7 @@ ul {
 }
 
 /* Header */
-header {
+header.main-header {
     padding: 0.8rem 0;
     position: fixed;
     width: 100%;
