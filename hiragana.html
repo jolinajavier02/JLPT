@@ -161,37 +161,46 @@
         }
 
         .tab-nav {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
             margin-bottom: 2rem;
-            background: white;
-            padding: 0.8rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(188, 0, 45, 0.1);
+            padding: 0.5rem;
         }
 
         .tab-btn {
-            padding: 0.8rem 2rem;
-            border-radius: 10px;
-            border: none;
-            background: transparent;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(188, 0, 45, 0.1);
             color: var(--text-light);
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-sm);
         }
 
         .tab-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
             color: var(--primary-color);
-            background: #fff5f5;
         }
 
         .tab-btn.active {
             background: var(--primary-color);
             color: white;
-            box-shadow: 0 4px 12px rgba(188, 0, 45, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(188, 0, 45, 0.2);
+        }
+
+        .tab-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
         }
 
         @keyframes fadeIn {
@@ -251,9 +260,18 @@
             </div>
 
             <div class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('basic', this)">Basic</button>
-                <button class="tab-btn" onclick="switchTab('dakuten', this)">Dakuten</button>
-                <button class="tab-btn" onclick="switchTab('yoon', this)">Yōon</button>
+                <div class="tab-btn active" onclick="switchTab('basic', this)">
+                    <span style="font-size: 0.8rem; opacity: 0.8;">Category 01</span>
+                    <span>Basic Chart</span>
+                </div>
+                <div class="tab-btn" onclick="switchTab('dakuten', this)">
+                    <span style="font-size: 0.8rem; opacity: 0.8;">Category 02</span>
+                    <span>Dakuten Chart</span>
+                </div>
+                <div class="tab-btn" onclick="switchTab('yoon', this)">
+                    <span style="font-size: 0.8rem; opacity: 0.8;">Category 03</span>
+                    <span>Yōon Chart</span>
+                </div>
             </div>
 
             <div id="basic-section" class="chart-section active">
