@@ -327,8 +327,9 @@
             { char: 'ピャ', romaji: 'pya', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ピュ', romaji: 'pyu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ピョ', romaji: 'pyo', meaning: 'Katakana (Yoon)', type: 'Katakana' }
         ];
 
-        // Placeholder for Kanji - will be fetched or expanded
-        let kanjiData = [];
+        // Kanji Data - Lazy Loading Strategy
+        let kanjiData = {}; // Cache for loaded Kanji details
+        let allKanjiList = []; // Full list of characters from API
 
         const grammarData = [
             { char: '私は寿司を食べます', kana: 'わたしはすしをたべます', romaji: 'Watashi wa sushi o tabemasu', meaning: 'I eat sushi', type: 'Grammar' },
@@ -619,111 +620,90 @@
         let currentPool = [];
         let currentItem = null;
         let currentModule = '';
-        let allKanjiList = [];
+        // allKanjiList is declared above
 
         async function fetchJoyoKanji() {
             try {
                 const response = await fetch('https://kanjiapi.dev/v1/kanji/joyo');
-                allKanjiList = await response.json();
-                // If we are already in kanji or all mode and have no kanji data, load a batch
-                if ((currentModule === 'kanji' || currentModule === 'all') && kanjiData.length === 0) {
-                    await loadRandomKanjiBatch();
-                }
+                const data = await response.json();
+                allKanjiList = data;
+                console.log(`Loaded ${allKanjiList.length} Kanji characters.`);
             } catch (error) {
                 console.error("Failed to fetch Kanji list", error);
+                // Fallback
+                allKanjiList = ['日', '月', '火', '水', '木', '金', '土', '山', '川', '田'];
             }
         }
 
-        async function loadRandomKanjiBatch() {
-            if (allKanjiList.length === 0) return;
-
-            // Pick 50 random kanji
-            const batch = [];
-            for (let i = 0; i < 50; i++) {
-                const randomChar = allKanjiList[Math.floor(Math.random() * allKanjiList.length)];
-                batch.push(randomChar);
-            }
-
-            // Fetch details for them
-            // We'll do this in parallel but limit concurrency if needed, though 50 is likely fine for browser
-            const detailsPromises = batch.map(char => fetch(`https://kanjiapi.dev/v1/kanji/${char}`).then(r => r.json()));
+        async function getKanjiDetails(char) {
+            if (kanjiData[char]) return kanjiData[char];
 
             try {
-                const details = await Promise.all(detailsPromises);
+                const response = await fetch(`https://kanjiapi.dev/v1/kanji/${char}`);
+                const data = await response.json();
 
-                // Format for flashcards
-                const newKanjiData = details.map(d => ({
-                    char: d.kanji,
-                    romaji: d.on_readings.join(', ') || d.kun_readings.join(', '),
-                    meaning: d.meanings.join(', '),
+                const details = {
+                    char: data.kanji,
+                    romaji: `On: ${data.on_readings.join(', ')} \n Kun: ${data.kun_readings.join(', ')}`,
+                    meaning: data.meanings.join(', '),
                     type: 'Kanji'
-                }));
-
-                kanjiData = newKanjiData;
-
-                // If current module is Kanji, update pool immediately
-                if (currentModule === 'kanji') {
-                    currentPool = [...kanjiData];
-                    if (document.getElementById('card-front-main').textContent === '?' || document.getElementById('card-front-main').textContent === 'Loading...') {
-                        nextCard();
-                    }
-                } else if (currentModule === 'all') {
-                    // Refresh the pool for 'all' to include new kanji
-                    currentPool = [...hiraganaData, ...katakanaData, ...kanjiData, ...vocabData, ...grammarData, ...particlesData];
-                }
-            } catch (e) {
-                console.error("Error fetching kanji details", e);
+                };
+                kanjiData[char] = details;
+                return details;
+            } catch (error) {
+                console.error(`Error fetching details for ${char}:`, error);
+                return {
+                    char: char,
+                    romaji: 'Unknown',
+                    meaning: 'Could not load details',
+                    type: 'Kanji'
+                };
             }
         }
 
         function switchModule(module, btn) {
             // Update UI
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if (btn) btn.classList.add('active');
 
             const area = document.getElementById('challenge-area');
             area.classList.add('active');
 
             currentModule = module;
-            document.getElementById('current-module-title').textContent = module === 'all' ? 'All Challenge' : module.charAt(0).toUpperCase() + module.slice(1) + ' Challenge';
+            document.getElementById('current-module-title').textContent = module.charAt(0).toUpperCase() + module.slice(1) + ' Challenge';
 
             if (module === 'hiragana') currentPool = [...hiraganaData];
             else if (module === 'katakana') currentPool = [...katakanaData];
-            else if (module === 'kanji') {
-                if (allKanjiList.length === 0) {
-                    // Still loading list, or failed. 
-                    // fetchJoyoKanji will trigger loadRandomKanjiBatch when done if module is kanji
-                    currentPool = [];
-                    document.getElementById('card-front-main').textContent = 'Loading...';
-                } else {
-                    loadRandomKanjiBatch(); // Refresh batch for a new session
-                    currentPool = [...kanjiData]; // Use existing while loading new
-                }
-            }
             else if (module === 'vocabulary') currentPool = [...vocabData];
             else if (module === 'grammar') currentPool = [...grammarData];
             else if (module === 'particles') currentPool = [...particlesData];
+            else if (module === 'kanji') {
+                currentPool = allKanjiList; // The pool is the list of characters
+            }
             else if (module === 'all') {
-                // For "All", we include everything. 
-                if (kanjiData.length === 0 && allKanjiList.length > 0) {
-                    loadRandomKanjiBatch();
+                // For 'all', we mix data. For Kanji, we'll just add a placeholder string 'KANJI_RANDOM' 
+                // multiple times to give it weight
+                currentPool = [
+                    ...hiraganaData,
+                    ...katakanaData,
+                    ...vocabData,
+                    ...grammarData,
+                    ...particlesData
+                ];
+                // Add some random Kanji placeholders to the mix (e.g., 50 slots)
+                if (allKanjiList.length > 0) {
+                    for (let i = 0; i < 50; i++) currentPool.push('KANJI_RANDOM');
                 }
-                currentPool = [...hiraganaData, ...katakanaData, ...kanjiData, ...vocabData, ...grammarData, ...particlesData];
             }
 
-            if (currentPool.length > 0) {
-                nextCard();
-            } else if (module !== 'kanji') { // Kanji might be loading
-                // Should not happen for others if data is there
-                nextCard();
-            }
+            nextCard();
         }
 
-        function nextCard() {
+        async function nextCard() {
             const card = document.getElementById('flashcard');
             card.classList.remove('flipped');
 
-            setTimeout(() => {
+            setTimeout(async () => {
                 if (currentPool.length === 0) {
                     if (currentModule === 'kanji') {
                         document.getElementById('card-front-main').textContent = 'Loading...';
@@ -733,8 +713,39 @@
                 }
 
                 const randomIndex = Math.floor(Math.random() * currentPool.length);
-                currentItem = currentPool[randomIndex];
+                let selectedItem = currentPool[randomIndex];
 
+                // Handle Kanji (Lazy Loading)
+                if (currentModule === 'kanji' || selectedItem === 'KANJI_RANDOM') {
+                    let charToFetch = selectedItem;
+
+                    if (currentModule === 'kanji') {
+                        // selectedItem is the character itself
+                        charToFetch = selectedItem;
+                    } else if (selectedItem === 'KANJI_RANDOM') {
+                        // Pick a random kanji from the full list
+                        if (allKanjiList.length > 0) {
+                            charToFetch = allKanjiList[Math.floor(Math.random() * allKanjiList.length)];
+                        } else {
+                            // Fallback if list not loaded yet
+                            charToFetch = '日';
+                        }
+                    }
+
+                    // Show loading state
+                    document.getElementById('card-module').textContent = 'Kanji';
+                    document.getElementById('card-front-main').textContent = charToFetch;
+                    document.getElementById('card-front-sub').textContent = 'Loading details...';
+                    document.getElementById('card-back-main').textContent = '...';
+                    document.getElementById('card-back-sub').textContent = '...';
+
+                    // Fetch details
+                    currentItem = await getKanjiDetails(charToFetch);
+                } else {
+                    currentItem = selectedItem;
+                }
+
+                // Update UI with currentItem details
                 document.getElementById('card-module').textContent = currentItem.type;
 
                 const frontMain = document.getElementById('card-front-main');
