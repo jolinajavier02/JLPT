@@ -264,6 +264,7 @@
 
     <script>
         const hiraganaData = [
+            // Basic
             { char: 'あ', romaji: 'a', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'い', romaji: 'i', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'う', romaji: 'u', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'え', romaji: 'e', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'お', romaji: 'o', meaning: 'Hiragana', type: 'Hiragana' },
             { char: 'か', romaji: 'ka', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'き', romaji: 'ki', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'く', romaji: 'ku', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'け', romaji: 'ke', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'こ', romaji: 'ko', meaning: 'Hiragana', type: 'Hiragana' },
             { char: 'さ', romaji: 'sa', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'し', romaji: 'shi', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'す', romaji: 'su', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'せ', romaji: 'se', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'そ', romaji: 'so', meaning: 'Hiragana', type: 'Hiragana' },
@@ -273,10 +274,29 @@
             { char: 'ま', romaji: 'ma', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'み', romaji: 'mi', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'む', romaji: 'mu', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'め', romaji: 'me', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'も', romaji: 'mo', meaning: 'Hiragana', type: 'Hiragana' },
             { char: 'や', romaji: 'ya', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ゆ', romaji: 'yu', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'よ', romaji: 'yo', meaning: 'Hiragana', type: 'Hiragana' },
             { char: 'ら', romaji: 'ra', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'り', romaji: 'ri', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'る', romaji: 'ru', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'れ', romaji: 're', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ろ', romaji: 'ro', meaning: 'Hiragana', type: 'Hiragana' },
-            { char: 'わ', romaji: 'wa', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'を', romaji: 'wo', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ん', romaji: 'n', meaning: 'Hiragana', type: 'Hiragana' }
+            { char: 'わ', romaji: 'wa', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'を', romaji: 'wo', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ん', romaji: 'n', meaning: 'Hiragana', type: 'Hiragana' },
+            // Dakuten (Voiced)
+            { char: 'が', romaji: 'ga', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ぎ', romaji: 'gi', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ぐ', romaji: 'gu', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'げ', romaji: 'ge', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ご', romaji: 'go', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' },
+            { char: 'ざ', romaji: 'za', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'じ', romaji: 'ji', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ず', romaji: 'zu', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ぜ', romaji: 'ze', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ぞ', romaji: 'zo', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' },
+            { char: 'だ', romaji: 'da', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ぢ', romaji: 'ji', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'づ', romaji: 'zu', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'で', romaji: 'de', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ど', romaji: 'do', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' },
+            { char: 'ば', romaji: 'ba', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'び', romaji: 'bi', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ぶ', romaji: 'bu', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'べ', romaji: 'be', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' }, { char: 'ぼ', romaji: 'bo', meaning: 'Hiragana (Dakuten)', type: 'Hiragana' },
+            { char: 'ぱ', romaji: 'pa', meaning: 'Hiragana (Handakuten)', type: 'Hiragana' }, { char: 'ぴ', romaji: 'pi', meaning: 'Hiragana (Handakuten)', type: 'Hiragana' }, { char: 'ぷ', romaji: 'pu', meaning: 'Hiragana (Handakuten)', type: 'Hiragana' }, { char: 'ぺ', romaji: 'pe', meaning: 'Hiragana (Handakuten)', type: 'Hiragana' }, { char: 'ぽ', romaji: 'po', meaning: 'Hiragana (Handakuten)', type: 'Hiragana' },
+            // Yoon (Combination)
+            { char: 'きゃ', romaji: 'kya', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'きゅ', romaji: 'kyu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'きょ', romaji: 'kyo', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'しゃ', romaji: 'sha', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'しゅ', romaji: 'shu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'しょ', romaji: 'sho', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'ちゃ', romaji: 'cha', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'ちゅ', romaji: 'chu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'ちょ', romaji: 'cho', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'にゃ', romaji: 'nya', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'にゅ', romaji: 'nyu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'にょ', romaji: 'nyo', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'ひゃ', romaji: 'hya', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'ひゅ', romaji: 'hyu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'ひょ', romaji: 'hyo', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'みゃ', romaji: 'mya', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'みゅ', romaji: 'myu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'みょ', romaji: 'myo', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'りゃ', romaji: 'rya', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'りゅ', romaji: 'ryu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'りょ', romaji: 'ryo', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'ぎゃ', romaji: 'gya', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'ぎゅ', romaji: 'gyu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'ぎょ', romaji: 'gyo', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'じゃ', romaji: 'ja', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'じゅ', romaji: 'ju', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'じょ', romaji: 'jo', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'びゃ', romaji: 'bya', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'びゅ', romaji: 'byu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'びょ', romaji: 'byo', meaning: 'Hiragana (Yoon)', type: 'Hiragana' },
+            { char: 'ぴゃ', romaji: 'pya', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'ぴゅ', romaji: 'pyu', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }, { char: 'ぴょ', romaji: 'pyo', meaning: 'Hiragana (Yoon)', type: 'Hiragana' }
         ];
 
         const katakanaData = [
+            // Basic
             { char: 'ア', romaji: 'a', meaning: 'Katakana', type: 'Katakana' }, { char: 'イ', romaji: 'i', meaning: 'Katakana', type: 'Katakana' }, { char: 'ウ', romaji: 'u', meaning: 'Katakana', type: 'Katakana' }, { char: 'エ', romaji: 'e', meaning: 'Katakana', type: 'Katakana' }, { char: 'オ', romaji: 'o', meaning: 'Katakana', type: 'Katakana' },
             { char: 'カ', romaji: 'ka', meaning: 'Katakana', type: 'Katakana' }, { char: 'キ', romaji: 'ki', meaning: 'Katakana', type: 'Katakana' }, { char: 'ク', romaji: 'ku', meaning: 'Katakana', type: 'Katakana' }, { char: 'ケ', romaji: 'ke', meaning: 'Katakana', type: 'Katakana' }, { char: 'コ', romaji: 'ko', meaning: 'Katakana', type: 'Katakana' },
             { char: 'サ', romaji: 'sa', meaning: 'Katakana', type: 'Katakana' }, { char: 'シ', romaji: 'shi', meaning: 'Katakana', type: 'Katakana' }, { char: 'ス', romaji: 'su', meaning: 'Katakana', type: 'Katakana' }, { char: 'セ', romaji: 'se', meaning: 'Katakana', type: 'Katakana' }, { char: 'ソ', romaji: 'so', meaning: 'Katakana', type: 'Katakana' },
@@ -286,19 +306,73 @@
             { char: 'マ', romaji: 'ma', meaning: 'Katakana', type: 'Katakana' }, { char: 'ミ', romaji: 'mi', meaning: 'Katakana', type: 'Katakana' }, { char: 'ム', romaji: 'mu', meaning: 'Katakana', type: 'Katakana' }, { char: 'メ', romaji: 'me', meaning: 'Katakana', type: 'Katakana' }, { char: 'モ', romaji: 'mo', meaning: 'Katakana', type: 'Katakana' },
             { char: 'ヤ', romaji: 'ya', meaning: 'Katakana', type: 'Katakana' }, { char: 'ユ', romaji: 'yu', meaning: 'Katakana', type: 'Katakana' }, { char: 'ヨ', romaji: 'yo', meaning: 'Katakana', type: 'Katakana' },
             { char: 'ラ', romaji: 'ra', meaning: 'Katakana', type: 'Katakana' }, { char: 'リ', romaji: 'ri', meaning: 'Katakana', type: 'Katakana' }, { char: 'ル', romaji: 'ru', meaning: 'Katakana', type: 'Katakana' }, { char: 'レ', romaji: 're', meaning: 'Katakana', type: 'Katakana' }, { char: 'ロ', romaji: 'ro', meaning: 'Katakana', type: 'Katakana' },
-            { char: 'ワ', romaji: 'wa', meaning: 'Katakana', type: 'Katakana' }, { char: 'ヲ', romaji: 'wo', meaning: 'Katakana', type: 'Katakana' }, { char: 'ン', romaji: 'n', meaning: 'Katakana', type: 'Katakana' }
+            { char: 'ワ', romaji: 'wa', meaning: 'Katakana', type: 'Katakana' }, { char: 'ヲ', romaji: 'wo', meaning: 'Katakana', type: 'Katakana' }, { char: 'ン', romaji: 'n', meaning: 'Katakana', type: 'Katakana' },
+            // Dakuten (Voiced)
+            { char: 'ガ', romaji: 'ga', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ギ', romaji: 'gi', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'グ', romaji: 'gu', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ゲ', romaji: 'ge', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ゴ', romaji: 'go', meaning: 'Katakana (Dakuten)', type: 'Katakana' },
+            { char: 'ザ', romaji: 'za', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ジ', romaji: 'ji', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ズ', romaji: 'zu', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ゼ', romaji: 'ze', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ゾ', romaji: 'zo', meaning: 'Katakana (Dakuten)', type: 'Katakana' },
+            { char: 'ダ', romaji: 'da', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ヂ', romaji: 'ji', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ヅ', romaji: 'zu', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'デ', romaji: 'de', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ド', romaji: 'do', meaning: 'Katakana (Dakuten)', type: 'Katakana' },
+            { char: 'バ', romaji: 'ba', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ビ', romaji: 'bi', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ブ', romaji: 'bu', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ベ', romaji: 'be', meaning: 'Katakana (Dakuten)', type: 'Katakana' }, { char: 'ボ', romaji: 'bo', meaning: 'Katakana (Dakuten)', type: 'Katakana' },
+            { char: 'パ', romaji: 'pa', meaning: 'Katakana (Handakuten)', type: 'Katakana' }, { char: 'ピ', romaji: 'pi', meaning: 'Katakana (Handakuten)', type: 'Katakana' }, { char: 'プ', romaji: 'pu', meaning: 'Katakana (Handakuten)', type: 'Katakana' }, { char: 'ペ', romaji: 'pe', meaning: 'Katakana (Handakuten)', type: 'Katakana' }, { char: 'ポ', romaji: 'po', meaning: 'Katakana (Handakuten)', type: 'Katakana' },
+            // Yoon (Combination)
+            { char: 'キャ', romaji: 'kya', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'キュ', romaji: 'kyu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'キョ', romaji: 'kyo', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'シャ', romaji: 'sha', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'シュ', romaji: 'shu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ショ', romaji: 'sho', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'チャ', romaji: 'cha', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'チュ', romaji: 'chu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'チョ', romaji: 'cho', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'ニャ', romaji: 'nya', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ニュ', romaji: 'nyu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ニョ', romaji: 'nyo', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'ヒャ', romaji: 'hya', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ヒュ', romaji: 'hyu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ヒョ', romaji: 'hyo', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'ミャ', romaji: 'mya', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ミュ', romaji: 'myu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ミョ', romaji: 'myo', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'リャ', romaji: 'rya', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'リュ', romaji: 'ryu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'リョ', romaji: 'ryo', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'ギャ', romaji: 'gya', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ギュ', romaji: 'gyu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ギョ', romaji: 'gyo', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'ジャ', romaji: 'ja', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ジュ', romaji: 'ju', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ジョ', romaji: 'jo', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'ビャ', romaji: 'bya', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ビュ', romaji: 'byu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ビョ', romaji: 'byo', meaning: 'Katakana (Yoon)', type: 'Katakana' },
+            { char: 'ピャ', romaji: 'pya', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ピュ', romaji: 'pyu', meaning: 'Katakana (Yoon)', type: 'Katakana' }, { char: 'ピョ', romaji: 'pyo', meaning: 'Katakana (Yoon)', type: 'Katakana' }
         ];
 
         // Placeholder for Kanji - will be fetched or expanded
-        let kanjiData = [
-            { char: '一', romaji: 'ichi', meaning: 'One', type: 'Kanji' }, { char: '二', romaji: 'ni', meaning: 'Two', type: 'Kanji' }, { char: '三', romaji: 'san', meaning: 'Three', type: 'Kanji' },
-            { char: '日', romaji: 'hi/nichi', meaning: 'Sun/Day', type: 'Kanji' }, { char: '月', romaji: 'tsuki/getsu', meaning: 'Moon/Month', type: 'Kanji' }, { char: '火', romaji: 'hi/ka', meaning: 'Fire', type: 'Kanji' },
-            { char: '水', romaji: 'mizu/sui', meaning: 'Water', type: 'Kanji' }, { char: '木', romaji: 'ki/moku', meaning: 'Tree', type: 'Kanji' }, { char: '金', romaji: 'kane/kin', meaning: 'Gold/Metal', type: 'Kanji' },
-            { char: '土', romaji: 'tsuchi/do', meaning: 'Earth/Soil', type: 'Kanji' }, { char: '人', romaji: 'hito/jin', meaning: 'Person', type: 'Kanji' }
+        let kanjiData = [];
+
+        const grammarData = [
+            { char: '私は寿司を食べます', romaji: 'Watashi wa sushi o tabemasu', meaning: 'I eat sushi', type: 'Grammar' },
+            { char: '田中さんは本を読みます', romaji: 'Tanaka-san wa hon o yomimasu', meaning: 'Mr. Tanaka reads a book', type: 'Grammar' },
+            { char: '私は水を飲みます', romaji: 'Watashi wa mizu o nomimasu', meaning: 'I drink water', type: 'Grammar' },
+            { char: '先生は日本語を話します', romaji: 'Sensei wa nihongo o hanashimasu', meaning: 'The teacher speaks Japanese', type: 'Grammar' },
+            { char: '私は映画を見ます', romaji: 'Watashi wa eiga o mimasu', meaning: 'I watch a movie', type: 'Grammar' },
+            { char: '昨日、寿司を食べました', romaji: 'Kinou, sushi o tabemashita', meaning: 'I ate sushi yesterday', type: 'Grammar' },
+            { char: '明日、学校に行きます', romaji: 'Ashita, gakkou ni ikimasu', meaning: 'I will go to school tomorrow', type: 'Grammar' },
+            { char: '今、コーヒーを飲みます', romaji: 'Ima, ko-hi- o nomimasu', meaning: 'I drink coffee now', type: 'Grammar' },
+            { char: '毎日勉強をします', romaji: 'Mainichi benkyou o shimasu', meaning: 'I study every day', type: 'Grammar' },
+            { char: '友達が家に来ます', romaji: 'Tomodachi ga uchi ni kimasu', meaning: 'A friend is coming to my house', type: 'Grammar' },
+            { char: 'この寿司はとても美味しいです', romaji: 'Kono sushi wa totemo oishii desu', meaning: 'This sushi is very delicious', type: 'Grammar' },
+            { char: '綺麗な花ですね', romaji: 'Kirei na hana desu ne', meaning: 'It\'s a beautiful flower, isn\'t it?', type: 'Grammar' },
+            { char: '今日はとても寒いです', romaji: 'Kyou wa totemo samui desu', meaning: 'Today is very cold', type: 'Grammar' },
+            { char: '静かな部屋が好きです', romaji: 'Shizuka na heya ga suki desu', meaning: 'I like quiet rooms', type: 'Grammar' },
+            { char: '高い時計を買いました', romaji: 'Takai tokei o kaimashita', meaning: 'I bought an expensive watch', type: 'Grammar' },
+            { char: '机の上に本があります', romaji: 'Tsukue no ue ni hon ga arimasu', meaning: 'There is a book on the desk', type: 'Grammar' },
+            { char: '庭に猫がいます', romaji: 'Niwa ni neko ga imasu', meaning: 'There is a cat in the garden', type: 'Grammar' },
+            { char: '先生はどこにいますか？', romaji: 'Sensei wa doko ni imasu ka?', meaning: 'Where is the teacher?', type: 'Grammar' },
+            { char: '駅はどこですか？', romaji: 'Eki wa doko desu ka?', meaning: 'Where is the station?', type: 'Grammar' },
+            { char: '車があります', romaji: 'Kuruma ga arimasu', meaning: 'There is a car', type: 'Grammar' },
+            { char: 'ちょっと待ってください', romaji: 'Chotto matte kudasai', meaning: 'Please wait a moment', type: 'Grammar' },
+            { char: '食べてください', romaji: 'Tabete kudasai', meaning: 'Please eat', type: 'Grammar' },
+            { char: '行ってください', romaji: 'Itte kudasai', meaning: 'Please go', type: 'Grammar' },
+            { char: 'テレビを見ています', romaji: 'Terebi o mite imasu', meaning: 'I am watching TV', type: 'Grammar' },
+            { char: '水を飲んでください', romaji: 'Mizu o nonde kudasai', meaning: 'Please drink water', type: 'Grammar' }
+        ];
+
+        const particlesData = [
+            { char: '私 __ 学生です', romaji: 'は (wa)', meaning: 'I am a student', type: 'Particles' },
+            { char: '猫 __ います', romaji: 'が (ga)', meaning: 'There is a cat', type: 'Particles' },
+            { char: '水 __ 飲みます', romaji: 'を (o)', meaning: 'Drink water', type: 'Particles' },
+            { char: '日本 __ 行きます', romaji: 'に (ni)', meaning: 'Go to Japan', type: 'Particles' },
+            { char: 'レストラン __ 食べます', romaji: 'で (de)', meaning: 'Eat at a restaurant', type: 'Particles' },
+            { char: '東京 __ 行きます', romaji: 'へ (e)', meaning: 'Go towards Tokyo', type: 'Particles' },
+            { char: '私 __ 本です', romaji: 'の (no)', meaning: 'It is my book', type: 'Particles' },
+            { char: '友達 __ 行きます', romaji: 'と (to)', meaning: 'Go with a friend', type: 'Particles' },
+            { char: '私 __ 学生です', romaji: 'も (mo)', meaning: 'I am also a student', type: 'Particles' },
+            { char: 'お元気です __', romaji: 'か (ka)', meaning: 'Are you well?', type: 'Particles' }
         ];
 
         const vocabData = [
-            // Copied from vocabulary.html
+            // Home
             { char: "家", romaji: "ie", meaning: "House", type: 'Vocabulary' },
             { char: "アパート", romaji: "apaato", meaning: "Apartment", type: 'Vocabulary' },
             { char: "部屋", romaji: "heya", meaning: "Room", type: 'Vocabulary' },
@@ -358,6 +432,7 @@
             { char: "ガス", romaji: "gasu", meaning: "Gas", type: 'Vocabulary' },
             { char: "鍵", romaji: "kagi", meaning: "Key", type: 'Vocabulary' },
             { char: "錠", romaji: "jou", meaning: "Lock", type: 'Vocabulary' },
+            // Family
             { char: "家族", romaji: "kazoku", meaning: "Family", type: 'Vocabulary' },
             { char: "父", romaji: "chichi", meaning: "Father", type: 'Vocabulary' },
             { char: "母", romaji: "haha", meaning: "Mother", type: 'Vocabulary' },
@@ -380,6 +455,7 @@
             { char: "お母さん", romaji: "okaasan", meaning: "Mother (Polite)", type: 'Vocabulary' },
             { char: "支える", romaji: "sasaeru", meaning: "To support", type: 'Vocabulary' },
             { char: "育てる", romaji: "sodateru", meaning: "To raise", type: 'Vocabulary' },
+            // Numbers
             { char: "零", romaji: "rei", meaning: "Zero", type: 'Vocabulary' },
             { char: "一", romaji: "ichi", meaning: "One", type: 'Vocabulary' },
             { char: "二", romaji: "ni", meaning: "Two", type: 'Vocabulary' },
@@ -400,6 +476,7 @@
             { char: "一冊", romaji: "issatsu", meaning: "One Book", type: 'Vocabulary' },
             { char: "一個", romaji: "ikko", meaning: "One Small Object", type: 'Vocabulary' },
             { char: "一番", romaji: "ichiban", meaning: "Number 1", type: 'Vocabulary' },
+            // Clothing
             { char: "服", romaji: "fuku", meaning: "Clothes", type: 'Vocabulary' },
             { char: "シャツ", romaji: "shatsu", meaning: "Shirt", type: 'Vocabulary' },
             { char: "ズボン", romaji: "zubon", meaning: "Pants", type: 'Vocabulary' },
@@ -420,6 +497,7 @@
             { char: "緩い", romaji: "yurui", meaning: "Loose", type: 'Vocabulary' },
             { char: "新しい", romaji: "atarashii", meaning: "New", type: 'Vocabulary' },
             { char: "古い", romaji: "furui", meaning: "Old", type: 'Vocabulary' },
+            // Movement
             { char: "行く", romaji: "iku", meaning: "To go", type: 'Vocabulary' },
             { char: "来る", romaji: "kuru", meaning: "To come", type: 'Vocabulary' },
             { char: "帰る", romaji: "kaeru", meaning: "To return", type: 'Vocabulary' },
@@ -443,6 +521,7 @@
             { char: "自転車", romaji: "jitensha", meaning: "Bicycle", type: 'Vocabulary' },
             { char: "バス", romaji: "basu", meaning: "Bus", type: 'Vocabulary' },
             { char: "飛行機", romaji: "hikouki", meaning: "Airplane", type: 'Vocabulary' },
+            // Food
             { char: "朝ご飯", romaji: "asagohan", meaning: "Breakfast", type: 'Vocabulary' },
             { char: "昼ご飯", romaji: "hirugohan", meaning: "Lunch", type: 'Vocabulary' },
             { char: "晩ご飯", romaji: "bangohan", meaning: "Dinner", type: 'Vocabulary' },
@@ -469,6 +548,7 @@
             { char: "辛い", romaji: "karai", meaning: "Spicy", type: 'Vocabulary' },
             { char: "塩辛い", romaji: "shiokarai", meaning: "Salty", type: 'Vocabulary' },
             { char: "苦い", romaji: "nigai", meaning: "Bitter", type: 'Vocabulary' },
+            // Body
             { char: "体", romaji: "karada", meaning: "Body", type: 'Vocabulary' },
             { char: "頭", romaji: "atama", meaning: "Head", type: 'Vocabulary' },
             { char: "顔", romaji: "kao", meaning: "Face", type: 'Vocabulary' },
@@ -487,6 +567,7 @@
             { char: "病院", romaji: "byouin", meaning: "Hospital", type: 'Vocabulary' },
             { char: "医者", romaji: "isha", meaning: "Doctor", type: 'Vocabulary' },
             { char: "休む", romaji: "yasumu", meaning: "To rest", type: 'Vocabulary' },
+            // Work
             { char: "仕事", romaji: "shigoto", meaning: "Work", type: 'Vocabulary' },
             { char: "会社", romaji: "kaisha", meaning: "Company", type: 'Vocabulary' },
             { char: "事務所", romaji: "jimusho", meaning: "Office", type: 'Vocabulary' },
@@ -501,6 +582,7 @@
             { char: "報告する", romaji: "houkokusuru", meaning: "To report", type: 'Vocabulary' },
             { char: "連絡する", romaji: "renrakusuru", meaning: "To contact", type: 'Vocabulary' },
             { char: "相談する", romaji: "soudansuru", meaning: "To discuss", type: 'Vocabulary' },
+            // Emotions
             { char: "嬉しい", romaji: "ureshii", meaning: "Happy", type: 'Vocabulary' },
             { char: "楽しい", romaji: "tanoshii", meaning: "Fun", type: 'Vocabulary' },
             { char: "好き", romaji: "suki", meaning: "Like", type: 'Vocabulary' },
@@ -514,6 +596,7 @@
             { char: "泣く", romaji: "naku", meaning: "To cry", type: 'Vocabulary' },
             { char: "怒る", romaji: "okoru", meaning: "To get angry", type: 'Vocabulary' },
             { char: "心配する", romaji: "shinpaisuru", meaning: "To worry", type: 'Vocabulary' },
+            // Technology
             { char: "パソコン", romaji: "pasokon", meaning: "Computer", type: 'Vocabulary' },
             { char: "スマホ", romaji: "sumaho", meaning: "Smartphone", type: 'Vocabulary' },
             { char: "携帯電話", romaji: "keitaidenwa", meaning: "Mobile Phone", type: 'Vocabulary' },
@@ -531,46 +614,7 @@
             { char: "ログインする", romaji: "roguinsuru", meaning: "To login", type: 'Vocabulary' }
         ];
 
-        const grammarData = [
-            { char: '私は寿司を食べます', romaji: 'Watashi wa sushi o tabemasu', meaning: 'I eat sushi', type: 'Grammar' },
-            { char: '田中さんは本を読みます', romaji: 'Tanaka-san wa hon o yomimasu', meaning: 'Mr. Tanaka reads a book', type: 'Grammar' },
-            { char: '私は水を飲みます', romaji: 'Watashi wa mizu o nomimasu', meaning: 'I drink water', type: 'Grammar' },
-            { char: '先生は日本語を話します', romaji: 'Sensei wa nihongo o hanashimasu', meaning: 'The teacher speaks Japanese', type: 'Grammar' },
-            { char: '私は映画を見ます', romaji: 'Watashi wa eiga o mimasu', meaning: 'I watch a movie', type: 'Grammar' },
-            { char: '昨日、寿司を食べました', romaji: 'Kinou, sushi o tabemashita', meaning: 'I ate sushi yesterday', type: 'Grammar' },
-            { char: '明日、学校に行きます', romaji: 'Ashita, gakkou ni ikimasu', meaning: 'I will go to school tomorrow', type: 'Grammar' },
-            { char: '今、コーヒーを飲みます', romaji: 'Ima, ko-hi- o nomimasu', meaning: 'I drink coffee now', type: 'Grammar' },
-            { char: '毎日勉強をします', romaji: 'Mainichi benkyou o shimasu', meaning: 'I study every day', type: 'Grammar' },
-            { char: '友達が家に来ます', romaji: 'Tomodachi ga uchi ni kimasu', meaning: 'A friend is coming to my house', type: 'Grammar' },
-            { char: 'この寿司はとても美味しいです', romaji: 'Kono sushi wa totemo oishii desu', meaning: 'This sushi is very delicious', type: 'Grammar' },
-            { char: '綺麗な花ですね', romaji: 'Kirei na hana desu ne', meaning: 'It\'s a beautiful flower, isn\'t it?', type: 'Grammar' },
-            { char: '今日はとても寒いです', romaji: 'Kyou wa totemo samui desu', meaning: 'Today is very cold', type: 'Grammar' },
-            { char: '静かな部屋が好きです', romaji: 'Shizuka na heya ga suki desu', meaning: 'I like quiet rooms', type: 'Grammar' },
-            { char: '高い時計を買いました', romaji: 'Takai tokei o kaimashita', meaning: 'I bought an expensive watch', type: 'Grammar' },
-            { char: '机の上に本があります', romaji: 'Tsukue no ue ni hon ga arimasu', meaning: 'There is a book on the desk', type: 'Grammar' },
-            { char: '庭に猫がいます', romaji: 'Niwa ni neko ga imasu', meaning: 'There is a cat in the garden', type: 'Grammar' },
-            { char: '先生はどこにいますか？', romaji: 'Sensei wa doko ni imasu ka?', meaning: 'Where is the teacher?', type: 'Grammar' },
-            { char: '駅はどこですか？', romaji: 'Eki wa doko desu ka?', meaning: 'Where is the station?', type: 'Grammar' },
-            { char: '車があります', romaji: 'Kuruma ga arimasu', meaning: 'There is a car', type: 'Grammar' },
-            { char: 'ちょっと待ってください', romaji: 'Chotto matte kudasai', meaning: 'Please wait a moment', type: 'Grammar' },
-            { char: '食べてください', romaji: 'Tabete kudasai', meaning: 'Please eat', type: 'Grammar' },
-            { char: '行ってください', romaji: 'Itte kudasai', meaning: 'Please go', type: 'Grammar' },
-            { char: 'テレビを見ています', romaji: 'Terebi o mite imasu', meaning: 'I am watching TV', type: 'Grammar' },
-            { char: '水を飲んでください', romaji: 'Mizu o nonde kudasai', meaning: 'Please drink water', type: 'Grammar' }
-        ];
 
-        const particlesData = [
-            { char: '私 __ 学生です', romaji: 'は (wa)', meaning: 'I am a student', type: 'Particles' },
-            { char: '猫 __ います', romaji: 'が (ga)', meaning: 'There is a cat', type: 'Particles' },
-            { char: '水 __ 飲みます', romaji: 'を (o)', meaning: 'Drink water', type: 'Particles' },
-            { char: '日本 __ 行きます', romaji: 'に (ni)', meaning: 'Go to Japan', type: 'Particles' },
-            { char: 'レストラン __ 食べます', romaji: 'で (de)', meaning: 'Eat at a restaurant', type: 'Particles' },
-            { char: '東京 __ 行きます', romaji: 'へ (e)', meaning: 'Go towards Tokyo', type: 'Particles' },
-            { char: '私 __ 本です', romaji: 'の (no)', meaning: 'It is my book', type: 'Particles' },
-            { char: '友達 __ 行きます', romaji: 'と (to)', meaning: 'Go with a friend', type: 'Particles' },
-            { char: '私 __ 学生です', romaji: 'も (mo)', meaning: 'I am also a student', type: 'Particles' },
-            { char: 'お元気です __', romaji: 'か (ka)', meaning: 'Are you well?', type: 'Particles' }
-        ];
 
         let currentPool = [];
         let currentItem = null;
@@ -581,8 +625,8 @@
             try {
                 const response = await fetch('https://kanjiapi.dev/v1/kanji/joyo');
                 allKanjiList = await response.json();
-                // Pick 50 random kanji to start with if we are in kanji mode
-                if (currentModule === 'kanji') {
+                // If we are already in kanji or all mode and have no kanji data, load a batch
+                if ((currentModule === 'kanji' || currentModule === 'all') && kanjiData.length === 0) {
                     await loadRandomKanjiBatch();
                 }
             } catch (error) {
@@ -593,30 +637,42 @@
         async function loadRandomKanjiBatch() {
             if (allKanjiList.length === 0) return;
 
-            // Pick 10 random kanji
+            // Pick 50 random kanji
             const batch = [];
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 50; i++) {
                 const randomChar = allKanjiList[Math.floor(Math.random() * allKanjiList.length)];
                 batch.push(randomChar);
             }
 
             // Fetch details for them
+            // We'll do this in parallel but limit concurrency if needed, though 50 is likely fine for browser
             const detailsPromises = batch.map(char => fetch(`https://kanjiapi.dev/v1/kanji/${char}`).then(r => r.json()));
-            const details = await Promise.all(detailsPromises);
 
-            // Format for flashcards
-            const newKanjiData = details.map(d => ({
-                char: d.kanji,
-                romaji: d.on_readings.join(', ') || d.kun_readings.join(', '),
-                meaning: d.meanings.join(', '),
-                type: 'Kanji'
-            }));
+            try {
+                const details = await Promise.all(detailsPromises);
 
-            kanjiData = newKanjiData;
-            currentPool = [...kanjiData];
-            // If we are currently waiting for a card, show one
-            if (document.getElementById('card-front-main').textContent === 'Loading...') {
-                nextCard();
+                // Format for flashcards
+                const newKanjiData = details.map(d => ({
+                    char: d.kanji,
+                    romaji: d.on_readings.join(', ') || d.kun_readings.join(', '),
+                    meaning: d.meanings.join(', '),
+                    type: 'Kanji'
+                }));
+
+                kanjiData = newKanjiData;
+
+                // If current module is Kanji, update pool immediately
+                if (currentModule === 'kanji') {
+                    currentPool = [...kanjiData];
+                    if (document.getElementById('card-front-main').textContent === '?' || document.getElementById('card-front-main').textContent === 'Loading...') {
+                        nextCard();
+                    }
+                } else if (currentModule === 'all') {
+                    // Refresh the pool for 'all' to include new kanji
+                    currentPool = [...hiraganaData, ...katakanaData, ...kanjiData, ...vocabData, ...grammarData, ...particlesData];
+                }
+            } catch (e) {
+                console.error("Error fetching kanji details", e);
             }
         }
 
@@ -635,22 +691,32 @@
             else if (module === 'katakana') currentPool = [...katakanaData];
             else if (module === 'kanji') {
                 if (allKanjiList.length === 0) {
-                    fetchJoyoKanji();
-                    currentPool = [...kanjiData]; // Use placeholder initially
+                    // Still loading list, or failed. 
+                    // fetchJoyoKanji will trigger loadRandomKanjiBatch when done if module is kanji
+                    currentPool = [];
+                    document.getElementById('card-front-main').textContent = 'Loading...';
                 } else {
-                    loadRandomKanjiBatch(); // Refresh batch
-                    currentPool = [...kanjiData];
+                    loadRandomKanjiBatch(); // Refresh batch for a new session
+                    currentPool = [...kanjiData]; // Use existing while loading new
                 }
             }
             else if (module === 'vocabulary') currentPool = [...vocabData];
             else if (module === 'grammar') currentPool = [...grammarData];
             else if (module === 'particles') currentPool = [...particlesData];
             else if (module === 'all') {
-                // For "All", we include everything. For Kanji, we just use the current batch or placeholder
+                // For "All", we include everything. 
+                if (kanjiData.length === 0 && allKanjiList.length > 0) {
+                    loadRandomKanjiBatch();
+                }
                 currentPool = [...hiraganaData, ...katakanaData, ...kanjiData, ...vocabData, ...grammarData, ...particlesData];
             }
 
-            nextCard();
+            if (currentPool.length > 0) {
+                nextCard();
+            } else if (module !== 'kanji') { // Kanji might be loading
+                // Should not happen for others if data is there
+                nextCard();
+            }
         }
 
         function nextCard() {
@@ -658,7 +724,13 @@
             card.classList.remove('flipped');
 
             setTimeout(() => {
-                if (currentPool.length === 0) return;
+                if (currentPool.length === 0) {
+                    if (currentModule === 'kanji') {
+                        document.getElementById('card-front-main').textContent = 'Loading...';
+                        document.getElementById('card-front-sub').textContent = 'Fetching Kanji data...';
+                    }
+                    return;
+                }
 
                 const randomIndex = Math.floor(Math.random() * currentPool.length);
                 currentItem = currentPool[randomIndex];
@@ -670,7 +742,7 @@
 
                 frontMain.textContent = currentItem.char;
 
-                // Contextual sub-text
+                // Contextual sub-text and font sizing
                 if (currentItem.type === 'Grammar') {
                     frontSub.textContent = 'Translate this sentence';
                     frontMain.style.fontSize = '1.8rem';
@@ -680,9 +752,13 @@
                 } else if (currentItem.type === 'Vocabulary') {
                     frontSub.textContent = 'What is the meaning?';
                     frontMain.style.fontSize = currentItem.char.length > 5 ? '2.5rem' : '4rem';
+                } else if (currentItem.type === 'Kanji') {
+                    frontSub.textContent = 'Readings & Meaning?';
+                    frontMain.style.fontSize = '6rem';
                 } else {
+                    // Hiragana / Katakana
                     frontSub.textContent = 'What is the meaning?';
-                    frontMain.style.fontSize = currentItem.char.length > 3 ? '3.5rem' : '6rem';
+                    frontMain.style.fontSize = '6rem';
                 }
 
                 document.getElementById('card-back-main').textContent = currentItem.romaji;
@@ -690,8 +766,10 @@
 
                 // Adjust back font size
                 const backMain = document.getElementById('card-back-main');
-                if (currentItem.romaji.length > 15) {
-                    backMain.style.fontSize = '1.5rem';
+                if (currentItem.romaji.length > 20) {
+                    backMain.style.fontSize = '1.2rem';
+                } else if (currentItem.romaji.length > 10) {
+                    backMain.style.fontSize = '1.8rem';
                 } else {
                     backMain.style.fontSize = '3.5rem';
                 }
@@ -703,11 +781,11 @@
             document.getElementById('flashcard').classList.toggle('flipped');
         }
 
-        // Initialize with All Challenge as per request "All Challenge" is first
+        // Initialize with All Challenge
         window.onload = () => {
-            const firstBtn = document.querySelector('.nav-btn'); // This selects the first one which is now "All Challenge"
-            switchModule('all', firstBtn);
+            const firstBtn = document.querySelector('.nav-btn'); // "All Challenge" is first
             fetchJoyoKanji(); // Start fetching kanji in background
+            switchModule('all', firstBtn);
         };
     </script>
 </body>
