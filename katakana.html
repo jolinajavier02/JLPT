@@ -62,8 +62,11 @@
             font-size: 8rem;
             font-family: var(--font-jp);
             color: var(--primary-color);
-            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
             margin-bottom: 1rem;
+            white-space: nowrap;
         }
 
         .detail-romaji {
@@ -95,10 +98,11 @@
         }
 
         .stroke-placeholder svg {
-            width: 100%;
+            width: auto;
             height: 100%;
             max-width: 150px;
             max-height: 150px;
+            flex: 1;
         }
 
         .stroke-placeholder path {
@@ -224,6 +228,11 @@
 
         .kana-grid {
             padding-bottom: 2rem;
+        }
+
+        .kana-char {
+            white-space: nowrap;
+            display: block;
         }
     </style>
 </head>
@@ -397,27 +406,28 @@
             const container = document.getElementById('stroke-container');
             container.innerHTML = '<span style="color: #ccc;">Loading...</span>';
 
-            const hex = getUnicodeHex(char);
-            const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+            const chars = Array.from(char);
+            const promises = chars.map(c => {
+                const hex = getUnicodeHex(c);
+                const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+                return fetch(url).then(res => {
+                    if (!res.ok) throw new Error('Not found');
+                    return res.text();
+                });
+            });
 
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.text();
-                })
-                .then(svgData => {
-                    // Parse the SVG data to extract only the <svg> element
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(svgData, "image/svg+xml");
-                    const svgElement = doc.querySelector("svg");
-
-                    if (svgElement) {
-                        container.innerHTML = ""; // Clear loading text
-                        container.appendChild(svgElement);
-                        animateStrokes();
-                    } else {
-                        throw new Error("Invalid SVG data");
-                    }
+            Promise.all(promises)
+                .then(svgTexts => {
+                    container.innerHTML = "";
+                    svgTexts.forEach(svgData => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(svgData, "image/svg+xml");
+                        const svgElement = doc.querySelector("svg");
+                        if (svgElement) {
+                            container.appendChild(svgElement);
+                        }
+                    });
+                    animateStrokes();
                 })
                 .catch(error => {
                     console.error('Error loading SVG:', error);

@@ -403,6 +403,7 @@ nav {
     font-family: var(--font-jp);
     display: block;
     margin-bottom: 0.25rem;
+    white-space: nowrap;
 }
 
 .kana-romaji {
