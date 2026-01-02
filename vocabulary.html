@@ -272,7 +272,6 @@
 
     <script>
         const categories = [
-            { id: 'all', name: '▸ All Words' },
             { id: 'home', name: '▸ Home' },
             { id: 'family', name: '▸ Family' },
             { id: 'numbers', name: '▸ Numbers & Counting' },
@@ -286,252 +285,143 @@
         ];
 
         const vocabularies = [
-            // Home - Rooms & Spaces
-            { en: "Room", jp: "部屋", furigana: "へや", romaji: "heya", cat: "home", past: "部屋でした", neg: "部屋ではありません" },
-            { en: "Kitchen", jp: "台所", furigana: "だいどころ", romaji: "daidokoro", cat: "home", past: "台所でした", neg: "台所ではありません" },
-            { en: "Toilet", jp: "トイレ", furigana: "といれ", romaji: "toire", cat: "home", past: "トイレでした", neg: "トイレではありません" },
-            { en: "Entrance", jp: "玄関", furigana: "げんかん", romaji: "genkan", cat: "home", past: "玄関でした", neg: "玄関ではありません" },
-            { en: "Living Room", jp: "居間", furigana: "いま", romaji: "ima", cat: "home", past: "居間でした", neg: "居間ではありません" },
-            { en: "Bedroom", jp: "寝室", furigana: "しんしつ", romaji: "shinshitsu", cat: "home", past: "寝室でした", neg: "寝室ではありません" },
-            { en: "Bathroom", jp: "風呂場", furigana: "ふろば", romaji: "furoba", cat: "home", past: "風呂場でした", neg: "風呂場ではありません" },
-            { en: "Garden", jp: "庭", furigana: "にわ", romaji: "niwa", cat: "home", past: "庭でした", neg: "庭ではありません" },
-
-            // Home - Furniture
-            { en: "Chair", jp: "椅子", furigana: "いす", romaji: "isu", cat: "home", past: "椅子でした", neg: "椅子ではありません" },
-            { en: "Table", jp: "テーブル", furigana: "てーぶる", romaji: "teeburu", cat: "home", past: "テーブルでした", neg: "テーブルではありません" },
+            // --- HOME ---
+            // Rooms & Spaces
+            { en: "Living Room", jp: "居間", furigana: "いま", romaji: "ima", cat: "home", past: "居間でした", past_read: "いまでした", neg: "居間ではありません", neg_read: "いまではありません" },
+            { en: "Kitchen", jp: "台所", furigana: "だいどころ", romaji: "daidokoro", cat: "home", past: "台所でした", past_read: "だいどころでした", neg: "台所ではありません", neg_read: "だいどころではありません" },
+            { en: "Bedroom", jp: "寝室", furigana: "しんしつ", romaji: "shinshitsu", cat: "home", past: "寝室でした", past_read: "しんしつでした", neg: "寝室ではありません", neg_read: "しんしつではありません" },
+            { en: "Entrance", jp: "玄関", furigana: "げんかん", romaji: "genkan", cat: "home", past: "玄関でした", past_read: "げんかんでした", neg: "玄関ではありません", neg_read: "げんかんではありません" },
+            { en: "Bathroom", jp: "風呂場", furigana: "ふろば", romaji: "furoba", cat: "home", past: "風呂場でした", past_read: "ふろばでした", neg: "風呂場ではありません", neg_read: "ふろばではありません" },
+            // Furniture
             { en: "Sofa", jp: "ソファ", furigana: "そふぁ", romaji: "sofa", cat: "home", past: "ソファでした", neg: "ソファではありません" },
-            { en: "Bed", jp: "ベッド", furigana: "べっど", romaji: "beddo", cat: "home", past: "ベッドでした", neg: "ベッドではありません" },
-            { en: "Bookshelf", jp: "本棚", furigana: "ほんだな", romaji: "hondana", cat: "home", past: "本棚でした", neg: "本棚ではありません" },
-
-            // Home - Appliances
+            { en: "Bookshelf", jp: "本棚", furigana: "ほんだな", romaji: "hondana", cat: "home", past: "本棚でした", past_read: "ほんだなでした", neg: "本棚ではありません", neg_read: "ほんだなではありません" },
+            { en: "Cabinet", jp: "戸棚", furigana: "とだな", romaji: "todana", cat: "home", past: "戸棚でした", past_read: "とだなでした", neg: "戸棚ではありません", neg_read: "とだなではありません" },
+            // Appliances
             { en: "TV", jp: "テレビ", furigana: "てれび", romaji: "terebi", cat: "home", past: "テレビでした", neg: "テレビではありません" },
-            { en: "Refrigerator", jp: "冷蔵庫", furigana: "れいぞうこ", romaji: "reizouko", cat: "home", past: "冷蔵庫でした", neg: "冷蔵庫ではありません" },
-            { en: "Washing Machine", jp: "洗濯機", furigana: "せんたくき", romaji: "sentakuki", cat: "home", past: "洗濯機でした", neg: "洗濯機ではありません" },
-            { en: "Air Conditioner", jp: "エアコン", furigana: "えあこん", romaji: "eakon", cat: "home", past: "エアコンでした", neg: "エアコンではありません" },
-            { en: "Microwave", jp: "電子レンジ", furigana: "でんしれんじ", romaji: "denshirenji", cat: "home", past: "電子レンジでした", neg: "電子レンジではありません" },
-
-            // Home - Household Items
-            { en: "Plate", jp: "皿", furigana: "さら", romaji: "sara", cat: "home", past: "皿でした", neg: "皿ではありません" },
+            { en: "Fridge", jp: "冷蔵庫", furigana: "れいぞうこ", romaji: "reizouko", cat: "home", past: "冷蔵庫でした", past_read: "れいぞうこでした", neg: "冷蔵庫ではありません", neg_read: "れいぞうこではありません" },
+            { en: "Washing Machine", jp: "洗濯機", furigana: "せんたくき", romaji: "sentakuki", cat: "home", past: "洗濯機でした", past_read: "せんたくきでした", neg: "洗濯機ではありません", neg_read: "せんたくきではありません" },
+            // Household Items
+            { en: "Plate", jp: "皿", furigana: "さら", romaji: "sara", cat: "home", past: "皿でした", past_read: "さらでした", neg: "皿ではありません", neg_read: "さらではありません" },
             { en: "Cup", jp: "コップ", furigana: "こっぷ", romaji: "koppu", cat: "home", past: "コップでした", neg: "コップではありません" },
-            { en: "Chopsticks", jp: "箸", furigana: "はし", romaji: "hashi", cat: "home", past: "箸でした", neg: "箸ではありません" },
-            { en: "Towel", jp: "タオル", furigana: "たおる", romaji: "taoru", cat: "home", past: "タオルでした", neg: "タオルではありません" },
-
-            // Home - Cleaning & Chores
-            { en: "Garbage", jp: "ゴミ", furigana: "ごみ", romaji: "gomi", cat: "home", past: "ゴミでした", neg: "ゴミではありません" },
-            { en: "Cleaning", jp: "掃除", furigana: "そうじ", romaji: "souji", cat: "home", past: "掃除でした", neg: "掃除ではありません" },
-            { en: "Laundry", jp: "洗濯", furigana: "せんたく", romaji: "sentaku", cat: "home", past: "洗濯でした", neg: "洗濯ではありません" },
-
-            // Home - Actions
-            { en: "To live", jp: "住む", furigana: "すむ", romaji: "sumu", cat: "home", past: "住みました", neg: "住みません" },
-            { en: "To sleep", jp: "寝る", furigana: "ねる", romaji: "neru", cat: "home", past: "寝ました", neg: "寝ません" },
-            { en: "To clean", jp: "掃除する", furigana: "そうじする", romaji: "soujisuru", cat: "home", past: "掃除しました", neg: "掃除しません" },
-
-            // Home - Utilities
-            { en: "Electricity", jp: "電気", furigana: "でんき", romaji: "denki", cat: "home", past: "電気でした", neg: "電気ではありません" },
-            { en: "Water", jp: "水", furigana: "みず", romaji: "mizu", cat: "home", past: "水でした", neg: "水ではありません" },
-            { en: "Gas", jp: "ガス", furigana: "がす", romaji: "gasu", cat: "home", past: "ガスでした", neg: "ガスではありません" },
-
-            // Home - Housing Types
-            { en: "House", jp: "家", furigana: "いえ", romaji: "ie", cat: "home", past: "家でした", neg: "家ではありません" },
+            // Chores & Actions
+            { en: "To clean", jp: "掃除する", furigana: "そうじする", romaji: "soujisuru", cat: "home", past: "掃除しました", past_read: "そうじしました", neg: "掃除しません", neg_read: "そうじしません" },
+            { en: "To wash", jp: "洗う", furigana: "あらう", romaji: "arau", cat: "home", past: "洗いました", past_read: "あらいました", neg: "洗いません", neg_read: "あらいません" },
+            { en: "To sleep", jp: "寝る", furigana: "ねる", romaji: "neru", cat: "home", past: "寝ました", past_read: "ねました", neg: "寝ません", neg_read: "ねません" },
+            // Utilities
+            { en: "Electricity", jp: "電気", furigana: "でんき", romaji: "denki", cat: "home", past: "電気でした", past_read: "でんきでした", neg: "電気ではありません", neg_read: "でんきではありません" },
+            { en: "Water", jp: "水道", furigana: "すいどう", romaji: "suidou", cat: "home", past: "水道でした", past_read: "すいどうでした", neg: "水道ではありません", neg_read: "すいどうではありません" },
+            // Housing Types
             { en: "Apartment", jp: "アパート", furigana: "あぱーと", romaji: "apaato", cat: "home", past: "アパートでした", neg: "アパートではありません" },
-            { en: "Dormitory", jp: "寮", furigana: "りょう", romaji: "ryou", cat: "home", past: "寮でした", neg: "寮ではありません" },
+            { en: "House", jp: "一戸建て", furigana: "いっこだて", romaji: "ikkodate", cat: "home", past: "一戸建てでした", past_read: "いっこだてでした", neg: "一戸建てではありません", neg_read: "いっこだてではありません" },
+            // Safety
+            { en: "Key", jp: "鍵", furigana: "かぎ", romaji: "kagi", cat: "home", past: "鍵でした", past_read: "かぎでした", neg: "鍵ではありません", neg_read: "かぎではありません" },
+            { en: "Lock", jp: "錠", furigana: "じょう", romaji: "jou", cat: "home", past: "錠でした", past_read: "じょうでした", neg: "錠ではありません", neg_read: "じょうではありません" },
 
-            // Home - Safety & Maintenance
-            { en: "Key", jp: "鍵", furigana: "かぎ", romaji: "kagi", cat: "home", past: "鍵でした", neg: "鍵ではありません" },
-            { en: "Door", jp: "ドア", furigana: "どあ", romaji: "doa", cat: "home", past: "ドアでした", neg: "ドアではありません" },
-            { en: "Wall", jp: "壁", furigana: "かべ", romaji: "kabe", cat: "home", past: "壁でした", neg: "壁ではありません" },
+            // --- FAMILY ---
+            // Immediate
+            { en: "Father", jp: "父", furigana: "ちち", romaji: "chichi", cat: "family", past: "父でした", past_read: "ちちでした", neg: "父ではありません", neg_read: "ちちではありません" },
+            { en: "Mother", jp: "母", furigana: "はは", romaji: "haha", cat: "family", past: "母でした", past_read: "ははでした", neg: "母ではありません", neg_read: "ははではありません" },
+            { en: "Older Brother", jp: "兄", furigana: "あに", romaji: "ani", cat: "family", past: "兄でした", past_read: "あにでした", neg: "兄ではありません", neg_read: "あにではありません" },
+            { en: "Younger Sister", jp: "妹", furigana: "いもうと", romaji: "imouto", cat: "family", past: "妹でした", past_read: "いもうとでした", neg: "妹ではありません", neg_read: "いもうとではありません" },
+            // Extended
+            { en: "Grandfather", jp: "祖父", furigana: "そふ", romaji: "sofu", cat: "family", past: "祖父でした", past_read: "そふでした", neg: "祖父ではありません", neg_read: "そふではありません" },
+            { en: "Cousin", jp: "従兄弟", furigana: "いとこ", romaji: "itoko", cat: "family", past: "従兄弟でした", past_read: "いとこでした", neg: "従兄弟ではありません", neg_read: "いとこではありません" },
+            // Marital
+            { en: "Marriage", jp: "結婚", furigana: "けっこん", romaji: "kekkon", cat: "family", past: "結婚でした", past_read: "けっこんでした", neg: "結婚ではありません", neg_read: "けっこんではありません" },
+            { en: "Single", jp: "独身", furigana: "どくしん", romaji: "dokushin", cat: "family", past: "独身でした", past_read: "どくしんでした", neg: "独身ではありません", neg_read: "どくしんではありません" },
+            // Actions
+            { en: "To support", jp: "支える", furigana: "ささえる", romaji: "sasaeru", cat: "family", past: "支えました", past_read: "ささえました", neg: "支えません", neg_read: "ささえません" },
+            { en: "To raise", jp: "育てる", furigana: "そだてる", romaji: "sodateru", cat: "family", past: "育てました", past_read: "そだてました", neg: "育てません", neg_read: "そだてません" },
 
-            // Home - Descriptions
-            { en: "Big", jp: "大きい", furigana: "おおきい", romaji: "ookii", cat: "home", past: "大きかったです", neg: "大きくないです" },
-            { en: "Small", jp: "小さい", furigana: "ちいさい", romaji: "chiisai", cat: "home", past: "小さかったです", neg: "小さくないです" },
-            { en: "New", jp: "新しい", furigana: "あたらしい", romaji: "atarashii", cat: "home", past: "新しかったです", neg: "新しくないです" },
-            { en: "Old", jp: "古い", furigana: "ふるい", romaji: "furui", cat: "home", past: "古かったです", neg: "古くないです" },
+            // --- NUMBERS ---
+            // Cardinal
+            { en: "Zero", jp: "零", furigana: "れい", romaji: "rei", cat: "numbers", past: "零でした", past_read: "れいでした", neg: "零ではありません", neg_read: "れいではありません" },
+            { en: "Hundred", jp: "百", furigana: "ひゃく", romaji: "hyaku", cat: "numbers", past: "百でした", past_read: "ひゃくでした", neg: "百ではありません", neg_read: "ひゃくではありません" },
+            { en: "Ten Thousand", jp: "万", furigana: "まん", romaji: "man", cat: "numbers", past: "万でした", past_read: "まんでした", neg: "万ではありません", neg_read: "まんでした", neg: "万ではありません" },
+            // Counters
+            { en: "One Person", jp: "一人", furigana: "ひとり", romaji: "hitori", cat: "numbers", past: "一人でした", past_read: "ひとりでした", neg: "一人ではありません", neg_read: "ひとりではありません" },
+            { en: "Two People", jp: "二人", furigana: "ふたり", romaji: "futari", cat: "numbers", past: "二人でした", past_read: "ふたりでした", neg: "二人ではありません", neg_read: "ふたりではありません" },
+            { en: "One Machine", jp: "一台", furigana: "いちだい", romaji: "ichidai", cat: "numbers", past: "一台でした", past_read: "いちだいでした", neg: "一台ではありません", neg_read: "いちだいではありません" },
+            { en: "One Book", jp: "一冊", furigana: "いっさつ", romaji: "issatsu", cat: "numbers", past: "一冊でした", past_read: "いっさつでした", neg: "一冊ではありません", neg_read: "いっさつではありません" },
 
-            // Family - Immediate Family
-            { en: "Family", jp: "家族", furigana: "かぞく", romaji: "kazoku", cat: "family", past: "家族でした", neg: "家族ではありません" },
-            { en: "Father", jp: "父", furigana: "ちち", romaji: "chichi", cat: "family", past: "父でした", neg: "父ではありません" },
-            { en: "Mother", jp: "母", furigana: "はは", romaji: "haha", cat: "family", past: "母でした", neg: "母ではありません" },
-            { en: "Older Brother", jp: "兄", furigana: "あに", romaji: "ani", cat: "family", past: "兄でした", neg: "兄ではありません" },
-            { en: "Older Sister", jp: "姉", furigana: "あね", romaji: "ane", cat: "family", past: "姉でした", neg: "姉ではありません" },
-            { en: "Younger Brother", jp: "弟", furigana: "おとうと", romaji: "otouto", cat: "family", past: "弟でした", neg: "弟ではありません" },
-            { en: "Younger Sister", jp: "妹", furigana: "いもうと", romaji: "imouto", cat: "family", past: "妹でした", neg: "妹ではありません" },
-
-            // Family - Extended Family
-            { en: "Grandfather", jp: "祖父", furigana: "そふ", romaji: "sofu", cat: "family", past: "祖父でした", neg: "祖父ではありません" },
-            { en: "Grandmother", jp: "祖母", furigana: "そぼ", romaji: "sobo", cat: "family", past: "祖母でした", neg: "祖母ではありません" },
-            { en: "Uncle", jp: "叔父", furigana: "おじ", romaji: "oji", cat: "family", past: "叔父でした", neg: "叔父ではありません" },
-            { en: "Aunt", jp: "叔母", furigana: "おば", romaji: "oba", cat: "family", past: "叔母でした", neg: "叔母ではありません" },
-            { en: "Cousin", jp: "従兄弟", furigana: "いとこ", romaji: "itoko", cat: "family", past: "従兄弟でした", neg: "従兄弟ではありません" },
-
-            // Family - Marital Status
-            { en: "Husband", jp: "夫", furigana: "おっと", romaji: "otto", cat: "family", past: "夫でした", neg: "夫ではありません" },
-            { en: "Wife", jp: "妻", furigana: "つま", romaji: "tsuma", cat: "family", past: "妻でした", neg: "妻ではありません" },
-            { en: "Single", jp: "独身", furigana: "どくしん", romaji: "dokushin", cat: "family", past: "独身でした", neg: "独身ではありません" },
-            { en: "Married", jp: "既婚", furigana: "きこん", romaji: "kikon", cat: "family", past: "既婚でした", neg: "既婚ではありません" },
-
-            // Family - Actions & Events
-            { en: "To raise", jp: "育てる", furigana: "そだてる", romaji: "sodateru", cat: "family", past: "育てました", neg: "育てません" },
-            { en: "To visit", jp: "訪ねる", furigana: "たずねる", romaji: "tazuneru", cat: "family", past: "訪ねました", neg: "訪ねません" },
-            { en: "Wedding", jp: "結婚式", furigana: "けっこんしき", romaji: "kekkonshiki", cat: "family", past: "結婚式でした", neg: "結婚式ではありません" },
-            { en: "Birthday", jp: "誕生日", furigana: "たんじょうび", romaji: "tanjoubi", cat: "family", past: "誕生日でした", neg: "誕生日ではありません" },
-
-            // Numbers - Cardinal
-            { en: "Zero", jp: "零", furigana: "れい", romaji: "rei", cat: "numbers", past: "零でした", neg: "零ではありません" },
-            { en: "One", jp: "一", furigana: "いち", romaji: "ichi", cat: "numbers", past: "一でした", neg: "一ではありません" },
-            { en: "Two", jp: "二", furigana: "に", romaji: "ni", cat: "numbers", past: "二でした", neg: "二ではありません" },
-            { en: "Three", jp: "三", furigana: "さん", romaji: "san", cat: "numbers", past: "三でした", neg: "三ではありません" },
-            { en: "Ten", jp: "十", furigana: "じゅう", romaji: "juu", cat: "numbers", past: "十でした", neg: "十ではありません" },
-            { en: "Hundred", jp: "百", furigana: "ひゃく", romaji: "hyaku", cat: "numbers", past: "百でした", neg: "百ではありません" },
-            { en: "Thousand", jp: "千", furigana: "せん", romaji: "sen", cat: "numbers", past: "千でした", neg: "千ではありません" },
-            { en: "Ten Thousand", jp: "万", furigana: "まん", romaji: "man", cat: "numbers", past: "万でした", neg: "万ではありません" },
-
-            // Numbers - Counters
-            { en: "One Person", jp: "一人", furigana: "ひとり", romaji: "hitori", cat: "numbers", past: "一人でした", neg: "一人ではありません" },
-            { en: "Two People", jp: "二人", furigana: "ふたり", romaji: "futari", cat: "numbers", past: "二人でした", neg: "二人ではありません" },
-            { en: "Three People", jp: "三人", furigana: "さんにん", romaji: "sannin", cat: "numbers", past: "三人でした", neg: "三人ではありません" },
-            { en: "One Flat Object", jp: "一枚", furigana: "いちまい", romaji: "ichimai", cat: "numbers", past: "一枚でした", neg: "一枚ではありません" },
-            { en: "One Long Object", jp: "一本", furigana: "いっぽん", romaji: "ippon", cat: "numbers", past: "一本でした", neg: "一本ではありません" },
-            { en: "One Small Item", jp: "一個", furigana: "いっこ", romaji: "ikko", cat: "numbers", past: "一個でした", neg: "一個ではありません" },
-            { en: "One Machine", jp: "一台", furigana: "いちだい", romaji: "ichidai", cat: "numbers", past: "一台でした", neg: "一台ではありません" },
-            { en: "One Animal", jp: "一匹", furigana: "いっぴき", romaji: "ippiki", cat: "numbers", past: "一匹でした", neg: "一匹ではありません" },
-            { en: "1st Floor", jp: "一階", furigana: "いっかい", romaji: "ikkai", cat: "numbers", past: "一階でした", neg: "一階ではありません" },
-            { en: "One Book", jp: "一冊", furigana: "いっさつ", romaji: "issatsu", cat: "numbers", past: "一冊でした", neg: "一冊ではありません" },
-            { en: "One Cup", jp: "一杯", furigana: "いっぱい", romaji: "ippai", cat: "numbers", past: "一杯でした", neg: "一杯ではありません" },
-            { en: "One Time", jp: "一回", furigana: "いっかい", romaji: "ikkai", cat: "numbers", past: "一回でした", neg: "一回ではありません" },
-
-            // Clothing - Upper Body
+            // --- CLOTHING ---
+            // Types
             { en: "Shirt", jp: "シャツ", furigana: "しゃつ", romaji: "shatsu", cat: "clothing", past: "シャツでした", neg: "シャツではありません" },
-            { en: "Jacket", jp: "ジャケット", furigana: "じゃけっと", romaji: "jaketto", cat: "clothing", past: "ジャケットでした", neg: "ジャケットではありません" },
-            { en: "To wear (upper)", jp: "着る", furigana: "きる", romaji: "kiru", cat: "clothing", past: "着ました", neg: "着ません" },
+            { en: "Shoes", jp: "靴", furigana: "くつ", romaji: "kutsu", cat: "clothing", past: "靴でした", past_read: "くつでした", neg: "靴ではありません", neg_read: "くつではありません" },
+            { en: "Hat", jp: "帽子", furigana: "ぼうし", romaji: "boushi", cat: "clothing", past: "帽子でした", past_read: "ぼうしでした", neg: "帽子ではありません", neg_read: "ぼうしではありません" },
+            // Actions
+            { en: "To wear (upper)", jp: "着る", furigana: "きる", romaji: "kiru", cat: "clothing", past: "着ました", past_read: "きました", neg: "着ません", neg_read: "きません" },
+            { en: "To wear (lower)", jp: "履く", furigana: "はく", romaji: "haku", cat: "clothing", past: "履きました", past_read: "はきました", neg: "履きません", neg_read: "はきません" },
+            { en: "To take off", jp: "脱ぐ", furigana: "ぬぐ", romaji: "nugu", cat: "clothing", past: "脱ぎました", past_read: "ぬぎました", neg: "脱ぎません", neg_read: "ぬぎません" },
+            // Desc
+            { en: "Tight", jp: "きつい", furigana: "きつい", romaji: "kitsui", cat: "clothing", past: "きつかったです", neg: "きつくないです" },
+            { en: "Loose", jp: "緩い", furigana: "ゆるい", romaji: "yurui", cat: "clothing", past: "緩かったです", past_read: "ゆるかったです", neg: "緩くないです", neg_read: "ゆるくないです" },
 
-            // Clothing - Lower Body
-            { en: "Pants", jp: "ズボン", furigana: "ずぼん", romaji: "zubon", cat: "clothing", past: "ズボンでした", neg: "ズボンではありません" },
-            { en: "Skirt", jp: "スカート", furigana: "すかーと", romaji: "sukaato", cat: "clothing", past: "スカートでした", neg: "スカートではありません" },
-            { en: "To wear (lower)", jp: "履く", furigana: "はく", romaji: "haku", cat: "clothing", past: "履きました", neg: "履きません" },
+            // --- MOVEMENT ---
+            // Verbs
+            { en: "To go", jp: "行く", furigana: "いく", romaji: "iku", cat: "movement", past: "行きました", past_read: "いきました", neg: "行きません", neg_read: "いきません" },
+            { en: "To come", jp: "来る", furigana: "くる", romaji: "kuru", cat: "movement", past: "来ました", past_read: "きました", neg: "来ません", neg_read: "きません" },
+            { en: "To return", jp: "帰る", furigana: "かえる", romaji: "kaeru", cat: "movement", past: "帰りました", past_read: "かえりました", neg: "帰りません", neg_read: "かえりません" },
+            // Direction
+            { en: "Right", jp: "右", furigana: "みぎ", romaji: "migi", cat: "movement", past: "右でした", past_read: "みぎでした", neg: "右ではありません", neg_read: "みぎではありません" },
+            { en: "Left", jp: "左", furigana: "ひだり", romaji: "hidari", cat: "movement", past: "左でした", past_read: "ひだりでした", neg: "左ではありません", neg_read: "ひだりではありません" },
+            { en: "Straight", jp: "真っ直ぐ", furigana: "まっすぐ", romaji: "massugu", cat: "movement", past: "真っ直ぐでした", past_read: "まっすぐでした", neg: "真っ直ぐではありません", neg_read: "まっすぐではありません" },
 
-            // Clothing - Accessories
-            { en: "Shoes", jp: "靴", furigana: "くつ", romaji: "kutsu", cat: "clothing", past: "靴でした", neg: "靴ではありません" },
-            { en: "Socks", jp: "靴下", furigana: "くつした", romaji: "kutsushita", cat: "clothing", past: "靴下でした", neg: "靴下ではありません" },
-            { en: "Hat", jp: "帽子", furigana: "ぼうし", romaji: "boushi", cat: "clothing", past: "帽子でした", neg: "帽子ではありません" },
-            { en: "To wear (head)", jp: "被る", furigana: "かぶる", romaji: "kaburu", cat: "clothing", past: "被りました", neg: "被りません" },
-            { en: "Glasses", jp: "眼鏡", furigana: "めがね", romaji: "megane", cat: "clothing", past: "眼鏡でした", neg: "眼鏡ではありません" },
-            { en: "To wear (glasses)", jp: "かける", furigana: "かける", romaji: "kakeru", cat: "clothing", past: "かけました", neg: "かけません" },
-            { en: "Bag", jp: "鞄", furigana: "かばん", romaji: "kaban", cat: "clothing", past: "鞄でした", neg: "鞄ではありません" },
-            { en: "Watch", jp: "時計", furigana: "とけい", romaji: "tokei", cat: "clothing", past: "時計でした", neg: "時計ではありません" },
+            // --- FOOD ---
+            // Types
+            { en: "Meat", jp: "肉", furigana: "にく", romaji: "niku", cat: "food", past: "肉でした", past_read: "にくでした", neg: "肉ではありません", neg_read: "にくではありません" },
+            { en: "Vegetable", jp: "野菜", furigana: "やさい", romaji: "yasai", cat: "food", past: "野菜でした", past_read: "やさいでした", neg: "野菜ではありません", neg_read: "やさいではありません" },
+            { en: "Rice", jp: "ご飯", furigana: "ごはん", romaji: "gohan", cat: "food", past: "ご飯でした", past_read: "ごはんでした", neg: "ご飯ではありません", neg_read: "ごはんではありません" },
+            // Cooking
+            { en: "To cook", jp: "料理する", furigana: "りょうりする", romaji: "ryourisuru", cat: "food", past: "料理しました", past_read: "りょうりしました", neg: "料理しません", neg_read: "りょうりしません" },
+            { en: "To boil", jp: "茹でる", furigana: "ゆでる", romaji: "yuderu", cat: "food", past: "茹でました", past_read: "ゆでました", neg: "茹でません", neg_read: "ゆでません" },
+            // Taste
+            { en: "Delicious", jp: "美味しい", furigana: "おいしい", romaji: "oishii", cat: "food", past: "美味しかったです", past_read: "おいしかったです", neg: "美味しくないです", neg_read: "おいしくないです" },
+            { en: "Sweet", jp: "甘い", furigana: "あまい", romaji: "amai", cat: "food", past: "甘かったです", past_read: "あまかったです", neg: "甘くないです", neg_read: "あまくないです" },
 
-            // Movement - Verbs
-            { en: "To go", jp: "行く", furigana: "いく", romaji: "iku", cat: "movement", past: "行きました", neg: "行きません" },
-            { en: "To come", jp: "来る", furigana: "くる", romaji: "kuru", cat: "movement", past: "来ました", neg: "来ません" },
-            { en: "To return", jp: "帰る", furigana: "かえる", romaji: "kaeru", cat: "movement", past: "帰りました", neg: "帰りません" },
-            { en: "To enter", jp: "入る", furigana: "はいる", romaji: "hairu", cat: "movement", past: "入りました", neg: "入りません" },
-            { en: "To exit", jp: "出る", furigana: "でる", romaji: "deru", cat: "movement", past: "出ました", neg: "出ません" },
-            { en: "To walk", jp: "歩く", furigana: "あるく", romaji: "aruku", cat: "movement", past: "歩きました", neg: "歩きません" },
-            { en: "To run", jp: "走る", furigana: "はしる", romaji: "hashiru", cat: "movement", past: "走りました", neg: "走りません" },
+            // --- BODY ---
+            // Parts
+            { en: "Head", jp: "頭", furigana: "あたま", romaji: "atama", cat: "body", past: "頭でした", past_read: "あたまでした", neg: "頭ではありません", neg_read: "あたまではありません" },
+            { en: "Stomach", jp: "お腹", furigana: "おなか", romaji: "onaka", cat: "body", past: "お腹でした", past_read: "おなかでした", neg: "お腹ではありません", neg_read: "おなかではありません" },
+            { en: "Hand", jp: "手", furigana: "て", romaji: "te", cat: "body", past: "手でした", past_read: "てでした", neg: "手ではありません", neg_read: "てではありません" },
+            // Health
+            { en: "Sick", jp: "病気", furigana: "びょうき", romaji: "byouki", cat: "body", past: "病気でした", past_read: "びょうきでした", neg: "病気ではありません", neg_read: "びょうきではありません" },
+            { en: "Painful", jp: "痛い", furigana: "いたい", romaji: "itai", cat: "body", past: "痛かったです", past_read: "いたかったです", neg: "痛くないです", neg_read: "いたくないです" },
+            { en: "Medicine", jp: "薬", furigana: "くすり", romaji: "kusuri", cat: "body", past: "薬でした", past_read: "くすりでした", neg: "薬ではありません", neg_read: "くすりではありません" },
 
-            // Movement - Direction
-            { en: "Right", jp: "右", furigana: "みぎ", romaji: "migi", cat: "movement", past: "右でした", neg: "右ではありません" },
-            { en: "Left", jp: "左", furigana: "ひだり", romaji: "hidari", cat: "movement", past: "左でした", neg: "左ではありません" },
-            { en: "Up", jp: "上", furigana: "うえ", romaji: "ue", cat: "movement", past: "上でした", neg: "上ではありません" },
-            { en: "Down", jp: "下", furigana: "した", romaji: "shita", cat: "movement", past: "下でした", neg: "下ではありません" },
-            { en: "Straight", jp: "真っ直ぐ", furigana: "まっすぐ", romaji: "massugu", cat: "movement", past: "真っ直ぐでした", neg: "真っ直ぐではありません" },
+            // --- WORK ---
+            // Office
+            { en: "Company", jp: "会社", furigana: "かいしゃ", romaji: "kaisha", cat: "work", past: "会社でした", past_read: "かいしゃでした", neg: "会社ではありません", neg_read: "かいしゃではありません" },
+            { en: "Meeting", jp: "会議", furigana: "かいぎ", romaji: "kaigi", cat: "work", past: "会議でした", past_read: "かいぎでした", neg: "会議ではありません", neg_read: "かいぎではありません" },
+            { en: "Document", jp: "書類", furigana: "しょるい", romaji: "shorui", cat: "work", past: "書類でした", past_read: "しょるいでした", neg: "書類ではありません", neg_read: "しょるいではありません" },
+            // Actions
+            { en: "To work", jp: "働く", furigana: "はたらく", romaji: "hataraku", cat: "work", past: "働きました", past_read: "はたらきました", neg: "働きません", neg_read: "はたらきません" },
+            { en: "To report", jp: "報告する", furigana: "ほうこくする", romaji: "houkokusuru", cat: "work", past: "報告しました", past_read: "ほうこくしました", neg: "報告しません", neg_read: "ほうこくしません" },
 
-            // Movement - Transport
-            { en: "To ride", jp: "乗る", furigana: "のる", romaji: "noru", cat: "movement", past: "乗りました", neg: "乗りません" },
-            { en: "To get off", jp: "降りる", furigana: "おりる", romaji: "oriru", cat: "movement", past: "降りました", neg: "降りません" },
-            { en: "To transfer", jp: "乗り換える", furigana: "のりかえる", romaji: "norikaeru", cat: "movement", past: "乗り換えました", neg: "乗り換えません" },
+            // --- EMOTIONS ---
+            // Positive
+            { en: "Happy", jp: "嬉しい", furigana: "うれしい", romaji: "ureshii", cat: "emotions", past: "嬉しかったです", past_read: "うれしかったです", neg: "嬉しくないです", neg_read: "うれしくないです" },
+            { en: "Fun", jp: "楽しい", furigana: "たのしい", romaji: "tanoshii", cat: "emotions", past: "楽しかったです", past_read: "たのしかったです", neg: "楽しくないです", neg_read: "たのしくないです" },
+            // Negative
+            { en: "Sad", jp: "悲しい", furigana: "かなしい", romaji: "kanashii", cat: "emotions", past: "悲しかったです", past_read: "かなしかったです", neg: "悲しくないです", neg_read: "かなしくないです" },
+            { en: "Angry", jp: "怒る", furigana: "おこる", romaji: "okoru", cat: "emotions", past: "怒りました", past_read: "おこりました", neg: "怒りません", neg_read: "おこりません" },
 
-            // Food & Drinks - Basics
-            { en: "Food", jp: "食べ物", furigana: "たべもの", romaji: "tabemono", cat: "food", past: "食べ物でした", neg: "食べ物ではありません" },
-            { en: "Drink", jp: "飲み物", furigana: "のみもの", romaji: "nomimono", cat: "food", past: "飲み物でした", neg: "飲み物ではありません" },
-            { en: "Water", jp: "水", furigana: "みず", romaji: "mizu", cat: "food", past: "水でした", neg: "水ではありません" },
-            { en: "Rice", jp: "ご飯", furigana: "ごはん", romaji: "gohan", cat: "food", past: "ご飯でした", neg: "ご飯ではありません" },
-            { en: "Bread", jp: "パン", furigana: "ぱん", romaji: "pan", cat: "food", past: "パンでした", neg: "パンではありません" },
-
-            // Food & Drinks - Specifics
-            { en: "Meat", jp: "肉", furigana: "にく", romaji: "niku", cat: "food", past: "肉でした", neg: "肉ではありません" },
-            { en: "Fish", jp: "魚", furigana: "さかな", romaji: "sakana", cat: "food", past: "魚でした", neg: "魚ではありません" },
-            { en: "Vegetable", jp: "野菜", furigana: "やさい", romaji: "yasai", cat: "food", past: "野菜でした", neg: "野菜ではありません" },
-            { en: "Fruit", jp: "果物", furigana: "くだもの", romaji: "kudamono", cat: "food", past: "果物でした", neg: "果物ではありません" },
-            { en: "Tea", jp: "お茶", furigana: "おちゃ", romaji: "ocha", cat: "food", past: "お茶でした", neg: "お茶ではありません" },
-            { en: "Coffee", jp: "コーヒー", furigana: "こーひー", romaji: "koohii", cat: "food", past: "コーヒーでした", neg: "コーヒーではありません" },
-            { en: "Alcohol", jp: "お酒", furigana: "おさけ", romaji: "osake", cat: "food", past: "お酒でした", neg: "お酒ではありません" },
-
-            // Food & Drinks - Actions
-            { en: "To eat", jp: "食べる", furigana: "たべる", romaji: "taberu", cat: "food", past: "食べました", neg: "食べません" },
-            { en: "To drink", jp: "飲む", furigana: "のむ", romaji: "nomu", cat: "food", past: "飲みました", neg: "飲みません" },
-            { en: "To cook", jp: "料理する", furigana: "りょうりする", romaji: "ryourisuru", cat: "food", past: "料理しました", neg: "料理しません" },
-            { en: "Delicious", jp: "美味しい", furigana: "おいしい", romaji: "oishii", cat: "food", past: "美味しかったです", neg: "美味しくないです" },
-
-            // Body - Parts
-            { en: "Body", jp: "体", furigana: "からだ", romaji: "karada", cat: "body", past: "体でした", neg: "体ではありません" },
-            { en: "Head", jp: "頭", furigana: "あたま", romaji: "atama", cat: "body", past: "頭でした", neg: "頭ではありません" },
-            { en: "Face", jp: "顔", furigana: "かお", romaji: "kao", cat: "body", past: "顔でした", neg: "顔ではありません" },
-            { en: "Eye", jp: "目", furigana: "め", romaji: "me", cat: "body", past: "目でした", neg: "目ではありません" },
-            { en: "Ear", jp: "耳", furigana: "みみ", romaji: "mimi", cat: "body", past: "耳でした", neg: "耳ではありません" },
-            { en: "Mouth", jp: "口", furigana: "くち", romaji: "kuchi", cat: "body", past: "口でした", neg: "口ではありません" },
-            { en: "Hand", jp: "手", furigana: "て", romaji: "te", cat: "body", past: "手でした", neg: "手ではありません" },
-            { en: "Leg/Foot", jp: "足", furigana: "あし", romaji: "ashi", cat: "body", past: "足でした", neg: "足ではありません" },
-            { en: "Stomach", jp: "お腹", furigana: "おなか", romaji: "onaka", cat: "body", past: "お腹でした", neg: "お腹ではありません" },
-
-            // Body - Health
-            { en: "Sick", jp: "病気", furigana: "びょうき", romaji: "byouki", cat: "body", past: "病気でした", neg: "病気ではありません" },
-            { en: "Headache", jp: "頭痛", furigana: "ずつう", romaji: "zutsuu", cat: "body", past: "頭痛でした", neg: "頭痛ではありません" },
-            { en: "Fever", jp: "熱", furigana: "ねつ", romaji: "netsu", cat: "body", past: "熱でした", neg: "熱ではありません" },
-            { en: "Medicine", jp: "薬", furigana: "くすり", romaji: "kusuri", cat: "body", past: "薬でした", neg: "薬ではありません" },
-            { en: "Hospital", jp: "病院", furigana: "びょういん", romaji: "byouin", cat: "body", past: "病院でした", neg: "病院ではありません" },
-            { en: "Painful", jp: "痛い", furigana: "いたい", romaji: "itai", cat: "body", past: "痛かったです", neg: "痛くないです" },
-
-            // Work - Basics
-            { en: "Work", jp: "仕事", furigana: "しごと", romaji: "shigoto", cat: "work", past: "仕事でした", neg: "仕事ではありません" },
-            { en: "Company", jp: "会社", furigana: "かいしゃ", romaji: "kaisha", cat: "work", past: "会社でした", neg: "会社ではありません" },
-            { en: "Office", jp: "事務所", furigana: "じむしょ", romaji: "jimusho", cat: "work", past: "事務所でした", neg: "事務所ではありません" },
-            { en: "Employee", jp: "会社員", furigana: "かいしゃいん", romaji: "kaishain", cat: "work", past: "会社員でした", neg: "会社員ではありません" },
-            { en: "Meeting", jp: "会議", furigana: "かいぎ", romaji: "kaigi", cat: "work", past: "会議でした", neg: "会議ではありません" },
-            { en: "Salary", jp: "給料", furigana: "きゅうりょう", romaji: "kyuuryou", cat: "work", past: "給料でした", neg: "給料ではありません" },
-
-            // Work - Actions
-            { en: "To work", jp: "働く", furigana: "はたらく", romaji: "hataraku", cat: "work", past: "働きました", neg: "働きません" },
-            { en: "To make a call", jp: "電話する", furigana: "でんわする", romaji: "denwasuru", cat: "work", past: "電話しました", neg: "電話しません" },
-            { en: "To meet", jp: "会う", furigana: "あう", romaji: "au", cat: "work", past: "会いました", neg: "会いません" },
-            { en: "To report", jp: "報告する", furigana: "ほうこくする", romaji: "houkokusuru", cat: "work", past: "報告しました", neg: "報告しません" },
-
-            // Emotions - Positive
-            { en: "Happy", jp: "嬉しい", furigana: "うれしい", romaji: "ureshii", cat: "emotions", past: "嬉しかったです", neg: "嬉しくないです" },
-            { en: "Fun", jp: "楽しい", furigana: "たのしい", romaji: "tanoshii", cat: "emotions", past: "楽しかったです", neg: "楽しくないです" },
-            { en: "Like", jp: "好き", furigana: "すき", romaji: "suki", cat: "emotions", past: "好きでした", neg: "好きではありません" },
-            { en: "Calm", jp: "落ち着く", furigana: "おちつく", romaji: "ochitsuku", cat: "emotions", past: "落ち着きました", neg: "落ち着きません" },
-
-            // Emotions - Negative
-            { en: "Sad", jp: "悲しい", furigana: "かなしい", romaji: "kanashii", cat: "emotions", past: "悲しかったです", neg: "悲しくないです" },
-            { en: "Scary", jp: "怖い", furigana: "こわい", romaji: "kowai", cat: "emotions", past: "怖かったです", neg: "怖くないです" },
-            { en: "Angry", jp: "怒る", furigana: "おこる", romaji: "okoru", cat: "emotions", past: "怒りました", neg: "怒りません" },
-            { en: "Hate", jp: "嫌い", furigana: "きらい", romaji: "kirai", cat: "emotions", past: "嫌いでした", neg: "嫌いではありません" },
-
-            // Technology - Devices
+            // --- TECHNOLOGY ---
+            // Devices
             { en: "Computer", jp: "パソコン", furigana: "ぱそこん", romaji: "pasokon", cat: "tech", past: "パソコンでした", neg: "パソコンではありません" },
             { en: "Smartphone", jp: "スマホ", furigana: "すまほ", romaji: "sumaho", cat: "tech", past: "スマホでした", neg: "スマホではありません" },
-            { en: "Tablet", jp: "タブレット", furigana: "たぶれっと", romaji: "taburetto", cat: "tech", past: "タブレットでした", neg: "タブレットではありません" },
-
-            // Technology - Internet & Software
-            { en: "Internet", jp: "ネット", furigana: "ねっと", romaji: "netto", cat: "tech", past: "ネットでした", neg: "ネットではありません" },
-            { en: "Email", jp: "メール", furigana: "めーる", romaji: "meeru", cat: "tech", past: "メールでした", neg: "メールではありません" },
-            { en: "App", jp: "アプリ", furigana: "あぷり", romaji: "apuri", cat: "tech", past: "アプリでした", neg: "アプリではありません" },
-            { en: "Game", jp: "ゲーム", furigana: "げーむ", romaji: "geemu", cat: "tech", past: "ゲームでした", neg: "ゲームではありません" },
-
-            // Technology - Actions
-            { en: "To use", jp: "使う", furigana: "つかう", romaji: "tsukau", cat: "tech", past: "使いました", neg: "使いません" },
-            { en: "To send", jp: "送る", furigana: "おくる", romaji: "okuru", cat: "tech", past: "送りました", neg: "送りません" },
-            { en: "To search", jp: "検索する", furigana: "けんさくする", romaji: "kensakusuru", cat: "tech", past: "検索しました", neg: "検索しません" },
-            { en: "To download", jp: "ダウンロードする", furigana: "だうんろーどする", romaji: "daunroodosuru", cat: "tech", past: "ダウンロードしました", neg: "ダウンロードしません" }
+            // Actions
+            { en: "To download", jp: "ダウンロードする", furigana: "だうんろーどする", romaji: "daunroodosuru", cat: "tech", past: "ダウンロードしました", neg: "ダウンロードしません" },
+            { en: "To search", jp: "検索する", furigana: "けんさくする", romaji: "kensakusuru", cat: "tech", past: "検索しました", past_read: "けんさくしました", neg: "検索しません", neg_read: "けんさくしません" }
         ];
 
-        let currentCategory = 'all';
+        let currentCategory = 'home';
 
         function initSidebar() {
             const list = document.getElementById('category-list');
             categories.forEach(cat => {
                 const item = document.createElement('div');
-                item.className = `category-item ${cat.id === 'all' ? 'active' : ''}`;
+                item.className = `category-item ${cat.id === currentCategory ? 'active' : ''}`;
                 item.textContent = cat.name;
                 item.onclick = (e) => filterCategory(cat.id, item, cat.name);
                 list.appendChild(item);
@@ -551,6 +441,9 @@
                 card.className = 'vocab-card animate-slide-in';
                 card.style.animationDelay = `${index * 0.02}s`;
 
+                const pastSubtitle = v.past_read ? `<div style="font-size: 0.7rem; color: #999;">${v.past_read}</div>` : '';
+                const negSubtitle = v.neg_read ? `<div style="font-size: 0.7rem; color: #999;">${v.neg_read}</div>` : '';
+
                 card.innerHTML = `
                     <span class="vocab-furigana">${v.furigana}</span>
                     <span class="vocab-jp">${v.jp}</span>
@@ -558,11 +451,17 @@
                     <div class="compact-forms">
                         <div class="form-row">
                             <span>Past:</span>
-                            <span>${v.past}</span>
+                            <div style="text-align: right;">
+                                ${pastSubtitle}
+                                <span>${v.past}</span>
+                            </div>
                         </div>
                         <div class="form-row">
                             <span>Neg:</span>
-                            <span>${v.neg}</span>
+                            <div style="text-align: right;">
+                                ${negSubtitle}
+                                <span>${v.neg}</span>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -588,6 +487,10 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             initSidebar();
+            const initialCat = categories.find(c => c.id === currentCategory);
+            if (initialCat) {
+                document.getElementById('category-title').textContent = initialCat.name.replace('▸ ', '');
+            }
             renderVocab();
         });
     </script>
