@@ -286,12 +286,66 @@
         ];
 
         const vocabularies = [
-            // Home
+            // Home - Rooms & Spaces
             { en: "Room", jp: "部屋", furigana: "へや", romaji: "heya", cat: "home", past: "部屋でした", neg: "部屋ではありません" },
             { en: "Kitchen", jp: "台所", furigana: "だいどころ", romaji: "daidokoro", cat: "home", past: "台所でした", neg: "台所ではありません" },
             { en: "Toilet", jp: "トイレ", furigana: "といれ", romaji: "toire", cat: "home", past: "トイレでした", neg: "トイレではありません" },
             { en: "Entrance", jp: "玄関", furigana: "げんかん", romaji: "genkan", cat: "home", past: "玄関でした", neg: "玄関ではありません" },
-            { en: "Window", jp: "窓", furigana: "まど", romaji: "mado", cat: "home", past: "窓でした", neg: "窓ではありません" },
+            { en: "Living Room", jp: "居間", furigana: "いま", romaji: "ima", cat: "home", past: "居間でした", neg: "居間ではありません" },
+            { en: "Bedroom", jp: "寝室", furigana: "しんしつ", romaji: "shinshitsu", cat: "home", past: "寝室でした", neg: "寝室ではありません" },
+            { en: "Bathroom", jp: "風呂場", furigana: "ふろば", romaji: "furoba", cat: "home", past: "風呂場でした", neg: "風呂場ではありません" },
+            { en: "Garden", jp: "庭", furigana: "にわ", romaji: "niwa", cat: "home", past: "庭でした", neg: "庭ではありません" },
+
+            // Home - Furniture
+            { en: "Chair", jp: "椅子", furigana: "いす", romaji: "isu", cat: "home", past: "椅子でした", neg: "椅子ではありません" },
+            { en: "Table", jp: "テーブル", furigana: "てーぶる", romaji: "teeburu", cat: "home", past: "テーブルでした", neg: "テーブルではありません" },
+            { en: "Sofa", jp: "ソファ", furigana: "そふぁ", romaji: "sofa", cat: "home", past: "ソファでした", neg: "ソファではありません" },
+            { en: "Bed", jp: "ベッド", furigana: "べっど", romaji: "beddo", cat: "home", past: "ベッドでした", neg: "ベッドではありません" },
+            { en: "Bookshelf", jp: "本棚", furigana: "ほんだな", romaji: "hondana", cat: "home", past: "本棚でした", neg: "本棚ではありません" },
+
+            // Home - Appliances
+            { en: "TV", jp: "テレビ", furigana: "てれび", romaji: "terebi", cat: "home", past: "テレビでした", neg: "テレビではありません" },
+            { en: "Refrigerator", jp: "冷蔵庫", furigana: "れいぞうこ", romaji: "reizouko", cat: "home", past: "冷蔵庫でした", neg: "冷蔵庫ではありません" },
+            { en: "Washing Machine", jp: "洗濯機", furigana: "せんたくき", romaji: "sentakuki", cat: "home", past: "洗濯機でした", neg: "洗濯機ではありません" },
+            { en: "Air Conditioner", jp: "エアコン", furigana: "えあこん", romaji: "eakon", cat: "home", past: "エアコンでした", neg: "エアコンではありません" },
+            { en: "Microwave", jp: "電子レンジ", furigana: "でんしれんじ", romaji: "denshirenji", cat: "home", past: "電子レンジでした", neg: "電子レンジではありません" },
+
+            // Home - Household Items
+            { en: "Plate", jp: "皿", furigana: "さら", romaji: "sara", cat: "home", past: "皿でした", neg: "皿ではありません" },
+            { en: "Cup", jp: "コップ", furigana: "こっぷ", romaji: "koppu", cat: "home", past: "コップでした", neg: "コップではありません" },
+            { en: "Chopsticks", jp: "箸", furigana: "はし", romaji: "hashi", cat: "home", past: "箸でした", neg: "箸ではありません" },
+            { en: "Towel", jp: "タオル", furigana: "たおる", romaji: "taoru", cat: "home", past: "タオルでした", neg: "タオルではありません" },
+
+            // Home - Cleaning & Chores
+            { en: "Garbage", jp: "ゴミ", furigana: "ごみ", romaji: "gomi", cat: "home", past: "ゴミでした", neg: "ゴミではありません" },
+            { en: "Cleaning", jp: "掃除", furigana: "そうじ", romaji: "souji", cat: "home", past: "掃除でした", neg: "掃除ではありません" },
+            { en: "Laundry", jp: "洗濯", furigana: "せんたく", romaji: "sentaku", cat: "home", past: "洗濯でした", neg: "洗濯ではありません" },
+
+            // Home - Actions
+            { en: "To live", jp: "住む", furigana: "すむ", romaji: "sumu", cat: "home", past: "住みました", neg: "住みません" },
+            { en: "To sleep", jp: "寝る", furigana: "ねる", romaji: "neru", cat: "home", past: "寝ました", neg: "寝ません" },
+            { en: "To clean", jp: "掃除する", furigana: "そうじする", romaji: "soujisuru", cat: "home", past: "掃除しました", neg: "掃除しません" },
+
+            // Home - Utilities
+            { en: "Electricity", jp: "電気", furigana: "でんき", romaji: "denki", cat: "home", past: "電気でした", neg: "電気ではありません" },
+            { en: "Water", jp: "水", furigana: "みず", romaji: "mizu", cat: "home", past: "水でした", neg: "水ではありません" },
+            { en: "Gas", jp: "ガス", furigana: "がす", romaji: "gasu", cat: "home", past: "ガスでした", neg: "ガスではありません" },
+
+            // Home - Housing Types
+            { en: "House", jp: "家", furigana: "いえ", romaji: "ie", cat: "home", past: "家でした", neg: "家ではありません" },
+            { en: "Apartment", jp: "アパート", furigana: "あぱーと", romaji: "apaato", cat: "home", past: "アパートでした", neg: "アパートではありません" },
+            { en: "Dormitory", jp: "寮", furigana: "りょう", romaji: "ryou", cat: "home", past: "寮でした", neg: "寮ではありません" },
+
+            // Home - Safety & Maintenance
+            { en: "Key", jp: "鍵", furigana: "かぎ", romaji: "kagi", cat: "home", past: "鍵でした", neg: "鍵ではありません" },
+            { en: "Door", jp: "ドア", furigana: "どあ", romaji: "doa", cat: "home", past: "ドアでした", neg: "ドアではありません" },
+            { en: "Wall", jp: "壁", furigana: "かべ", romaji: "kabe", cat: "home", past: "壁でした", neg: "壁ではありません" },
+
+            // Home - Descriptions
+            { en: "Big", jp: "大きい", furigana: "おおきい", romaji: "ookii", cat: "home", past: "大きかったです", neg: "大きくないです" },
+            { en: "Small", jp: "小さい", furigana: "ちいさい", romaji: "chiisai", cat: "home", past: "小さかったです", neg: "小さくないです" },
+            { en: "New", jp: "新しい", furigana: "あたらしい", romaji: "atarashii", cat: "home", past: "新しかったです", neg: "新しくないです" },
+            { en: "Old", jp: "古い", furigana: "ふるい", romaji: "furui", cat: "home", past: "古かったです", neg: "古くないです" },
 
             // Family
             { en: "Family", jp: "家族", furigana: "かぞく", romaji: "kazoku", cat: "family", past: "家族でした", neg: "家族ではありません" },
