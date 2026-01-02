@@ -60,9 +60,9 @@
                 <p>Connect your words correctly.</p>
             </div>
             <div class="learn-box" onclick="window.location.href='vocabulary.html'">
-                <span class="icon-placeholder">📚</span>
-                <h3>Vocabularies</h3>
-                <p>Learn Words</p>
+                <span class="icon-placeholder">⚡</span>
+                <h3>Test Flashcard</h3>
+                <p>Review what you've learned.</p>
             </div>
         </div>
 
@@ -149,6 +149,31 @@
                     <div class="info-card">
                         <h3>が (Ga)</h3>
                         <p>Subject Marker. Identifies the subject of the verb.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flashcard Section -->
+        <section id="flashcard-section" class="alphabet-section alphabet-container">
+            <div class="container" style="text-align: center;">
+                <h2 style="margin-bottom: 2rem;">Flashcard Challenge</h2>
+
+                <div class="flashcard-container">
+                    <div class="flashcard" id="flashcard" onclick="flipCard()">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <span id="flashcard-char" class="kana-char" style="font-size: 5rem;">?</span>
+                                <p style="margin-top: 1rem; color: var(--text-light);">Click to Reveal</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <span id="flashcard-romaji" class="kana-char" style="font-size: 3rem;">?</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flashcard-controls">
+                        <button class="btn btn-primary" onclick="nextCard()">Next Card</button>
                     </div>
                 </div>
             </div>
