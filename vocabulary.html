@@ -15,81 +15,100 @@
         :root {
             --vocab-primary: var(--primary-color);
             --vocab-secondary: var(--secondary-color);
+            --sidebar-width: 280px;
         }
 
         body {
             background: #f8fafc;
         }
 
-        .vocab-header {
+        .layout-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 80px;
+            /* Space for fixed header */
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
             background: white;
-            padding: 3rem 2rem;
-            text-align: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            position: fixed;
+            top: 80px;
+            bottom: 0;
+            overflow-y: auto;
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            padding-left: 1rem;
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .category-item {
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            color: var(--text-light);
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .category-item:hover {
+            background: #f1f5f9;
+            color: var(--vocab-primary);
+        }
+
+        .category-item.active {
+            background: var(--vocab-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(188, 0, 45, 0.2);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+        }
+
+        .vocab-header {
             margin-bottom: 2rem;
         }
 
         .vocab-header h1 {
-            font-size: 3rem;
-        }
-
-        .category-nav {
-            background: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 80px;
-            z-index: 100;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 2rem;
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .category-nav::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .category-nav::-webkit-scrollbar-thumb {
-            background: #ddd;
-            border-radius: 10px;
-        }
-
-        .category-tabs {
-            display: inline-flex;
-            gap: 0.5rem;
-            padding: 0 2rem;
-        }
-
-        .tab {
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            background: #f1f5f9;
-            color: var(--text-light);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid transparent;
-            font-size: 0.85rem;
-        }
-
-        .tab.active {
-            background: var(--vocab-primary);
-            color: white;
-            box-shadow: 0 4px 10px rgba(188, 0, 45, 0.2);
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
         }
 
         .vocab-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 1.5rem;
-            padding: 0 2rem 5rem;
+            padding-bottom: 4rem;
         }
 
         .vocab-card {
             background: white;
             border-radius: 16px;
-            padding: 1.2rem;
+            padding: 1.5rem;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(0, 0, 0, 0.05);
             transition: var(--transition);
@@ -97,6 +116,8 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .vocab-card:hover {
@@ -105,38 +126,56 @@
             border-color: var(--vocab-primary);
         }
 
+        .vocab-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--vocab-primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .vocab-card:hover::before {
+            opacity: 1;
+        }
+
         .vocab-furigana {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             color: var(--text-light);
             display: block;
         }
 
         .vocab-jp {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-family: var(--font-jp);
             color: var(--secondary-color);
             line-height: 1.2;
+            font-weight: 700;
         }
 
         .vocab-meaning {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--vocab-primary);
             margin-bottom: 0.5rem;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 0.5rem;
         }
 
         .compact-forms {
-            border-top: 1px solid #f1f5f9;
-            padding-top: 0.8rem;
+            padding-top: 0.5rem;
             display: flex;
             flex-direction: column;
-            gap: 0.3rem;
+            gap: 0.4rem;
         }
 
         .form-row {
             display: flex;
             justify-content: space-between;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--text-light);
         }
 
@@ -161,6 +200,38 @@
         .animate-slide-in {
             animation: slideIn 0.3s ease forwards;
         }
+
+        @media (max-width: 900px) {
+            .layout-container {
+                flex-direction: column;
+                padding-top: 60px;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding: 1rem;
+            }
+
+            .category-list {
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+
+            .category-item {
+                white-space: nowrap;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -177,182 +248,125 @@
         </div>
     </header>
 
-    <div class="vocab-header fixed-header-offset">
-        <div class="container">
-            <h1>Vocabulary Mastery</h1>
-            <p style="color: var(--text-light); font-size: 1.1rem;">Explore 40+ categories of Japanese vocabulary.</p>
-        </div>
-    </div>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-title">Categories</div>
+            <div id="category-list" class="category-list">
+                <!-- Categories injected by JS -->
+            </div>
+        </aside>
 
-    <div class="category-nav">
-        <div id="category-tabs" class="category-tabs">
-            <!-- Tabs injected by JS -->
-        </div>
-    </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="vocab-header">
+                <h1 id="category-title">All Vocabulary</h1>
+                <p style="color: var(--text-light);">Master essential Japanese words for daily life.</p>
+            </div>
 
-    <div id="vocab-grid" class="vocab-grid">
-        <!-- Vocabularies will be injected here -->
+            <div id="vocab-grid" class="vocab-grid">
+                <!-- Vocabularies will be injected here -->
+            </div>
+        </main>
     </div>
 
     <script>
         const categories = [
-            { id: 'all', name: 'All' },
-            { id: 'clothing', name: 'Clothing' },
-            { id: 'questions', name: 'Questions' },
-            { id: 'colors', name: 'Colors' },
-            { id: 'food', name: 'Food & Drink' },
-            { id: 'animals', name: 'Animals' },
-            { id: 'personal', name: 'Personal Info' },
-            { id: 'people', name: 'People & Pronouns' },
-            { id: 'numbers', name: 'Numbers & Counting' },
-            { id: 'time', name: 'Time & Date' },
-            { id: 'home', name: 'Home & Household' },
-            { id: 'daily', name: 'Daily Activities' },
-            { id: 'shopping', name: 'Shopping & Money' },
-            { id: 'transport', name: 'Transportation' },
-            { id: 'places', name: 'Places & Locations' },
-            { id: 'health', name: 'Health & Medical' },
-            { id: 'emotions', name: 'Emotions & Personality' },
-            { id: 'social', name: 'Social & Culture' },
-            { id: 'education', name: 'Education' },
-            { id: 'work', name: 'Work & Business' },
-            { id: 'nature', name: 'Nature & Environment' },
-            { id: 'abstract', name: 'Abstract & Logic' },
-            { id: 'tech', name: 'Technology & IT' },
-            { id: 'grammar', name: 'Grammar & Functional' }
+            { id: 'all', name: '▸ All Words' },
+            { id: 'home', name: '▸ Home' },
+            { id: 'family', name: '▸ Family' },
+            { id: 'numbers', name: '▸ Numbers & Counting' },
+            { id: 'clothing', name: '▸ Clothing & Accessories' },
+            { id: 'movement', name: '▸ Movement & Direction' },
+            { id: 'food', name: '▸ Food & Drinks' },
+            { id: 'body', name: '▸ Body & Health' },
+            { id: 'work', name: '▸ Work & Office' },
+            { id: 'emotions', name: '▸ Emotions' },
+            { id: 'tech', name: '▸ Technology' }
         ];
 
         const vocabularies = [
-            // Clothing (Wear)
-            { en: "To wear (head)", jp: "被る", furigana: "かぶる", romaji: "kaburu", cat: "clothing", past: "被りました", neg: "被りません", type: "verb" },
-            { en: "To wear (neck)", jp: "巻く", furigana: "まく", romaji: "maku", cat: "clothing", past: "巻きました", neg: "巻きません", type: "verb" },
-            { en: "To wear (below)", jp: "履く", furigana: "はく", romaji: "haku", cat: "clothing", past: "履きました", neg: "履きません", type: "verb" },
-            { en: "To wear (upper)", jp: "着る", furigana: "きる", romaji: "kiru", cat: "clothing", past: "着ました", neg: "着ません", type: "verb" },
-            { en: "To wear (glasses)", jp: "かける", furigana: "かける", romaji: "kakeru", cat: "clothing", past: "かけました", neg: "かけません", type: "verb" },
-
-            // Questions
-            { en: "Where", jp: "どこ", furigana: "どこ", romaji: "doko", cat: "questions", past: "どこでした", neg: "どこではありません", type: "noun" },
-            { en: "Who", jp: "だれ", furigana: "だれ", romaji: "dare", cat: "questions", past: "だれでした", neg: "だれではありません", type: "noun" },
-            { en: "What", jp: "なに", furigana: "なに", romaji: "nani", cat: "questions", past: "なにでした", neg: "なにではありません", type: "noun" },
-            { en: "When", jp: "いつ", furigana: "いつ", romaji: "itsu", cat: "questions", past: "いつでした", neg: "いつではありません", type: "noun" },
-            { en: "How", jp: "どう", furigana: "どう", romaji: "dou", cat: "questions", past: "どうでした", neg: "どうではありません", type: "noun" },
-            { en: "There", jp: "あそこ", furigana: "あそこ", romaji: "asoko", cat: "questions", past: "あそこでした", neg: "あそこではありません", type: "noun" },
-
-            // Colors
-            { en: "Red", jp: "赤", furigana: "あか", romaji: "aka", cat: "colors", past: "赤でした", neg: "赤ではありません", type: "noun" },
-            { en: "Blue", jp: "青", furigana: "あお", romaji: "ao", cat: "colors", past: "青でした", neg: "青ではありません", type: "noun" },
-            { en: "White", jp: "白", furigana: "しろ", romaji: "shiro", cat: "colors", past: "白でした", neg: "白ではありません", type: "noun" },
-            { en: "Black", jp: "黒", furigana: "くろ", romaji: "kuro", cat: "colors", past: "黒でした", neg: "黒ではありません", type: "noun" },
-            { en: "Yellow", jp: "黄色", furigana: "きいろ", romaji: "kiiro", cat: "colors", past: "黄色でした", neg: "黄色ではありません", type: "noun" },
-            { en: "Green", jp: "緑", furigana: "みどり", romaji: "midori", cat: "colors", past: "緑でした", neg: "緑ではありません", type: "noun" },
-
-            // Food & Drink
-            { en: "Apple", jp: "林檎", furigana: "りんご", romaji: "ringo", cat: "food", past: "林檎でした", neg: "林檎ではありません", type: "noun" },
-            { en: "Meat", jp: "肉", furigana: "にく", romaji: "niku", cat: "food", past: "肉でした", neg: "肉ではありません", type: "noun" },
-            { en: "Water", jp: "水", furigana: "みず", romaji: "mizu", cat: "food", past: "水でした", neg: "水ではありません", type: "noun" },
-            { en: "Rice", jp: "ご飯", furigana: "ごはん", romaji: "gohan", cat: "food", past: "ご飯でした", neg: "ご飯ではありません", type: "noun" },
-            { en: "Bread", jp: "パン", furigana: "ぱん", romaji: "pan", cat: "food", past: "パンでした", neg: "パンではありません", type: "noun" },
-            { en: "Milk", jp: "牛乳", furigana: "ぎゅうにゅう", romaji: "gyuunyuu", cat: "food", past: "牛乳でした", neg: "牛乳ではありません", type: "noun" },
-            { en: "To eat", jp: "食べる", furigana: "たべる", romaji: "taberu", cat: "food", past: "食べました", neg: "食べません", type: "verb" },
-            { en: "To drink", jp: "飲む", furigana: "のむ", romaji: "nomu", cat: "food", past: "飲みました", neg: "飲みません", type: "verb" },
-
-            // Animals
-            { en: "Dog", jp: "犬", furigana: "いぬ", romaji: "inu", cat: "animals", past: "犬でした", neg: "犬ではありません", type: "noun" },
-            { en: "Cat", jp: "猫", furigana: "ねこ", romaji: "neko", cat: "animals", past: "猫でした", neg: "猫ではありません", type: "noun" },
-            { en: "Bird", jp: "鳥", furigana: "とり", romaji: "tori", cat: "animals", past: "鳥でした", neg: "鳥ではありません", type: "noun" },
-            { en: "Fish", jp: "魚", furigana: "さかな", romaji: "sakana", cat: "animals", past: "魚でした", neg: "魚ではありません", type: "noun" },
-            { en: "Horse", jp: "馬", furigana: "うま", romaji: "uma", cat: "animals", past: "馬でした", neg: "馬ではありません", type: "noun" },
-
-            // Personal Info
-            { en: "Name", jp: "名前", furigana: "なまえ", romaji: "namae", cat: "personal", past: "名前でした", neg: "名前ではありません", type: "noun" },
-            { en: "Age", jp: "年齢", furigana: "ねんれい", romaji: "nenrei", cat: "personal", past: "年齢でした", neg: "年齢ではありません", type: "noun" },
-            { en: "Nationality", jp: "国籍", furigana: "こくせき", romaji: "kokuseki", cat: "personal", past: "国籍でした", neg: "国籍ではありません", type: "noun" },
-            { en: "Occupation", jp: "職業", furigana: "しょくぎょう", romaji: "shokugyou", cat: "personal", past: "職業でした", neg: "職業ではありません", type: "noun" },
-
-            // People
-            { en: "I (Polite)", jp: "私", furigana: "わたし", romaji: "watashi", cat: "people", past: "私でした", neg: "私ではありません", type: "noun" },
-            { en: "You", jp: "あなた", furigana: "あなた", romaji: "anata", cat: "people", past: "あなたでした", neg: "あなたではありません", type: "noun" },
-            { en: "He", jp: "彼", furigana: "かれ", romaji: "kare", cat: "people", past: "彼でした", neg: "彼ではありません", type: "noun" },
-            { en: "She", jp: "彼女", furigana: "かのじょ", romaji: "kanojo", cat: "people", past: "彼女でした", neg: "彼女ではありません", type: "noun" },
-            { en: "Mr/Ms", jp: "さん", furigana: "さん", romaji: "san", cat: "people", past: "さんでした", neg: "さんではありません", type: "noun" },
-
-            // Numbers
-            { en: "One", jp: "一", furigana: "いち", romaji: "ichi", cat: "numbers", past: "一でした", neg: "一ではありません", type: "noun" },
-            { en: "Ten", jp: "十", furigana: "じゅう", romaji: "juu", cat: "numbers", past: "十でした", neg: "十ではありません", type: "noun" },
-            { en: "Hundred", jp: "百", furigana: "ひゃく", romaji: "hyaku", cat: "numbers", past: "百でした", neg: "百ではありません", type: "noun" },
-            { en: "Thousand", jp: "千", furigana: "せん", romaji: "sen", cat: "numbers", past: "千でした", neg: "千ではありません", type: "noun" },
-
-            // Time
-            { en: "Today", jp: "今日", furigana: "きょう", romaji: "kyou", cat: "time", past: "今日でした", neg: "今日ではありません", type: "noun" },
-            { en: "Tomorrow", jp: "明日", furigana: "あした", romaji: "ashita", cat: "time", past: "明日でした", neg: "明日ではありません", type: "noun" },
-            { en: "Yesterday", jp: "昨日", furigana: "きのう", romaji: "kinou", cat: "time", past: "昨日でした", neg: "昨日ではありません", type: "noun" },
-            { en: "Year", jp: "年", furigana: "とし", romaji: "toshi", cat: "time", past: "年でした", neg: "年ではありません", type: "noun" },
-            { en: "Month", jp: "月", furigana: "つき", romaji: "tsuki", cat: "time", past: "月でした", neg: "月ではありません", type: "noun" },
-
             // Home
-            { en: "Room", jp: "部屋", furigana: "へや", romaji: "heya", cat: "home", past: "部屋でした", neg: "部屋ではありません", type: "noun" },
-            { en: "Chair", jp: "椅子", furigana: "いす", romaji: "isu", cat: "home", past: "椅子でした", neg: "椅子ではありません", type: "noun" },
-            { en: "TV", jp: "テレビ", furigana: "てれび", romaji: "terebi", cat: "home", past: "テレビでした", neg: "テレビではありません", type: "noun" },
-            { en: "Bed", jp: "ベッド", furigana: "べっど", romaji: "beddo", cat: "home", past: "ベッドでした", neg: "ベッドではありません", type: "noun" },
+            { en: "Room", jp: "部屋", furigana: "へや", romaji: "heya", cat: "home", past: "部屋でした", neg: "部屋ではありません" },
+            { en: "Kitchen", jp: "台所", furigana: "だいどころ", romaji: "daidokoro", cat: "home", past: "台所でした", neg: "台所ではありません" },
+            { en: "Toilet", jp: "トイレ", furigana: "といれ", romaji: "toire", cat: "home", past: "トイレでした", neg: "トイレではありません" },
+            { en: "Entrance", jp: "玄関", furigana: "げんかん", romaji: "genkan", cat: "home", past: "玄関でした", neg: "玄関ではありません" },
+            { en: "Window", jp: "窓", furigana: "まど", romaji: "mado", cat: "home", past: "窓でした", neg: "窓ではありません" },
 
-            // Daily
-            { en: "To wake up", jp: "起きる", furigana: "おきる", romaji: "okiru", cat: "daily", past: "起きました", neg: "起きません", type: "verb" },
-            { en: "To sleep", jp: "寝る", furigana: "ねる", romaji: "neru", cat: "daily", past: "寝ました", neg: "寝ません", type: "verb" },
-            { en: "To work", jp: "働く", furigana: "はたらく", romaji: "hataraku", cat: "daily", past: "働きました", neg: "働きません", type: "verb" },
-            { en: "To study", jp: "勉強する", furigana: "べんきょうする", romaji: "benkyousuru", cat: "daily", past: "勉強しました", neg: "勉強しません", type: "verb" },
+            // Family
+            { en: "Family", jp: "家族", furigana: "かぞく", romaji: "kazoku", cat: "family", past: "家族でした", neg: "家族ではありません" },
+            { en: "Father", jp: "父", furigana: "ちち", romaji: "chichi", cat: "family", past: "父でした", neg: "父ではありません" },
+            { en: "Mother", jp: "母", furigana: "はは", romaji: "haha", cat: "family", past: "母でした", neg: "母ではありません" },
+            { en: "Older Brother", jp: "兄", furigana: "あに", romaji: "ani", cat: "family", past: "兄でした", neg: "兄ではありません" },
+            { en: "Older Sister", jp: "姉", furigana: "あね", romaji: "ane", cat: "family", past: "姉でした", neg: "姉ではありません" },
 
-            // Health
-            { en: "Headache", jp: "頭痛", furigana: "ずつう", romaji: "zutsuu", cat: "health", past: "頭痛でした", neg: "頭痛ではありません", type: "noun" },
-            { en: "Medicine", jp: "薬", furigana: "くすり", romaji: "kusuri", cat: "health", past: "薬でした", neg: "薬ではありません", type: "noun" },
-            { en: "Hospital", jp: "病院", furigana: "びょういん", romaji: "byouin", cat: "health", past: "病院でした", neg: "病院ではありません", type: "noun" },
-            { en: "Fever", jp: "熱", furigana: "ねつ", romaji: "netsu", cat: "health", past: "熱でした", neg: "熱ではありません", type: "noun" },
+            // Numbers & Counting
+            { en: "One", jp: "一", furigana: "いち", romaji: "ichi", cat: "numbers", past: "一でした", neg: "一ではありません" },
+            { en: "Two", jp: "二", furigana: "に", romaji: "ni", cat: "numbers", past: "二でした", neg: "二ではありません" },
+            { en: "Three", jp: "三", furigana: "さん", romaji: "san", cat: "numbers", past: "三でした", neg: "三ではありません" },
+            { en: "Ten", jp: "十", furigana: "じゅう", romaji: "juu", cat: "numbers", past: "十でした", neg: "十ではありません" },
+            { en: "Hundred", jp: "百", furigana: "ひゃく", romaji: "hyaku", cat: "numbers", past: "百でした", neg: "百ではありません" },
+
+            // Clothing & Accessories
+            { en: "Clothes", jp: "服", furigana: "ふく", romaji: "fuku", cat: "clothing", past: "服でした", neg: "服ではありません" },
+            { en: "Shoes", jp: "靴", furigana: "くつ", romaji: "kutsu", cat: "clothing", past: "靴でした", neg: "靴ではありません" },
+            { en: "Hat", jp: "帽子", furigana: "ぼうし", romaji: "boushi", cat: "clothing", past: "帽子でした", neg: "帽子ではありません" },
+            { en: "Bag", jp: "鞄", furigana: "かばん", romaji: "kaban", cat: "clothing", past: "鞄でした", neg: "鞄ではありません" },
+            { en: "Glasses", jp: "眼鏡", furigana: "めがね", romaji: "megane", cat: "clothing", past: "眼鏡でした", neg: "眼鏡ではありません" },
+
+            // Movement & Direction
+            { en: "To go", jp: "行く", furigana: "いく", romaji: "iku", cat: "movement", past: "行きました", neg: "行きません" },
+            { en: "To come", jp: "来る", furigana: "くる", romaji: "kuru", cat: "movement", past: "来ました", neg: "来ません" },
+            { en: "To return", jp: "帰る", furigana: "かえる", romaji: "kaeru", cat: "movement", past: "帰りました", neg: "帰りません" },
+            { en: "Right", jp: "右", furigana: "みぎ", romaji: "migi", cat: "movement", past: "右でした", neg: "右ではありません" },
+            { en: "Left", jp: "左", furigana: "ひだり", romaji: "hidari", cat: "movement", past: "左でした", neg: "左ではありません" },
+
+            // Food & Drinks
+            { en: "Food", jp: "食べ物", furigana: "たべもの", romaji: "tabemono", cat: "food", past: "食べ物でした", neg: "食べ物ではありません" },
+            { en: "Drink", jp: "飲み物", furigana: "のみもの", romaji: "nomimono", cat: "food", past: "飲み物でした", neg: "飲み物ではありません" },
+            { en: "Water", jp: "水", furigana: "みず", romaji: "mizu", cat: "food", past: "水でした", neg: "水ではありません" },
+            { en: "Rice", jp: "ご飯", furigana: "ごはん", romaji: "gohan", cat: "food", past: "ご飯でした", neg: "ご飯ではありません" },
+            { en: "Tea", jp: "お茶", furigana: "おちゃ", romaji: "ocha", cat: "food", past: "お茶でした", neg: "お茶ではありません" },
+
+            // Body & Health
+            { en: "Body", jp: "体", furigana: "からだ", romaji: "karada", cat: "body", past: "体でした", neg: "体ではありません" },
+            { en: "Head", jp: "頭", furigana: "あたま", romaji: "atama", cat: "body", past: "頭でした", neg: "頭ではありません" },
+            { en: "Eye", jp: "目", furigana: "め", romaji: "me", cat: "body", past: "目でした", neg: "目ではありません" },
+            { en: "Hand", jp: "手", furigana: "て", romaji: "te", cat: "body", past: "手でした", neg: "手ではありません" },
+            { en: "Medicine", jp: "薬", furigana: "くすり", romaji: "kusuri", cat: "body", past: "薬でした", neg: "薬ではありません" },
+
+            // Work & Office
+            { en: "Work", jp: "仕事", furigana: "しごと", romaji: "shigoto", cat: "work", past: "仕事でした", neg: "仕事ではありません" },
+            { en: "Company", jp: "会社", furigana: "かいしゃ", romaji: "kaisha", cat: "work", past: "会社でした", neg: "会社ではありません" },
+            { en: "Meeting", jp: "会議", furigana: "かいぎ", romaji: "kaigi", cat: "work", past: "会議でした", neg: "会議ではありません" },
+            { en: "Desk", jp: "机", furigana: "つくえ", romaji: "tsukue", cat: "work", past: "机でした", neg: "机ではありません" },
+            { en: "Phone", jp: "電話", furigana: "でんわ", romaji: "denwa", cat: "work", past: "電話でした", neg: "電話ではありません" },
 
             // Emotions
-            { en: "Happy", jp: "嬉しい", furigana: "うれしい", romaji: "ureshii", cat: "emotions", past: "嬉しかったです", neg: "嬉しくないです", type: "adjective" },
-            { en: "Sad", jp: "悲しい", furigana: "かなしい", romaji: "kanashii", cat: "emotions", past: "悲しかったです", neg: "悲しくないです", type: "adjective" },
-            { en: "Angry", jp: "怒る", furigana: "おこる", romaji: "okoru", cat: "emotions", past: "怒りました", neg: "怒りません", type: "verb" },
+            { en: "Happy", jp: "嬉しい", furigana: "うれしい", romaji: "ureshii", cat: "emotions", past: "嬉しかったです", neg: "嬉しくないです" },
+            { en: "Sad", jp: "悲しい", furigana: "かなしい", romaji: "kanashii", cat: "emotions", past: "悲しかったです", neg: "悲しくないです" },
+            { en: "Fun", jp: "楽しい", furigana: "たのしい", romaji: "tanoshii", cat: "emotions", past: "楽しかったです", neg: "楽しくないです" },
+            { en: "Scary", jp: "怖い", furigana: "こわい", romaji: "kowai", cat: "emotions", past: "怖かったです", neg: "怖くないです" },
+            { en: "Like", jp: "好き", furigana: "すき", romaji: "suki", cat: "emotions", past: "好きでした", neg: "好きではありません" },
 
-            // Social
-            { en: "Festival", jp: "祭り", furigana: "まつり", romaji: "matsuri", cat: "social", past: "祭りでした", neg: "祭りではありません", type: "noun" },
-            { en: "Culture", jp: "文化", furigana: "ぶんか", romaji: "bunka", cat: "social", past: "文化でした", neg: "文化ではありません", type: "noun" },
-            { en: "Tradition", jp: "伝統", furigana: "でんとう", romaji: "dentou", cat: "social", past: "伝統でした", neg: "伝統ではありません", type: "noun" },
-
-            // Education
-            { en: "Subject", jp: "科目", furigana: "かもく", romaji: "kamoku", cat: "education", past: "科目でした", neg: "科目ではありません", type: "noun" },
-            { en: "Exam", jp: "試験", furigana: "しけん", romaji: "shiken", cat: "education", past: "試験でした", neg: "試験ではありません", type: "noun" },
-            { en: "School", jp: "学校", furigana: "がっこう", romaji: "gakkou", cat: "education", past: "学校でした", neg: "学校ではありません", type: "noun" },
-
-            // Work
-            { en: "Company", jp: "会社", furigana: "かいしゃ", romaji: "kaisha", cat: "work", past: "会社でした", neg: "会社ではありません", type: "noun" },
-            { en: "Meeting", jp: "会議", furigana: "かいぎ", romaji: "kaigi", cat: "work", past: "会議でした", neg: "会議ではありません", type: "noun" },
-            { en: "Salary", jp: "給料", furigana: "きゅうりょう", romaji: "kyuuryou", cat: "work", past: "給料でした", neg: "給料ではありません", type: "noun" },
-
-            // Nature
-            { en: "Mountain", jp: "山", furigana: "やま", romaji: "yama", cat: "nature", past: "山でした", neg: "山ではありません", type: "noun" },
-            { en: "River", jp: "川", furigana: "かわ", romaji: "kawa", cat: "nature", past: "川でした", neg: "川ではありません", type: "noun" },
-            { en: "Environment", jp: "環境", furigana: "かんきょう", romaji: "kankyou", cat: "nature", past: "環境でした", neg: "環境ではありません", type: "noun" },
-
-            // Abstract
-            { en: "Freedom", jp: "自由", furigana: "じゆう", romaji: "jiyuu", cat: "abstract", past: "自由でした", neg: "自由ではありません", type: "noun" },
-            { en: "Value", jp: "価値", furigana: "かち", romaji: "kachi", cat: "abstract", past: "価値でした", neg: "価値ではありません", type: "noun" },
-            { en: "Logic", jp: "論理", furigana: "ろんり", romaji: "ronri", cat: "abstract", past: "論理でした", neg: "論理ではありません", type: "noun" },
-
-            // Tech
-            { en: "Computer", jp: "パソコン", furigana: "ぱそこん", romaji: "pasokon", cat: "tech", past: "パソコンでした", neg: "パソコンではありません", type: "noun" },
-            { en: "Internet", jp: "ネット", furigana: "ねっと", romaji: "netto", cat: "tech", past: "ネットでした", neg: "ネットではありません", type: "noun" },
-            { en: "Software", jp: "ソフト", furigana: "そふと", romaji: "sofuto", cat: "tech", past: "ソフトでした", neg: "ソフトではありません", type: "noun" }
+            // Technology
+            { en: "Computer", jp: "パソコン", furigana: "ぱそこん", romaji: "pasokon", cat: "tech", past: "パソコンでした", neg: "パソコンではありません" },
+            { en: "Smartphone", jp: "スマホ", furigana: "すまほ", romaji: "sumaho", cat: "tech", past: "スマホでした", neg: "スマホではありません" },
+            { en: "Internet", jp: "ネット", furigana: "ねっと", romaji: "netto", cat: "tech", past: "ネットでした", neg: "ネットではありません" },
+            { en: "Game", jp: "ゲーム", furigana: "げーむ", romaji: "geemu", cat: "tech", past: "ゲームでした", neg: "ゲームではありません" },
+            { en: "Robot", jp: "ロボット", furigana: "ろぼっと", romaji: "robotto", cat: "tech", past: "ロボットでした", neg: "ロボットではありません" }
         ];
 
         let currentCategory = 'all';
 
-        function initTabs() {
-            const tabContainer = document.getElementById('category-tabs');
+        function initSidebar() {
+            const list = document.getElementById('category-list');
             categories.forEach(cat => {
-                const tab = document.createElement('div');
-                tab.className = `tab ${cat.id === 'all' ? 'active' : ''}`;
-                tab.textContent = cat.name;
-                tab.onclick = (e) => filterCategory(cat.id, tab);
-                tabContainer.appendChild(tab);
+                const item = document.createElement('div');
+                item.className = `category-item ${cat.id === 'all' ? 'active' : ''}`;
+                item.textContent = cat.name;
+                item.onclick = (e) => filterCategory(cat.id, item, cat.name);
+                list.appendChild(item);
             });
         }
 
@@ -392,18 +406,20 @@
             }
         }
 
-        function filterCategory(catId, el) {
+        function filterCategory(catId, el, name) {
             currentCategory = catId;
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.category-item').forEach(t => t.classList.remove('active'));
             el.classList.add('active');
-            renderVocab();
 
-            // Scroll tab into view
-            el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            // Update Title
+            document.getElementById('category-title').textContent = name.replace('▸ ', '');
+
+            renderVocab();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            initTabs();
+            initSidebar();
             renderVocab();
         });
     </script>
