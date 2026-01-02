@@ -55,9 +55,10 @@
             border-radius: 24px;
             box-shadow: var(--shadow-lg);
             width: 95%;
-            max-width: 1000px;
-            height: 90vh;
-            max-height: 700px;
+            max-width: 900px;
+            height: auto;
+            max-height: 85vh;
+            aspect-ratio: 16/9;
             display: grid;
             grid-template-columns: 35% 65%;
             /* Left: Kanji, Right: Info */
@@ -99,7 +100,8 @@
             display: grid;
             grid-template-rows: auto 1fr auto;
             gap: 1.5rem;
-            overflow-y: auto;
+            gap: 1rem;
+            overflow: hidden;
         }
 
         /* Readings Section */
@@ -374,10 +376,7 @@
                 <p>Explore all 2,136 Joyo Kanji</p>
             </div>
 
-            <div class="search-container">
-                <input type="text" id="kanji-search" class="search-input"
-                    placeholder="Search Kanji character (e.g., 山)..." oninput="filterKanji()">
-            </div>
+
 
             <div id="loading-indicator" class="loading-spinner" style="margin: 2rem auto;"></div>
             <div class="kanji-grid" id="kanji-grid"></div>
@@ -560,10 +559,11 @@
                 const response = await fetch(`https://kanjiapi.dev/v1/kanji/${char}`);
                 const data = await response.json();
 
-                document.getElementById('detail-meaning').textContent = data.meanings.join(', ');
+                // Limit meanings to top 3 to save space
+                document.getElementById('detail-meaning').textContent = data.meanings.slice(0, 3).join(', ');
 
-                const onRomaji = data.on_readings.map(r => `${r} (${toRomaji(r)})`).join(', ');
-                const kunRomaji = data.kun_readings.map(r => `${r} (${toRomaji(r)})`).join(', ');
+                const onRomaji = data.on_readings.slice(0, 3).map(r => `${r} (${toRomaji(r)})`).join(', ');
+                const kunRomaji = data.kun_readings.slice(0, 3).map(r => `${r} (${toRomaji(r)})`).join(', ');
                 document.getElementById('detail-onyomi').textContent = onRomaji || '-';
                 document.getElementById('detail-kunyomi').textContent = kunRomaji || '-';
 
@@ -575,13 +575,14 @@
                 examplesContainer.innerHTML = '';
 
                 if (wordsData.length > 0) {
-                    // Take top 5 examples
-                    const examples = wordsData.slice(0, 5);
+                    // Take top 3 examples to fit single screen
+                    const examples = wordsData.slice(0, 3);
                     examples.forEach(word => {
                         const div = document.createElement('div');
-                        div.style.marginBottom = '0.5rem';
-                        div.style.paddingBottom = '0.5rem';
+                        div.style.marginBottom = '0.4rem';
+                        div.style.paddingBottom = '0.4rem';
                         div.style.borderBottom = '1px solid rgba(0,0,0,0.05)';
+                        div.style.fontSize = '0.9rem';
 
                         // Format: Word (Reading) - Meaning
                         const variant = word.variants[0];
@@ -589,8 +590,10 @@
                         const meaning = word.meanings[0].glosses[0];
 
                         div.innerHTML = `
-                            <div style="font-weight: bold; color: var(--text-color);">${variant.written} <span style="font-weight: normal; font-size: 0.9em; color: var(--text-light);">(${reading})</span></div>
-                            <div style="font-size: 0.9rem; color: var(--secondary-color);">${meaning}</div>
+                            <div style="font-weight: bold; color: var(--text-color); display: flex; justify-content: space-between;">
+                                <span>${variant.written} <span style="font-weight: normal; font-size: 0.9em; color: var(--text-light);">(${reading})</span></span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--secondary-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${meaning}</div>
                         `;
                         examplesContainer.appendChild(div);
                     });
