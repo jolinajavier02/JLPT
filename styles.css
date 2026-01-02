@@ -385,25 +385,33 @@ nav {
 
 .kana-card {
     background: var(--bg-color);
-    padding: 1.5rem;
+    padding: 1.2rem;
     border-radius: 12px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 110px;
     transition: var(--transition);
+    cursor: pointer;
 }
 
 .kana-card:hover {
     background: var(--primary-color);
     color: white;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .kana-char {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     font-family: var(--font-jp);
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 0.25rem;
     white-space: nowrap;
+    line-height: 1;
 }
 
 .kana-romaji {
