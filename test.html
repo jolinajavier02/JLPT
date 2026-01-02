@@ -196,6 +196,12 @@
             margin-bottom: 1rem;
             border: 2px dashed #cbd5e1;
         }
+
+        /* Header Button Fade */
+        .header-btn {
+            opacity: 0.5;
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -219,13 +225,13 @@
         </div>
 
         <div class="module-nav">
+            <button class="nav-btn" onclick="switchModule('all', this)">All Challenge</button>
             <button class="nav-btn" onclick="switchModule('hiragana', this)">Hiragana</button>
             <button class="nav-btn" onclick="switchModule('katakana', this)">Katakana</button>
             <button class="nav-btn" onclick="switchModule('kanji', this)">Kanji</button>
-            <button class="nav-btn" onclick="switchModule('vocabulary', this)">Vocabulary</button>
             <button class="nav-btn" onclick="switchModule('grammar', this)">Grammar</button>
-            <button class="nav-btn" onclick="switchModule('particles', this)">Particles</button>
-            <button class="nav-btn" onclick="switchModule('all', this)">Challenge All</button>
+            <button class="nav-btn" onclick="switchModule('particles', this)">Particle</button>
+            <button class="nav-btn" onclick="switchModule('vocabulary', this)">Vocabulary</button>
         </div>
 
         <!-- Integrated Challenge Area -->
@@ -258,17 +264,33 @@
 
     <script>
         const hiraganaData = [
-            { char: 'あ', romaji: 'a', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'い', romaji: 'i', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'う', romaji: 'u', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'え', romaji: 'e', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'お', romaji: 'o', meaning: 'Hiragana Character', type: 'Hiragana' },
-            { char: 'か', romaji: 'ka', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'き', romaji: 'ki', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'く', romaji: 'ku', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'け', romaji: 'ke', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'こ', romaji: 'ko', meaning: 'Hiragana Character', type: 'Hiragana' },
-            { char: 'さ', romaji: 'sa', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'し', romaji: 'shi', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'す', romaji: 'su', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'せ', romaji: 'se', meaning: 'Hiragana Character', type: 'Hiragana' }, { char: 'そ', romaji: 'so', meaning: 'Hiragana Character', type: 'Hiragana' }
+            { char: 'あ', romaji: 'a', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'い', romaji: 'i', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'う', romaji: 'u', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'え', romaji: 'e', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'お', romaji: 'o', meaning: 'Hiragana', type: 'Hiragana' },
+            { char: 'か', romaji: 'ka', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'き', romaji: 'ki', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'く', romaji: 'ku', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'け', romaji: 'ke', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'こ', romaji: 'ko', meaning: 'Hiragana', type: 'Hiragana' },
+            { char: 'さ', romaji: 'sa', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'し', romaji: 'shi', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'す', romaji: 'su', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'せ', romaji: 'se', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'そ', romaji: 'so', meaning: 'Hiragana', type: 'Hiragana' },
+            { char: 'た', romaji: 'ta', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ち', romaji: 'chi', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'つ', romaji: 'tsu', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'て', romaji: 'te', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'と', romaji: 'to', meaning: 'Hiragana', type: 'Hiragana' },
+            { char: 'な', romaji: 'na', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'に', romaji: 'ni', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ぬ', romaji: 'nu', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ね', romaji: 'ne', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'の', romaji: 'no', meaning: 'Hiragana', type: 'Hiragana' },
+            { char: 'は', romaji: 'ha', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ひ', romaji: 'hi', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ふ', romaji: 'fu', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'へ', romaji: 'he', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ほ', romaji: 'ho', meaning: 'Hiragana', type: 'Hiragana' },
+            { char: 'ま', romaji: 'ma', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'み', romaji: 'mi', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'む', romaji: 'mu', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'め', romaji: 'me', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'も', romaji: 'mo', meaning: 'Hiragana', type: 'Hiragana' },
+            { char: 'や', romaji: 'ya', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ゆ', romaji: 'yu', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'よ', romaji: 'yo', meaning: 'Hiragana', type: 'Hiragana' },
+            { char: 'ら', romaji: 'ra', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'り', romaji: 'ri', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'る', romaji: 'ru', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'れ', romaji: 're', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ろ', romaji: 'ro', meaning: 'Hiragana', type: 'Hiragana' },
+            { char: 'わ', romaji: 'wa', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'を', romaji: 'wo', meaning: 'Hiragana', type: 'Hiragana' }, { char: 'ん', romaji: 'n', meaning: 'Hiragana', type: 'Hiragana' }
         ];
 
         const katakanaData = [
-            { char: 'ア', romaji: 'a', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'イ', romaji: 'i', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'ウ', romaji: 'u', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'エ', romaji: 'e', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'オ', romaji: 'o', meaning: 'Katakana Character', type: 'Katakana' },
-            { char: 'カ', romaji: 'ka', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'キ', romaji: 'ki', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'ク', romaji: 'ku', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'ケ', romaji: 'ke', meaning: 'Katakana Character', type: 'Katakana' }, { char: 'コ', romaji: 'ko', meaning: 'Katakana Character', type: 'Katakana' }
+            { char: 'ア', romaji: 'a', meaning: 'Katakana', type: 'Katakana' }, { char: 'イ', romaji: 'i', meaning: 'Katakana', type: 'Katakana' }, { char: 'ウ', romaji: 'u', meaning: 'Katakana', type: 'Katakana' }, { char: 'エ', romaji: 'e', meaning: 'Katakana', type: 'Katakana' }, { char: 'オ', romaji: 'o', meaning: 'Katakana', type: 'Katakana' },
+            { char: 'カ', romaji: 'ka', meaning: 'Katakana', type: 'Katakana' }, { char: 'キ', romaji: 'ki', meaning: 'Katakana', type: 'Katakana' }, { char: 'ク', romaji: 'ku', meaning: 'Katakana', type: 'Katakana' }, { char: 'ケ', romaji: 'ke', meaning: 'Katakana', type: 'Katakana' }, { char: 'コ', romaji: 'ko', meaning: 'Katakana', type: 'Katakana' },
+            { char: 'サ', romaji: 'sa', meaning: 'Katakana', type: 'Katakana' }, { char: 'シ', romaji: 'shi', meaning: 'Katakana', type: 'Katakana' }, { char: 'ス', romaji: 'su', meaning: 'Katakana', type: 'Katakana' }, { char: 'セ', romaji: 'se', meaning: 'Katakana', type: 'Katakana' }, { char: 'ソ', romaji: 'so', meaning: 'Katakana', type: 'Katakana' },
+            { char: 'タ', romaji: 'ta', meaning: 'Katakana', type: 'Katakana' }, { char: 'チ', romaji: 'chi', meaning: 'Katakana', type: 'Katakana' }, { char: 'ツ', romaji: 'tsu', meaning: 'Katakana', type: 'Katakana' }, { char: 'テ', romaji: 'te', meaning: 'Katakana', type: 'Katakana' }, { char: 'ト', romaji: 'to', meaning: 'Katakana', type: 'Katakana' },
+            { char: 'ナ', romaji: 'na', meaning: 'Katakana', type: 'Katakana' }, { char: 'ニ', romaji: 'ni', meaning: 'Katakana', type: 'Katakana' }, { char: 'ヌ', romaji: 'nu', meaning: 'Katakana', type: 'Katakana' }, { char: 'ネ', romaji: 'ne', meaning: 'Katakana', type: 'Katakana' }, { char: 'ノ', romaji: 'no', meaning: 'Katakana', type: 'Katakana' },
+            { char: 'ハ', romaji: 'ha', meaning: 'Katakana', type: 'Katakana' }, { char: 'ヒ', romaji: 'hi', meaning: 'Katakana', type: 'Katakana' }, { char: 'フ', romaji: 'fu', meaning: 'Katakana', type: 'Katakana' }, { char: 'ヘ', romaji: 'he', meaning: 'Katakana', type: 'Katakana' }, { char: 'ホ', romaji: 'ho', meaning: 'Katakana', type: 'Katakana' },
+            { char: 'マ', romaji: 'ma', meaning: 'Katakana', type: 'Katakana' }, { char: 'ミ', romaji: 'mi', meaning: 'Katakana', type: 'Katakana' }, { char: 'ム', romaji: 'mu', meaning: 'Katakana', type: 'Katakana' }, { char: 'メ', romaji: 'me', meaning: 'Katakana', type: 'Katakana' }, { char: 'モ', romaji: 'mo', meaning: 'Katakana', type: 'Katakana' },
+            { char: 'ヤ', romaji: 'ya', meaning: 'Katakana', type: 'Katakana' }, { char: 'ユ', romaji: 'yu', meaning: 'Katakana', type: 'Katakana' }, { char: 'ヨ', romaji: 'yo', meaning: 'Katakana', type: 'Katakana' },
+            { char: 'ラ', romaji: 'ra', meaning: 'Katakana', type: 'Katakana' }, { char: 'リ', romaji: 'ri', meaning: 'Katakana', type: 'Katakana' }, { char: 'ル', romaji: 'ru', meaning: 'Katakana', type: 'Katakana' }, { char: 'レ', romaji: 're', meaning: 'Katakana', type: 'Katakana' }, { char: 'ロ', romaji: 'ro', meaning: 'Katakana', type: 'Katakana' },
+            { char: 'ワ', romaji: 'wa', meaning: 'Katakana', type: 'Katakana' }, { char: 'ヲ', romaji: 'wo', meaning: 'Katakana', type: 'Katakana' }, { char: 'ン', romaji: 'n', meaning: 'Katakana', type: 'Katakana' }
         ];
 
-        const kanjiData = [
+        // Placeholder for Kanji - will be fetched or expanded
+        let kanjiData = [
             { char: '一', romaji: 'ichi', meaning: 'One', type: 'Kanji' }, { char: '二', romaji: 'ni', meaning: 'Two', type: 'Kanji' }, { char: '三', romaji: 'san', meaning: 'Three', type: 'Kanji' },
             { char: '日', romaji: 'hi/nichi', meaning: 'Sun/Day', type: 'Kanji' }, { char: '月', romaji: 'tsuki/getsu', meaning: 'Moon/Month', type: 'Kanji' }, { char: '火', romaji: 'hi/ka', meaning: 'Fire', type: 'Kanji' },
             { char: '水', romaji: 'mizu/sui', meaning: 'Water', type: 'Kanji' }, { char: '木', romaji: 'ki/moku', meaning: 'Tree', type: 'Kanji' }, { char: '金', romaji: 'kane/kin', meaning: 'Gold/Metal', type: 'Kanji' },
@@ -276,30 +298,327 @@
         ];
 
         const vocabData = [
-            { char: '食べる', romaji: 'taberu', meaning: 'To eat', type: 'Vocabulary' }, { char: '飲む', romaji: 'nomu', meaning: 'To drink', type: 'Vocabulary' },
-            { char: '名前', romaji: 'namae', meaning: 'Name', type: 'Vocabulary' }, { char: '先生', romaji: 'sensei', meaning: 'Teacher', type: 'Vocabulary' },
-            { char: '学生', romaji: 'gakusei', meaning: 'Student', type: 'Vocabulary' }, { char: '日本', romaji: 'nihon', meaning: 'Japan', type: 'Vocabulary' }
+            // Copied from vocabulary.html
+            { char: "家", romaji: "ie", meaning: "House", type: 'Vocabulary' },
+            { char: "アパート", romaji: "apaato", meaning: "Apartment", type: 'Vocabulary' },
+            { char: "部屋", romaji: "heya", meaning: "Room", type: 'Vocabulary' },
+            { char: "玄関", romaji: "genkan", meaning: "Entrance", type: 'Vocabulary' },
+            { char: "居間", romaji: "ima", meaning: "Living Room", type: 'Vocabulary' },
+            { char: "台所", romaji: "daidokoro", meaning: "Kitchen", type: 'Vocabulary' },
+            { char: "寝室", romaji: "shinshitsu", meaning: "Bedroom", type: 'Vocabulary' },
+            { char: "風呂場", romaji: "furoba", meaning: "Bathroom", type: 'Vocabulary' },
+            { char: "トイレ", romaji: "toire", meaning: "Toilet", type: 'Vocabulary' },
+            { char: "庭", romaji: "niwa", meaning: "Garden", type: 'Vocabulary' },
+            { char: "ベランダ", romaji: "beranda", meaning: "Balcony", type: 'Vocabulary' },
+            { char: "廊下", romaji: "rouka", meaning: "Hallway", type: 'Vocabulary' },
+            { char: "階段", romaji: "kaidan", meaning: "Stairs", type: 'Vocabulary' },
+            { char: "ドア", romaji: "doa", meaning: "Door", type: 'Vocabulary' },
+            { char: "窓", romaji: "mado", meaning: "Window", type: 'Vocabulary' },
+            { char: "床", romaji: "yuka", meaning: "Floor", type: 'Vocabulary' },
+            { char: "壁", romaji: "kabe", meaning: "Wall", type: 'Vocabulary' },
+            { char: "天井", romaji: "tenjou", meaning: "Ceiling", type: 'Vocabulary' },
+            { char: "椅子", romaji: "isu", meaning: "Chair", type: 'Vocabulary' },
+            { char: "テーブル", romaji: "teeburu", meaning: "Table", type: 'Vocabulary' },
+            { char: "ソファ", romaji: "sofa", meaning: "Sofa", type: 'Vocabulary' },
+            { char: "ベッド", romaji: "beddo", meaning: "Bed", type: 'Vocabulary' },
+            { char: "本棚", romaji: "hondana", meaning: "Bookshelf", type: 'Vocabulary' },
+            { char: "机", romaji: "tsukue", meaning: "Desk", type: 'Vocabulary' },
+            { char: "戸棚", romaji: "todana", meaning: "Cabinet", type: 'Vocabulary' },
+            { char: "カーテン", romaji: "kaaten", meaning: "Curtain", type: 'Vocabulary' },
+            { char: "鏡", romaji: "kagami", meaning: "Mirror", type: 'Vocabulary' },
+            { char: "ゴミ箱", romaji: "gomibako", meaning: "Trash Can", type: 'Vocabulary' },
+            { char: "テレビ", romaji: "terebi", meaning: "TV", type: 'Vocabulary' },
+            { char: "冷蔵庫", romaji: "reizouko", meaning: "Refrigerator", type: 'Vocabulary' },
+            { char: "洗濯機", romaji: "sentakuki", meaning: "Washing Machine", type: 'Vocabulary' },
+            { char: "電子レンジ", romaji: "denshirenji", meaning: "Microwave", type: 'Vocabulary' },
+            { char: "エアコン", romaji: "eakon", meaning: "Air Conditioner", type: 'Vocabulary' },
+            { char: "掃除機", romaji: "soujiki", meaning: "Vacuum Cleaner", type: 'Vocabulary' },
+            { char: "炊飯器", romaji: "suihanki", meaning: "Rice Cooker", type: 'Vocabulary' },
+            { char: "皿", romaji: "sara", meaning: "Plate", type: 'Vocabulary' },
+            { char: "コップ", romaji: "koppu", meaning: "Cup", type: 'Vocabulary' },
+            { char: "箸", romaji: "hashi", meaning: "Chopsticks", type: 'Vocabulary' },
+            { char: "スプーン", romaji: "supuun", meaning: "Spoon", type: 'Vocabulary' },
+            { char: "フォーク", romaji: "fooku", meaning: "Fork", type: 'Vocabulary' },
+            { char: "ナイフ", romaji: "naifu", meaning: "Knife", type: 'Vocabulary' },
+            { char: "茶碗", romaji: "chawan", meaning: "Bowl", type: 'Vocabulary' },
+            { char: "鍋", romaji: "nabe", meaning: "Pot", type: 'Vocabulary' },
+            { char: "フライパン", romaji: "furaipan", meaning: "Frying Pan", type: 'Vocabulary' },
+            { char: "タオル", romaji: "taoru", meaning: "Towel", type: 'Vocabulary' },
+            { char: "石鹸", romaji: "sekken", meaning: "Soap", type: 'Vocabulary' },
+            { char: "シャンプー", romaji: "shanpuu", meaning: "Shampoo", type: 'Vocabulary' },
+            { char: "歯ブラシ", romaji: "haburashi", meaning: "Toothbrush", type: 'Vocabulary' },
+            { char: "掃除する", romaji: "soujisuru", meaning: "To clean", type: 'Vocabulary' },
+            { char: "洗濯する", romaji: "sentakusuru", meaning: "To do laundry", type: 'Vocabulary' },
+            { char: "洗う", romaji: "arau", meaning: "To wash", type: 'Vocabulary' },
+            { char: "乾かす", romaji: "kawakasu", meaning: "To dry", type: 'Vocabulary' },
+            { char: "寝る", romaji: "neru", meaning: "To sleep", type: 'Vocabulary' },
+            { char: "起きる", romaji: "okiru", meaning: "To wake up", type: 'Vocabulary' },
+            { char: "電気", romaji: "denki", meaning: "Electricity", type: 'Vocabulary' },
+            { char: "水道", romaji: "suidou", meaning: "Water (utility)", type: 'Vocabulary' },
+            { char: "ガス", romaji: "gasu", meaning: "Gas", type: 'Vocabulary' },
+            { char: "鍵", romaji: "kagi", meaning: "Key", type: 'Vocabulary' },
+            { char: "錠", romaji: "jou", meaning: "Lock", type: 'Vocabulary' },
+            { char: "家族", romaji: "kazoku", meaning: "Family", type: 'Vocabulary' },
+            { char: "父", romaji: "chichi", meaning: "Father", type: 'Vocabulary' },
+            { char: "母", romaji: "haha", meaning: "Mother", type: 'Vocabulary' },
+            { char: "兄", romaji: "ani", meaning: "Older Brother", type: 'Vocabulary' },
+            { char: "姉", romaji: "ane", meaning: "Older Sister", type: 'Vocabulary' },
+            { char: "弟", romaji: "otouto", meaning: "Younger Brother", type: 'Vocabulary' },
+            { char: "妹", romaji: "imouto", meaning: "Younger Sister", type: 'Vocabulary' },
+            { char: "両親", romaji: "ryoushin", meaning: "Parents", type: 'Vocabulary' },
+            { char: "兄弟", romaji: "kyoudai", meaning: "Siblings", type: 'Vocabulary' },
+            { char: "祖父", romaji: "sofu", meaning: "Grandfather", type: 'Vocabulary' },
+            { char: "祖母", romaji: "sobo", meaning: "Grandmother", type: 'Vocabulary' },
+            { char: "叔父", romaji: "oji", meaning: "Uncle", type: 'Vocabulary' },
+            { char: "叔母", romaji: "oba", meaning: "Aunt", type: 'Vocabulary' },
+            { char: "従兄弟", romaji: "itoko", meaning: "Cousin", type: 'Vocabulary' },
+            { char: "夫", romaji: "otto", meaning: "Husband", type: 'Vocabulary' },
+            { char: "妻", romaji: "tsuma", meaning: "Wife", type: 'Vocabulary' },
+            { char: "結婚", romaji: "kekkon", meaning: "Marriage", type: 'Vocabulary' },
+            { char: "独身", romaji: "dokushin", meaning: "Single", type: 'Vocabulary' },
+            { char: "お父さん", romaji: "otousan", meaning: "Father (Polite)", type: 'Vocabulary' },
+            { char: "お母さん", romaji: "okaasan", meaning: "Mother (Polite)", type: 'Vocabulary' },
+            { char: "支える", romaji: "sasaeru", meaning: "To support", type: 'Vocabulary' },
+            { char: "育てる", romaji: "sodateru", meaning: "To raise", type: 'Vocabulary' },
+            { char: "零", romaji: "rei", meaning: "Zero", type: 'Vocabulary' },
+            { char: "一", romaji: "ichi", meaning: "One", type: 'Vocabulary' },
+            { char: "二", romaji: "ni", meaning: "Two", type: 'Vocabulary' },
+            { char: "三", romaji: "san", meaning: "Three", type: 'Vocabulary' },
+            { char: "四", romaji: "yon", meaning: "Four", type: 'Vocabulary' },
+            { char: "五", romaji: "go", meaning: "Five", type: 'Vocabulary' },
+            { char: "六", romaji: "roku", meaning: "Six", type: 'Vocabulary' },
+            { char: "七", romaji: "nana", meaning: "Seven", type: 'Vocabulary' },
+            { char: "八", romaji: "hachi", meaning: "Eight", type: 'Vocabulary' },
+            { char: "九", romaji: "kyuu", meaning: "Nine", type: 'Vocabulary' },
+            { char: "十", romaji: "juu", meaning: "Ten", type: 'Vocabulary' },
+            { char: "百", romaji: "hyaku", meaning: "Hundred", type: 'Vocabulary' },
+            { char: "千", romaji: "sen", meaning: "Thousand", type: 'Vocabulary' },
+            { char: "万", romaji: "man", meaning: "Ten Thousand", type: 'Vocabulary' },
+            { char: "一人", romaji: "hitori", meaning: "One Person", type: 'Vocabulary' },
+            { char: "二人", romaji: "futari", meaning: "Two People", type: 'Vocabulary' },
+            { char: "一台", romaji: "ichidai", meaning: "One Machine", type: 'Vocabulary' },
+            { char: "一冊", romaji: "issatsu", meaning: "One Book", type: 'Vocabulary' },
+            { char: "一個", romaji: "ikko", meaning: "One Small Object", type: 'Vocabulary' },
+            { char: "一番", romaji: "ichiban", meaning: "Number 1", type: 'Vocabulary' },
+            { char: "服", romaji: "fuku", meaning: "Clothes", type: 'Vocabulary' },
+            { char: "シャツ", romaji: "shatsu", meaning: "Shirt", type: 'Vocabulary' },
+            { char: "ズボン", romaji: "zubon", meaning: "Pants", type: 'Vocabulary' },
+            { char: "スカート", romaji: "sukaato", meaning: "Skirt", type: 'Vocabulary' },
+            { char: "コート", romaji: "kooto", meaning: "Coat", type: 'Vocabulary' },
+            { char: "靴", romaji: "kutsu", meaning: "Shoes", type: 'Vocabulary' },
+            { char: "靴下", romaji: "kutsushita", meaning: "Socks", type: 'Vocabulary' },
+            { char: "帽子", romaji: "boushi", meaning: "Hat", type: 'Vocabulary' },
+            { char: "眼鏡", romaji: "megane", meaning: "Glasses", type: 'Vocabulary' },
+            { char: "鞄", romaji: "kaban", meaning: "Bag", type: 'Vocabulary' },
+            { char: "財布", romaji: "saifu", meaning: "Wallet", type: 'Vocabulary' },
+            { char: "傘", romaji: "kasa", meaning: "Umbrella", type: 'Vocabulary' },
+            { char: "着る", romaji: "kiru", meaning: "To wear (upper)", type: 'Vocabulary' },
+            { char: "履く", romaji: "haku", meaning: "To wear (lower)", type: 'Vocabulary' },
+            { char: "被る", romaji: "kaburu", meaning: "To wear (head)", type: 'Vocabulary' },
+            { char: "脱ぐ", romaji: "nugu", meaning: "To take off", type: 'Vocabulary' },
+            { char: "きつい", romaji: "kitsui", meaning: "Tight", type: 'Vocabulary' },
+            { char: "緩い", romaji: "yurui", meaning: "Loose", type: 'Vocabulary' },
+            { char: "新しい", romaji: "atarashii", meaning: "New", type: 'Vocabulary' },
+            { char: "古い", romaji: "furui", meaning: "Old", type: 'Vocabulary' },
+            { char: "行く", romaji: "iku", meaning: "To go", type: 'Vocabulary' },
+            { char: "来る", romaji: "kuru", meaning: "To come", type: 'Vocabulary' },
+            { char: "帰る", romaji: "kaeru", meaning: "To return", type: 'Vocabulary' },
+            { char: "歩く", romaji: "aruku", meaning: "To walk", type: 'Vocabulary' },
+            { char: "走る", romaji: "hashiru", meaning: "To run", type: 'Vocabulary' },
+            { char: "飛ぶ", romaji: "tobu", meaning: "To fly", type: 'Vocabulary' },
+            { char: "泳ぐ", romaji: "oyogu", meaning: "To swim", type: 'Vocabulary' },
+            { char: "曲がる", romaji: "magaru", meaning: "To turn", type: 'Vocabulary' },
+            { char: "止まる", romaji: "tomaru", meaning: "To stop", type: 'Vocabulary' },
+            { char: "右", romaji: "migi", meaning: "Right", type: 'Vocabulary' },
+            { char: "左", romaji: "hidari", meaning: "Left", type: 'Vocabulary' },
+            { char: "真っ直ぐ", romaji: "massugu", meaning: "Straight", type: 'Vocabulary' },
+            { char: "上", romaji: "ue", meaning: "Up", type: 'Vocabulary' },
+            { char: "下", romaji: "shita", meaning: "Down", type: 'Vocabulary' },
+            { char: "前", romaji: "mae", meaning: "Front", type: 'Vocabulary' },
+            { char: "後ろ", romaji: "ushiro", meaning: "Back", type: 'Vocabulary' },
+            { char: "外", romaji: "soto", meaning: "Outside", type: 'Vocabulary' },
+            { char: "中", romaji: "naka", meaning: "Inside", type: 'Vocabulary' },
+            { char: "車", romaji: "kuruma", meaning: "Car", type: 'Vocabulary' },
+            { char: "電車", romaji: "densha", meaning: "Train", type: 'Vocabulary' },
+            { char: "自転車", romaji: "jitensha", meaning: "Bicycle", type: 'Vocabulary' },
+            { char: "バス", romaji: "basu", meaning: "Bus", type: 'Vocabulary' },
+            { char: "飛行機", romaji: "hikouki", meaning: "Airplane", type: 'Vocabulary' },
+            { char: "朝ご飯", romaji: "asagohan", meaning: "Breakfast", type: 'Vocabulary' },
+            { char: "昼ご飯", romaji: "hirugohan", meaning: "Lunch", type: 'Vocabulary' },
+            { char: "晩ご飯", romaji: "bangohan", meaning: "Dinner", type: 'Vocabulary' },
+            { char: "肉", romaji: "niku", meaning: "Meat", type: 'Vocabulary' },
+            { char: "野菜", romaji: "yasai", meaning: "Vegetable", type: 'Vocabulary' },
+            { char: "ご飯", romaji: "gohan", meaning: "Rice/Meal", type: 'Vocabulary' },
+            { char: "魚", romaji: "sakana", meaning: "Fish", type: 'Vocabulary' },
+            { char: "卵", romaji: "tamago", meaning: "Egg", type: 'Vocabulary' },
+            { char: "果物", romaji: "kudamono", meaning: "Fruit", type: 'Vocabulary' },
+            { char: "パン", romaji: "pan", meaning: "Bread", type: 'Vocabulary' },
+            { char: "水", romaji: "mizu", meaning: "Water", type: 'Vocabulary' },
+            { char: "お茶", romaji: "ocha", meaning: "Tea", type: 'Vocabulary' },
+            { char: "コーヒー", romaji: "koohii", meaning: "Coffee", type: 'Vocabulary' },
+            { char: "牛乳", romaji: "gyuunyuu", meaning: "Milk", type: 'Vocabulary' },
+            { char: "お酒", romaji: "osake", meaning: "Alcohol", type: 'Vocabulary' },
+            { char: "料理する", romaji: "ryourisuru", meaning: "To cook", type: 'Vocabulary' },
+            { char: "食べる", romaji: "taberu", meaning: "To eat", type: 'Vocabulary' },
+            { char: "飲む", romaji: "nomu", meaning: "To drink", type: 'Vocabulary' },
+            { char: "茹でる", romaji: "yuderu", meaning: "To boil", type: 'Vocabulary' },
+            { char: "焼く", romaji: "yaku", meaning: "To bake/grill", type: 'Vocabulary' },
+            { char: "切る", romaji: "kiru", meaning: "To cut", type: 'Vocabulary' },
+            { char: "美味しい", romaji: "oishii", meaning: "Delicious", type: 'Vocabulary' },
+            { char: "甘い", romaji: "amai", meaning: "Sweet", type: 'Vocabulary' },
+            { char: "辛い", romaji: "karai", meaning: "Spicy", type: 'Vocabulary' },
+            { char: "塩辛い", romaji: "shiokarai", meaning: "Salty", type: 'Vocabulary' },
+            { char: "苦い", romaji: "nigai", meaning: "Bitter", type: 'Vocabulary' },
+            { char: "体", romaji: "karada", meaning: "Body", type: 'Vocabulary' },
+            { char: "頭", romaji: "atama", meaning: "Head", type: 'Vocabulary' },
+            { char: "顔", romaji: "kao", meaning: "Face", type: 'Vocabulary' },
+            { char: "目", romaji: "me", meaning: "Eye", type: 'Vocabulary' },
+            { char: "耳", romaji: "mimi", meaning: "Ear", type: 'Vocabulary' },
+            { char: "口", romaji: "kuchi", meaning: "Mouth", type: 'Vocabulary' },
+            { char: "鼻", romaji: "hana", meaning: "Nose", type: 'Vocabulary' },
+            { char: "手", romaji: "te", meaning: "Hand", type: 'Vocabulary' },
+            { char: "足", romaji: "ashi", meaning: "Foot/Leg", type: 'Vocabulary' },
+            { char: "お腹", romaji: "onaka", meaning: "Stomach", type: 'Vocabulary' },
+            { char: "背中", romaji: "senaka", meaning: "Back", type: 'Vocabulary' },
+            { char: "病気", romaji: "byouki", meaning: "Sick", type: 'Vocabulary' },
+            { char: "風邪", romaji: "kaze", meaning: "Cold", type: 'Vocabulary' },
+            { char: "痛い", romaji: "itai", meaning: "Painful", type: 'Vocabulary' },
+            { char: "薬", romaji: "kusuri", meaning: "Medicine", type: 'Vocabulary' },
+            { char: "病院", romaji: "byouin", meaning: "Hospital", type: 'Vocabulary' },
+            { char: "医者", romaji: "isha", meaning: "Doctor", type: 'Vocabulary' },
+            { char: "休む", romaji: "yasumu", meaning: "To rest", type: 'Vocabulary' },
+            { char: "仕事", romaji: "shigoto", meaning: "Work", type: 'Vocabulary' },
+            { char: "会社", romaji: "kaisha", meaning: "Company", type: 'Vocabulary' },
+            { char: "事務所", romaji: "jimusho", meaning: "Office", type: 'Vocabulary' },
+            { char: "会議", romaji: "kaigi", meaning: "Meeting", type: 'Vocabulary' },
+            { char: "書類", romaji: "shorui", meaning: "Document", type: 'Vocabulary' },
+            { char: "電話", romaji: "denwa", meaning: "Telephone", type: 'Vocabulary' },
+            { char: "会社員", romaji: "kaishain", meaning: "Company Employee", type: 'Vocabulary' },
+            { char: "同僚", romaji: "douryou", meaning: "Colleague", type: 'Vocabulary' },
+            { char: "上司", romaji: "joushi", meaning: "Boss", type: 'Vocabulary' },
+            { char: "部下", romaji: "buka", meaning: "Subordinate", type: 'Vocabulary' },
+            { char: "働く", romaji: "hataraku", meaning: "To work", type: 'Vocabulary' },
+            { char: "報告する", romaji: "houkokusuru", meaning: "To report", type: 'Vocabulary' },
+            { char: "連絡する", romaji: "renrakusuru", meaning: "To contact", type: 'Vocabulary' },
+            { char: "相談する", romaji: "soudansuru", meaning: "To discuss", type: 'Vocabulary' },
+            { char: "嬉しい", romaji: "ureshii", meaning: "Happy", type: 'Vocabulary' },
+            { char: "楽しい", romaji: "tanoshii", meaning: "Fun", type: 'Vocabulary' },
+            { char: "好き", romaji: "suki", meaning: "Like", type: 'Vocabulary' },
+            { char: "大好き", romaji: "daisuki", meaning: "Love", type: 'Vocabulary' },
+            { char: "面白い", romaji: "omoshiroi", meaning: "Interesting", type: 'Vocabulary' },
+            { char: "悲しい", romaji: "kanashii", meaning: "Sad", type: 'Vocabulary' },
+            { char: "寂しい", romaji: "sabishii", meaning: "Lonely", type: 'Vocabulary' },
+            { char: "嫌い", romaji: "kirai", meaning: "Hate", type: 'Vocabulary' },
+            { char: "怖い", romaji: "kowai", meaning: "Scary", type: 'Vocabulary' },
+            { char: "笑う", romaji: "warau", meaning: "To laugh", type: 'Vocabulary' },
+            { char: "泣く", romaji: "naku", meaning: "To cry", type: 'Vocabulary' },
+            { char: "怒る", romaji: "okoru", meaning: "To get angry", type: 'Vocabulary' },
+            { char: "心配する", romaji: "shinpaisuru", meaning: "To worry", type: 'Vocabulary' },
+            { char: "パソコン", romaji: "pasokon", meaning: "Computer", type: 'Vocabulary' },
+            { char: "スマホ", romaji: "sumaho", meaning: "Smartphone", type: 'Vocabulary' },
+            { char: "携帯電話", romaji: "keitaidenwa", meaning: "Mobile Phone", type: 'Vocabulary' },
+            { char: "タブレット", romaji: "taburetto", meaning: "Tablet", type: 'Vocabulary' },
+            { char: "カメラ", romaji: "kamera", meaning: "Camera", type: 'Vocabulary' },
+            { char: "インターネット", romaji: "intaanetto", meaning: "Internet", type: 'Vocabulary' },
+            { char: "メール", romaji: "meeru", meaning: "Email", type: 'Vocabulary' },
+            { char: "ウェブサイト", romaji: "webusaito", meaning: "Website", type: 'Vocabulary' },
+            { char: "パスワード", romaji: "pasuwaado", meaning: "Password", type: 'Vocabulary' },
+            { char: "使う", romaji: "tsukau", meaning: "To use", type: 'Vocabulary' },
+            { char: "送る", romaji: "okuru", meaning: "To send", type: 'Vocabulary' },
+            { char: "ダウンロードする", romaji: "daunroodosuru", meaning: "To download", type: 'Vocabulary' },
+            { char: "検索する", romaji: "kensakusuru", meaning: "To search", type: 'Vocabulary' },
+            { char: "クリックする", romaji: "kurikkusuru", meaning: "To click", type: 'Vocabulary' },
+            { char: "ログインする", romaji: "roguinsuru", meaning: "To login", type: 'Vocabulary' }
         ];
 
         const grammarData = [
-            { char: 'です / 私 / 学生', romaji: 'Watashi wa gakusei desu', meaning: 'I am a student', type: 'Grammar' },
-            { char: 'を / 食べる / ご飯', romaji: 'Gohan o taberu', meaning: 'Eat rice/meal', type: 'Grammar' },
-            { char: 'に / 行く / 学校', romaji: 'Gakkou ni iku', meaning: 'Go to school', type: 'Grammar' },
-            { char: 'は / 綺麗 / 花', romaji: 'Hana wa kirei', meaning: 'The flower is beautiful', type: 'Grammar' },
-            { char: 'の / 本 / 私', romaji: 'Watashi no hon', meaning: 'My book', type: 'Grammar' }
+            { char: '私は寿司を食べます', romaji: 'Watashi wa sushi o tabemasu', meaning: 'I eat sushi', type: 'Grammar' },
+            { char: '田中さんは本を読みます', romaji: 'Tanaka-san wa hon o yomimasu', meaning: 'Mr. Tanaka reads a book', type: 'Grammar' },
+            { char: '私は水を飲みます', romaji: 'Watashi wa mizu o nomimasu', meaning: 'I drink water', type: 'Grammar' },
+            { char: '先生は日本語を話します', romaji: 'Sensei wa nihongo o hanashimasu', meaning: 'The teacher speaks Japanese', type: 'Grammar' },
+            { char: '私は映画を見ます', romaji: 'Watashi wa eiga o mimasu', meaning: 'I watch a movie', type: 'Grammar' },
+            { char: '昨日、寿司を食べました', romaji: 'Kinou, sushi o tabemashita', meaning: 'I ate sushi yesterday', type: 'Grammar' },
+            { char: '明日、学校に行きます', romaji: 'Ashita, gakkou ni ikimasu', meaning: 'I will go to school tomorrow', type: 'Grammar' },
+            { char: '今、コーヒーを飲みます', romaji: 'Ima, ko-hi- o nomimasu', meaning: 'I drink coffee now', type: 'Grammar' },
+            { char: '毎日勉強をします', romaji: 'Mainichi benkyou o shimasu', meaning: 'I study every day', type: 'Grammar' },
+            { char: '友達が家に来ます', romaji: 'Tomodachi ga uchi ni kimasu', meaning: 'A friend is coming to my house', type: 'Grammar' },
+            { char: 'この寿司はとても美味しいです', romaji: 'Kono sushi wa totemo oishii desu', meaning: 'This sushi is very delicious', type: 'Grammar' },
+            { char: '綺麗な花ですね', romaji: 'Kirei na hana desu ne', meaning: 'It\'s a beautiful flower, isn\'t it?', type: 'Grammar' },
+            { char: '今日はとても寒いです', romaji: 'Kyou wa totemo samui desu', meaning: 'Today is very cold', type: 'Grammar' },
+            { char: '静かな部屋が好きです', romaji: 'Shizuka na heya ga suki desu', meaning: 'I like quiet rooms', type: 'Grammar' },
+            { char: '高い時計を買いました', romaji: 'Takai tokei o kaimashita', meaning: 'I bought an expensive watch', type: 'Grammar' },
+            { char: '机の上に本があります', romaji: 'Tsukue no ue ni hon ga arimasu', meaning: 'There is a book on the desk', type: 'Grammar' },
+            { char: '庭に猫がいます', romaji: 'Niwa ni neko ga imasu', meaning: 'There is a cat in the garden', type: 'Grammar' },
+            { char: '先生はどこにいますか？', romaji: 'Sensei wa doko ni imasu ka?', meaning: 'Where is the teacher?', type: 'Grammar' },
+            { char: '駅はどこですか？', romaji: 'Eki wa doko desu ka?', meaning: 'Where is the station?', type: 'Grammar' },
+            { char: '車があります', romaji: 'Kuruma ga arimasu', meaning: 'There is a car', type: 'Grammar' },
+            { char: 'ちょっと待ってください', romaji: 'Chotto matte kudasai', meaning: 'Please wait a moment', type: 'Grammar' },
+            { char: '食べてください', romaji: 'Tabete kudasai', meaning: 'Please eat', type: 'Grammar' },
+            { char: '行ってください', romaji: 'Itte kudasai', meaning: 'Please go', type: 'Grammar' },
+            { char: 'テレビを見ています', romaji: 'Terebi o mite imasu', meaning: 'I am watching TV', type: 'Grammar' },
+            { char: '水を飲んでください', romaji: 'Mizu o nonde kudasai', meaning: 'Please drink water', type: 'Grammar' }
         ];
 
         const particlesData = [
             { char: '私 __ 学生です', romaji: 'は (wa)', meaning: 'I am a student', type: 'Particles' },
-            { char: 'りんご __ 食べます', romaji: 'を (o)', meaning: 'Eat an apple', type: 'Particles' },
-            { char: '学校 __ 行きます', romaji: 'に (ni)', meaning: 'Go to school', type: 'Particles' },
             { char: '猫 __ います', romaji: 'が (ga)', meaning: 'There is a cat', type: 'Particles' },
-            { char: '東京 __ 住んでいます', romaji: 'に (ni)', meaning: 'Living in Tokyo', type: 'Particles' }
+            { char: '水 __ 飲みます', romaji: 'を (o)', meaning: 'Drink water', type: 'Particles' },
+            { char: '日本 __ 行きます', romaji: 'に (ni)', meaning: 'Go to Japan', type: 'Particles' },
+            { char: 'レストラン __ 食べます', romaji: 'で (de)', meaning: 'Eat at a restaurant', type: 'Particles' },
+            { char: '東京 __ 行きます', romaji: 'へ (e)', meaning: 'Go towards Tokyo', type: 'Particles' },
+            { char: '私 __ 本です', romaji: 'の (no)', meaning: 'It is my book', type: 'Particles' },
+            { char: '友達 __ 行きます', romaji: 'と (to)', meaning: 'Go with a friend', type: 'Particles' },
+            { char: '私 __ 学生です', romaji: 'も (mo)', meaning: 'I am also a student', type: 'Particles' },
+            { char: 'お元気です __', romaji: 'か (ka)', meaning: 'Are you well?', type: 'Particles' }
         ];
 
         let currentPool = [];
         let currentItem = null;
         let currentModule = '';
+        let allKanjiList = [];
+
+        async function fetchJoyoKanji() {
+            try {
+                const response = await fetch('https://kanjiapi.dev/v1/kanji/joyo');
+                allKanjiList = await response.json();
+                // Pick 50 random kanji to start with if we are in kanji mode
+                if (currentModule === 'kanji') {
+                    await loadRandomKanjiBatch();
+                }
+            } catch (error) {
+                console.error("Failed to fetch Kanji list", error);
+            }
+        }
+
+        async function loadRandomKanjiBatch() {
+            if (allKanjiList.length === 0) return;
+
+            // Pick 10 random kanji
+            const batch = [];
+            for (let i = 0; i < 10; i++) {
+                const randomChar = allKanjiList[Math.floor(Math.random() * allKanjiList.length)];
+                batch.push(randomChar);
+            }
+
+            // Fetch details for them
+            const detailsPromises = batch.map(char => fetch(`https://kanjiapi.dev/v1/kanji/${char}`).then(r => r.json()));
+            const details = await Promise.all(detailsPromises);
+
+            // Format for flashcards
+            const newKanjiData = details.map(d => ({
+                char: d.kanji,
+                romaji: d.on_readings.join(', ') || d.kun_readings.join(', '),
+                meaning: d.meanings.join(', '),
+                type: 'Kanji'
+            }));
+
+            kanjiData = newKanjiData;
+            currentPool = [...kanjiData];
+            // If we are currently waiting for a card, show one
+            if (document.getElementById('card-front-main').textContent === 'Loading...') {
+                nextCard();
+            }
+        }
 
         function switchModule(module, btn) {
             // Update UI
@@ -310,15 +629,26 @@
             area.classList.add('active');
 
             currentModule = module;
-            document.getElementById('current-module-title').textContent = module.charAt(0).toUpperCase() + module.slice(1) + ' Challenge';
+            document.getElementById('current-module-title').textContent = module === 'all' ? 'All Challenge' : module.charAt(0).toUpperCase() + module.slice(1) + ' Challenge';
 
             if (module === 'hiragana') currentPool = [...hiraganaData];
             else if (module === 'katakana') currentPool = [...katakanaData];
-            else if (module === 'kanji') currentPool = [...kanjiData];
+            else if (module === 'kanji') {
+                if (allKanjiList.length === 0) {
+                    fetchJoyoKanji();
+                    currentPool = [...kanjiData]; // Use placeholder initially
+                } else {
+                    loadRandomKanjiBatch(); // Refresh batch
+                    currentPool = [...kanjiData];
+                }
+            }
             else if (module === 'vocabulary') currentPool = [...vocabData];
             else if (module === 'grammar') currentPool = [...grammarData];
             else if (module === 'particles') currentPool = [...particlesData];
-            else if (module === 'all') currentPool = [...hiraganaData, ...katakanaData, ...kanjiData, ...vocabData, ...grammarData, ...particlesData];
+            else if (module === 'all') {
+                // For "All", we include everything. For Kanji, we just use the current batch or placeholder
+                currentPool = [...hiraganaData, ...katakanaData, ...kanjiData, ...vocabData, ...grammarData, ...particlesData];
+            }
 
             nextCard();
         }
@@ -328,6 +658,8 @@
             card.classList.remove('flipped');
 
             setTimeout(() => {
+                if (currentPool.length === 0) return;
+
                 const randomIndex = Math.floor(Math.random() * currentPool.length);
                 currentItem = currentPool[randomIndex];
 
@@ -340,11 +672,14 @@
 
                 // Contextual sub-text
                 if (currentItem.type === 'Grammar') {
-                    frontSub.textContent = 'Arrange these words correctly';
-                    frontMain.style.fontSize = '2.5rem';
+                    frontSub.textContent = 'Translate this sentence';
+                    frontMain.style.fontSize = '1.8rem';
                 } else if (currentItem.type === 'Particles') {
                     frontSub.textContent = 'Which particle fits the blank?';
                     frontMain.style.fontSize = '2.5rem';
+                } else if (currentItem.type === 'Vocabulary') {
+                    frontSub.textContent = 'What is the meaning?';
+                    frontMain.style.fontSize = currentItem.char.length > 5 ? '2.5rem' : '4rem';
                 } else {
                     frontSub.textContent = 'What is the meaning?';
                     frontMain.style.fontSize = currentItem.char.length > 3 ? '3.5rem' : '6rem';
@@ -356,7 +691,7 @@
                 // Adjust back font size
                 const backMain = document.getElementById('card-back-main');
                 if (currentItem.romaji.length > 15) {
-                    backMain.style.fontSize = '2rem';
+                    backMain.style.fontSize = '1.5rem';
                 } else {
                     backMain.style.fontSize = '3.5rem';
                 }
@@ -368,10 +703,11 @@
             document.getElementById('flashcard').classList.toggle('flipped');
         }
 
-        // Initialize with Hiragana
+        // Initialize with All Challenge as per request "All Challenge" is first
         window.onload = () => {
-            const firstBtn = document.querySelector('.nav-btn');
-            switchModule('hiragana', firstBtn);
+            const firstBtn = document.querySelector('.nav-btn'); // This selects the first one which is now "All Challenge"
+            switchModule('all', firstBtn);
+            fetchJoyoKanji(); // Start fetching kanji in background
         };
     </script>
 </body>
