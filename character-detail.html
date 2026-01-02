@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Detail - NihongoMastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .detail-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 500px;
+            border: 2px solid var(--primary-color);
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .detail-char {
+            font-size: 8rem;
+            font-family: var(--font-jp);
+            color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            margin-bottom: 1rem;
+            white-space: nowrap;
+        }
+
+        .detail-romaji {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .stroke-order-box {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 16px;
+            width: 100%;
+        }
+
+        .stroke-placeholder {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            background: white;
+            overflow: hidden;
+            gap: 1rem;
+        }
+
+        .stroke-placeholder svg {
+            width: auto;
+            height: 100%;
+            max-width: 150px;
+            max-height: 150px;
+            flex: 1;
+        }
+
+        .stroke-placeholder path {
+            stroke: var(--primary-color) !important;
+            stroke-width: 4 !important;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">NihongoMastery</a>
+                <div class="nav-links">
+                    <a href="home.html" class="nav-link">Dashboard</a>
+                    <a href="test.html" class="header-btn">Take Test</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container fixed-header-offset">
+        <div class="detail-card">
+            <div id="detail-char" class="detail-char">あ</div>
+            <div id="detail-romaji" class="detail-romaji">A</div>
+
+            <div class="stroke-order-box">
+                <p style="margin-bottom: 1rem; font-weight: 600; color: var(--secondary-color);">Writing Tutorial</p>
+                <div class="stroke-placeholder" id="stroke-container">
+                    Loading...
+                </div>
+                <button class="btn btn-primary" style="margin-top: 1.5rem; padding: 0.7rem 1.5rem;"
+                    onclick="replayAnimation()">Replay Animation</button>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button id="back-btn" class="btn" style="background: #eee; padding: 1rem 2rem;" onclick="goBack()">Back to
+                Chart</button>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const char = urlParams.get('char') || 'あ';
+        const type = urlParams.get('type') || 'hiragana';
+
+        document.getElementById('detail-char').textContent = char;
+
+        // Find romaji from our data sets if not provided
+        // For simplicity, we'll just use the char to load the stroke order
+        // and assume romaji is passed or we can look it up.
+        const romaji = urlParams.get('romaji') || '';
+        if (romaji) {
+            document.getElementById('detail-romaji').textContent = romaji;
+        }
+
+        function getUnicodeHex(char) {
+            let hex = char.charCodeAt(0).toString(16);
+            while (hex.length < 5) {
+                hex = "0" + hex;
+            }
+            return hex;
+        }
+
+        function loadStrokeOrder(char) {
+            const container = document.getElementById('stroke-container');
+            container.innerHTML = '<span style="color: #ccc;">Loading...</span>';
+
+            const chars = Array.from(char);
+            const promises = chars.map(c => {
+                const hex = getUnicodeHex(c);
+                const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+                return fetch(url).then(res => {
+                    if (!res.ok) throw new Error('Not found');
+                    return res.text();
+                });
+            });
+
+            Promise.all(promises)
+                .then(svgTexts => {
+                    container.innerHTML = "";
+                    svgTexts.forEach(svgData => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(svgData, "image/svg+xml");
+                        const svgElement = doc.querySelector("svg");
+                        if (svgElement) {
+                            container.appendChild(svgElement);
+                        }
+                    });
+                    animateStrokes();
+                })
+                .catch(error => {
+                    console.error('Error loading SVG:', error);
+                    container.innerHTML = '<span style="color: #ccc;">No animation available</span>';
+                });
+        }
+
+        function animateStrokes() {
+            const paths = document.querySelectorAll('.stroke-placeholder path');
+            paths.forEach((path, index) => {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                path.style.animation = `draw 1s linear forwards ${index * 0.8}s`;
+            });
+        }
+
+        function replayAnimation() {
+            const container = document.getElementById('stroke-container');
+            const svg = container.innerHTML;
+            container.innerHTML = '';
+            setTimeout(() => {
+                container.innerHTML = svg;
+                animateStrokes();
+            }, 10);
+        }
+
+        function goBack() {
+            window.location.href = type + '.html';
+        }
+
+        // Initialize
+        loadStrokeOrder(char);
+    </script>
+</body>
+
+</html>

@@ -389,6 +389,12 @@ nav {
     border-radius: 12px;
     text-align: center;
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    min-height: 120px;
 }
 
 .kana-card:hover {
@@ -398,10 +404,12 @@ nav {
 }
 
 .kana-char {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     font-family: var(--font-jp);
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
     margin-bottom: 0.25rem;
     white-space: nowrap;
 }

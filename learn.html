@@ -34,17 +34,17 @@
         </div>
 
         <div class="learning-grid animate-fade-in">
-            <div class="learn-box" onclick="toggleSection('hiragana')">
+            <div class="learn-box" onclick="window.location.href='hiragana.html'">
                 <span class="icon-placeholder">あ</span>
                 <h3>Learn Hiragana</h3>
                 <p>The foundation of Japanese reading.</p>
             </div>
-            <div class="learn-box" onclick="toggleSection('katakana')">
+            <div class="learn-box" onclick="window.location.href='katakana.html'">
                 <span class="icon-placeholder">ア</span>
                 <h3>Learn Katakana</h3>
                 <p>For foreign words and emphasis.</p>
             </div>
-            <div class="learn-box" onclick="toggleSection('kanji')">
+            <div class="learn-box" onclick="window.location.href='kanji.html'">
                 <span class="icon-placeholder">漢</span>
                 <h3>Learn Kanji</h3>
                 <p>Master the Chinese characters.</p>
@@ -66,119 +66,7 @@
             </div>
         </div>
 
-        <!-- Hiragana Section -->
-        <section id="hiragana-section" class="alphabet-section alphabet-container">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 2rem;">Hiragana Chart</h2>
-                <div class="kana-grid" id="hiragana-grid">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Katakana Section -->
-        <section id="katakana-section" class="alphabet-section alphabet-container">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 2rem;">Katakana Chart</h2>
-                <div class="kana-grid" id="katakana-grid">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Kanji Section -->
-        <section id="kanji-section" class="alphabet-section alphabet-container">
-            <div class="container" style="text-align: center;">
-                <h2>Kanji Learning</h2>
-                <p style="margin-top: 1rem; color: var(--text-light);">Start with the basics. Here are the first 5
-                    numbers.</p>
-                <div class="kana-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
-                    <div class="kana-card">
-                        <span class="kana-char">一</span>
-                        <span class="kana-romaji">Ichi (One)</span>
-                    </div>
-                    <div class="kana-card">
-                        <span class="kana-char">二</span>
-                        <span class="kana-romaji">Ni (Two)</span>
-                    </div>
-                    <div class="kana-card">
-                        <span class="kana-char">三</span>
-                        <span class="kana-romaji">San (Three)</span>
-                    </div>
-                    <div class="kana-card">
-                        <span class="kana-char">四</span>
-                        <span class="kana-romaji">Yon (Four)</span>
-                    </div>
-                    <div class="kana-card">
-                        <span class="kana-char">五</span>
-                        <span class="kana-romaji">Go (Five)</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Grammar Section -->
-        <section id="grammar-section" class="alphabet-section alphabet-container">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 2rem;">Basic Grammar</h2>
-                <div class="info-card" style="max-width: 800px; margin: 0 auto;">
-                    <h3>Sentence Structure: SOV</h3>
-                    <p>Japanese uses a Subject-Object-Verb structure.</p>
-                    <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
-                        <p><strong>English:</strong> I eat sushi.</p>
-                        <p><strong>Japanese:</strong> Watashi wa sushi o tabemasu.</p>
-                        <p style="color: var(--text-light); font-size: 0.9rem;">(I [topic] sushi [object] eat)</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Particle Section -->
-        <section id="particle-section" class="alphabet-section alphabet-container">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 2rem;">Essential Particles</h2>
-                <div class="section-grid">
-                    <div class="info-card">
-                        <h3>は (Wa)</h3>
-                        <p>Topic Marker. Indicates what the sentence is about.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>を (O)</h3>
-                        <p>Object Marker. Indicates the direct object of an action.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>が (Ga)</h3>
-                        <p>Subject Marker. Identifies the subject of the verb.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Flashcard Section -->
-        <section id="flashcard-section" class="alphabet-section alphabet-container">
-            <div class="container" style="text-align: center;">
-                <h2 style="margin-bottom: 2rem;">Flashcard Challenge</h2>
-
-                <div class="flashcard-container">
-                    <div class="flashcard" id="flashcard" onclick="flipCard()">
-                        <div class="flashcard-inner">
-                            <div class="flashcard-front">
-                                <span id="flashcard-char" class="kana-char" style="font-size: 5rem;">?</span>
-                                <p style="margin-top: 1rem; color: var(--text-light);">Click to Reveal</p>
-                            </div>
-                            <div class="flashcard-back">
-                                <span id="flashcard-romaji" class="kana-char" style="font-size: 3rem;">?</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flashcard-controls">
-                        <button class="btn btn-primary" onclick="nextCard()">Next Card</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+    </div>
     </div>
 
     <script src="script.js"></script>
