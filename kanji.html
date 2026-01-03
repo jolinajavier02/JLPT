@@ -670,34 +670,200 @@
                     </div>
                     <div class="set-card"
                         style="background: white; padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); box-shadow: var(--shadow-sm);">
-                        <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Temperature & State</h3>
+                        <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Body Parts</h3>
                         <div class="set-kanji" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="mini-kanji" onclick="openDetail('温')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">温</span>
-                            <span class="mini-kanji" onclick="openDetail('度')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">度</span>
-                            <span class="mini-kanji" onclick="openDetail('熱')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">熱</span>
-                            <span class="mini-kanji" onclick="openDetail('暖')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">暖</span>
-                            <span class="mini-kanji" onclick="openDetail('冷')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">冷</span>
-                            <span class="mini-kanji" onclick="openDetail('凍')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">凍</span>
-                            <span class="mini-kanji" onclick="openDetail('常')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">常</span>
-                            <span class="mini-kanji" onclick="openDetail('焦')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">焦</span>
-                            <span class="mini-kanji" onclick="openDetail('熟')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">熟</span>
-                            <span class="mini-kanji" onclick="openDetail('好')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">好</span>
-                            <span class="mini-kanji" onclick="openDetail('嫌')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">嫌</span>
-                            <span class="mini-kanji" onclick="openDetail('満')"
-                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">満</span>
+                            <span class="mini-kanji" onclick="openDetail('体')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">体</span>
+                            <span class="mini-kanji" onclick="openDetail('頭')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">頭</span>
+                            <span class="mini-kanji" onclick="openDetail('髪')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">髪</span>
+                            <span class="mini-kanji" onclick="openDetail('顔')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">顔</span>
+                            <span class="mini-kanji" onclick="openDetail('額')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">額</span>
+                            <span class="mini-kanji" onclick="openDetail('目')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">目</span>
+                            <span class="mini-kanji" onclick="openDetail('耳')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">耳</span>
+                            <span class="mini-kanji" onclick="openDetail('鼻')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">鼻</span>
+                            <span class="mini-kanji" onclick="openDetail('口')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">口</span>
+                            <span class="mini-kanji" onclick="openDetail('歯')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">歯</span>
+                            <span class="mini-kanji" onclick="openDetail('舌')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">舌</span>
+                            <span class="mini-kanji" onclick="openDetail('首')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">首</span>
+                            <span class="mini-kanji" onclick="openDetail('肩')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">肩</span>
+                            <span class="mini-kanji" onclick="openDetail('胸')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">胸</span>
+                            <span class="mini-kanji" onclick="openDetail('背')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">背</span>
+                            <span class="mini-kanji" onclick="openDetail('腕')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">腕</span>
+                            <span class="mini-kanji" onclick="openDetail('肘')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">肘</span>
+                            <span class="mini-kanji" onclick="openDetail('手')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">手</span>
+                            <span class="mini-kanji" onclick="openDetail('指')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">指</span>
+                            <span class="mini-kanji" onclick="openDetail('爪')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">爪</span>
+                            <span class="mini-kanji" onclick="openDetail('腹')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">腹</span>
+                            <span class="mini-kanji" onclick="openDetail('腰')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">腰</span>
+                            <span class="mini-kanji" onclick="openDetail('脚')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">脚</span>
                             <span class="mini-kanji" onclick="openDetail('足')"
                                 style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">足</span>
+                        </div>
+                    </div>
+                    <div class="set-card"
+                        style="background: white; padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); box-shadow: var(--shadow-sm);">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Internal Organs</h3>
+                        <div class="set-kanji" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="mini-kanji" onclick="openDetail('内')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">内</span>
+                            <span class="mini-kanji" onclick="openDetail('臓')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">臓</span>
+                            <span class="mini-kanji" onclick="openDetail('心')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">心</span>
+                            <span class="mini-kanji" onclick="openDetail('肺')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">肺</span>
+                            <span class="mini-kanji" onclick="openDetail('胃')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">胃</span>
+                            <span class="mini-kanji" onclick="openDetail('腸')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">腸</span>
+                            <span class="mini-kanji" onclick="openDetail('肝')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">肝</span>
+                            <span class="mini-kanji" onclick="openDetail('腎')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">腎</span>
+                            <span class="mini-kanji" onclick="openDetail('脳')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">脳</span>
+                            <span class="mini-kanji" onclick="openDetail('血')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">血</span>
+                            <span class="mini-kanji" onclick="openDetail('管')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">管</span>
+                            <span class="mini-kanji" onclick="openDetail('骨')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">骨</span>
+                            <span class="mini-kanji" onclick="openDetail('筋')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">筋</span>
+                            <span class="mini-kanji" onclick="openDetail('神')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">神</span>
+                            <span class="mini-kanji" onclick="openDetail('経')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">経</span>
+                            <span class="mini-kanji" onclick="openDetail('皮')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">皮</span>
+                            <span class="mini-kanji" onclick="openDetail('膚')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">膚</span>
+                            <span class="mini-kanji" onclick="openDetail('免')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">免</span>
+                            <span class="mini-kanji" onclick="openDetail('疫')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">疫</span>
+                        </div>
+                    </div>
+                    <div class="set-card"
+                        style="background: white; padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); box-shadow: var(--shadow-sm);">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Health & Illness</h3>
+                        <div class="set-kanji" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="mini-kanji" onclick="openDetail('健')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">健</span>
+                            <span class="mini-kanji" onclick="openDetail('康')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">康</span>
+                            <span class="mini-kanji" onclick="openDetail('病')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">病</span>
+                            <span class="mini-kanji" onclick="openDetail('気')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">気</span>
+                            <span class="mini-kanji" onclick="openDetail('痛')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">痛</span>
+                            <span class="mini-kanji" onclick="openDetail('頭')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">頭</span>
+                            <span class="mini-kanji" onclick="openDetail('喉')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">喉</span>
+                            <span class="mini-kanji" onclick="openDetail('熱')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">熱</span>
+                            <span class="mini-kanji" onclick="openDetail('咳')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">咳</span>
+                            <span class="mini-kanji" onclick="openDetail('吐')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">吐</span>
+                            <span class="mini-kanji" onclick="openDetail('痢')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">痢</span>
+                            <span class="mini-kanji" onclick="openDetail('便')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">便</span>
+                            <span class="mini-kanji" onclick="openDetail('秘')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">秘</span>
+                            <span class="mini-kanji" onclick="openDetail('腫')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">腫</span>
+                            <span class="mini-kanji" onclick="openDetail('花')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">花</span>
+                            <span class="mini-kanji" onclick="openDetail('粉')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">粉</span>
+                            <span class="mini-kanji" onclick="openDetail('症')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">症</span>
+                        </div>
+                    </div>
+                    <div class="set-card"
+                        style="background: white; padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); box-shadow: var(--shadow-sm);">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Medical & Exercise</h3>
+                        <div class="set-kanji" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="mini-kanji" onclick="openDetail('医')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">医</span>
+                            <span class="mini-kanji" onclick="openDetail('看')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">看</span>
+                            <span class="mini-kanji" onclick="openDetail('護')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">護</span>
+                            <span class="mini-kanji" onclick="openDetail('師')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">師</span>
+                            <span class="mini-kanji" onclick="openDetail('院')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">院</span>
+                            <span class="mini-kanji" onclick="openDetail('局')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">局</span>
+                            <span class="mini-kanji" onclick="openDetail('薬')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">薬</span>
+                            <span class="mini-kanji" onclick="openDetail('処')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">処</span>
+                            <span class="mini-kanji" onclick="openDetail('方')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">方</span>
+                            <span class="mini-kanji" onclick="openDetail('箋')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">箋</span>
+                            <span class="mini-kanji" onclick="openDetail('注')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">注</span>
+                            <span class="mini-kanji" onclick="openDetail('射')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">射</span>
+                            <span class="mini-kanji" onclick="openDetail('手')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">手</span>
+                            <span class="mini-kanji" onclick="openDetail('術')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">術</span>
+                            <span class="mini-kanji" onclick="openDetail('検')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">検</span>
+                            <span class="mini-kanji" onclick="openDetail('査')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">査</span>
+                            <span class="mini-kanji" onclick="openDetail('診')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">診</span>
+                            <span class="mini-kanji" onclick="openDetail('察')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">察</span>
+                            <span class="mini-kanji" onclick="openDetail('予')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">予</span>
+                            <span class="mini-kanji" onclick="openDetail('約')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">約</span>
+                            <span class="mini-kanji" onclick="openDetail('救')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">救</span>
+                            <span class="mini-kanji" onclick="openDetail('急')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">急</span>
+                            <span class="mini-kanji" onclick="openDetail('車')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">車</span>
+                            <span class="mini-kanji" onclick="openDetail('運')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">運</span>
+                            <span class="mini-kanji" onclick="openDetail('動')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">動</span>
+                            <span class="mini-kanji" onclick="openDetail('泳')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">泳</span>
+                            <span class="mini-kanji" onclick="openDetail('操')"
+                                style="cursor: pointer; padding: 0.4rem; background: #f0f4f8; border-radius: 6px; font-family: var(--font-jp); font-weight: 700;">操</span>
                         </div>
                     </div>
                 </div>
