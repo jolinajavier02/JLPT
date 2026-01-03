@@ -675,11 +675,15 @@
                 const response = await fetch(`https://kanjiapi.dev/v1/kanji/${char}`);
                 const data = await response.json();
 
+                // Pick the first reading (prefer Kun if available, otherwise On)
+                const allReadings = [...data.kun_readings, ...data.on_readings];
+                const primaryReading = allReadings[0] || '';
+
                 const details = {
                     char: data.kanji,
-                    kana: `On: ${data.on_readings.join(', ')} \n Kun: ${data.kun_readings.join(', ')}`,
-                    romaji: `On: ${data.on_readings.map(toRomaji).join(', ')} \n Kun: ${data.kun_readings.map(toRomaji).join(', ')}`,
-                    meaning: data.meanings.join(', '),
+                    kana: primaryReading,
+                    romaji: toRomaji(primaryReading),
+                    meaning: data.meanings[0] || 'Unknown',
                     type: 'Kanji'
                 };
                 kanjiData[char] = details;
@@ -823,11 +827,10 @@
                     frontSub.textContent = 'Readings & Meaning?';
                     frontMain.style.fontSize = '6rem';
 
-                    // Back: Readings (Kana) <br> Romaji <br> Meaning
-                    // No Kanji character on back as requested
-                    backMain.innerHTML = `<span style="font-size: 0.7em; line-height: 1.2; display: block;">${currentItem.kana.replace(/\n/g, '<br>')}</span><span style="font-size: 0.5em; display: block; margin-top: 0.5rem; color: rgba(255,255,255,0.7); font-weight: normal;">${currentItem.romaji.replace(/\n/g, '<br>')}</span>`;
+                    // Back: Reading (Kana) <br> Romaji <br> Meaning (English)
+                    backMain.innerHTML = `<span style="font-size: 1.2em; display: block;">${currentItem.kana}</span><span style="font-size: 0.6em; display: block; margin-top: 0.5rem; color: rgba(255,255,255,0.7); font-weight: normal;">${currentItem.romaji}</span>`;
                     backSub.textContent = currentItem.meaning;
-                    backMain.style.fontSize = '2.5rem';
+                    backMain.style.fontSize = '3rem';
 
                 } else {
                     // Hiragana / Katakana
