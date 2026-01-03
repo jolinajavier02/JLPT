@@ -635,6 +635,39 @@
             }
         }
 
+        function toRomaji(text) {
+            if (!text) return '';
+            let result = '';
+            let i = 0;
+            const combined = [...hiraganaData, ...katakanaData];
+
+            while (i < text.length) {
+                let found = false;
+                // Try 2 characters first (for Yoon)
+                if (i + 1 < text.length) {
+                    const pair = text.substring(i, i + 2);
+                    const match = combined.find(d => d.char === pair);
+                    if (match) {
+                        result += (result && !result.endsWith(' ') ? '' : '') + match.romaji;
+                        i += 2;
+                        found = true;
+                    }
+                }
+
+                if (!found) {
+                    const char = text[i];
+                    const match = combined.find(d => d.char === char);
+                    if (match) {
+                        result += match.romaji;
+                    } else {
+                        result += char;
+                    }
+                    i++;
+                }
+            }
+            return result;
+        }
+
         async function getKanjiDetails(char) {
             if (kanjiData[char]) return kanjiData[char];
 
@@ -644,7 +677,8 @@
 
                 const details = {
                     char: data.kanji,
-                    romaji: `On: ${data.on_readings.join(', ')} \n Kun: ${data.kun_readings.join(', ')}`,
+                    kana: `On: ${data.on_readings.join(', ')} \n Kun: ${data.kun_readings.join(', ')}`,
+                    romaji: `On: ${data.on_readings.map(toRomaji).join(', ')} \n Kun: ${data.kun_readings.map(toRomaji).join(', ')}`,
                     meaning: data.meanings.join(', '),
                     type: 'Kanji'
                 };
@@ -654,6 +688,7 @@
                 console.error(`Error fetching details for ${char}:`, error);
                 return {
                     char: char,
+                    kana: 'Unknown',
                     romaji: 'Unknown',
                     meaning: 'Could not load details',
                     type: 'Kanji'
@@ -788,10 +823,11 @@
                     frontSub.textContent = 'Readings & Meaning?';
                     frontMain.style.fontSize = '6rem';
 
-                    // Back: Kanji <br> Romaji <br> Meaning
-                    backMain.innerHTML = `${currentItem.char}<br><span style="font-size: 0.4em; display: block; margin-top: 0.5rem;">${currentItem.romaji}</span>`;
+                    // Back: Readings (Kana) <br> Romaji <br> Meaning
+                    // No Kanji character on back as requested
+                    backMain.innerHTML = `<span style="font-size: 0.7em; line-height: 1.2; display: block;">${currentItem.kana.replace(/\n/g, '<br>')}</span><span style="font-size: 0.5em; display: block; margin-top: 0.5rem; color: rgba(255,255,255,0.7); font-weight: normal;">${currentItem.romaji.replace(/\n/g, '<br>')}</span>`;
                     backSub.textContent = currentItem.meaning;
-                    backMain.style.fontSize = '5rem'; // Large Kanji on back too
+                    backMain.style.fontSize = '2.5rem';
 
                 } else {
                     // Hiragana / Katakana
@@ -812,9 +848,14 @@
                     }
                 }
 
-                // Specific adjustments for Grammar/Vocab back text size if it's too long
-                if (currentItem.type === 'Grammar' || currentItem.type === 'Vocabulary') {
+                // Specific adjustments for Grammar back text size
+                if (currentItem.type === 'Grammar') {
                     backMain.style.fontSize = '2rem';
+                }
+
+                // Vocabulary now matches others (3.5rem) as requested
+                if (currentItem.type === 'Vocabulary') {
+                    backMain.style.fontSize = '3.5rem';
                 }
 
             }, card.classList.contains('flipped') ? 300 : 0);
