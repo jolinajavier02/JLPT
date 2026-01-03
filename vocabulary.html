@@ -100,24 +100,29 @@
 
         .vocab-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
             padding-bottom: 4rem;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .vocab-card {
             background: white;
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: 1.2rem;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(0, 0, 0, 0.05);
             transition: var(--transition);
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.3rem;
             position: relative;
             overflow: hidden;
+            text-align: center;
+            align-items: center;
         }
 
         .vocab-card:hover {
@@ -149,7 +154,7 @@
         }
 
         .vocab-jp {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-family: var(--font-jp);
             color: var(--secondary-color);
             line-height: 1.2;
@@ -157,12 +162,18 @@
         }
 
         .vocab-meaning {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--vocab-primary);
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid #f1f5f9;
-            padding-bottom: 0.5rem;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .vocab-romaji {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
         }
 
         .compact-forms {
@@ -599,29 +610,10 @@
                 card.className = 'vocab-card animate-slide-in';
                 card.style.animationDelay = `${index * 0.02}s`;
 
-                const pastSubtitle = v.past_read ? `<div style="font-size: 0.7rem; color: #999;">${v.past_read}</div>` : '';
-                const negSubtitle = v.neg_read ? `<div style="font-size: 0.7rem; color: #999;">${v.neg_read}</div>` : '';
-
                 card.innerHTML = `
-                    <span class="vocab-furigana">${v.furigana}</span>
-                    <span class="vocab-jp">${v.jp}</span>
+                    <span class="vocab-jp">${v.furigana || v.jp}</span>
+                    <span class="vocab-romaji">${v.romaji}</span>
                     <span class="vocab-meaning">${v.en}</span>
-                    <div class="compact-forms">
-                        <div class="form-row">
-                            <span>Past:</span>
-                            <div style="text-align: right;">
-                                ${pastSubtitle}
-                                <span>${v.past}</span>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <span>Neg:</span>
-                            <div style="text-align: right;">
-                                ${negSubtitle}
-                                <span>${v.neg}</span>
-                            </div>
-                        </div>
-                    </div>
                 `;
                 grid.appendChild(card);
             });
