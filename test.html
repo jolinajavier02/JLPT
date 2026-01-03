@@ -677,13 +677,14 @@
 
                 // Pick the first reading (prefer Kun if available, otherwise On)
                 const allReadings = [...data.kun_readings, ...data.on_readings];
-                const primaryReading = allReadings[0] || '';
+                const rawReading = allReadings[0] || '';
+                const cleanReading = rawReading.replace(/\./g, ''); // Remove okurigana dot
 
                 const details = {
                     char: data.kanji,
-                    kana: primaryReading,
-                    romaji: toRomaji(primaryReading),
-                    meaning: data.meanings[0] || 'Unknown',
+                    kana: cleanReading,
+                    romaji: toRomaji(cleanReading),
+                    meaning: (data.meanings[0] || 'Unknown').split(',')[0].trim(), // Get only the first specific meaning
                     type: 'Kanji'
                 };
                 kanjiData[char] = details;
