@@ -3348,7 +3348,37 @@
                 const meaning = (data.meanings[0] || 'Unknown').split(',')[0].trim();
                 // Use the first reading as the primary answer for the button
                 const allReadings = [...(data.kun_readings || []), ...(data.on_readings || [])];
-                const primaryReading = allReadings[0] || '?';
+
+                // Smart Selection: Prefer readings without '.' (okurigana) and common ones
+                let primaryReading = allReadings[0] || '?';
+
+                // 1. Filter out verbs/adjectives (readings with '.')
+                const nounReadings = allReadings.filter(r => !r.includes('.'));
+
+                if (nounReadings.length > 0) {
+                    // 2. Check against a priority list of common N5/N4 readings
+                    const priorityReadings = [
+                        "naka", "chuu", "nichi", "jitsu", "hi", "ka", "getsu", "gatsu", "tsuki", "sui", "mizu",
+                        "moku", "boku", "ki", "ko", "kin", "kon", "kane", "kana", "do", "to", "tsuchi",
+                        "yama", "san", "kawa", "sen", "ta", "den", "hito", "jin", "nin", "shi", "su",
+                        "onna", "jo", "nyo", "otoko", "dan", "nan", "me", "kuchi", "kou", "ku", "mimi", "ji",
+                        "te", "shu", "ashi", "soku", "chikara", "ryoku", "riki", "ue", "jou", "shou", "nobo",
+                        "shita", "ge", "kuda", "migi", "yuu", "hidari", "sa", "dai", "tai", "shin", "haku",
+                        "koku", "seki", "shaku", "sei", "iku", "gyou", "kuru", "rai", "shoku", "in", "ken",
+                        "bun", "mon", "wa"
+                    ];
+
+                    // Find first reading that matches priority list
+                    const bestMatch = nounReadings.find(r => priorityReadings.includes(toRomaji(r)));
+
+                    if (bestMatch) {
+                        primaryReading = bestMatch;
+                    } else {
+                        // Fallback to first noun reading
+                        primaryReading = nounReadings[0];
+                    }
+                }
+
                 const primaryRomaji = toRomaji(primaryReading);
 
                 // Keep full list for details
