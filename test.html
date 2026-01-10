@@ -3127,7 +3127,7 @@
             if (selected === correct) {
                 btn.classList.add('correct');
                 score++;
-                feedbackMsg.textContent = "Correct!";
+                feedbackMsg.textContent = "";
                 feedbackMsg.style.color = "#15803d";
             }
 
@@ -3139,7 +3139,7 @@
                 buttons.forEach(b => {
                     if (b.textContent === correct) b.classList.add('correct');
                 });
-                feedbackMsg.textContent = "Wrong!";
+                feedbackMsg.textContent = "";
                 feedbackMsg.style.color = "#b91c1c";
             }
 
@@ -3147,8 +3147,11 @@
             let revealHTML = '';
 
             // Common Fields
-            revealHTML += `<div class="reveal-item"><span class="reveal-label">Romaji</span><div class="reveal-value">${itemData.romaji || correct}</div></div>`;
-            revealHTML += `<div class="reveal-item"><span class="reveal-label">English Meaning</span><div class="reveal-value">${itemData.meaning || '-'}</div></div>`;
+            // Only show Romaji/English for non-kana modules
+            if (currentModule !== 'hiragana' && currentModule !== 'katakana') {
+                revealHTML += `<div class="reveal-item"><span class="reveal-label">Romaji</span><div class="reveal-value">${itemData.romaji || correct}</div></div>`;
+                revealHTML += `<div class="reveal-item"><span class="reveal-label">English Meaning</span><div class="reveal-value">${itemData.meaning || '-'}</div></div>`;
+            }
 
             // Module Specific Fields
             if (currentModule === 'hiragana' || currentModule === 'katakana') {
