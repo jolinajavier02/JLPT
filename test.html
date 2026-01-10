@@ -202,6 +202,120 @@
             opacity: 0.5;
             pointer-events: none;
         }
+
+        /* Quiz Styles */
+        .quiz-container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quiz-container.active {
+            display: block;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .q-char {
+            font-size: 5rem;
+            font-family: var(--font-jp);
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .q-context {
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .choices-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .choice-btn {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .choice-btn:hover {
+            background: #f1f5f9;
+            border-color: var(--primary-color);
+        }
+
+        .choice-btn.correct {
+            background: #dcfce7;
+            border-color: #22c55e;
+            color: #15803d;
+        }
+
+        .choice-btn.wrong {
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #b91c1c;
+        }
+
+        .feedback-msg {
+            height: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .result-container {
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .result-container.active {
+            display: block;
+        }
+
+        .final-score {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .header-btn {
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 
@@ -234,30 +348,36 @@
             <button class="nav-btn" onclick="switchModule('vocabulary', this)">Vocabulary</button>
         </div>
 
-        <!-- Integrated Challenge Area -->
-        <div id="challenge-area" class="challenge-area">
-            <div style="text-align: center; margin-bottom: 0.5rem;">
-                <h1 id="current-module-title" style="margin-bottom: 0.2rem;">Select a Module</h1>
-                <p style="color: var(--text-light); font-size: 0.9rem;">Click the card to reveal the answer</p>
-            </div>
+        <!-- Quiz Interface -->
+        <div id="start-screen" style="text-align: center; margin-bottom: 2rem;">
+            <h1 id="module-title-display" style="margin-bottom: 0.5rem;">Select a Module</h1>
+            <p style="color: var(--text-light);">Choose a category above to begin the challenge.</p>
+        </div>
 
-            <div class="flashcard-container" onclick="flipCard()">
-                <div id="flashcard" class="flashcard">
-                    <div class="flashcard-front">
-                        <div id="card-module" class="module-badge">Module</div>
-                        <div id="card-front-main" class="card-char">?</div>
-                        <div id="card-front-sub" class="card-info">Select a module above to begin</div>
-                    </div>
-                    <div class="flashcard-back">
-                        <div id="card-back-main" class="card-answer">Answer</div>
-                        <div id="card-back-sub" class="card-meaning">Meaning</div>
-                    </div>
-                </div>
+        <div id="quiz-container" class="quiz-container">
+            <div class="quiz-header">
+                <div class="progress-text">Question <span id="q-current">1</span> / <span id="q-total">35</span></div>
+                <div class="score-text">Score: <span id="score">0</span></div>
             </div>
+            <div class="question-box">
+                <div id="q-char" class="q-char">?</div>
+                <div id="q-context" class="q-context">Select the correct answer</div>
+            </div>
+            <div id="choices-grid" class="choices-grid">
+                <!-- Buttons injected here -->
+            </div>
+            <div id="feedback-msg" class="feedback-msg"></div>
+            <button id="next-btn" class="btn btn-primary next-btn" onclick="nextQuestion()"
+                style="display: none; margin: 0 auto;">Next Question</button>
+        </div>
 
-            <div class="controls">
-                <button class="btn btn-primary" style="padding: 1rem 3rem; border-radius: 50px;"
-                    onclick="nextCard()">Next Challenge</button>
+        <div id="result-container" class="result-container">
+            <h2>Level Complete!</h2>
+            <div class="final-score">Score: <span id="final-score">0</span> / <span id="final-total">0</span></div>
+            <p id="result-message">Great job!</p>
+            <div class="result-actions">
+                <button class="btn" onclick="restartLevel()">Retry Level</button>
+                <button id="next-level-btn" class="btn btn-primary" onclick="startNextLevel()">Next Level</button>
             </div>
         </div>
     </div>
@@ -617,265 +737,271 @@
 
 
 
-        let currentPool = [];
-        let currentItem = null;
+        // Quiz State
         let currentModule = '';
-        // allKanjiList is declared above
+        let currentLevel = 0; // 0: Basic, 1: Medium, 2: Hard
+        const LEVELS = ['Basic', 'Medium', 'Hard'];
+        let quizQueue = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        // Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchJoyoKanji();
+            // Hide quiz container initially
+            document.getElementById('quiz-container').classList.remove('active');
+        });
 
         async function fetchJoyoKanji() {
             try {
                 const response = await fetch('https://kanjiapi.dev/v1/kanji/joyo');
-                const data = await response.json();
-                allKanjiList = data;
-                console.log(`Loaded ${allKanjiList.length} Kanji characters.`);
+                allKanjiList = await response.json();
             } catch (error) {
                 console.error("Failed to fetch Kanji list", error);
-                // Fallback
                 allKanjiList = ['日', '月', '火', '水', '木', '金', '土', '山', '川', '田'];
             }
         }
 
-        function toRomaji(text) {
-            if (!text) return '';
-            let result = '';
-            let i = 0;
-            const combined = [...hiraganaData, ...katakanaData];
+        function switchModule(module, btn) {
+            // Update Nav
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
 
-            while (i < text.length) {
-                let found = false;
-                // Try 2 characters first (for Yoon)
-                if (i + 1 < text.length) {
-                    const pair = text.substring(i, i + 2);
-                    const match = combined.find(d => d.char === pair);
-                    if (match) {
-                        result += (result && !result.endsWith(' ') ? '' : '') + match.romaji;
-                        i += 2;
-                        found = true;
-                    }
-                }
+            currentModule = module;
+            currentLevel = 0; // Reset to Basic/First level
 
-                if (!found) {
-                    const char = text[i];
-                    const match = combined.find(d => d.char === char);
-                    if (match) {
-                        result += match.romaji;
-                    } else {
-                        result += char;
-                    }
-                    i++;
-                }
-            }
-            return result;
+            // Update Title
+            const title = module.charAt(0).toUpperCase() + module.slice(1);
+            document.getElementById('module-title-display').textContent = `${title} Challenge`;
+
+            // Start Level 1
+            startLevel();
         }
 
-        async function getKanjiDetails(char) {
-            if (kanjiData[char]) return kanjiData[char];
+        function startLevel() {
+            // Hide Start Screen, Show Quiz
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('result-container').classList.remove('active');
+            document.getElementById('quiz-container').classList.add('active');
+
+            // Prepare Queue based on Module & Level
+            prepareQuizQueue();
+
+            // Reset Stats
+            currentQuestionIndex = 0;
+            score = 0;
+            updateStats();
+
+            // Show First Question
+            showQuestion();
+        }
+
+        function prepareQuizQueue() {
+            let sourceData = [];
+            let sliceStart = 0;
+            let sliceEnd = 0;
+            let count = 35; // Default
+
+            if (currentModule === 'hiragana') sourceData = hiraganaData;
+            else if (currentModule === 'katakana') sourceData = katakanaData;
+            else if (currentModule === 'vocabulary') { sourceData = vocabData; count = 50; }
+            else if (currentModule === 'grammar') { sourceData = grammarData; count = 35; }
+            else if (currentModule === 'particles') { sourceData = particlesData; count = 35; }
+            else if (currentModule === 'kanji') { sourceData = allKanjiList; count = 50; }
+            else if (currentModule === 'all') {
+                // Mix everything
+                sourceData = [...hiraganaData, ...katakanaData, ...vocabData, ...grammarData, ...particlesData];
+                if (allKanjiList.length > 0) sourceData = [...sourceData, ...allKanjiList.slice(0, 100)];
+                count = 50;
+            }
+
+            // Level Logic
+            if (currentModule === 'hiragana' || currentModule === 'katakana') {
+                // 105 items total. Split 35/35/35
+                if (currentLevel === 0) { sliceStart = 0; sliceEnd = 35; }
+                else if (currentLevel === 1) { sliceStart = 35; sliceEnd = 70; }
+                else { sliceStart = 70; sliceEnd = sourceData.length; }
+
+                quizQueue = sourceData.slice(sliceStart, sliceEnd);
+                shuffleArray(quizQueue);
+            } else {
+                // For others, just pick random 'count' items
+                let pool = [...sourceData];
+                shuffleArray(pool);
+                quizQueue = pool.slice(0, Math.min(count, pool.length));
+            }
+        }
+
+        function showQuestion() {
+            isAnswered = false;
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('feedback-msg').textContent = '';
+
+            const item = quizQueue[currentQuestionIndex];
+            const grid = document.getElementById('choices-grid');
+            grid.innerHTML = '';
+
+            // Determine Display and Answer
+            let questionText = '';
+            let correctAnswer = '';
+            let contextText = '';
+
+            if (typeof item === 'string') {
+                // Raw Kanji string
+                renderKanjiQuestion(item);
+                return;
+            } else {
+                // Object data
+                if (currentModule === 'grammar' || currentModule === 'particles') {
+                    questionText = item.char;
+                    correctAnswer = item.romaji;
+                    contextText = item.meaning;
+                } else {
+                    questionText = item.char;
+                    correctAnswer = item.romaji;
+                    contextText = "Select the correct Romaji";
+                }
+                renderQuestionUI(questionText, correctAnswer, contextText, item);
+            }
+        }
+
+        async function renderKanjiQuestion(char) {
+            document.getElementById('q-char').textContent = char;
+            document.getElementById('q-context').textContent = "Loading...";
 
             try {
                 const response = await fetch(`https://kanjiapi.dev/v1/kanji/${char}`);
                 const data = await response.json();
+                const meaning = (data.meanings[0] || 'Unknown').split(',')[0].trim();
 
-                // Pick the first reading (prefer Kun if available, otherwise On)
-                const allReadings = [...data.kun_readings, ...data.on_readings];
-                const rawReading = allReadings[0] || '';
-                const cleanReading = rawReading.replace(/\./g, ''); // Remove okurigana dot
-
-                const details = {
-                    char: data.kanji,
-                    kana: cleanReading,
-                    romaji: toRomaji(cleanReading),
-                    meaning: (data.meanings[0] || 'Unknown').split(',')[0].trim(), // Get only the first specific meaning
-                    type: 'Kanji'
-                };
-                kanjiData[char] = details;
-                return details;
-            } catch (error) {
-                console.error(`Error fetching details for ${char}:`, error);
-                return {
-                    char: char,
-                    kana: 'Unknown',
-                    romaji: 'Unknown',
-                    meaning: 'Could not load details',
-                    type: 'Kanji'
-                };
+                renderQuestionUI(char, meaning, "Select the correct meaning", { type: 'Kanji', meaning: meaning });
+            } catch (e) {
+                console.error(e);
+                nextQuestion();
             }
         }
 
-        function switchModule(module, btn) {
-            // Update UI
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
+        function renderQuestionUI(qText, correctAns, context, itemData) {
+            document.getElementById('q-char').textContent = qText;
+            document.getElementById('q-context').textContent = context;
+            document.getElementById('q-total').textContent = quizQueue.length;
+            document.getElementById('q-current').textContent = currentQuestionIndex + 1;
 
-            const area = document.getElementById('challenge-area');
-            area.classList.add('active');
+            // Generate Distractors
+            let choices = [correctAns];
+            let pool = [];
 
-            currentModule = module;
-            document.getElementById('current-module-title').textContent = module.charAt(0).toUpperCase() + module.slice(1) + ' Challenge';
-
-            if (module === 'hiragana') currentPool = [...hiraganaData];
-            else if (module === 'katakana') currentPool = [...katakanaData];
-            else if (module === 'vocabulary') currentPool = [...vocabData];
-            else if (module === 'grammar') currentPool = [...grammarData];
-            else if (module === 'particles') currentPool = [...particlesData];
-            else if (module === 'kanji') {
-                currentPool = allKanjiList; // The pool is the list of characters
+            // Get pool for distractors
+            if (currentModule === 'hiragana') pool = hiraganaData.map(i => i.romaji);
+            else if (currentModule === 'katakana') pool = katakanaData.map(i => i.romaji);
+            else if (currentModule === 'vocabulary') pool = vocabData.map(i => i.romaji);
+            else if (currentModule === 'kanji' || (itemData && itemData.type === 'Kanji')) {
+                pool = ["Sun", "Moon", "Fire", "Water", "Tree", "Gold", "Soil", "Mountain", "River", "Rice Field", "Book", "Person", "Year", "Big", "Small", "Middle", "Up", "Down", "Left", "Right"];
             }
-            else if (module === 'all') {
-                // For 'all', we mix data. For Kanji, we'll just add a placeholder string 'KANJI_RANDOM' 
-                // multiple times to give it weight
-                currentPool = [
-                    ...hiraganaData,
-                    ...katakanaData,
-                    ...vocabData,
-                    ...grammarData,
-                    ...particlesData
-                ];
-                // Add some random Kanji placeholders to the mix (e.g., 50 slots)
-                if (allKanjiList.length > 0) {
-                    for (let i = 0; i < 50; i++) currentPool.push('KANJI_RANDOM');
-                }
+            else if (currentModule === 'grammar' || currentModule === 'particles') {
+                pool = (currentModule === 'grammar' ? grammarData : particlesData).map(i => i.romaji);
+            } else {
+                pool = [...hiraganaData, ...katakanaData].map(i => i.romaji);
             }
 
-            nextCard();
+            // Filter out correct answer from pool
+            pool = pool.filter(a => a !== correctAns);
+            shuffleArray(pool);
+
+            // Take 3
+            choices.push(...pool.slice(0, 3));
+            shuffleArray(choices);
+
+            const grid = document.getElementById('choices-grid');
+            grid.innerHTML = '';
+
+            choices.forEach(choice => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                btn.textContent = choice;
+                btn.onclick = () => checkAnswer(btn, choice, correctAns);
+                grid.appendChild(btn);
+            });
         }
 
-        async function nextCard() {
-            const card = document.getElementById('flashcard');
-            card.classList.remove('flipped');
+        function checkAnswer(btn, selected, correct) {
+            if (isAnswered) return;
+            isAnswered = true;
 
-            setTimeout(async () => {
-                if (currentPool.length === 0) {
-                    if (currentModule === 'kanji') {
-                        document.getElementById('card-front-main').textContent = 'Loading...';
-                        document.getElementById('card-front-sub').textContent = 'Fetching Kanji data...';
-                    }
-                    return;
-                }
+            if (selected === correct) {
+                btn.classList.add('correct');
+                score++;
+                document.getElementById('feedback-msg').textContent = "Correct!";
+                document.getElementById('feedback-msg').style.color = "#15803d";
+            } else {
+                btn.classList.add('wrong');
+                // Highlight correct one
+                const buttons = document.querySelectorAll('.choice-btn');
+                buttons.forEach(b => {
+                    if (b.textContent === correct) b.classList.add('correct');
+                });
+                document.getElementById('feedback-msg').textContent = "Wrong!";
+                document.getElementById('feedback-msg').style.color = "#b91c1c";
+            }
 
-                const randomIndex = Math.floor(Math.random() * currentPool.length);
-                let selectedItem = currentPool[randomIndex];
+            updateStats();
+            document.getElementById('next-btn').style.display = 'block';
+        }
 
-                // Handle Kanji (Lazy Loading)
-                if (currentModule === 'kanji' || selectedItem === 'KANJI_RANDOM') {
-                    let charToFetch = selectedItem;
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= quizQueue.length) {
+                endLevel();
+            } else {
+                showQuestion();
+            }
+        }
 
-                    if (currentModule === 'kanji') {
-                        // selectedItem is the character itself
-                        charToFetch = selectedItem;
-                    } else if (selectedItem === 'KANJI_RANDOM') {
-                        // Pick a random kanji from the full list
-                        if (allKanjiList.length > 0) {
-                            charToFetch = allKanjiList[Math.floor(Math.random() * allKanjiList.length)];
-                        } else {
-                            // Fallback if list not loaded yet
-                            charToFetch = '日';
-                        }
-                    }
+        function endLevel() {
+            document.getElementById('quiz-container').classList.remove('active');
+            document.getElementById('result-container').classList.add('active');
 
-                    // Show loading state
-                    document.getElementById('card-module').textContent = 'Kanji';
-                    document.getElementById('card-front-main').textContent = charToFetch;
-                    document.getElementById('card-front-sub').textContent = 'Loading details...';
-                    document.getElementById('card-back-main').textContent = '...';
-                    document.getElementById('card-back-sub').textContent = '...';
+            document.getElementById('final-score').textContent = score;
+            document.getElementById('final-total').textContent = quizQueue.length;
 
-                    // Fetch details
-                    currentItem = await getKanjiDetails(charToFetch);
+            const nextBtn = document.getElementById('next-level-btn');
+
+            if (currentModule === 'hiragana' || currentModule === 'katakana') {
+                if (currentLevel < 2) {
+                    nextBtn.style.display = 'inline-block';
+                    nextBtn.textContent = `Start ${LEVELS[currentLevel + 1]} Level`;
                 } else {
-                    currentItem = selectedItem;
+                    nextBtn.style.display = 'none';
+                    document.getElementById('result-message').textContent = "Congratulations! You have mastered this module!";
                 }
-
-                // Update UI with currentItem details
-                document.getElementById('card-module').textContent = currentItem.type;
-
-                const frontMain = document.getElementById('card-front-main');
-                const frontSub = document.getElementById('card-front-sub');
-                const backMain = document.getElementById('card-back-main');
-                const backSub = document.getElementById('card-back-sub');
-
-                frontMain.textContent = currentItem.char;
-
-                // Reset styles
-                frontMain.style.fontSize = '';
-                backMain.style.fontSize = '';
-
-                // Contextual sub-text and font sizing
-                if (currentItem.type === 'Grammar') {
-                    frontSub.textContent = 'Translate this sentence';
-                    frontMain.style.fontSize = '1.8rem';
-
-                    // Back: Romaji <br> Kana <br> Meaning
-                    backMain.innerHTML = `${currentItem.romaji}<br><span style="font-size: 0.6em; color: rgba(255,255,255,0.8); font-weight: normal;">${currentItem.kana || ''}</span>`;
-                    backSub.textContent = currentItem.meaning;
-
-                } else if (currentItem.type === 'Particles') {
-                    // Front: Sentence <br> Romaji Subtitle
-                    frontSub.innerHTML = `${currentItem.sentenceRomaji || ''}<br><span style="font-size:0.7em; opacity: 0.8;">Which particle fits?</span>`;
-                    frontMain.style.fontSize = '2.5rem';
-
-                    backMain.textContent = currentItem.romaji;
-                    backSub.textContent = currentItem.meaning;
-
-                } else if (currentItem.type === 'Vocabulary') {
-                    frontSub.textContent = 'What is the meaning?';
-                    frontMain.style.fontSize = currentItem.char.length > 5 ? '2.5rem' : '4rem';
-
-                    // Back: Romaji <br> Kana <br> Meaning
-                    backMain.innerHTML = `${currentItem.romaji}<br><span style="font-size: 0.6em; color: rgba(255,255,255,0.8); font-weight: normal;">${currentItem.kana || ''}</span>`;
-                    backSub.textContent = currentItem.meaning;
-
-                } else if (currentItem.type === 'Kanji') {
-                    frontSub.textContent = 'Readings & Meaning?';
-                    frontMain.style.fontSize = '6rem';
-
-                    // Back: Reading (Kana) <br> Romaji <br> Meaning (English)
-                    backMain.innerHTML = `<span style="font-size: 1.2em; display: block;">${currentItem.kana}</span><span style="font-size: 0.6em; display: block; margin-top: 0.5rem; color: rgba(255,255,255,0.7); font-weight: normal;">${currentItem.romaji}</span>`;
-                    backSub.textContent = currentItem.meaning;
-                    backMain.style.fontSize = '3rem';
-
-                } else {
-                    // Hiragana / Katakana
-                    frontSub.textContent = 'What is the meaning?';
-                    frontMain.style.fontSize = '6rem';
-
-                    backMain.textContent = currentItem.romaji;
-                    backSub.textContent = currentItem.meaning;
-                    backMain.style.fontSize = '3.5rem';
-                }
-
-                // Adjust back font size for non-Kanji/Grammar/Vocab if needed
-                if (currentItem.type !== 'Kanji' && currentItem.type !== 'Grammar' && currentItem.type !== 'Vocabulary') {
-                    if (currentItem.romaji.length > 20) {
-                        backMain.style.fontSize = '1.2rem';
-                    } else if (currentItem.romaji.length > 10) {
-                        backMain.style.fontSize = '1.8rem';
-                    }
-                }
-
-                // Specific adjustments for Grammar back text size
-                if (currentItem.type === 'Grammar') {
-                    backMain.style.fontSize = '2rem';
-                }
-
-                // Vocabulary now matches others (3.5rem) as requested
-                if (currentItem.type === 'Vocabulary') {
-                    backMain.style.fontSize = '3.5rem';
-                }
-
-            }, card.classList.contains('flipped') ? 300 : 0);
+            } else {
+                nextBtn.style.display = 'inline-block';
+                nextBtn.textContent = "Start New Set";
+            }
         }
 
-        function flipCard() {
-            if (!currentModule) return;
-            document.getElementById('flashcard').classList.toggle('flipped');
+        function startNextLevel() {
+            if (currentModule === 'hiragana' || currentModule === 'katakana') {
+                currentLevel++;
+            }
+            startLevel();
         }
 
-        // Initialize with All Challenge
-        window.onload = () => {
-            const firstBtn = document.querySelector('.nav-btn'); // "All Challenge" is first
-            fetchJoyoKanji(); // Start fetching kanji in background
-            switchModule('all', firstBtn);
-        };
+        function restartLevel() {
+            startLevel();
+        }
+
+        function updateStats() {
+            document.getElementById('score').textContent = score;
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
     </script>
 </body>
 
