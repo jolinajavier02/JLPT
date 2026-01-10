@@ -3152,11 +3152,17 @@
             else if (currentModule === 'vocabulary') pool = vocabData.map(i => i.romaji);
 
             else if (currentModule === 'kanji' || (itemData && itemData.type === 'Kanji')) {
-                // Use Romaji readings for distractors
-                // Since we don't have a full list of readings readily available as a simple array, 
-                // we'll use a mix of Hiragana/Katakana or some common readings if possible.
-                // For simplicity and robustness without a full dictionary, let's use some common Japanese sounds/readings.
-                pool = ["ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ya", "yu", "yo", "ra", "ri", "ru", "re", "ro", "wa", "wo", "n"];
+                // Use realistic Kanji readings for distractors
+                pool = [
+                    "nichi, jitsu, hi, ka", "getsu, gatsu, tsuki", "ka, hi, ho", "sui, mizu", "moku, boku, ki, ko",
+                    "kin, kon, kane, kana", "do, to, tsuchi", "yama, san", "kawa, sen", "ta, den",
+                    "hito, jin, nin", "ko, shi, su", "onna, jo, nyo", "otoko, dan, nan", "me, moku, boku",
+                    "kuchi, kou, ku", "mimi, ji", "te, shu", "ashi, soku", "chikara, ryoku, riki",
+                    "ue, jou, shou, nobo", "shita, ka, ge, kuda", "naka, chuu", "migi, u, yuu", "hidari, sa",
+                    "ookii, dai, tai", "chiisai, shou", "atarashii, shin", "furui, ko", "shiroi, haku",
+                    "kuroi, koku", "akai, seki, shaku", "aoi, sei, shou", "iku, ko, gyou", "kuru, rai",
+                    "taberu, shoku", "nomu, in", "miru, ken", "kiku, bun, mon", "hanasu, wa"
+                ];
             }
 
             else if (currentModule === 'grammar' || currentModule === 'particles') {
