@@ -523,8 +523,11 @@
 
                     document.getElementById('detail-meaning').textContent = data.meanings.join(', ');
 
-                    const onRomaji = data.on_readings.map(r => `${r} (${toRomaji(r)})`).join(', ');
-                    const kunRomaji = data.kun_readings.map(r => `${r} (${toRomaji(r)})`).join(', ');
+                    const onReadings = data.on_readings || [];
+                    const kunReadings = data.kun_readings || [];
+
+                    const onRomaji = onReadings.map(r => `${r} (${toRomaji(r)})`).join(', ');
+                    const kunRomaji = kunReadings.map(r => `${r} (${toRomaji(r)})`).join(', ');
                     document.getElementById('detail-onyomi').textContent = onRomaji || '-';
                     document.getElementById('detail-kunyomi').textContent = kunRomaji || '-';
 
