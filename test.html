@@ -3147,9 +3147,8 @@
             let revealHTML = '';
 
             // Common Fields
-            // Only show Romaji/English for non-kana modules
+            // Only show English for non-kana modules (Romaji removed as per request)
             if (currentModule !== 'hiragana' && currentModule !== 'katakana') {
-                revealHTML += `<div class="reveal-item"><span class="reveal-label">Romaji</span><div class="reveal-value">${itemData.romaji || correct}</div></div>`;
                 revealHTML += `<div class="reveal-item"><span class="reveal-label">English Meaning</span><div class="reveal-value">${itemData.meaning || '-'}</div></div>`;
             }
 
