@@ -3346,14 +3346,20 @@
                 const response = await fetch(`https://kanjiapi.dev/v1/kanji/${char}`);
                 const data = await response.json();
                 const meaning = (data.meanings[0] || 'Unknown').split(',')[0].trim();
-                const readings = [...(data.kun_readings || []), ...(data.on_readings || [])].join(', ');
-                const readingsRomaji = toRomaji(readings);
+                // Use the first reading as the primary answer for the button
+                const allReadings = [...(data.kun_readings || []), ...(data.on_readings || [])];
+                const primaryReading = allReadings[0] || '?';
+                const primaryRomaji = toRomaji(primaryReading);
 
-                renderQuestionUI(char, readingsRomaji, "Select the correct reading", {
+                // Keep full list for details
+                const fullReadings = allReadings.join(', ');
+                const fullReadingsRomaji = toRomaji(fullReadings);
+
+                renderQuestionUI(char, primaryRomaji, "Select the correct reading", {
                     type: 'Kanji',
                     meaning: meaning,
-                    romaji: readingsRomaji,
-                    kana: readings, // Pass original Kana readings
+                    romaji: fullReadingsRomaji,
+                    kana: fullReadings, // Pass original Kana readings
                     sentence: null
                 });
             }
@@ -3393,16 +3399,15 @@
             else if (currentModule === 'vocabulary') pool = vocabData.map(i => i.romaji);
 
             else if (currentModule === 'kanji' || (itemData && itemData.type === 'Kanji')) {
-                // Use realistic Kanji readings for distractors
+                // Use realistic single Kanji readings for distractors
                 pool = [
-                    "nichi, jitsu, hi, ka", "getsu, gatsu, tsuki", "ka, hi, ho", "sui, mizu", "moku, boku, ki, ko",
-                    "kin, kon, kane, kana", "do, to, tsuchi", "yama, san", "kawa, sen", "ta, den",
-                    "hito, jin, nin", "ko, shi, su", "onna, jo, nyo", "otoko, dan, nan", "me, moku, boku",
-                    "kuchi, kou, ku", "mimi, ji", "te, shu", "ashi, soku", "chikara, ryoku, riki",
-                    "ue, jou, shou, nobo", "shita, ka, ge, kuda", "naka, chuu", "migi, u, yuu", "hidari, sa",
-                    "ookii, dai, tai", "chiisai, shou", "atarashii, shin", "furui, ko", "shiroi, haku",
-                    "kuroi, koku", "akai, seki, shaku", "aoi, sei, shou", "iku, ko, gyou", "kuru, rai",
-                    "taberu, shoku", "nomu, in", "miru, ken", "kiku, bun, mon", "hanasu, wa"
+                    "nichi", "jitsu", "hi", "ka", "getsu", "gatsu", "tsuki", "sui", "mizu", "moku", "boku", "ki", "ko",
+                    "kin", "kon", "kane", "kana", "do", "to", "tsuchi", "yama", "san", "kawa", "sen", "ta", "den",
+                    "hito", "jin", "nin", "shi", "su", "onna", "jo", "nyo", "otoko", "dan", "nan", "me",
+                    "kuchi", "kou", "ku", "mimi", "ji", "te", "shu", "ashi", "soku", "chikara", "ryoku", "riki",
+                    "ue", "jou", "shou", "nobo", "shita", "ge", "kuda", "naka", "chuu", "migi", "yuu", "hidari", "sa",
+                    "dai", "tai", "shou", "shin", "ko", "haku", "koku", "seki", "shaku", "sei", "shou",
+                    "iku", "gyou", "kuru", "rai", "shoku", "in", "ken", "bun", "mon", "wa"
                 ];
             }
 
