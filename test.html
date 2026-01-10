@@ -1511,8 +1511,6 @@
                 char: 'ピュ', romaji: 'pyu', meaning: 'Katakana (Yoon)', type: 'Katakana'
             }
 
-            ,
-            {
         ];
 
         // Kanji Data - JLPT N5-N1 with Difficulty Categories
@@ -3161,6 +3159,30 @@
             }
         }
 
+        // Kanji Progression Stages
+        const kanjiStages = [
+            { level: 'N5', category: 'all' },
+            { level: 'N4', category: 'easy' },
+            { level: 'N4', category: 'hard' },
+            { level: 'N3', category: 'basic' },
+            { level: 'N3', category: 'easy' },
+            { level: 'N3', category: 'medium' },
+            { level: 'N3', category: 'hard' },
+            { level: 'N2', category: 'basic' },
+            { level: 'N2', category: 'easy' },
+            { level: 'N2', category: 'medium' },
+            { level: 'N2', category: 'hard' },
+            { level: 'N1', category: 'basic' },
+            { level: 'N1', category: 'easy' },
+            { level: 'N1', category: 'medium' },
+            { level: 'N1', category: 'complicated' },
+            { level: 'N1', category: 'challenging' },
+            { level: 'N1', category: 'difficult' },
+            { level: 'N1', category: 'hard' },
+            { level: 'N1', category: 'complex' }
+        ];
+        let currentKanjiStageIndex = 0;
+
         function switchModule(module, btn) {
             // Update Nav
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -3168,6 +3190,7 @@
 
             currentModule = module;
             currentLevel = 0; // Reset to Basic/First level
+            currentKanjiStageIndex = 0; // Reset Kanji Stage
 
             // Update Title
             const title = module.charAt(0).toUpperCase() + module.slice(1);
@@ -3221,8 +3244,16 @@
             }
 
             else if (currentModule === 'kanji') {
-                sourceData = allKanjiList;
-                count = 50;
+                const stage = kanjiStages[currentKanjiStageIndex];
+                // Access data from kanjiLevels
+                if (kanjiLevels[stage.level] && kanjiLevels[stage.level].categories[stage.category]) {
+                    sourceData = kanjiLevels[stage.level].categories[stage.category];
+                    document.getElementById('module-title-display').textContent = `Kanji Challenge - ${stage.level} (${stage.category})`;
+                } else {
+                    // Fallback
+                    sourceData = allKanjiList;
+                }
+                count = sourceData.length; // Use all items in the set
             }
 
             else if (currentModule === 'all') {
@@ -3495,13 +3526,19 @@
             if (currentModule === 'hiragana' || currentModule === 'katakana') {
                 if (currentLevel < 2) {
                     nextBtn.style.display = 'inline-block';
-
                     nextBtn.textContent = `Start ${LEVELS[currentLevel + 1]} Level`;
-                }
-
-                else {
+                } else {
                     nextBtn.style.display = 'none';
                     document.getElementById('result-message').textContent = "Congratulations! You have mastered this module!";
+                }
+            } else if (currentModule === 'kanji') {
+                if (currentKanjiStageIndex < kanjiStages.length - 1) {
+                    nextBtn.style.display = 'inline-block';
+                    const nextStage = kanjiStages[currentKanjiStageIndex + 1];
+                    nextBtn.textContent = `Start ${nextStage.level} (${nextStage.category})`;
+                } else {
+                    nextBtn.style.display = 'none';
+                    document.getElementById('result-message').textContent = "Congratulations! You have mastered all JLPT Kanji!";
                 }
             }
 
@@ -3514,6 +3551,8 @@
         function startNextLevel() {
             if (currentModule === 'hiragana' || currentModule === 'katakana') {
                 currentLevel++;
+            } else if (currentModule === 'kanji') {
+                currentKanjiStageIndex++;
             }
 
             startLevel();
