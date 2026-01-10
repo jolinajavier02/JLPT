@@ -3084,7 +3084,7 @@
                 if (currentModule === 'grammar' || currentModule === 'particles') {
                     questionText = item.char;
                     correctAnswer = item.romaji;
-                    contextText = item.meaning;
+                    contextText = "Select the correct reading";
                 }
 
                 else {
@@ -3217,8 +3217,8 @@
             let revealHTML = '';
 
             // Common Fields
-            // Only show English for non-kana modules AND non-grammar/particle modules (as requested "do not add the english below" for grammar/particle)
-            if (currentModule !== 'hiragana' && currentModule !== 'katakana' && currentModule !== 'grammar' && currentModule !== 'particles') {
+            // Only show English for non-kana modules (Romaji removed as per request)
+            if (currentModule !== 'hiragana' && currentModule !== 'katakana') {
                 revealHTML += `<div class="reveal-item"><span class="reveal-label">English Meaning</span><div class="reveal-value">${itemData.meaning || '-'}</div></div>`;
             }
 
@@ -3241,16 +3241,8 @@
             }
 
             else if (currentModule === 'grammar' || currentModule === 'particles') {
-                // Grammar/Particles: Sample Sentence (The 'char' is usually the sentence)
-                // For particles, 'sentenceRomaji' is also available
-                let sentence = itemData.char;
-
-                if (currentModule === 'particles') {
-                    // Fill in the blank for the reveal
-                    sentence = sentence.replace('__', itemData.romaji.split(' ')[0]);
-                }
-
-                revealHTML += `<div class="reveal-sentence" >"${sentence}" </div>`;
+                // Grammar/Particles: Sample Sentence removed as per request
+                // Only English meaning is shown (handled in common fields)
             }
 
             revealArea.innerHTML = revealHTML;
