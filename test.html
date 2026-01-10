@@ -310,8 +310,8 @@
         }
 
         .next-btn {
-            margin-top: 0.5rem;
-            /* Reduced gap */
+            margin-top: 10px;
+            /* Reduced gap to 10-15px as requested */
         }
 
         .choices-grid {
@@ -3218,8 +3218,14 @@
 
             // Common Fields
             // Only show English for non-kana modules (Romaji removed as per request)
+            // Only show English for non-kana modules (Romaji removed as per request)
             if (currentModule !== 'hiragana' && currentModule !== 'katakana') {
-                revealHTML += `<div class="reveal-item"><span class="reveal-label">English Meaning</span><div class="reveal-value">${itemData.meaning || '-'}</div></div>`;
+                let meaningDisplay = itemData.meaning || '-';
+                // For Grammar/Particles, append Kana meaning
+                if ((currentModule === 'grammar' || currentModule === 'particles') && itemData.kana) {
+                    meaningDisplay += ` (${itemData.kana})`;
+                }
+                revealHTML += `<div class="reveal-item"><span class="reveal-label">English Meaning</span><div class="reveal-value">${meaningDisplay}</div></div>`;
             }
 
             // Module Specific Fields
@@ -3230,14 +3236,8 @@
             else if (currentModule === 'vocabulary' || currentModule === 'kanji' || (itemData && itemData.type === 'Kanji')) {
 
                 // Vocab: Sample Sentence (Kanji excluded as per request)
-                if (itemData.sentence && itemData.type !== 'Kanji') {
-                    revealHTML += `<div class="reveal-sentence" >"${itemData.sentence}" </div>`;
-                }
-
-                else if (itemData.type !== 'Kanji') {
-                    // Placeholder if missing (only for Vocab)
-                    revealHTML += `<div class="reveal-sentence" style="color: #999; font-size: 0.9rem;" >(Sample sentence not available)</div>`;
-                }
+                // Vocab: Sample Sentence removed as per request
+                // if (itemData.sentence && itemData.type !== 'Kanji') { ... }
             }
 
             else if (currentModule === 'grammar' || currentModule === 'particles') {
