@@ -2905,11 +2905,7 @@
             // Update Title
             const title = module.charAt(0).toUpperCase() + module.slice(1);
 
-            document.getElementById('module-title-display').textContent = `$ {
-                title
-            }
-
-            Challenge`;
+            document.getElementById('module-title-display').textContent = `${title} Challenge`;
 
             // Start Level 1
             startLevel();
@@ -3049,7 +3045,7 @@
             document.getElementById('q-context').textContent = "Loading...";
 
             try {
-                const response = await fetch(`https: //kanjiapi.dev/v1/kanji/${char}`);
+                const response = await fetch(`https://kanjiapi.dev/v1/kanji/${char}`);
                 const data = await response.json();
                 const meaning = (data.meanings[0] || 'Unknown').split(',')[0].trim();
                 const readings = [...(data.kun_readings || []), ...(data.on_readings || [])].join(', ');
@@ -3151,23 +3147,12 @@
             let revealHTML = '';
 
             // Common Fields
-            revealHTML += `<div class="reveal-item" ><span class="reveal-label" >Romaji</span><div class="reveal-value" >$ {
-                itemData.romaji || correct
-            }
-
-            </div></div>`;
-
-            revealHTML += `<div class="reveal-item" ><span class="reveal-label" >English Meaning</span><div class="reveal-value" >$ {
-                itemData.meaning || '-'
-            }
-
-            </div></div>`;
+            revealHTML += `<div class="reveal-item"><span class="reveal-label">Romaji</span><div class="reveal-value">${itemData.romaji || correct}</div></div>`;
+            revealHTML += `<div class="reveal-item"><span class="reveal-label">English Meaning</span><div class="reveal-value">${itemData.meaning || '-'}</div></div>`;
 
             // Module Specific Fields
             if (currentModule === 'hiragana' || currentModule === 'katakana') {
-                // Charts: Past/Negative (Not applicable for basic chars, but requested)
-                revealHTML += `<div class="reveal-item" ><span class="reveal-label" >Past Form</span><div class="reveal-value" >-</div></div>`;
-                revealHTML += `<div class="reveal-item" ><span class="reveal-label" >Negative Form</span><div class="reveal-value" >-</div></div>`;
+                // No extra fields for basic kana
             }
 
             else if (currentModule === 'vocabulary' || currentModule === 'kanji' || (itemData && itemData.type === 'Kanji')) {
@@ -3228,11 +3213,7 @@
                 if (currentLevel < 2) {
                     nextBtn.style.display = 'inline-block';
 
-                    nextBtn.textContent = `Start $ {
-                        LEVELS[currentLevel + 1]
-                    }
-
-                    Level`;
+                    nextBtn.textContent = `Start ${LEVELS[currentLevel + 1]} Level`;
                 }
 
                 else {
