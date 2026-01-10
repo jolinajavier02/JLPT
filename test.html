@@ -3112,6 +3112,7 @@
                     type: 'Kanji',
                     meaning: meaning,
                     romaji: readingsRomaji,
+                    kana: readings, // Pass original Kana readings
                     sentence: null
                 });
             }
@@ -3219,13 +3220,15 @@
             // Common Fields
             // Only show English for non-kana modules (Romaji removed as per request)
             // Only show English for non-kana modules (Romaji removed as per request)
+            // Only show English for non-kana modules (Romaji removed as per request)
             if (currentModule !== 'hiragana' && currentModule !== 'katakana') {
-                let meaningDisplay = itemData.meaning || '-';
-                // For Grammar/Particles, append Kana meaning
-                if ((currentModule === 'grammar' || currentModule === 'particles') && itemData.kana) {
-                    meaningDisplay += ` (${itemData.kana})`;
+                // English Meaning
+                revealHTML += `<div class="reveal-item"><span class="reveal-label">English Meaning</span><div class="reveal-value">${itemData.meaning || '-'}</div></div>`;
+
+                // Kana Reading (Hiragana/Katakana translation)
+                if (itemData.kana) {
+                    revealHTML += `<div class="reveal-item"><span class="reveal-label">Reading</span><div class="reveal-value">${itemData.kana}</div></div>`;
                 }
-                revealHTML += `<div class="reveal-item"><span class="reveal-label">English Meaning</span><div class="reveal-value">${meaningDisplay}</div></div>`;
             }
 
             // Module Specific Fields
