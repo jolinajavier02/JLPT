@@ -86,10 +86,40 @@
                 <div class="nav-links">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="test.html" class="header-btn">Take Test</a>
+                    <div id="user-profile"
+                        style="display: none; align-items: center; gap: 0.5rem; color: var(--secondary-color); font-weight: 600;">
+                        <span id="user-name">User</span>
+                        <div
+                            style="width: 35px; height: 35px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem;">
+                            U</div>
+                    </div>
                 </div>
             </nav>
         </div>
     </header>
+
+    <script>
+        // Check Auth
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user || !user.isLoggedIn) {
+                // If not logged in, redirect to login
+                window.location.href = 'login.html';
+            } else {
+                // Show user details
+                const profile = document.getElementById('user-profile');
+                const nameSpan = document.getElementById('user-name');
+                const avatar = profile.querySelector('div');
+
+                profile.style.display = 'flex';
+                // Hide "Take Test" or keep it? User wants "user details". Let's simply append user profile info.
+                // Or maybe hide the "Start Learning" type links if they were there (but they are not in header).
+
+                nameSpan.textContent = user.name;
+                avatar.textContent = user.name.charAt(0).toUpperCase();
+            }
+        });
+    </script>
 
     <div class="main-content">
         <div class="dashboard-header">

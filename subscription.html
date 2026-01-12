@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Plan - Notesjp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .pricing-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(180deg, #fff5f7 0%, white 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            width: 100%;
+            margin-top: 3rem;
+        }
+
+        .check-list {
+            text-align: left;
+            margin: 2rem 0;
+            color: var(--text-light);
+        }
+
+        .check-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .check-list li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="main-header" style="position: absolute; background: transparent; border: none; box-shadow: none;">
+        <div class="container">
+            <nav style="justify-content: center;">
+                <a href="#" class="logo">Notesjp</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="pricing-container animate-fade-in">
+        <div style="text-align: center; max-width: 600px;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Choose Your Plan</h1>
+            <p style="color: var(--text-light); font-size: 1.1rem;">Unlock full access to all lessons, quizzes, and
+                tracking features. Start your journey today.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Monthly Plan -->
+            <div class="pricing-card">
+                <h3 style="color: var(--text-light);">Monthly</h3>
+                <div class="price-tag">$5<span>/month</span></div>
+                <p>Perfect for short-term goals and flexibility.</p>
+
+                <ul class="check-list">
+                    <li>Full access to all lessons</li>
+                    <li>Interactive quizzes</li>
+                    <li>Progress tracking</li>
+                    <li>Cancel anytime</li>
+                </ul>
+
+                <button class="btn btn-outline" style="width: 100%;" onclick="selectPlan('monthly')">Select
+                    Monthly</button>
+            </div>
+
+            <!-- Yearly Plan -->
+            <div class="pricing-card featured">
+                <div
+                    style="background: var(--primary-color); color: white; padding: 0.3rem 1rem; border-radius: 20px; display: inline-block; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem;">
+                    BEST VALUE</div>
+                <h3>Yearly</h3>
+                <div class="price-tag" style="color: var(--primary-color);">$30<span>/year</span></div>
+                <p>Save 50% compared to monthly. Best for fluency.</p>
+
+                <ul class="check-list">
+                    <li><strong>Everything in Monthly</strong></li>
+                    <li>Offline access</li>
+                    <li>Priority support</li>
+                    <li>Certification certificate</li>
+                </ul>
+
+                <button class="btn btn-primary" style="width: 100%;" onclick="selectPlan('yearly')">Select
+                    Yearly</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectPlan(plan) {
+            // Retrieve current user
+            const user = JSON.parse(localStorage.getItem('user')) || {};
+
+            // Update subscription status
+            user.subscription = plan;
+            user.subscriptionDate = new Date().toISOString();
+
+            localStorage.setItem('user', JSON.stringify(user));
+
+            // Simulate processing
+            const button = event.target;
+            const originalText = button.innerText;
+            button.innerText = 'Processing...';
+            button.style.opacity = '0.8';
+
+            setTimeout(() => {
+                // Redirect to dashboard (home)
+                window.location.href = 'home.html';
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
