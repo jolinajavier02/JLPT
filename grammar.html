@@ -247,18 +247,83 @@
         @media (max-width: 992px) {
             .main-container {
                 flex-direction: column;
+                height: auto;
+                min-height: calc(100vh - 140px);
+                /* Adjust for mobile header */
             }
 
             .sidebar {
                 width: 100%;
                 position: static;
                 margin-bottom: 1rem;
+                padding: 1rem;
             }
 
             .topic-list {
                 display: flex;
-                flex-wrap: wrap;
+                overflow-x: auto;
                 gap: 0.5rem;
+                padding-bottom: 0.5rem;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .topic-item {
+                flex: 0 0 auto;
+                margin-bottom: 0;
+            }
+
+            /* Scrollbar hiding for cleaner look */
+            .topic-list::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .topic-list::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            .topic-list::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 4px;
+            }
+
+            .content-area {
+                height: 60vh;
+                /* Fixed height for scrollable content on mobile */
+                min-height: 400px;
+            }
+
+            .book-page {
+                padding: 1.5rem 1rem 4rem 1rem;
+                /* More bottom padding for nav buttons */
+            }
+
+            .book-nav {
+                top: auto;
+                bottom: 10px;
+                transform: none;
+                width: 50px;
+                height: 50px;
+                background: rgba(255, 255, 255, 0.95);
+                border: 2px solid var(--primary-color);
+            }
+
+            .book-nav.prev {
+                left: 20px;
+            }
+
+            .book-nav.next {
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lesson-header h1 {
+                font-size: 1.3rem;
+            }
+
+            .content-area {
+                height: 65vh;
             }
         }
     </style>
