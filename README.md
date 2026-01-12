@@ -1,99 +1,73 @@
 # Notesjp - JLPT Learning Platform
 
-A comprehensive Japanese language learning platform with integrated payment processing.
+A comprehensive Japanese language learning platform for mastering the Japanese Language Proficiency Test (JLPT).
 
-## 🚀 Quick Start
+## 🎌 Features
 
-### 1. Install Dependencies
+- **Hiragana & Katakana**: Learn the basic Japanese alphabets with interactive charts
+- **Kanji**: Master Chinese characters used in Japanese
+- **Grammar**: Understand sentence structure and grammar patterns
+- **Particles**: Learn essential sentence connectors
+- **Vocabulary**: Expand your word knowledge across multiple categories
+- **Practice Tests**: Test your knowledge with interactive quizzes
+
+## 🚀 Getting Started
+
+### Option 1: Open Directly
+Simply open `index.html` in your web browser.
+
+### Option 2: Use a Local Server
+For better performance, use a local server:
+
 ```bash
-npm install
-```
-
-### 2. Set Up Environment Variables
-Copy `.env.example` to `.env`:
-```bash
-cp .env.example .env
-```
-
-Then edit `.env` and add your PayMongo API keys:
-```
-PAYMONGO_SECRET_KEY=sk_test_your_key_here
-PAYMONGO_PUBLIC_KEY=pk_test_your_key_here
-```
-
-Get your keys from: https://dashboard.paymongo.com/
-
-### 3. Start the Payment Server
-```bash
-npm start
-```
-
-The server will run on http://localhost:3000
-
-### 4. Open the Website
-Open `index.html` in your browser or use a local server:
-```bash
-# Option 1: Python
+# Python
 python3 -m http.server 8000
 
-# Option 2: Node.js (install first: npm install -g http-server)
+# Node.js (install first: npm install -g http-server)
 http-server -p 8000
 ```
 
 Then visit: http://localhost:8000
-
-## 📋 Testing Payments
-
-### Test Cards (PayMongo Test Mode)
-
-**Successful Payment:**
-- Card: `4343 4343 4343 4345`
-- Expiry: Any future date (e.g., `12/25`)
-- CVC: Any 3 digits (e.g., `123`)
-
-**Failed Payment:**
-- Card: `4571 7360 0000 0002`
-
-## 🌐 Deployment
-
-See `PAYMENT_INTEGRATION_GUIDE.md` for detailed deployment instructions.
-
-### Quick Deploy to Railway
-1. Push code to GitHub
-2. Go to https://railway.app/
-3. Create new project from GitHub repo
-4. Add environment variables
-5. Deploy!
-
-## 💰 Pricing
-
-- Monthly: ₱275 ($5 USD)
-- Yearly: ₱1,650 ($30 USD)
 
 ## 📁 Project Structure
 
 ```
 JLPT/
 ├── index.html              # Landing page
-├── login.html              # Login page
-├── register.html           # Registration page
-├── subscription.html       # Plan selection
-├── payment.html            # Payment processing
 ├── home.html               # Learning dashboard
-├── profile.html            # User profile
-├── server.js               # Payment backend
-├── package.json            # Dependencies
-├── .env                    # Environment variables (not in git)
-└── PAYMENT_INTEGRATION_GUIDE.md  # Detailed setup guide
+├── hiragana.html           # Hiragana learning module
+├── katakana.html           # Katakana learning module
+├── kanji.html              # Kanji learning module
+├── grammar.html            # Grammar lessons
+├── particles.html          # Particles guide
+├── vocabulary.html         # Vocabulary lists
+├── test.html               # Practice tests
+├── character-detail.html   # Character detail view
+├── styles.css              # Main stylesheet
+├── script.js               # JavaScript utilities
+└── images/                 # Image assets
 ```
 
-## 🔒 Security
+## 🎯 Learning Path
 
-- Never commit `.env` file
-- Use test keys for development
-- Switch to live keys only in production
-- Always use HTTPS in production
+1. **Start with Alphabets**: Begin with Hiragana and Katakana
+2. **Build Vocabulary**: Learn common words and phrases
+3. **Study Grammar**: Understand sentence structure
+4. **Master Kanji**: Learn Chinese characters
+5. **Practice**: Take tests to reinforce your knowledge
 
-## 📞 Support
+## 🌐 Live Demo
 
-For PayMongo support: support@paymongo.com
+Visit the live site: [Your GitHub Pages URL]
+
+## 📝 License
+
+This project is open source and available for educational purposes.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+---
+
+Made with ❤️ for Japanese language learners
