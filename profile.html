@@ -227,6 +227,8 @@
         }
 
         function logout() {
+            // Set flag for returning user
+            localStorage.setItem('returningUser', 'true');
             // Clear session only
             localStorage.removeItem('user');
             window.location.href = 'login.html';
@@ -241,6 +243,9 @@
                 let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
                 users = users.filter(u => u.email !== user.email);
                 localStorage.setItem('registeredUsers', JSON.stringify(users));
+
+                // Set flag for returning user (in case they sign up again)
+                localStorage.setItem('returningUser', 'true');
 
                 // Clear session
                 localStorage.removeItem('user');
