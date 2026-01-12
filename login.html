@@ -134,17 +134,36 @@
 
                 <form onsubmit="handleLogin(event)">
                     <div>
-                        <input type="email" class="form-input" placeholder="Email address" required>
-                    </div>
-                    <div>
-                        <input type="password" class="form-input" placeholder="Password" required>
+                        <input type="email" class="form-input" id="login-email" placeholder="Email address" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Log In</button>
+                    <div class="password-wrapper" style="position: relative; width: 100%;">
+                        <input type="password" class="form-input" id="login-password" placeholder="Password" required>
+                        <button type="button" class="toggle-password"
+                            onclick="togglePasswordVisibility('login-password')"
+                            style="position: absolute; right: 1rem; top: 40%; transform: translateY(-50%); cursor: pointer; color: var(--text-light); background: none; border: none; padding: 0; display: flex; align-items: center;">
+                            <!-- Eye Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="login-error"
+                        style="display: none; color: #DC2626; background: #FEE2E2; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">
+                        Account not found. Please <a href="register.html"
+                            style="font-weight: 700; text-decoration: underline; color: #991B1B;">register first</a>.
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Log
+                        In</button>
 
                     <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-light);">
-                        Don't have an account? <a href="#" style="color: var(--primary-color); font-weight: 600;">Sign
-                            up</a>
+                        Don't have an account? <a href="register.html"
+                            style="color: var(--primary-color); font-weight: 600;">Sign up</a>
                     </p>
                 </form>
             </div>
@@ -152,25 +171,65 @@
     </div>
 
     <script>
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+        }
+
         function handleLogin(e) {
             e.preventDefault();
-            // Simulate login
-            const email = document.querySelector('input[type="email"]').value;
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const errorDiv = document.getElementById('login-error');
+
+            // Reset error
+            errorDiv.style.display = 'none';
+
+            // Get registered users
+            const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+
+            // Check credentials
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (!user) {
+                // Check if email exists but password wrong (optional, for now just generic validation or strictly not registered)
+                // The prompt specifically asked "if the user is new and not yet register... it cannot login it will say that you are not yet register"
+                const emailExists = users.some(u => u.email === email);
+
+                if (!emailExists) {
+                    errorDiv.style.display = 'block';
+                    errorDiv.innerHTML = 'You are not yet registered. Please <a href="register.html" style="font-weight: 700; text-decoration: underline; color: #991B1B;">sign up here</a>.';
+                } else {
+                    errorDiv.style.display = 'block';
+                    errorDiv.innerHTML = 'Incorrect password. Please try again.';
+                }
+                return;
+            }
+
+            // Successful Login
             localStorage.setItem('user', JSON.stringify({
-                email: email,
-                name: email.split('@')[0],
+                email: user.email,
+                name: user.name,
                 isLoggedIn: true
             }));
 
-            // Redirect to subscription page
+            // Redirect to subscription page (or home if already subscribed - simplified to subscription as per flow)
+            // If they have a subscription, maybe skip to home? For now, stick to user request flow or subscription flow.
+            // Let's assume on every fresh login we check sub? Or just send to sub page.
+            // Check if user has subscription in their record (advanced) or just default flow.
+            // The previous flow was Login -> Subscription. We stick to that.
             window.location.href = 'subscription.html';
         }
 
         function handleSocialLogin(provider) {
-            // Simulate social login
+            // Simulate social login - auto register for simplicity in this mock
+            const email = `user@${provider.toLowerCase()}.com`;
+            const name = `User (${provider})`;
+
             localStorage.setItem('user', JSON.stringify({
-                email: `user@${provider.toLowerCase()}.com`,
-                name: `User (${provider})`,
+                email: email,
+                name: name,
                 isLoggedIn: true
             }));
 

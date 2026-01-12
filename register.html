@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Notesjp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .auth-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+            background: white;
+        }
+
+        .auth-visual {
+            background: var(--secondary-color);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+            padding: 2rem;
+        }
+
+        .auth-visual::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: url('https://images.unsplash.com/photo-1524413843420-3142071f6610?q=80&w=2992&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            opacity: 0.2;
+            mix-blend-mode: overlay;
+        }
+
+        .auth-visual-content {
+            position: relative;
+            z-index: 10;
+            max-width: 400px;
+        }
+
+        .auth-form-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Password Wrapper for Eye Icon */
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-visual {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <!-- Visual Side -->
+        <div class="auth-visual">
+            <div class="auth-visual-content">
+                <h1 style="font-size: 3rem; color: white; margin-bottom: 1rem;">Start Your Journey</h1>
+                <p style="font-size: 1.2rem; opacity: 0.9;">Join thousands of learners mastering Japanese today.</p>
+            </div>
+        </div>
+
+        <!-- Form Side -->
+        <div class="auth-form-wrapper">
+            <div class="auth-card animate-fade-in">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <a href="index.html" class="logo" style="font-size: 2rem;">Notesjp</a>
+                    <h2 style="margin-top: 1rem; color: var(--secondary-color);">Create your account</h2>
+                </div>
+
+                <form onsubmit="handleRegister(event)">
+                    <div>
+                        <input type="text" class="form-input" id="reg-name" placeholder="Full Name" required>
+                    </div>
+                    <div>
+                        <input type="email" class="form-input" id="reg-email" placeholder="Email address" required>
+                    </div>
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="reg-password" placeholder="Password" required>
+                        <button type="button" class="toggle-password"
+                            onclick="togglePasswordVisibility('reg-password')">
+                            <!-- Eye Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Sign
+                        Up</button>
+
+                    <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-light);">
+                        Already have an account? <a href="login.html"
+                            style="color: var(--primary-color); font-weight: 600;">Log in</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+
+            // Get existing users
+            const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+
+            // Check if user already exists
+            const userExists = users.some(u => u.email === email);
+            if (userExists) {
+                alert('This email is already registered. Please login.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Register new user
+            users.push({ name, email, password });
+            localStorage.setItem('registeredUsers', JSON.stringify(users));
+
+            // Auto login
+            localStorage.setItem('user', JSON.stringify({
+                email: email,
+                name: name,
+                isLoggedIn: true
+            }));
+
+            alert('Account created successfully!');
+            window.location.href = 'subscription.html';
+        }
+    </script>
+</body>
+
+</html>
