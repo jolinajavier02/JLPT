@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Notesjp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 100px auto 2rem;
+            padding: 2rem;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-section {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .profile-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-g {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-g label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .danger-zone {
+            border: 1px solid #fee2e2;
+            background: #fff5f5;
+        }
+
+        .danger-zone h3 {
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Notesjp</a>
+                <div class="nav-links">
+                    <a href="home.html" class="nav-link">Home</a>
+                    <a href="test.html" class="header-btn">Take Test</a>
+                    <!-- Clicking this acts as a 'back to profile' which is this page, or purely informational -->
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="profile-container animate-fade-in">
+        <div class="profile-header">
+            <h1>User Profile</h1>
+            <p style="color: var(--text-light);">Manage your account settings and subscription</p>
+        </div>
+
+        <!-- Profile Settings -->
+        <div class="profile-section">
+            <h3>Account Settings</h3>
+            <div class="form-g">
+                <label>Username</label>
+                <div style="display: flex; gap: 1rem;">
+                    <input type="text" id="username-input" class="form-input" value="User">
+                    <button class="btn btn-outline" onclick="updateUsername()">Update</button>
+                </div>
+            </div>
+            <div class="form-g">
+                <label>Email</label>
+                <input type="email" id="email-input" class="form-input" value="user@example.com" disabled
+                    style="background: #f9fafb; opacity: 0.7;">
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="profile-section">
+            <h3>Payment Methods</h3>
+            <div id="payment-method-container">
+                <p style="color: var(--text-light); font-style: italic;">Loading payment details...</p>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="profile-section" style="text-align: center;">
+            <button class="btn btn-outline" onclick="logout()"
+                style="border-color: var(--primary-color); color: var(--primary-color);">Log Out</button>
+        </div>
+
+        <!-- Delete Account -->
+        <div class="profile-section danger-zone">
+            <h3>Delete Account</h3>
+            <p style="margin-bottom: 1rem; color: #7f1d1d;">
+                <strong>Warning:</strong> Deleting your account is permanent.
+                Your subscription is <strong>non-refundable</strong>.
+                If you create a new account with the same email, you will be treated as a new user and charged again for
+                any subscription.
+            </p>
+
+            <div style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <input type="checkbox" id="delete-agreement" style="margin-top: 0.3rem;">
+                <label for="delete-agreement"
+                    style="font-weight: 400; font-size: 0.9rem; color: #991b1b; cursor: pointer;">
+                    I understand that my account and data will be permanently deleted and my subscription is
+                    non-refundable.
+                </label>
+            </div>
+
+            <button class="btn btn-primary" id="delete-btn" onclick="deleteAccount()" disabled
+                style="background: #dc2626; border-color: #dc2626; opacity: 0.5; cursor: not-allowed;">Delete My
+                Account</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserProfile();
+
+            // Enable delete button on checkbox
+            document.getElementById('delete-agreement').addEventListener('change', function () {
+                const btn = document.getElementById('delete-btn');
+                if (this.checked) {
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                } else {
+                    btn.disabled = true;
+                    btn.style.opacity = '0.5';
+                    btn.style.cursor = 'not-allowed';
+                }
+            });
+        });
+
+        function loadUserProfile() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user || !user.isLoggedIn) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            document.getElementById('username-input').value = user.name;
+            document.getElementById('email-input').value = user.email;
+
+            // Mock Payment Method Display
+            const container = document.getElementById('payment-method-container');
+            const plan = user.subscription ? (user.subscription.charAt(0).toUpperCase() + user.subscription.slice(1)) : 'Free';
+
+            // Assume they paid with Card for demo unless we stored method. 
+            // In a real app we'd fetch this. We'll show a generic "Card" or determine from plan.
+            if (user.subscription) {
+                container.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: space-between; border: 1px solid #ddd; padding: 1rem; border-radius: 12px;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 1.5rem;">💳</div>
+                            <div>
+                                <div style="font-weight: 600;">${plan} Plan Subscription</div>
+                                <div style="font-size: 0.9rem; color: var(--text-light);">Auto-renews on end of billing cycle</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="removeCard()">Remove Card</button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '<p>No active subscription or payment method details found.</p>';
+            }
+        }
+
+        function updateUsername() {
+            const newName = document.getElementById('username-input').value;
+            if (!newName) return alert('Username cannot be empty');
+
+            const user = JSON.parse(localStorage.getItem('user'));
+            const oldEmail = user.email;
+
+            // Update Session User
+            user.name = newName;
+            localStorage.setItem('user', JSON.stringify(user));
+
+            // Update Registered Users DB
+            let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+            const index = users.findIndex(u => u.email === oldEmail);
+            if (index !== -1) {
+                users[index].name = newName;
+                localStorage.setItem('registeredUsers', JSON.stringify(users));
+            }
+
+            alert('Username updated successfully!');
+        }
+
+        function removeCard() {
+            if (confirm('Are you sure you want to remove your card details? You may lose access to auto-renewal.')) {
+                // In a real app, API call. Here just UI update.
+                document.getElementById('payment-method-container').innerHTML =
+                    '<p style="color: var(--text-light);">Payment method has been removed.</p>';
+                alert('Card details removed for your security.');
+            }
+        }
+
+        function logout() {
+            // Clear session only
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+
+        function deleteAccount() {
+            if (!confirm('Final Confirmation: Are you absolutely sure you want to delete your account? This cannot be undone.')) return;
+
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                // Remove from registered users
+                let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+                users = users.filter(u => u.email !== user.email);
+                localStorage.setItem('registeredUsers', JSON.stringify(users));
+
+                // Clear session
+                localStorage.removeItem('user');
+
+                alert('Account deleted. We are sorry to see you go.');
+                window.location.href = 'index.html'; // Redirect to landing page (not login, as account is gone)
+            }
+        }
+    </script>
+</body>
+
+</html>
