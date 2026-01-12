@@ -195,15 +195,18 @@
             localStorage.setItem('user', JSON.stringify({
                 email: user.email,
                 name: user.name,
-                isLoggedIn: true
+                isLoggedIn: true,
+                subscription: user.subscription || null
             }));
 
-            // Redirect to subscription page (or home if already subscribed - simplified to subscription as per flow)
-            // If they have a subscription, maybe skip to home? For now, stick to user request flow or subscription flow.
-            // Let's assume on every fresh login we check sub? Or just send to sub page.
-            // Check if user has subscription in their record (advanced) or just default flow.
-            // The previous flow was Login -> Subscription. We stick to that.
-            window.location.href = 'subscription.html';
+            // Check if user has already paid for subscription
+            if (user.subscription) {
+                // User already has active subscription, go directly to home
+                window.location.href = 'home.html';
+            } else {
+                // User needs to subscribe first
+                window.location.href = 'subscription.html';
+            }
         }
 
 

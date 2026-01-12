@@ -167,18 +167,12 @@
             }
 
             // Register new user
-            users.push({ name, email, password });
+            // Initialize subscription as null/false
+            users.push({ name, email, password, subscription: null });
             localStorage.setItem('registeredUsers', JSON.stringify(users));
 
-            // Auto login
-            localStorage.setItem('user', JSON.stringify({
-                email: email,
-                name: name,
-                isLoggedIn: true
-            }));
-
-            alert('Account created successfully!');
-            window.location.href = 'subscription.html';
+            alert('Account created successfully! Please log in.');
+            window.location.href = 'login.html';
         }
     </script>
 </body>
