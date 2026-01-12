@@ -120,55 +120,101 @@
 
     <div class="payment-container animate-fade-in">
         <div class="payment-form-card">
-            <h2 style="margin-bottom: 1.5rem;">Payment Details</h2>
+            <h2 style="margin-bottom: 1.5rem;">Payment Method</h2>
 
-            <div class="card-preview">
-                <div class="card-chip"></div>
-                <div>
-                    <div style="font-family: monospace; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 0.5rem;"
-                        id="preview-number">0000 0000 0000 0000</div>
-                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                        <div style="font-size: 0.9rem; text-transform: uppercase; opacity: 0.8;" id="preview-name">YOUR
-                            NAME</div>
-                        <div style="font-size: 0.9rem;" id="preview-expiry">MM/YY</div>
-                    </div>
+            <!-- Payment Method Selector -->
+            <div class="payment-methods" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                <div class="method-card active" onclick="switchMethod('card', this)"
+                    style="flex: 1; border: 2px solid var(--primary-color); border-radius: 12px; padding: 1rem; cursor: pointer; text-align: center; font-weight: 600;">
+                    💳 Card
+                </div>
+                <div class="method-card" onclick="switchMethod('gcash', this)"
+                    style="flex: 1; border: 1px solid #ddd; border-radius: 12px; padding: 1rem; cursor: pointer; text-align: center; font-weight: 600;">
+                    💙 GCash
+                </div>
+                <div class="method-card" onclick="switchMethod('maya', this)"
+                    style="flex: 1; border: 1px solid #ddd; border-radius: 12px; padding: 1rem; cursor: pointer; text-align: center; font-weight: 600;">
+                    💚 Maya
                 </div>
             </div>
 
-            <form onsubmit="processPayment(event)">
-                <div class="form-group">
-                    <label style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">Card
-                        Number</label>
-                    <input type="text" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19"
-                        id="card-number" oninput="updatePreview()" required>
+            <!-- Credit Card Section -->
+            <div id="card-section">
+                <div class="card-preview">
+                    <div class="card-chip"></div>
+                    <div>
+                        <div style="font-family: monospace; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 0.5rem;"
+                            id="preview-number">0000 0000 0000 0000</div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                            <div style="font-size: 0.9rem; text-transform: uppercase; opacity: 0.8;" id="preview-name">
+                                YOUR NAME</div>
+                            <div style="font-size: 0.9rem;" id="preview-expiry">MM/YY</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label
-                        style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">Cardholder
-                        Name</label>
-                    <input type="text" class="form-input" placeholder="Name on card" id="card-name"
-                        oninput="updatePreview()" required>
-                </div>
+                <form onsubmit="processPayment(event)">
+                    <div class="form-group">
+                        <label style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">Card
+                            Number</label>
+                        <input type="text" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19"
+                            id="card-number" oninput="updatePreview()" required>
+                    </div>
 
-                <div class="form-row">
                     <div class="form-group">
                         <label
-                            style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">Expiry
-                            Date</label>
-                        <input type="text" class="form-input" placeholder="MM/YY" maxlength="5" id="card-expiry"
+                            style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">Cardholder
+                            Name</label>
+                        <input type="text" class="form-input" placeholder="Name on card" id="card-name"
                             oninput="updatePreview()" required>
                     </div>
-                    <div class="form-group">
-                        <label
-                            style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">CVC</label>
-                        <input type="text" class="form-input" placeholder="123" maxlength="3" required>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label
+                                style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">Expiry
+                                Date</label>
+                            <input type="text" class="form-input" placeholder="MM/YY" maxlength="5" id="card-expiry"
+                                oninput="updatePreview()" required>
+                        </div>
+                        <div class="form-group">
+                            <label
+                                style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">CVC</label>
+                            <input type="text" class="form-input" placeholder="123" maxlength="3" required>
+                        </div>
                     </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;"
+                        id="pay-btn-card">Pay Now</button>
+                </form>
+            </div>
+
+            <!-- E-Wallet Section (Hidden by default) -->
+            <div id="ewallet-section" style="display: none; text-align: center;">
+                <div style="background: #f8fafc; padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem;">
+                    <h3 style="margin-bottom: 1rem; color: var(--secondary-color);">Scan to Pay</h3>
+                    <div
+                        style="width: 200px; height: 200px; background: white; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; border: 2px dashed #ddd; border-radius: 12px; overflow: hidden;">
+                        <!-- Placeholder for User's QR Code -->
+                        <img src="images/qr-placeholder.png" alt="QR Code"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg'">
+                    </div>
+                    <p style="font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem;">Notesjp</p>
+                    <p style="color: var(--text-light); font-size: 0.9rem;">Scan using your <span
+                            id="wallet-name">GCash</span> app</p>
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" id="pay-btn">Pay
-                    Now</button>
-            </form>
+                <a href="#" id="wallet-link" target="_blank" class="btn btn-primary"
+                    style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    Open <span id="wallet-btn-name">GCash</span> App
+                </a>
+
+                <button onclick="processPayment(event)" class="btn btn-outline" style="width: 100%; margin-top: 1rem;">
+                    I have completed the payment
+                </button>
+            </div>
+
         </div>
 
         <div class="order-summary">
@@ -207,13 +253,52 @@
 
             // Formatting
             const cardInput = document.getElementById('card-number');
-            cardInput.addEventListener('input', (e) => {
-                let val = e.target.value.replace(/\D/g, '');
-                val = val.replace(/(.{4})/g, '$1 ').trim();
-                e.target.value = val;
-                updatePreview();
-            });
+            if (cardInput) {
+                cardInput.addEventListener('input', (e) => {
+                    let val = e.target.value.replace(/\D/g, '');
+                    val = val.replace(/(.{4})/g, '$1 ').trim();
+                    e.target.value = val;
+                    updatePreview();
+                });
+            }
         });
+
+        function switchMethod(method, element) {
+            // UI Toggle
+            document.querySelectorAll('.method-card').forEach(el => {
+                el.style.border = '1px solid #ddd';
+                el.classList.remove('active');
+            });
+            element.style.border = '2px solid var(--primary-color)';
+            element.classList.add('active');
+
+            // Section Toggle
+            const cardSection = document.getElementById('card-section');
+            const walletSection = document.getElementById('ewallet-section');
+            const walletName = document.getElementById('wallet-name');
+            const walletBtnName = document.getElementById('wallet-btn-name');
+            const walletLink = document.getElementById('wallet-link');
+
+            if (method === 'card') {
+                cardSection.style.display = 'block';
+                walletSection.style.display = 'none';
+            } else {
+                cardSection.style.display = 'none';
+                walletSection.style.display = 'block';
+
+                if (method === 'gcash') {
+                    walletName.textContent = 'GCash';
+                    walletBtnName.textContent = 'GCash';
+                    walletLink.href = 'https://m.gcash.com';
+                    walletLink.style.background = '#007DFE'; // GCash Blue
+                } else {
+                    walletName.textContent = 'Maya';
+                    walletBtnName.textContent = 'Maya';
+                    walletLink.href = 'https://www.maya.ph';
+                    walletLink.style.background = '#73C82D'; // Maya Green
+                }
+            }
+        }
 
         function updatePreview() {
             const num = document.getElementById('card-number').value || '0000 0000 0000 0000';
@@ -227,8 +312,9 @@
 
         function processPayment(e) {
             e.preventDefault();
-            const btn = document.getElementById('pay-btn');
-            const originalText = btn.innerText;
+
+            // Determine source button
+            const btn = e.target.tagName === 'BUTTON' ? e.target : document.getElementById('pay-btn-card');
 
             btn.innerText = 'Processing...';
             btn.style.opacity = '0.7';
