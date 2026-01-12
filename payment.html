@@ -209,7 +209,7 @@
             // Get plan from URL or local storage
             const urlParams = new URLSearchParams(window.location.search);
             const planType = urlParams.get('plan') || 'monthly';
-            
+
             // Convert USD to PHP (update exchange rate as needed)
             const USD_TO_PHP = 55;
             const priceUSD = planType === 'yearly' ? 30 : 5;
@@ -330,12 +330,53 @@
             btn.style.opacity = '0.7';
             btn.disabled = true;
 
+            // Check if backend server is available
+            let serverAvailable = false;
+            try {
+                const healthCheck = await fetch(`${API_URL}/api/health`, {
+                    method: 'GET',
+                    signal: AbortSignal.timeout(2000) // 2 second timeout
+                });
+                serverAvailable = healthCheck.ok;
+            } catch (error) {
+                console.log('Backend server not available, using mock payment');
+                serverAvailable = false;
+            }
+
+            if (!serverAvailable) {
+                // Fallback to mock payment
+                console.log('Using mock payment processing');
+                setTimeout(() => {
+                    const user = JSON.parse(localStorage.getItem('user')) || {};
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const plan = urlParams.get('plan') || 'monthly';
+
+                    user.subscription = plan;
+                    user.subscriptionDate = new Date().toISOString();
+                    localStorage.setItem('user', JSON.stringify(user));
+
+                    // Update in registeredUsers database
+                    let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+                    const userIndex = users.findIndex(u => u.email === user.email);
+                    if (userIndex !== -1) {
+                        users[userIndex].subscription = plan;
+                        users[userIndex].subscriptionDate = new Date().toISOString();
+                        localStorage.setItem('registeredUsers', JSON.stringify(users));
+                    }
+
+                    alert('Payment Successful! (Demo Mode - No real payment processed)\nWelcome to Notesjp.');
+                    window.location.href = 'home.html';
+                }, 1500);
+                return;
+            }
+
+            // Real payment processing with PayMongo
             try {
                 // Get user and plan details
                 const user = JSON.parse(localStorage.getItem('user')) || {};
                 const urlParams = new URLSearchParams(window.location.search);
                 const plan = urlParams.get('plan') || 'monthly';
-                
+
                 const USD_TO_PHP = 55;
                 const priceUSD = plan === 'yearly' ? 30 : 5;
                 const pricePHP = priceUSD * USD_TO_PHP;
