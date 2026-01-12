@@ -111,25 +111,8 @@
 
     <script>
         function selectPlan(plan) {
-            // Retrieve current user
-            const user = JSON.parse(localStorage.getItem('user')) || {};
-
-            // Update subscription status
-            user.subscription = plan;
-            user.subscriptionDate = new Date().toISOString();
-
-            localStorage.setItem('user', JSON.stringify(user));
-
-            // Simulate processing
-            const button = event.target;
-            const originalText = button.innerText;
-            button.innerText = 'Processing...';
-            button.style.opacity = '0.8';
-
-            setTimeout(() => {
-                // Redirect to dashboard (home)
-                window.location.href = 'home.html';
-            }, 1000);
+            // Redirect to payment page with plan details
+            window.location.href = `payment.html?plan=${plan}`;
         }
     </script>
 </body>
