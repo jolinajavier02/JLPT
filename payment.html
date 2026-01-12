@@ -193,14 +193,22 @@
             <div id="ewallet-section" style="display: none; text-align: center;">
                 <div style="background: #f8fafc; padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem;">
                     <h3 style="margin-bottom: 1rem; color: var(--secondary-color);">Scan to Pay</h3>
-                    <div
-                        style="width: 200px; height: 200px; background: white; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; border: 2px dashed #ddd; border-radius: 12px; overflow: hidden;">
-                        <!-- Placeholder for User's QR Code -->
-                        <img src="images/qr-placeholder.png" alt="QR Code"
-                            style="width: 100%; height: 100%; object-fit: contain;"
-                            onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg'">
+
+                    <!-- QR Container with Name Masking -->
+                    <div style="position: relative; width: 300px; margin: 0 auto 1.5rem;">
+                        <div style="border: 2px solid #ddd; border-radius: 12px; overflow: hidden; background: white;">
+                            <!-- The Image -->
+                            <img id="qr-image" src="" alt="QR Code" style="width: 100%; display: block;">
+                        </div>
+
+                        <!-- Name Overlay (Masking original name) -->
+                        <div
+                            style="position: absolute; top: 5%; left: 50%; transform: translateX(-50%); background: white; padding: 0.5rem 1rem; border-radius: 8px; width: 80%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center;">
+                            <p style="font-weight: 800; font-size: 1.2rem; color: var(--primary-color);">Notesjp</p>
+                            <p style="font-size: 0.8rem; color: var(--text-light);">Scan to Pay</p>
+                        </div>
                     </div>
-                    <p style="font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem;">Notesjp</p>
+
                     <p style="color: var(--text-light); font-size: 0.9rem;">Scan using your <span
                             id="wallet-name">GCash</span> app</p>
                 </div>
@@ -275,6 +283,8 @@
             // Section Toggle
             const cardSection = document.getElementById('card-section');
             const walletSection = document.getElementById('ewallet-section');
+
+            const qrImage = document.getElementById('qr-image');
             const walletName = document.getElementById('wallet-name');
             const walletBtnName = document.getElementById('wallet-btn-name');
             const walletLink = document.getElementById('wallet-link');
@@ -287,11 +297,13 @@
                 walletSection.style.display = 'block';
 
                 if (method === 'gcash') {
+                    qrImage.src = 'images/gcash.jpg';
                     walletName.textContent = 'GCash';
                     walletBtnName.textContent = 'GCash';
                     walletLink.href = 'https://m.gcash.com';
                     walletLink.style.background = '#007DFE'; // GCash Blue
                 } else {
+                    qrImage.src = 'images/maya.jpg';
                     walletName.textContent = 'Maya';
                     walletBtnName.textContent = 'Maya';
                     walletLink.href = 'https://www.maya.ph';
