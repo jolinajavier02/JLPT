@@ -1,182 +1,99 @@
-# NihongoMastery - JLPT Learning Platform
+# Notesjp - JLPT Learning Platform
 
-A modern, interactive web application designed to help learners master Japanese language fundamentals for the JLPT (Japanese Language Proficiency Test).
+A comprehensive Japanese language learning platform with integrated payment processing.
 
-## 🎯 Features
+## 🚀 Quick Start
 
-### Character Learning Systems
-- **Hiragana Chart**: Interactive learning tool for all 46 basic hiragana characters plus dakuten and yōon combinations
-- **Katakana Chart**: Comprehensive katakana character reference with the same interactive features
-- **Kanji Study**: Essential kanji characters organized by JLPT levels
-- **Stroke Order Animations**: Visual guides showing proper character writing techniques
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-### Grammar & Particles
-- **Grammar Mastery**: Book-style layout presenting core Japanese grammar patterns
-  - Sentence structure (SOV)
-  - Verb conjugations
-  - Adjective forms
-  - Question patterns
-  - Te-form usage
-- **Essential Particles**: Interactive lessons on Japanese particles (は, が, を, に, で, の, と, も, か)
-- **Navigation**: Previous/Next buttons for seamless lesson progression
+### 2. Set Up Environment Variables
+Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
 
-### Vocabulary Builder
-- **Categorized Word Lists**: Organized by topics (persons, body parts, time, directions, etc.)
-- **Conjugation Display**: Shows past tense and negative forms for each word
-- **Search Functionality**: Quick lookup for specific vocabulary items
+Then edit `.env` and add your PayMongo API keys:
+```
+PAYMONGO_SECRET_KEY=sk_test_your_key_here
+PAYMONGO_PUBLIC_KEY=pk_test_your_key_here
+```
 
-### Interactive Features
-- **Flashcard System**: Click-to-flip cards for active recall practice
-- **Character Detail View**: In-depth information for each kana character
-- **Tabbed Navigation**: Switch between Basic, Dakuten, and Yōon charts instantly
-- **Single-Screen Design**: Optimized layouts that fit perfectly within viewport
+Get your keys from: https://dashboard.paymongo.com/
 
-## 🎨 Design Philosophy
+### 3. Start the Payment Server
+```bash
+npm start
+```
 
-### Visual Identity
-- **Primary Color**: Japan Red (#BC002D) - representing traditional Japanese aesthetics
-- **Typography**: 
-  - Inter for Latin text
-  - Noto Sans JP for Japanese characters
-- **Layout**: Clean, modern interface with premium glassmorphism effects
-- **Animations**: Smooth transitions and micro-interactions for enhanced UX
+The server will run on http://localhost:3000
 
-### User Experience
-- **Responsive Design**: Optimized for various screen sizes
-- **No-Scroll Layouts**: Key learning pages fit within single viewport
-- **Instant Feedback**: Color changes and highlights on interaction
-- **Consistent Navigation**: Unified header across all pages
+### 4. Open the Website
+Open `index.html` in your browser or use a local server:
+```bash
+# Option 1: Python
+python3 -m http.server 8000
+
+# Option 2: Node.js (install first: npm install -g http-server)
+http-server -p 8000
+```
+
+Then visit: http://localhost:8000
+
+## 📋 Testing Payments
+
+### Test Cards (PayMongo Test Mode)
+
+**Successful Payment:**
+- Card: `4343 4343 4343 4345`
+- Expiry: Any future date (e.g., `12/25`)
+- CVC: Any 3 digits (e.g., `123`)
+
+**Failed Payment:**
+- Card: `4571 7360 0000 0002`
+
+## 🌐 Deployment
+
+See `PAYMENT_INTEGRATION_GUIDE.md` for detailed deployment instructions.
+
+### Quick Deploy to Railway
+1. Push code to GitHub
+2. Go to https://railway.app/
+3. Create new project from GitHub repo
+4. Add environment variables
+5. Deploy!
+
+## 💰 Pricing
+
+- Monthly: ₱275 ($5 USD)
+- Yearly: ₱1,650 ($30 USD)
 
 ## 📁 Project Structure
 
 ```
 JLPT/
 ├── index.html              # Landing page
-├── home.html              # Main dashboard
-├── learn.html             # Learning modules overview
-├── hiragana.html          # Hiragana character chart
-├── katakana.html          # Katakana character chart
-├── kanji.html             # Kanji learning module
-├── grammar.html           # Grammar lessons
-├── particles.html         # Particle explanations
-├── vocabulary.html        # Vocabulary builder
-├── styles.css             # Global styles and design system
-└── README.md             # This file
+├── login.html              # Login page
+├── register.html           # Registration page
+├── subscription.html       # Plan selection
+├── payment.html            # Payment processing
+├── home.html               # Learning dashboard
+├── profile.html            # User profile
+├── server.js               # Payment backend
+├── package.json            # Dependencies
+├── .env                    # Environment variables (not in git)
+└── PAYMENT_INTEGRATION_GUIDE.md  # Detailed setup guide
 ```
 
-## 🚀 Getting Started
+## 🔒 Security
 
-### Prerequisites
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- No server setup required - runs entirely client-side
+- Never commit `.env` file
+- Use test keys for development
+- Switch to live keys only in production
+- Always use HTTPS in production
 
-### Installation
-1. Clone or download this repository
-2. Open `index.html` in your web browser
-3. Navigate through the learning modules using the dashboard
+## 📞 Support
 
-### Local Development
-```bash
-# Simply open the HTML files in your browser
-open index.html
-
-# Or use a local server (optional)
-python -m http.server 8000
-# Then visit http://localhost:8000
-```
-
-## 🎓 Learning Path
-
-### Recommended Study Order
-1. **Start with Kana**: Master hiragana first, then katakana
-2. **Basic Grammar**: Learn sentence structure and particles
-3. **Vocabulary Building**: Expand word knowledge in parallel
-4. **Kanji Introduction**: Begin with JLPT N5 level characters
-5. **Advanced Grammar**: Progress to complex sentence patterns
-
-### Study Tips
-- Use the flashcard system for daily review
-- Practice writing characters using the stroke order guides
-- Create example sentences using learned grammar patterns
-- Review particles regularly as they're fundamental to Japanese
-
-## 🛠️ Technical Details
-
-### Technologies Used
-- **HTML5**: Semantic markup
-- **CSS3**: Modern styling with custom properties
-- **Vanilla JavaScript**: No framework dependencies
-- **SVG**: Stroke order animations
-- **Google Fonts**: Typography (Inter, Noto Sans JP)
-
-### Browser Compatibility
-- Chrome/Edge: Full support
-- Firefox: Full support
-- Safari: Full support
-- Mobile browsers: Responsive design included
-
-### Performance
-- Lightweight: No heavy frameworks
-- Fast loading: Minimal external dependencies
-- Smooth animations: CSS-based transitions
-- Efficient rendering: Optimized DOM manipulation
-
-## 📝 Content Organization
-
-### Grammar Topics
-- Sentence Basics (SOV structure)
-- Verb Basics (る-verbs, う-verbs)
-- Adjectives (い-adjectives, な-adjectives)
-- Questions & Existence (か, います, あります)
-- Te-form (て-form conjugations)
-
-### Particle Coverage
-- は (wa) - Topic marker
-- が (ga) - Subject marker
-- を (o) - Direct object marker
-- に (ni) - Direction/time/location
-- で (de) - Location of action/means
-- の (no) - Possessive/modification
-- と (to) - "And" connector/quotation
-- も (mo) - "Also/too"
-- か (ka) - Question marker
-
-### Vocabulary Categories
-- People & Relationships
-- Body Parts & Organs
-- Time Expressions
-- Directions & Locations
-- Common Verbs & Adjectives
-
-## 🎯 Future Enhancements
-
-- [ ] Audio pronunciation guides
-- [ ] Practice quizzes and tests
-- [ ] Progress tracking system
-- [ ] Spaced repetition algorithm
-- [ ] User accounts and saved progress
-- [ ] Mobile app version
-- [ ] Additional JLPT levels (N4-N1)
-- [ ] Community features
-
-## 📄 License
-
-This project is open source and available for educational purposes.
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page or submit pull requests.
-
-## 📧 Contact
-
-For questions or feedback about this learning platform, please open an issue in the repository.
-
-## 🙏 Acknowledgments
-
-- Character stroke order data from KanjiVG project
-- Japanese language resources from various JLPT study materials
-- Design inspiration from modern Japanese web aesthetics
-
----
-
-**Happy Learning! がんばって！(Ganbatte!)**
+For PayMongo support: support@paymongo.com

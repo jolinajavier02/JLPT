@@ -202,16 +202,23 @@
     </div>
 
     <script>
+        // IMPORTANT: Change this to your deployed backend URL in production
+        const API_URL = 'http://localhost:3000';
+
         document.addEventListener('DOMContentLoaded', () => {
             // Get plan from URL or local storage
             const urlParams = new URLSearchParams(window.location.search);
             const planType = urlParams.get('plan') || 'monthly';
-            const price = planType === 'yearly' ? 30 : 5;
+            
+            // Convert USD to PHP (update exchange rate as needed)
+            const USD_TO_PHP = 55;
+            const priceUSD = planType === 'yearly' ? 30 : 5;
+            const pricePHP = priceUSD * USD_TO_PHP;
 
             // Update summary
             document.getElementById('plan-name').textContent = planType.charAt(0).toUpperCase() + planType.slice(1) + ' Plan';
-            document.getElementById('plan-price').textContent = '$' + price.toFixed(2);
-            document.getElementById('total-price').textContent = '$' + price.toFixed(2);
+            document.getElementById('plan-price').textContent = '₱' + pricePHP.toFixed(2);
+            document.getElementById('total-price').textContent = '₱' + pricePHP.toFixed(2);
 
             // Formatting for card number
             const cardInput = document.getElementById('card-number');
@@ -276,7 +283,7 @@
             return cvc.length >= 3 && cvc.length <= 4 && /^\d+$/.test(cvc);
         }
 
-        function processPayment(e) {
+        async function processPayment(e) {
             e.preventDefault();
 
             // Reset errors
@@ -318,32 +325,110 @@
             }
 
             const btn = document.getElementById('pay-btn-card');
-            btn.innerText = 'Processing...';
+            const originalText = btn.innerText;
+            btn.innerText = 'Processing Payment...';
             btn.style.opacity = '0.7';
             btn.disabled = true;
 
-            setTimeout(() => {
-                // Update user subscription in session
+            try {
+                // Get user and plan details
                 const user = JSON.parse(localStorage.getItem('user')) || {};
                 const urlParams = new URLSearchParams(window.location.search);
                 const plan = urlParams.get('plan') || 'monthly';
+                
+                const USD_TO_PHP = 55;
+                const priceUSD = plan === 'yearly' ? 30 : 5;
+                const pricePHP = priceUSD * USD_TO_PHP;
 
-                user.subscription = plan;
-                user.subscriptionDate = new Date().toISOString();
-                localStorage.setItem('user', JSON.stringify(user));
+                // Step 1: Create Payment Intent
+                const intentResponse = await fetch(`${API_URL}/api/create-payment-intent`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: pricePHP,
+                        description: `Notesjp ${plan} subscription`,
+                        email: user.email,
+                        plan: plan
+                    })
+                });
 
-                // Update in registeredUsers database
-                let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-                const userIndex = users.findIndex(u => u.email === user.email);
-                if (userIndex !== -1) {
-                    users[userIndex].subscription = plan;
-                    users[userIndex].subscriptionDate = new Date().toISOString();
-                    localStorage.setItem('registeredUsers', JSON.stringify(users));
+                if (!intentResponse.ok) {
+                    throw new Error('Failed to create payment intent');
                 }
 
-                alert('Payment Successful! Welcome to Notesjp.');
-                window.location.href = 'home.html';
-            }, 2000);
+                const intentData = await intentResponse.json();
+                const paymentIntentId = intentData.paymentIntentId;
+
+                // Step 2: Create Payment Method
+                const expiryParts = cardExpiry.split('/');
+                const methodResponse = await fetch(`${API_URL}/api/create-payment-method`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        cardNumber: cardNumber,
+                        expMonth: expiryParts[0],
+                        expYear: '20' + expiryParts[1],
+                        cvc: cardCVC,
+                        name: cardName
+                    })
+                });
+
+                if (!methodResponse.ok) {
+                    throw new Error('Invalid card details');
+                }
+
+                const methodData = await methodResponse.json();
+                const paymentMethodId = methodData.paymentMethodId;
+
+                // Step 3: Attach Payment Method to Intent
+                const attachResponse = await fetch(`${API_URL}/api/attach-payment-method`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        paymentIntentId: paymentIntentId,
+                        paymentMethodId: paymentMethodId
+                    })
+                });
+
+                if (!attachResponse.ok) {
+                    throw new Error('Payment processing failed');
+                }
+
+                const attachData = await attachResponse.json();
+
+                // Check payment status
+                if (attachData.status === 'succeeded' || attachData.status === 'awaiting_payment_method') {
+                    // Payment successful - update user subscription
+                    user.subscription = plan;
+                    user.subscriptionDate = new Date().toISOString();
+                    user.paymentIntentId = paymentIntentId;
+                    localStorage.setItem('user', JSON.stringify(user));
+
+                    // Update in registeredUsers database
+                    let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+                    const userIndex = users.findIndex(u => u.email === user.email);
+                    if (userIndex !== -1) {
+                        users[userIndex].subscription = plan;
+                        users[userIndex].subscriptionDate = new Date().toISOString();
+                        localStorage.setItem('registeredUsers', JSON.stringify(users));
+                    }
+
+                    alert('Payment Successful! Welcome to Notesjp.');
+                    window.location.href = 'home.html';
+                } else {
+                    throw new Error('Payment was not successful. Please try again.');
+                }
+
+            } catch (error) {
+                console.error('Payment Error:', error);
+                btn.innerText = originalText;
+                btn.style.opacity = '1';
+                btn.disabled = false;
+
+                // Show error to user
+                document.getElementById('card-error').textContent = error.message || 'Payment failed. Please check your card details and try again.';
+                document.getElementById('card-error').style.display = 'block';
+            }
         }
     </script>
 </body>
