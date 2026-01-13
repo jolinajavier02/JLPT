@@ -28,39 +28,48 @@
         .structure-bead {
             padding: 0.5rem 1rem;
             border-radius: 8px;
-            font-weight: 800;
-            font-size: 1.1rem;
-            box-shadow: var(--shadow-sm);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .structure-bead:hover {
+            transform: translateY(-2px);
         }
 
         .bead-noun {
             background: #eff6ff;
             color: #1e40af;
-            border: 1px solid #bfdbfe;
+            border: 2px solid #bfdbfe;
         }
 
         .bead-verb {
             background: #f0fdf4;
             color: #166534;
-            border: 1px solid #bbf7d0;
+            border: 2px solid #bbf7d0;
         }
 
         .bead-particle {
             background: #fff1f2;
             color: #9f1239;
-            border: 1px solid #fecdd3;
+            border: 2px solid #fecdd3;
         }
 
         .bead-adj {
             background: #fef9c3;
             color: #854d0e;
-            border: 1px solid #fef08a;
+            border: 2px solid #fef08a;
         }
 
         .bead-plus {
             color: #94a3b8;
             font-size: 1.5rem;
+            font-weight: 300;
         }
+
 
         /* Color classes for text identification */
         .text-noun {
@@ -343,7 +352,7 @@
                 examples: [
                     { jp: '新しい<ruby>車<rt>くるま</rt></ruby><span class="text-particle">が</span><ruby>欲<rt>ほ</rt></ruby>しいです。', ro: 'Atarashii <span class="text-noun">kuruma</span> <span class="text-particle">ga</span> <span class="text-verb">hoshii</span> desu.', en: 'I <span class="text-verb">want</span> a new <span class="text-noun">car</span>.' },
                     { jp: '<ruby>水<rt>みず</rt></ruby><span class="text-particle">が</span><ruby>欲<rt>ほ</rt></ruby>しい。', ro: '<span class="text-noun">Mizu</span> <span class="text-particle">ga</span> <span class="text-verb">hoshii</span>.', en: 'I <span class="text-verb">want</span> <span class="text-noun">water</span>.' },
-                    { jp: '<ruby>何<rt>なに</rt></ruby><span class="text-particle">が</span><ruby>欲<rt>ほ</rt></ruby>しいですか。', ro: '<span class="text-noun">Nani</span> <span class="text-particle">ga</span> <span class="text-verb">hoshii</span> desu ka?', en: 'What do you <span class="text-verb">want</span>?' }
+                    { jp: '<ruby>何<rt>なに</rt></ruby><span class="text-particle">が</span><ruby>欲<rt>ほ</rt></ruby>しいですか。', ro: '<span class="text-noun">Nani</span> <span class="text-particle">ga</span> <span class="text-verb">hoshii</span> desu ka?', en: '<span class="text-noun">What</span> do you <span class="text-verb">want</span>?' }
                 ]
             },
             {
@@ -354,9 +363,9 @@
                 meaning: 'Indicates the destination, target, or location toward which an action is directed.',
                 notes: '<strong>に</strong> marks the destination with motion verbs (go, come, return). It also marks the target/recipient of actions. Unlike <em>で</em> (location of action), <em>に</em> focuses on the point of arrival or state.',
                 examples: [
-                    { jp: '<ruby>学校<rt>がっこう</rt></ruby><span class="text-particle">に</span><ruby>行<rt>い</rt></ruby>きます。', ro: '<span class="text-noun">Gakkou</span> <span class="text-particle">ni</span> <span class="text-verb">ikimasu</span>.', en: 'I <span class="text-verb">go</span> to <span class="text-noun">school</span>.' },
-                    { jp: '<ruby>友達<rt>ともだち</rt></ruby><span class="text-particle">に</span><ruby>会<rt>あ</rt></ruby>います。', ro: '<span class="text-noun">Tomodachi</span> <span class="text-particle">ni</span> <span class="text-verb">aimasu</span>.', en: 'I <span class="text-verb">meet</span> (with) my <span class="text-noun">friend</span>.' },
-                    { jp: '<ruby>東京<rt>とうきょう</rt></ruby><span class="text-particle">に</span><ruby>住<rt>す</rt></ruby>んでいます。', ro: '<span class="text-noun">Tokyo</span> <span class="text-particle">ni</span> <span class="text-verb">sunde imasu</span>.', en: 'I <span class="text-verb">live</span> in <span class="text-noun">Tokyo</span>.' }
+                    { jp: '<ruby>学校<rt>がっこう</rt></ruby><span class="text-particle">に</span><ruby>行<rt>い</rt></ruby>きます。', ro: '<span class="text-noun">Gakkou</span> <span class="text-particle">ni</span> <span class="text-verb">ikimasu</span>.', en: 'I <span class="text-verb">go</span> <span class="text-particle">to</span> <span class="text-noun">school</span>.' },
+                    { jp: '<ruby>友達<rt>ともだち</rt></ruby><span class="text-particle">に</span><ruby>会<rt>あ</rt></ruby>います。', ro: '<span class="text-noun">Tomodachi</span> <span class="text-particle">ni</span> <span class="text-verb">aimasu</span>.', en: 'I <span class="text-verb">meet</span> (<span class="text-particle">with</span>) my <span class="text-noun">friend</span>.' },
+                    { jp: '<ruby>東京<rt>とうきょう</rt></ruby><span class="text-particle">に</span><ruby>住<rt>す</rt></ruby>んでいます。', ro: '<span class="text-noun">Tokyo</span> <span class="text-particle">ni</span> <span class="text-verb">sunde imasu</span>.', en: 'I <span class="text-verb">live</span> <span class="text-particle">in</span> <span class="text-noun">Tokyo</span>.' }
                 ]
             },
             {
@@ -369,7 +378,7 @@
                 examples: [
                     { jp: '<ruby>先生<rt>せんせい</rt></ruby><span class="text-particle">に</span><ruby>質問<rt>しつもん</rt></ruby><span class="text-particle">を</span>します。', ro: '<span class="text-noun">Sensei</span> <span class="text-particle">ni</span> <span class="text-noun">shitsumon</span> <span class="text-particle">wo</span> <span class="text-verb">shimasu</span>.', en: 'I <span class="text-verb">ask</span> the <span class="text-noun">teacher</span> a <span class="text-noun">question</span>.' },
                     { jp: '<ruby>母<rt>はは</rt></ruby><span class="text-particle">に</span>プレゼント<span class="text-particle">を</span>あげました。', ro: '<span class="text-noun">Haha</span> <span class="text-particle">ni</span> <span class="text-noun">purezento</span> <span class="text-particle">wo</span> <span class="text-verb">agemashita</span>.', en: 'I <span class="text-verb">gave</span> my <span class="text-noun">mother</span> a <span class="text-noun">present</span>.' },
-                    { jp: '<ruby>友達<rt>ともだち</rt></ruby><span class="text-particle">に</span><ruby>本<rt>ほん</rt></ruby><span class="text-particle">を</span><ruby>貸<rt>か</rt></ruby>します。', ro: '<span class="text-noun">Tomodachi</span> <span class="text-particle">ni</span> <span class="text-noun">hon</span> <span class="text-particle">wo</span> <span class="text-verb">kashimasu</span>.', en: 'I <span class="text-verb">lend</span> a <span class="text-noun">book</span> to my <span class="text-noun">friend</span>.' }
+                    { jp: '<ruby>友達<rt>ともだち</rt></ruby><span class="text-particle">に</span><ruby>本<rt>ほん</rt></ruby><span class="text-particle">を</span><ruby>貸<rt>か</rt></ruby>します。', ro: '<span class="text-noun">Tomodachi</span> <span class="text-particle">ni</span> <span class="text-noun">hon</span> <span class="text-particle">wo</span> <span class="text-verb">kashimasu</span>.', en: 'I <span class="text-verb">lend</span> a <span class="text-noun">book</span> <span class="text-particle">to</span> my <span class="text-noun">friend</span>.' }
                 ]
             },
             {
@@ -404,9 +413,9 @@
                 subtitle: 'Describing Attributes',
                 structure: ['Noun 1', 'は', 'Noun 2', 'が', 'Adjective'],
                 meaning: 'Describes a specific attribute, body part, or quality of the main subject.',
-                notes: 'The overall topic is marked by <strong>は</strong>, while the specific part being described is marked by <strong>が</strong>. This is the standard way to talk about heights, body parts, or preferences.',
+                notes: 'The overall topic is already marked by <strong>は</strong>, while the specific part being described is marked by <strong>が</strong>. This is the standard way to talk about heights, body parts, or preferences.',
                 examples: [
-                    { jp: '<ruby>象<rt>ぞう</rt></ruby><span class="text-particle">は</span><ruby>鼻<rt>はな</rt></ruby><span class="text-particle">が</span><ruby>長<rt>なが</rt></ruby>いです。', ro: '<span class="text-noun">Zou</span> <span class="text-particle">wa</span> <span class="text-noun">hana</span> <span class="text-particle">ga</span> <span class="text-adj">nagai</span> desu.', en: '<span class="text-noun">Elephants</span> have <span class="text-adj">long</span> <span class="text-noun">trunks</span>.' },
+                    { jp: '<ruby>象<rt>ぞう</rt></ruby><span class="text-particle">は</span><ruby>鼻<rt>はな</rt></ruby><span class="text-particle">が</span><ruby>長<rt>なが</rt></ruby>いです。', ro: '<span class="text-noun">Zou</span> <span class="text-particle">wa</span> <span class="text-noun">hana</span> <span class="text-particle">ga</span> <span class="text-adj">nagai</span> desu.', en: '<span class="text-noun">Elephants</span> <span class="text-particle">have</span> <span class="text-adj">long</span> <span class="text-noun">trunks</span>.' },
                     { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">は</span><ruby>頭<rt>あたま</rt></ruby><span class="text-particle">が</span><ruby>痛<rt>いた</rt></ruby>いです。', ro: '<span class="text-noun">Watashi</span> <span class="text-particle">wa</span> <span class="text-noun">atama</span> <span class="text-particle">ga</span> <span class="text-adj">itai</span> desu.', en: 'I have a <span class="text-noun">headache</span> (<span class="text-noun">My head</span> <span class="text-verb">hurts</span>).' },
                     { jp: '<ruby>彼<rt>かれ</rt></ruby><span class="text-particle">は</span><ruby>背<rt>せ</rt></ruby><span class="text-particle">が</span><ruby>高<rt>たか</rt></ruby>いです。', ro: '<span class="text-noun">Kare</span> <span class="text-particle">wa</span> <span class="text-noun">se</span> <span class="text-particle">ga</span> <span class="text-adj">takai</span> desu.', en: 'He is <span class="text-adj">tall</span>.' }
                 ]
@@ -419,9 +428,9 @@
                 meaning: 'Indicates a deadline by which an action must be completed.',
                 notes: '<strong>までに</strong> means "by [time]". Don\'t confuse it with <em>まで (until)</em>. <em>まで</em> describes a continuous action up to a point, while <em>までに</em> describes a one-time completion before a deadline.',
                 examples: [
-                    { jp: '5<ruby>時<rt>じ</rt></ruby><span class="text-particle">までに</span><ruby>帰<rt>かえ</rt></ruby>ります。', ro: '<span class="text-noun">5-ji</span> <span class="text-particle">made ni</span> <span class="text-verb">kaerimasu</span>.', en: 'I\'ll <span class="text-verb">return</span> by <span class="text-noun">5 o\'clock</span>.' },
-                    { jp: '<ruby>明日<rt>あした</rt></ruby><span class="text-particle">までに</span><ruby>宿題<rt>しゅくだい</rt></ruby><span class="text-particle">を</span><ruby>出<rt>だ</rt></ruby>してください。', ro: '<span class="text-noun">Ashita</span> <span class="text-particle">made ni</span> <span class="text-noun">shukudai</span> <span class="text-particle">wo</span> <span class="text-verb">dashite kudasai</span>.', en: 'Please <span class="text-verb">submit</span> <span class="text-noun">homework</span> by <span class="text-noun">tomorrow</span>.' },
-                    { jp: '<ruby>来週<rt>らいしゅう</rt></ruby><span class="text-particle">までに</span><ruby>終<rt>お</rt></ruby>わります。', ro: '<span class="text-noun">Raishuu</span> <span class="text-particle">made ni</span> <span class="text-verb">owarimasu</span>.', en: 'I\'ll <span class="text-verb">finish</span> by <span class="text-noun">next week</span>.' }
+                    { jp: '5<ruby>時<rt>じ</rt></ruby><span class="text-particle">までに</span><ruby>帰<rt>かえ</rt></ruby>ります。', ro: '<span class="text-noun">5-ji</span> <span class="text-particle">made ni</span> <span class="text-verb">kaerimasu</span>.', en: 'I\'ll <span class="text-verb">return</span> <span class="text-particle">by</span> <span class="text-noun">5 o\'clock</span>.' },
+                    { jp: '<ruby>明日<rt>あした</rt></ruby><span class="text-particle">までに</span><ruby>宿題<rt>しゅくだい</rt></ruby><span class="text-particle">を</span><ruby>出<rt>だ</rt></ruby>してください。', ro: '<span class="text-noun">Ashita</span> <span class="text-particle">made ni</span> <span class="text-noun">shukudai</span> <span class="text-particle">wo</span> <span class="text-verb">dashite kudasai</span>.', en: 'Please <span class="text-verb">submit</span> <span class="text-noun">homework</span> <span class="text-particle">by</span> <span class="text-noun">tomorrow</span>.' },
+                    { jp: '<ruby>来週<rt>らいしゅう</rt></ruby><span class="text-particle">までに</span><ruby>終<rt>お</rt></ruby>わります。', ro: '<span class="text-noun">Raishuu</span> <span class="text-particle">made ni</span> <span class="text-verb">owarimasu</span>.', en: 'I\'ll <span class="text-verb">finish</span> <span class="text-particle">by</span> <span class="text-noun">next week</span>.' }
                 ]
             },
             {
@@ -445,9 +454,9 @@
                 meaning: 'Indicates that one thing happens before another.',
                 notes: 'Always use <strong>の</strong> to connect a noun to <em>前に</em>. If using a verb, use the <strong>Dictionary Form</strong> directly before <em>前に</em>. The opposite is <em>後で (ato de)</em>.',
                 examples: [
-                    { jp: '<ruby>寝<rt>ね</rt></ruby>る<span class="text-particle">前に</span><ruby>歯<rt>は</rt></ruby><span class="text-particle">を</span><ruby>磨<rt>みが</rt></ruby>きます。', ro: '<span class="text-verb">Neru</span> <span class="text-particle">mae ni</span> <span class="text-noun">ha</span> <span class="text-particle">wo</span> <span class="text-verb">migakimasu</span>.', en: 'I <span class="text-verb">brush</span> my <span class="text-noun">teeth</span> before <span class="text-verb">sleeping</span>.' },
-                    { jp: '<ruby>試験<rt>しけん</rt></ruby><span class="text-particle">の前に</span><ruby>勉強<rt>べんきょう</rt></ruby>します。', ro: '<span class="text-noun">Shiken</span> <span class="text-particle">no mae ni</span> <span class="text-verb">benkyou shimasu</span>.', en: 'I <span class="text-verb">study</span> before the <span class="text-noun">exam</span>.' },
-                    { jp: '<ruby>食<rt>た</rt></ruby>べる<span class="text-particle">前に</span><ruby>手<rt>て</rt></ruby><span class="text-particle">を</span><ruby>洗<rt>あら</rt></ruby>います。', ro: '<span class="text-verb">Taberu</span> <span class="text-particle">mae ni</span> <span class="text-noun">te</span> <span class="text-particle">wo</span> <span class="text-verb">araimasu</span>.', en: 'I <span class="text-verb">wash</span> <span class="text-noun">hands</span> before <span class="text-verb">eating</span>.' }
+                    { jp: '<ruby>寝<rt>ね</rt></ruby>る<span class="text-particle">前に</span><ruby>歯<rt>は</rt></ruby><span class="text-particle">を</span><ruby>磨<rt>みが</rt></ruby>きます。', ro: '<span class="text-verb">Neru</span> <span class="text-particle">mae ni</span> <span class="text-noun">ha</span> <span class="text-particle">wo</span> <span class="text-verb">migakimasu</span>.', en: 'I <span class="text-verb">brush</span> my <span class="text-noun">teeth</span> <span class="text-particle">before</span> <span class="text-verb">sleeping</span>.' },
+                    { jp: '<ruby>試験<rt>しけん</rt></ruby><span class="text-particle">の前に</span><ruby>勉強<rt>べんきょう</rt></ruby>します。', ro: '<span class="text-noun">Shiken</span> <span class="text-particle">no mae ni</span> <span class="text-verb">benkyou shimasu</span>.', en: 'I <span class="text-verb">study</span> <span class="text-particle">before</span> the <span class="text-noun">exam</span>.' },
+                    { jp: '<ruby>食<rt>た</rt></ruby>べる<span class="text-particle">前に</span><ruby>手<rt>て</rt></ruby><span class="text-particle">を</span><ruby>洗<rt>あら</rt></ruby>います。', ro: '<span class="text-verb">Taberu</span> <span class="text-particle">mae ni</span> <span class="text-noun">te</span> <span class="text-particle">wo</span> <span class="text-verb">araimasu</span>.', en: 'I <span class="text-verb">wash</span> <span class="text-noun">hands</span> <span class="text-particle">before</span> <span class="text-verb">eating</span>.' }
                 ]
             },
             {
@@ -487,9 +496,10 @@
             // Build Structure HTML
             const structureHtml = lesson.structure.map((item, i) => {
                 let type = 'bead-plus';
+                // Check for roles
                 if (item.match(/Noun|Time|Recipient/)) type = 'bead-noun';
-                else if (item.match(/Verb|なります|欲しい|できます/)) type = 'bead-verb';
-                else if (item.match(/が|を|に|の|は|までに|の/)) type = 'bead-particle';
+                else if (item.match(/Verb|なります|欲しい|できます|行きます|見ます/)) type = 'bead-verb';
+                else if (item.match(/が|を|に|の|は|までに|どの|前の|前に/)) type = 'bead-particle';
                 else if (item.match(/Adjective/)) type = 'bead-adj';
 
                 const bead = `<span class="structure-bead ${type}">${item}</span>`;
@@ -502,7 +512,7 @@
                 <div class="example-item">
                     <p style="font-family: var(--font-jp); font-size: 1.3rem; margin-bottom: 0.3rem;">${ex.jp}</p>
                     <p style="font-style: italic; color: #64748b; font-size: 0.9rem;">${ex.ro}</p>
-                    <p style="color: var(--primary-color); font-weight: 600;">${ex.en}</p>
+                    <p style="color: #1e293b; font-weight: 500;">${ex.en}</p>
                 </div>
             `).join('');
 
