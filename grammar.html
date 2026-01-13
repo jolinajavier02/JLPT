@@ -12,8 +12,83 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* [Existing styles kept, adding structure tag styles] */
+        .structure-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            padding: 1.2rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px dashed var(--primary-color);
+        }
+
+        .structure-bead {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .bead-noun {
+            background: #eff6ff;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .bead-verb {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .bead-particle {
+            background: #fff1f2;
+            color: #9f1239;
+            border: 1px solid #fecdd3;
+        }
+
+        .bead-adj {
+            background: #fef9c3;
+            color: #854d0e;
+            border: 1px solid #fef08a;
+        }
+
+        .bead-plus {
+            color: #94a3b8;
+            font-size: 1.5rem;
+        }
+
+        .note-box {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .note-box strong {
+            color: #b45309;
+        }
+
+        .example-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .example-item {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        /* [Rest of the existing styles] */
         :root {
-            --sidebar-width: 260px;
+            --sidebar-width: 280px;
         }
 
         body {
@@ -23,8 +98,6 @@
             height: 100vh;
             overflow: hidden;
         }
-
-
 
         .main-container {
             max-width: 1400px;
@@ -38,7 +111,6 @@
             align-items: stretch;
         }
 
-        /* Sidebar Styling */
         .sidebar {
             width: var(--sidebar-width);
             background: white;
@@ -65,6 +137,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
+            overflow-y: auto;
         }
 
         .topic-item {
@@ -76,6 +149,14 @@
             color: var(--text-light);
             margin-bottom: 0.3rem;
             font-weight: 600;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topic-item small {
+            font-weight: 400;
+            opacity: 0.7;
+            font-size: 0.75rem;
         }
 
         .topic-item:hover {
@@ -89,7 +170,6 @@
             border-left: 4px solid var(--primary-color);
         }
 
-        /* Content Area Styling */
         .content-area {
             flex: 1;
             display: flex;
@@ -104,19 +184,16 @@
 
         .book-page {
             flex: 1;
-            padding: 2rem;
+            padding: 2.5rem;
             overflow-y: auto;
             position: relative;
             background: white;
         }
 
-
-
         .book-page:first-child {
             border-right: 1px solid #eee;
         }
 
-        /* Book Spine Effect */
         .content-area::after {
             content: '';
             position: absolute;
@@ -125,32 +202,16 @@
             bottom: 0;
             width: 40px;
             transform: translateX(-50%);
-            background: linear-gradient(to right,
-                    rgba(0, 0, 0, 0.03) 0%,
-                    rgba(0, 0, 0, 0.01) 40%,
-                    rgba(0, 0, 0, 0) 50%,
-                    rgba(0, 0, 0, 0.01) 60%,
-                    rgba(0, 0, 0, 0.03) 100%);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.01) 40%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.01) 60%, rgba(0, 0, 0, 0.03) 100%);
             pointer-events: none;
-        }
-
-        .lesson-header {
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-        }
-
-        .lesson-header h1 {
-            color: var(--primary-color);
-            font-size: 1.6rem;
         }
 
         .book-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: white;
             border: 1px solid var(--primary-color);
             border-radius: 50%;
@@ -166,12 +227,6 @@
         .book-nav:hover {
             background: var(--primary-color);
             color: white;
-            box-shadow: 0 4px 12px rgba(188, 0, 45, 0.3);
-        }
-
-        .book-nav:active {
-            background: #a00026;
-            transform: translateY(-50%) scale(0.95);
         }
 
         .book-nav.prev {
@@ -182,148 +237,41 @@
             right: 10px;
         }
 
-        .example-box {
-            background: #fff5f5;
-            padding: 1.2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        h3,
-        h4 {
-            color: var(--primary-color) !important;
-        }
-
-        .grammar-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
-            margin-top: 1.2rem;
-        }
-
-        .formation-box {
-            background: #fff;
-            border: 1px solid #eee;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-top: 0.8rem;
-            margin-bottom: 1.2rem;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .mistake-tag {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: #fff5f5;
-            color: var(--primary-color);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-
-        .conjugation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-        }
-
-        .conjugation-table th,
-        .conjugation-table td {
-            padding: 0.8rem;
-            border: 1px solid #eee;
-            text-align: left;
-        }
-
-        .conjugation-table th {
-            background: #fff5f5;
-            color: var(--primary-color);
-        }
-
-
-
         @media (max-width: 992px) {
             .main-container {
                 flex-direction: column;
                 height: auto;
-                min-height: calc(100vh - 140px);
-                /* Adjust for mobile header */
             }
 
             .sidebar {
                 width: 100%;
-                position: static;
+                height: auto;
                 margin-bottom: 1rem;
-                padding: 1rem;
             }
 
             .topic-list {
                 display: flex;
                 overflow-x: auto;
                 gap: 0.5rem;
-                padding-bottom: 0.5rem;
-                white-space: nowrap;
-                -webkit-overflow-scrolling: touch;
+                padding-bottom: 1rem;
             }
 
             .topic-item {
-                flex: 0 0 auto;
-                margin-bottom: 0;
-            }
-
-            /* Scrollbar hiding for cleaner look */
-            .topic-list::-webkit-scrollbar {
-                height: 4px;
-            }
-
-            .topic-list::-webkit-scrollbar-track {
-                background: #f1f1f1;
-            }
-
-            .topic-list::-webkit-scrollbar-thumb {
-                background: #ccc;
-                border-radius: 4px;
+                flex: 0 0 160px;
             }
 
             .content-area {
-                height: 60vh;
-                /* Fixed height for scrollable content on mobile */
-                min-height: 400px;
+                height: 70vh;
+                flex-direction: column;
             }
 
-            .book-page {
-                padding: 1.5rem 1rem 4rem 1rem;
-                /* More bottom padding for nav buttons */
+            .book-page:first-child {
+                border-right: none;
+                border-bottom: 1px solid #eee;
             }
 
-            .book-nav {
-                top: auto;
-                bottom: 10px;
-                transform: none;
-                width: 50px;
-                height: 50px;
-                background: rgba(255, 255, 255, 0.95);
-                border: 2px solid var(--primary-color);
-            }
-
-            .book-nav.prev {
-                left: 20px;
-            }
-
-            .book-nav.next {
-                right: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .lesson-header h1 {
-                font-size: 1.3rem;
-            }
-
-            .content-area {
-                height: 65vh;
+            .content-area::after {
+                display: none;
             }
         }
     </style>
@@ -343,357 +291,249 @@
     </header>
 
     <div class="main-container fixed-header-offset">
-        <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-title">Grammar Mastery</div>
-            <ul class="topic-list">
-                <li class="topic-item active" onclick="showLesson('basics', this)">Sentence Basics</li>
-                <li class="topic-item" onclick="showLesson('verbs', this)">Verb Basics</li>
-                <li class="topic-item" onclick="showLesson('adjectives', this)">Adjectives</li>
-                <li class="topic-item" onclick="showLesson('existence', this)">Question & Existence</li>
-                <li class="topic-item" onclick="showLesson('te-form', this)">Te-form</li>
-            </ul>
-
-            <ul class="topic-list" style="margin-top: auto;">
-                <li class="topic-item" onclick="window.location.href='particles.html'">Go to Particles</li>
+            <div class="sidebar-title">Grammar Guide</div>
+            <ul class="topic-list" id="sidebar-list">
+                <!-- Topics injected here -->
             </ul>
         </aside>
 
-        <!-- Content Area -->
         <main class="content-area" id="book-container">
-            <div class="book-nav prev" onclick="navigateLesson(-1)">←</div>
-            <div class="book-nav next" onclick="navigateLesson(1)">→</div>
+            <div class="book-nav prev" id="nav-prev" onclick="navigateLesson(-1)">←</div>
+            <div class="book-nav next" id="nav-next" onclick="navigateLesson(1)">→</div>
             <div id="book-pages-wrapper" style="display: flex; width: 100%; height: 100%;">
-                <!-- Pages will be injected here -->
+                <!-- Pages injected here -->
             </div>
         </main>
     </div>
 
     <script>
-        const lessons = {
-            'basics': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>1. Sentence Basics (SOV)</h1>
-                    </div>
-                    <p>Japanese sentences follow a <strong>Subject + Object + Verb (SOV)</strong> structure. This is different from English (SVO). Particles are used to mark the grammatical role of each word.</p>
-                    
-                    <div class="formation-box">
-                        <strong>Core Particles:</strong><br>
-                        • <strong>は (wa):</strong> Marks the topic of the sentence.<br>
-                        • <strong>を (o):</strong> Marks the direct object receiving the action.<br>
-                        • <strong>に (ni):</strong> Indicates direction, time, or destination.<br>
-                        • <strong>で (de):</strong> Indicates where an action takes place.
-                    </div>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Detailed Examples</h4>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>寿司</rb><rt>すし</rt></ruby>を<ruby><rb>食</rb><rt>た</rt></ruby>べます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi wa sushi o tabemasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I eat sushi.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>田中</rb><rt>たなか</rt></ruby>さんは<ruby><rb>本</rb><rt>ほん</rt></ruby>を<ruby><rb>読</rb><rt>よ</rt></ruby>みます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tanaka-san wa hon o yomimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">Mr. Tanaka reads a book.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>水</rb><rt>みず</rt></ruby>を<ruby><rb>飲</rb><rt>の</rt></ruby>みます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi wa mizu o nomimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I drink water.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>先生</rb><rt>せんせい</rt></ruby>は<ruby><rb>日本語</rb><rt>にほんご</rt></ruby>を<ruby><rb>話</rb><rt>はな</rt></ruby>します。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Sensei wa nihongo o hanashimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">The teacher speaks Japanese.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>私</rb><rt>わたし</rt></ruby>は<ruby><rb>映画</rb><rt>えいが</rt></ruby>を<ruby><rb>見</rb><rt>み</rt></ruby>ます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi wa eiga o mimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I watch a movie.</p>
-                            </div>
-                        </div>
-
-                        <div class="example-box">
-                            <span class="mistake-tag">Common Mistake</span>
-                            <p style="font-size: 0.9rem;">Japanese learners often forget that the verb <strong>must</strong> come at the very end. Avoid saying "Watashi wa tabemasu sushi" as it sounds unnatural.</p>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'verbs': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>2. Verb Basics (Conjugation)</h1>
-                    </div>
-                    <p>Japanese verbs are categorized into three groups. Understanding these groups is essential for correct conjugation into polite (~masu) and casual forms.</p>
-                    
-                    <div class="formation-box">
-                        <strong>Verb Groups:</strong><br>
-                        • <strong>Group 1 (U-verbs):</strong> End in 'u' sounds (e.g., Iku, Nomu).<br>
-                        • <strong>Group 2 (Ru-verbs):</strong> End in 'iru' or 'eru' (e.g., Taberu, Miru).<br>
-                        • <strong>Group 3 (Irregular):</strong> Only two verbs: Suru (to do) and Kuru (to come).
-                    </div>
-
-                    <table class="conjugation-table">
-                        <tr><th>Group</th><th>Dictionary Form</th><th>Polite (~masu)</th><th>Meaning</th></tr>
-                        <tr><td>Group 2</td><td><ruby><rb>食</rb><rt>た</rt></ruby>べる</td><td><ruby><rb>食</rb><rt>た</rt></ruby>べます</td><td>To eat</td></tr>
-                        <tr><td>Group 1</td><td><ruby><rb>行</rb><rt>い</rt></ruby>く</td><td><ruby><rb>行</rb><rt>い</rt></ruby>きます</td><td>To go</td></tr>
-                        <tr><td>Group 1</td><td><ruby><rb>飲</rb><rt>の</rt></ruby>む</td><td><ruby><rb>飲</rb><rt>の</rt></ruby>みます</td><td>To drink</td></tr>
-                        <tr><td>Group 3</td><td>する</td><td>します</td><td>To do</td></tr>
-                        <tr><td>Group 3</td><td><ruby><rb>来</rb><rt>く</rt></ruby>る</td><td><ruby><rb>来</rb><rt>き</rt></ruby>ます</td><td>To come</td></tr>
-                    </table>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Detailed Examples</h4>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>昨日</rb><rt>きのう</rt></ruby>、<ruby><rb>寿司</rb><rt>すし</rt></ruby>を<ruby><rb>食</rb><rt>た</rt></ruby>べました。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kinou, sushi o tabemashita.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I ate sushi yesterday.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>明日</rb><rt>あした</rt></ruby>、<ruby><rb>学校</rb><rt>がっこう</rt></ruby>に<ruby><rb>行</rb><rt>い</rt></ruby>きます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Ashita, gakkou ni ikimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I will go to school tomorrow.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>今</rb><rt>いま</rt></ruby>、コーヒーを<ruby><rb>飲</rb><rt>の</rt></ruby>みます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Ima, ko-hi- o nomimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I drink coffee now.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>毎日</rb><rt>まいにち</rt></ruby><ruby><rb>勉強</rb><rt>べんきょう</rt></ruby>をします。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Mainichi benkyou o shimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I study every day.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>友達</rb><rt>ともだち</rt></ruby>が<ruby><rb>家</rb><rt>うち</rt></ruby>に<ruby><rb>来</rb><rt>き</rt></ruby>ます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tomodachi ga uchi ni kimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">A friend is coming to my house.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'adjectives': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>3. Adjectives (I vs Na)</h1>
-                    </div>
-                    <p>Japanese adjectives are divided into two types: <strong>I-adjectives</strong> and <strong>Na-adjectives</strong>. They behave differently when modifying nouns or ending sentences.</p>
-                    
-                    <div class="formation-box">
-                        <strong>Key Differences:</strong><br>
-                        • <strong>I-adjectives:</strong> End in 'i' (e.g., Oishii, Samui). They conjugate directly.<br>
-                        • <strong>Na-adjectives:</strong> Need 'na' before a noun (e.g., Kirei na, Shizuka na). They behave like nouns.
-                    </div>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Detailed Examples</h4>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">この<ruby><rb>寿司</rb><rt>すし</rt></ruby>はとても<ruby><rb>美味</rb><rt>おい</rt></ruby>しいです。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kono sushi wa totemo oishii desu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">This sushi is very delicious.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>綺麗</rb><rt>きれい</rt></ruby>な<ruby><rb>花</rb><rt>はな</rt></ruby>ですね。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kirei na hana desu ne.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">It's a beautiful flower, isn't it?</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>今日</rb><rt>きょう</rt></ruby>はとても<ruby><rb>寒</rb><rt>さむ</rt></ruby>いです。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kyou wa totemo samui desu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">Today is very cold.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem; font-weight: 600;"><ruby><rb>静</rb><rt>しず</rt></ruby>かな<ruby><rb>部屋</rb><rt>へや</rt></ruby>が<ruby><rb>好</rb><rt>す</rt></ruby>きです。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Shizuka na heya ga suki desu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I like quiet rooms.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>高</rb><rt>たか</rt></ruby>い<ruby><rb>時計</rb><rt>とけい</rt></ruby>を<ruby><rb>買</rb><rt>か</rt></ruby>いました。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Takai tokei o kaimashita.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I bought an expensive watch.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'existence': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>4. Question & Existence</h1>
-                    </div>
-                    <p>Japanese uses two different verbs for "to exist" depending on whether the subject is animate (living) or inanimate (non-living).</p>
-                    
-                    <div class="formation-box">
-                        <strong>Existence Verbs:</strong><br>
-                        • <strong>あります (arimasu):</strong> For objects, plants, and abstract things.<br>
-                        • <strong>います (imasu):</strong> For people and animals.
-                    </div>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Detailed Examples</h4>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>机</rb><rt>つくえ</rt></ruby>の<ruby><rb>上</rb><rt>うえ</rt></ruby>に<ruby><rb>本</rb><rt>ほん</rt></ruby>があります。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tsukue no ue ni hon ga arimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">There is a book on the desk.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>庭</rb><rt>にわ</rt></ruby>に<ruby><rb>猫</rb><rt>ねこ</rt></ruby>がいます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Niwa ni neko ga imasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">There is a cat in the garden.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>先生</rb><rt>せんせい</rt></ruby>はどこにいますか？</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Sensei wa doko ni imasu ka?</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">Where is the teacher?</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>駅</rb><rt>えき</rt></ruby>はどこですか？</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Eki wa doko desu ka?</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">Where is the station?</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>車</rb><rt>くるま</rt></ruby>があります。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Kuruma ga arimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">There is a car.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'te-form': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>5. Te-form (Requests & Connection)</h1>
-                    </div>
-                    <p>The <strong>Te-form</strong> is one of the most important verb forms in Japanese. It is used to connect sentences, make requests, and express ongoing actions.</p>
-                    
-                    <div class="formation-box">
-                        <strong>Common Usage:</strong><br>
-                        • <strong>~te kudasai:</strong> Please do [action].<br>
-                        • <strong>~te mo ii desu ka:</strong> May I do [action]?<br>
-                        • <strong>~te imasu:</strong> I am doing [action].
-                    </div>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Detailed Examples</h4>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">ちょっと<ruby><rb>待</rb><rt>ま</rt></ruby>ってください。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Chotto matte kudasai.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">Please wait a moment.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>食</rb><rt>た</rt></ruby>べてください。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tabete kudasai.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">Please eat.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>行</rb><rt>い</rt></ruby>ってください。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Itte kudasai.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">Please go.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">テレビを<ruby><rb>見</rb><rt>み</rt></ruby>ています。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Terebi o mite imasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I am watching TV.</p>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;"><ruby><rb>水</rb><rt>みず</rt></ruby>を<ruby><rb>飲</rb><rt>の</rt></ruby>んでください。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Mizu o nonde kudasai.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">Please drink water.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `
-        };
-
-        let currentLessonIndex = 0;
-        const lessonIds = Object.keys(lessons);
-
-        function showLesson(id, element) {
-            if (!element) {
-                element = document.querySelector(`.topic-item[onclick*="'${id}'"]`);
+        const lessons = [
+            {
+                id: 'hoshii',
+                title: 'Noun が欲しい',
+                subtitle: 'Wanting something',
+                structure: ['Noun', 'が', '欲しい'],
+                meaning: 'Expresses a desire to have or want a tangible object.',
+                notes: 'Used only for <strong>tangible things</strong>, not actions. The desired object takes the <strong>が</strong> particle. To express wanting to <em>do</em> something, use the Verb+たい form instead.',
+                examples: [
+                    { jp: '新しい車が欲しいです。', ro: 'Atarashii kuruma ga hoshii desu.', en: 'I want a new car.' },
+                    { jp: '水が欲しい。', ro: 'Mizu ga hoshii.', en: 'I want water.' },
+                    { jp: '何が欲しいですか。', ro: 'Nani ga hoshii desu ka?', en: 'What do you want?' }
+                ]
+            },
+            {
+                id: 'ni-verb',
+                title: 'Noun に Verb',
+                subtitle: 'Location & Target',
+                structure: ['Noun', 'に', 'Verb'],
+                meaning: 'Indicates the destination, target, or location toward which an action is directed.',
+                notes: '<strong>に</strong> marks the destination with motion verbs (go, come, return). It also marks the target/recipient of actions. Unlike <em>で</em> (location of action), <em>に</em> focuses on the point of arrival or state.',
+                examples: [
+                    { jp: '学校に行きます。', ro: 'Gakkou ni ikimasu.', en: 'I go to school.' },
+                    { jp: '友達に会います。', ro: 'Tomodachi ni aimasu.', en: 'I meet (with) my friend.' },
+                    { jp: '東京に住んでいます。', ro: 'Tokyo ni sunde imasu.', en: 'I live in Tokyo.' }
+                ]
+            },
+            {
+                id: 'indirect-obj',
+                title: 'Noun に N2 を V',
+                subtitle: 'Give/Do for someone',
+                structure: ['Noun (Recipient)', 'に', 'Noun 2 (Object)', 'を', 'Verb'],
+                meaning: 'Indicates both the indirect object (recipient) and the direct object of an action.',
+                notes: 'Commonly used with verbs of <strong>giving, teaching, lending, or showing</strong>. <em>に</em> marks who receives it, while <em>を</em> marks what is being given.',
+                examples: [
+                    { jp: '先生に質問をします。', ro: 'Sensei ni shitsumon wo shimasu.', en: 'I ask the teacher a question.' },
+                    { jp: '母にプレゼントをあげました。', ro: 'Haha ni purezento wo agemashita.', en: 'I gave my mother a present.' },
+                    { jp: '友達に本を貸します。', ro: 'Tomodachi ni hon wo kashimasu.', en: 'I lend a book to my friend.' }
+                ]
+            },
+            {
+                id: 'wo-verb',
+                title: 'Noun を V',
+                subtitle: 'Direct Object',
+                structure: ['Noun', 'を', 'Verb'],
+                meaning: 'Marks the direct object that receives the action of a transitive verb.',
+                notes: '<strong>を</strong> (pronounced "o") is the most common way to link a verb to its object. It is only used with transitive verbs (verbs that act on something).',
+                examples: [
+                    { jp: 'ご飯を食べます。', ro: 'Gohan wo tabemasu.', en: 'I eat rice/a meal.' },
+                    { jp: '日本語を勉強します。', ro: 'Nihongo wo benkyou shimasu.', en: 'I study Japanese.' },
+                    { jp: '映画を見ます。', ro: 'Eiga wo mimasu.', en: 'I watch a movie.' }
+                ]
+            },
+            {
+                id: 'dore-dono',
+                title: 'どれ、どの Noun',
+                subtitle: 'Which one?',
+                structure: ['どの', 'Noun'],
+                meaning: 'Questions used to ask "which" among several options.',
+                notes: '<strong>どれ</strong> is used alone ("Which one?"). <strong>どの</strong> must be followed by a noun ("Which book?", etc.). For choosing between exactly two, use <em>どちら (dochira)</em>.',
+                examples: [
+                    { jp: 'どれが好きですか。', ro: 'Dore ga suki desu ka?', en: 'Which one do you like?' },
+                    { jp: 'どの本ですか。', ro: 'Dono hon desu ka?', en: 'Which book is it?' },
+                    { jp: 'どのペンを使いますか。', ro: 'Dono pen wo tsukaimasu ka?', en: 'Which pen will you use?' }
+                ]
+            },
+            {
+                id: 'wa-ga-adj',
+                title: 'N1 は N2 が adj',
+                subtitle: 'Describing Attributes',
+                structure: ['Noun 1', 'は', 'Noun 2', 'が', 'Adjective'],
+                meaning: 'Describes a specific attribute, body part, or quality of the main subject.',
+                notes: 'The overall topic is marked by <strong>は</strong>, while the specific part being described is marked by <strong>が</strong>. This is the standard way to talk about heights, body parts, or preferences.',
+                examples: [
+                    { jp: '象は鼻が長いです。', ro: 'Zou wa hana ga nagai desu.', en: 'Elephants have long trunks.' },
+                    { jp: '私は頭が痛いです。', ro: 'Watashi wa atama ga itai desu.', en: 'I have a headache (My head hurts).' },
+                    { jp: '彼は背が高いです。', ro: 'Kare wa se ga takai desu.', en: 'He is tall.' }
+                ]
+            },
+            {
+                id: 'made-ni',
+                title: 'N (time) までに V',
+                subtitle: 'Deadlines',
+                structure: ['Time Noun', 'までに', 'Verb'],
+                meaning: 'Indicates a deadline by which an action must be completed.',
+                notes: '<strong>までに</strong> means "by [time]". Don\'t confuse it with <em>まで (until)</em>. <em>まで</em> describes a continuous action up to a point, while <em>までに</em> describes a one-time completion before a deadline.',
+                examples: [
+                    { jp: '5時までに帰ります。', ro: 'Go-ji made ni kaerimasu.', en: 'I\'ll return by 5 o\'clock.' },
+                    { jp: '明日までに宿題を出してください。', ro: 'Ashita made ni shukudai wo dashite kudasai.', en: 'Please submit homework by tomorrow.' },
+                    { jp: '来週までに終わります。', ro: 'Raishuu made ni owarimasu.', en: 'I\'ll finish by next week.' }
+                ]
+            },
+            {
+                id: 'dekimasu',
+                title: 'N ができます',
+                subtitle: 'Ability & Possibility',
+                structure: ['Noun', 'が', 'できます'],
+                meaning: 'Expresses ability (can do) or possibility.',
+                notes: 'Indicates a natural ability or a learned skill. <strong>できます</strong> can also mean something is "completed" or "ready" (e.g., Dinner is ready).',
+                examples: [
+                    { jp: '日本語ができます。', ro: 'Nihongo ga dekimasu.', en: 'I can speak Japanese.' },
+                    { jp: '料理ができます。', ro: 'Ryouri ga dekimasu.', en: 'I can cook.' },
+                    { jp: '明日ができますか。', ro: 'Ashita ga dekimasu ka?', en: 'Is tomorrow possible / Can you do it tomorrow?' }
+                ]
+            },
+            {
+                id: 'mae-ni',
+                title: 'N の前に',
+                subtitle: 'Sequence: Before',
+                structure: ['Noun', 'の', '前に'],
+                meaning: 'Indicates that one thing happens before another.',
+                notes: 'Always use <strong>の</strong> to connect a noun to <em>前に</em>. If using a verb, use the <strong>Dictionary Form</strong> directly before <em>前に</em>. The opposite is <em>後で (ato de)</em>.',
+                examples: [
+                    { jp: '寝る前に歯を磨きます。', ro: 'Neru mae ni ha wo migakimasu.', en: 'I brush my teeth before sleeping.' },
+                    { jp: '試験の前に勉強します。', ro: 'Shiken no mae ni benkyou shimasu.', en: 'I study before the exam.' },
+                    { jp: '食べる前に手を洗います。', ro: 'Taberu mae ni te wo araimasu.', en: 'I wash hands before eating.' }
+                ]
+            },
+            {
+                id: 'ni-narimasu',
+                title: 'N になります',
+                subtitle: 'Becoming / Change',
+                structure: ['Noun', 'に', 'なります'],
+                meaning: 'Expresses a change or transformation of state.',
+                notes: 'Indicates a result of a change. <strong>に</strong> marks the final state. It can be used with nouns or Na-adjectives. For I-adjectives, the \'i\' changes to \'ku\' (e.g. <em>あつくなります</em>).',
+                examples: [
+                    { jp: '先生になります。', ro: 'Sensei ni narimasu.', en: 'I will become a teacher.' },
+                    { jp: '春になりました。', ro: 'Haru ni narimashita.', en: 'It has become spring.' },
+                    { jp: '大人になります。', ro: 'Otona ni narimasu.', en: 'I\'ll become an adult.' }
+                ]
             }
-            document.querySelectorAll('.topic-item').forEach(item => item.classList.remove('active'));
-            if (element) element.classList.add('active');
+        ];
 
-            currentLessonIndex = lessonIds.indexOf(id);
-            const lesson = lessons[id];
+        let currentIdx = 0;
+
+        function renderSidebar() {
+            const list = document.getElementById('sidebar-list');
+            list.innerHTML = lessons.map((l, i) => `
+                <li class="topic-item ${i === currentIdx ? 'active' : ''}" onclick="setLesson(${i})">
+                    <span>${l.title}</span>
+                    <small>${l.subtitle}</small>
+                </li>
+            `).join('');
+        }
+
+        function setLesson(index) {
+            currentIdx = index;
+            renderSidebar();
+
+            const lesson = lessons[currentIdx];
             const wrapper = document.getElementById('book-pages-wrapper');
 
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = lesson;
+            // Build Structure HTML
+            const structureHtml = lesson.structure.map((item, i) => {
+                let type = 'bead-plus';
+                if (item.match(/Noun|Time|Recipient/)) type = 'bead-noun';
+                else if (item.match(/Verb|なります|欲しい|できます/)) type = 'bead-verb';
+                else if (item.match(/が|を|に|の|は|までに|の/)) type = 'bead-particle';
+                else if (item.match(/Adjective/)) type = 'bead-adj';
 
-            const header = tempDiv.querySelector('.lesson-header').outerHTML;
-            const intro = tempDiv.querySelector('p').outerHTML;
-            const formation = tempDiv.querySelector('.formation-box').outerHTML;
+                const bead = `<span class="structure-bead ${type}">${item}</span>`;
+                const plus = (i < lesson.structure.length - 1) ? '<span class="bead-plus">+</span>' : '';
+                return bead + plus;
+            }).join('');
 
-            const grid = tempDiv.querySelector('.grammar-grid') || tempDiv.querySelector('.conjugation-table');
-            const gridHtml = grid ? grid.outerHTML : '';
+            // Build Examples HTML
+            const examplesHtml = lesson.examples.map(ex => `
+                <div class="example-item">
+                    <p style="font-family: var(--font-jp); font-size: 1.3rem; margin-bottom: 0.3rem;">${ex.jp}</p>
+                    <p style="font-style: italic; color: #64748b; font-size: 0.9rem;">${ex.ro}</p>
+                    <p style="color: var(--primary-color); font-weight: 600;">${ex.en}</p>
+                </div>
+            `).join('');
 
             wrapper.innerHTML = `
-                <div class="book-page">
-                    ${header}
-                    ${intro}
-                    ${formation}
+                <div class="book-page animate-fade-in">
+                    <div class="lesson-header">
+                        <small style="color: var(--text-light); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Grammar Point #${currentIdx + 1}</small>
+                        <h1 style="margin-top: 0.5rem; font-size: 2rem;">${lesson.title}</h1>
+                    </div>
+                    <p style="font-size: 1.1rem; color: #334155; line-height: 1.6;">${lesson.meaning}</p>
+                    
+                    <h4 style="margin-top: 2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Sentence Structure</h4>
+                    <div class="structure-container">
+                        ${structureHtml}
+                    </div>
+
+                    <div class="note-box">
+                        <strong>💡 Teacher's Note:</strong><br>
+                        ${lesson.notes}
+                    </div>
                 </div>
-                <div class="book-page">
-                    <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Examples & Usage</h3>
-                    ${gridHtml}
+                <div class="book-page animate-fade-in">
+                    <div class="lesson-header">
+                        <h1>Examples & Usage</h1>
+                    </div>
+                    <div class="example-list">
+                        ${examplesHtml}
+                    </div>
+                    
+                    <div style="margin-top: 3rem; background: #f1f5f9; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+                        <h4 style="margin-bottom: 0.8rem;">Arrangement Tip</h4>
+                        <p style="font-size: 0.85rem; color: #475569;">In Japanese, word order is flexible *except* for the verb. The verb **always** goes at the end of the sentence. Particles (が, を, に) act like glue that holds nouns to their roles.</p>
+                    </div>
                 </div>
             `;
 
-            // Update nav visibility
-            document.querySelector('.book-nav.prev').style.display = currentLessonIndex > 0 ? 'flex' : 'none';
-            document.querySelector('.book-nav.next').style.display = currentLessonIndex < lessonIds.length - 1 ? 'flex' : 'none';
+            // Nav visibility
+            document.getElementById('nav-prev').style.visibility = currentIdx > 0 ? 'visible' : 'hidden';
+            document.getElementById('nav-next').style.visibility = currentIdx < lessons.length - 1 ? 'visible' : 'hidden';
+
+            // Scroll to top
+            document.querySelectorAll('.book-page').forEach(p => p.scrollTop = 0);
         }
 
-        function navigateLesson(direction) {
-            const nextIndex = currentLessonIndex + direction;
-            if (nextIndex >= 0 && nextIndex < lessonIds.length) {
-                showLesson(lessonIds[nextIndex]);
+        function navigateLesson(dir) {
+            const newIdx = currentIdx + dir;
+            if (newIdx >= 0 && newIdx < lessons.length) {
+                setLesson(newIdx);
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            showLesson('basics', document.querySelector('.topic-item'));
+            renderSidebar();
+            setLesson(0);
         });
-
-
     </script>
 </body>
 
