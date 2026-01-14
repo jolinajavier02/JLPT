@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Essential Particles - Notesjp</title>
+    <title>Particle Mastery - Notesjp</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         :root {
-            --sidebar-width: 260px;
+            --sidebar-width: 300px;
         }
 
         body {
@@ -40,23 +40,38 @@
         .sidebar {
             width: var(--sidebar-width);
             background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 1.5rem 1rem;
             height: 100%;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(188, 0, 45, 0.1);
+            border: 1px solid rgba(188, 0, 45, 0.05);
         }
 
         .sidebar-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
             color: var(--primary-color);
             text-align: center;
             padding-bottom: 1rem;
             border-bottom: 2px solid #f1f5f9;
+        }
+
+        .sidebar-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .sidebar-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
         }
 
         .topic-list {
@@ -66,57 +81,68 @@
         }
 
         .topic-item {
-            padding: 0.8rem 1.2rem;
-            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            border-radius: 16px;
             cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: 0.3rem;
-            font-weight: 600;
+            transition: all 0.2s ease;
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid transparent;
         }
 
         .topic-item:hover {
-            background: #f1f5f9;
-            color: var(--primary-color);
+            background: #f8fafc;
+            border-color: #e2e8f0;
         }
 
         .topic-item.active {
             background: #fff5f5;
+            border-color: rgba(188, 0, 45, 0.2);
+            box-shadow: 0 4px 12px rgba(188, 0, 45, 0.05);
+        }
+
+        .topic-item span {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1e293b;
+        }
+
+        .topic-item.active span {
             color: var(--primary-color);
-            border-left: 4px solid var(--primary-color);
+        }
+
+        .topic-item small {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 2px;
         }
 
         /* Content Area Styling */
-        .content-area {
+        .content-area-wrapper {
             flex: 1;
-            display: flex;
-            background: white;
-            border-radius: 20px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(188, 0, 45, 0.1);
-            height: 100%;
             position: relative;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(188, 0, 45, 0.05);
+            display: flex;
             overflow: hidden;
         }
 
         .book-page {
             flex: 1;
-            padding: 2rem;
+            padding: 2.5rem;
             overflow-y: auto;
-            position: relative;
-            background: white;
+            height: 100%;
         }
-
-
 
         .book-page:first-child {
-            border-right: 1px solid #eee;
+            border-right: 1px solid #f1f5f9;
         }
 
-        /* Book Spine Effect */
-        .content-area::after {
-            content: '';
+        /* Spine shadow */
+        .spine {
             position: absolute;
             left: 50%;
             top: 0;
@@ -132,173 +158,112 @@
             pointer-events: none;
         }
 
-        .lesson-header {
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
+        /* Color classes */
+        .text-noun {
+            color: #1e40af;
+            font-weight: 500;
         }
 
-        .lesson-header h1 {
-            color: var(--primary-color);
-            font-size: 1.6rem;
+        .text-verb {
+            color: #166534;
+            font-weight: 500;
         }
 
-        .book-nav {
+        .text-particle {
+            color: #9f1239;
+            font-weight: 700;
+            background: rgba(159, 18, 57, 0.05);
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .note-box {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .note-box h4 {
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example-item {
+            background: #f8fafc;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .nav-controls {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: white;
-            border: 1px solid var(--primary-color);
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
+            border: none;
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            color: var(--primary-color);
-            z-index: 10;
-            box-shadow: var(--shadow-md);
+            transition: all 0.2s;
+            border: 1px solid #f1f5f9;
         }
 
-        .book-nav:hover {
+        .nav-btn:hover {
             background: var(--primary-color);
             color: white;
-            box-shadow: 0 4px 12px rgba(188, 0, 45, 0.3);
+            transform: translateY(-2px);
         }
 
-        .book-nav:active {
-            background: #a00026;
-            transform: translateY(-50%) scale(0.95);
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        .book-nav.prev {
-            left: 10px;
-        }
-
-        .book-nav.next {
-            right: 10px;
-        }
-
-        .example-box {
-            background: #fff5f5;
-            padding: 1.2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        h3,
-        h4 {
-            color: var(--primary-color) !important;
-        }
-
-        .grammar-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
-            margin-top: 1.2rem;
-        }
-
-        .formation-box {
-            background: #fff;
-            border: 1px solid #eee;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-top: 0.8rem;
-            margin-bottom: 1.2rem;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .mistake-tag {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: #fff5f5;
-            color: var(--primary-color);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-
-
-
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
             .main-container {
                 flex-direction: column;
                 height: auto;
-                min-height: calc(100vh - 140px);
+                overflow: visible;
             }
 
             .sidebar {
                 width: 100%;
-                position: static;
-                margin-bottom: 1rem;
-                padding: 1rem;
+                height: auto;
             }
 
-            .topic-list {
-                display: flex;
-                overflow-x: auto;
-                gap: 0.5rem;
-                padding-bottom: 0.5rem;
-                white-space: nowrap;
-                -webkit-overflow-scrolling: touch;
+            .content-area-wrapper {
+                height: 800px;
             }
 
-            .topic-item {
-                flex: 0 0 auto;
-                margin-bottom: 0;
+            .spine {
+                display: none;
             }
 
-            .topic-list::-webkit-scrollbar {
-                height: 4px;
+            .content-area-wrapper {
+                flex-direction: column;
             }
 
-            .topic-list::-webkit-scrollbar-track {
-                background: #f1f1f1;
-            }
-
-            .topic-list::-webkit-scrollbar-thumb {
-                background: #ccc;
-                border-radius: 4px;
-            }
-
-            .content-area {
-                height: 60vh;
-                min-height: 400px;
-            }
-
-            .book-page {
-                padding: 1.5rem 1rem 4rem 1rem;
-            }
-
-            .book-nav {
-                top: auto;
-                bottom: 10px;
-                transform: none;
-                width: 50px;
-                height: 50px;
-                background: rgba(255, 255, 255, 0.95);
-                border: 2px solid var(--primary-color);
-            }
-
-            .book-nav.prev {
-                left: 20px;
-            }
-
-            .book-nav.next {
-                right: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .lesson-header h1 {
-                font-size: 1.3rem;
-            }
-
-            .content-area {
-                height: 65vh;
+            .book-page:first-child {
+                border-right: none;
+                border-bottom: 1px solid #f1f5f9;
             }
         }
     </style>
@@ -307,249 +272,385 @@
 <body>
     <header class="main-header">
         <div class="container">
-            <nav>
+            <nav style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                 <a href="home.html" class="logo">Notesjp</a>
-                <div class="nav-links">
+                <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
                     <a href="home.html" class="nav-link">Dashboard</a>
-                    <a href="test.html" class="header-btn">Take Test</a>
+                    <a href="grammar.html" class="nav-link">Grammar</a>
+                    <a href="vocabulary.html" class="nav-link">Vocabulary</a>
+                    <a href="test.html" class="header-btn">Practice Test</a>
                 </div>
             </nav>
         </div>
     </header>
 
     <div class="main-container fixed-header-offset">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-title">Essential Particles</div>
-            <ul class="topic-list">
-                <li class="topic-item active" onclick="showLesson('wa-ga', this)">は (Wa) & が (Ga)</li>
-                <li class="topic-item" onclick="showLesson('o-ni', this)">を (O) & に (Ni)</li>
-                <li class="topic-item" onclick="showLesson('de-e', this)">で (De) & へ (E)</li>
-                <li class="topic-item" onclick="showLesson('no-to', this)">の (No) & と (To)</li>
-                <li class="topic-item" onclick="showLesson('mo-ka', this)">も (Mo) & か (Ka)</li>
-            </ul>
-
-            <ul class="topic-list" style="margin-top: auto;">
-                <li class="topic-item" onclick="window.location.href='grammar.html'">Go to Grammar</li>
-            </ul>
+            <div class="sidebar-scroll">
+                <ul class="topic-list" id="sidebar-list">
+                    <!-- Sidebar items injected here -->
+                </ul>
+            </div>
         </aside>
 
-        <!-- Content Area -->
-        <main class="content-area" id="book-container">
-            <div class="book-nav prev" onclick="navigateLesson(-1)">←</div>
-            <div class="book-nav next" onclick="navigateLesson(1)">→</div>
+        <main class="content-area-wrapper" id="book-container">
+            <div class="spine"></div>
             <div id="book-pages-wrapper" style="display: flex; width: 100%; height: 100%;">
-                <!-- Pages will be injected here -->
+                <!-- Pages injected here -->
+            </div>
+            <div class="nav-controls">
+                <button class="nav-btn" onclick="navigateLesson(-1)" id="prevBtn">←</button>
+                <button class="nav-btn" onclick="navigateLesson(1)" id="nextBtn">→</button>
             </div>
         </main>
     </div>
 
     <script>
-        const lessons = {
-            'wa-ga': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>1. は (Wa) vs が (Ga)</h1>
-                    </div>
-                    <p>These are the most fundamental particles in Japanese. <strong>は (wa)</strong> marks the topic, while <strong>が (ga)</strong> marks the subject.</p>
-                    
-                    <div class="formation-box">
-                        <strong>Key Differences:</strong><br>
-                        • <strong>は (wa):</strong> Focuses on what comes <em>after</em> the particle (the comment).<br>
-                        • <strong>が (ga):</strong> Focuses on what comes <em>before</em> the particle (the subject).
-                    </div>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Examples</h4>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">私は学生です。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi wa gakusei desu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">As for me, I am a student.</p>
-                            </div>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">猫がいます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Neko ga imasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">There is a cat (specifically a cat).</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'o-ni': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>2. を (O) & に (Ni)</h1>
-                    </div>
-                    <p><strong>を (o)</strong> marks the direct object, and <strong>に (ni)</strong> marks the destination, time, or indirect object.</p>
-                    
-                    <div class="formation-box">
-                        <strong>Usage:</strong><br>
-                        • <strong>を (o):</strong> Used with transitive verbs (actions done to something).<br>
-                        • <strong>に (ni):</strong> Used for movement towards a place or specific points in time.
-                    </div>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Examples</h4>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">水を飲みます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Mizu o nomimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I drink water.</p>
-                            </div>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">日本に行きます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Nihon ni ikimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I go to Japan.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'de-e': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>3. で (De) & へ (E)</h1>
-                    </div>
-                    <p><strong>で (de)</strong> indicates the location of an action or the means/tool used. <strong>へ (e)</strong> indicates direction.</p>
-                    
-                    <div class="formation-box">
-                        <strong>Usage:</strong><br>
-                        • <strong>で (de):</strong> Where an action happens (e.g., eating at a restaurant).<br>
-                        • <strong>へ (e):</strong> Similar to に (ni) but emphasizes the direction of travel.
-                    </div>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Examples</h4>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">レストランで食べます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Resutoran de tabemasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I eat at a restaurant.</p>
-                            </div>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">東京へ行きます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Toukyou e ikimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I head towards Tokyo.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'no-to': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>4. の (No) & と (To)</h1>
-                    </div>
-                    <p><strong>の (no)</strong> indicates possession or connection. <strong>と (to)</strong> means "and" or "with".</p>
-                    
-                    <div class="formation-box">
-                        <strong>Usage:</strong><br>
-                        • <strong>の (no):</strong> Connects two nouns (A no B = B of A).<br>
-                        • <strong>と (to):</strong> Lists nouns or indicates doing something with someone.
-                    </div>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Examples</h4>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">私の本です。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi no hon desu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">It is my book.</p>
-                            </div>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">友達と行きます。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Tomodachi to ikimasu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I go with a friend.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'mo-ka': `
-                <div class="lesson-card">
-                    <div class="lesson-header">
-                        <h1>5. も (Mo) & か (Ka)</h1>
-                    </div>
-                    <p><strong>も (mo)</strong> means "also" or "too". <strong>か (ka)</strong> is the question marker.</p>
-                    
-                    <div class="formation-box">
-                        <strong>Usage:</strong><br>
-                        • <strong>も (mo):</strong> Replaces は, が, or を to mean "also".<br>
-                        • <strong>か (ka):</strong> Placed at the end of a sentence to make it a question.
-                    </div>
-
-                    <div class="grammar-grid">
-                        <div class="example-box">
-                            <h4>Examples</h4>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">私も学生です。</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">Watashi mo gakusei desu.</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">I am also a student.</p>
-                            </div>
-                            <div style="margin-bottom: 1.5rem;">
-                                <p style="font-family: var(--font-jp); font-size: 1.3rem;">お元気ですか？</p>
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.9rem;">O-genki desu ka?</p>
-                                <p style="font-weight: 600; color: var(--primary-color);">Are you well?</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `
-        };
-
-        let currentLessonIndex = 0;
-        const lessonIds = Object.keys(lessons);
-
-        function showLesson(id, element) {
-            if (!element) {
-                element = document.querySelector(`.topic-item[onclick*="'${id}'"]`);
+        const lessons = [
+            {
+                id: 'wa',
+                title: 'は (wa)',
+                subtitle: 'Topic Marker',
+                description: 'Marks the topic of the sentence. It translates roughly to "As for..." or "Regarding...".',
+                uses: [
+                    'Marking the Topic of the Sentence',
+                    'Contrast and Comparison (A is X, but B is Y)',
+                    'Emphasizing or Clarifying the Subject',
+                    'Used in Negative Sentences for emphasis',
+                ],
+                notes: 'While written as "ha", it is pronounced "wa" when used as a particle. It establishes what the conversation is about.',
+                examples: [
+                    { jp: '私<span class="text-particle">は</span>学生です。', ro: 'Watashi <span class="text-particle">wa</span> gakusei desu.', en: '<span class="text-particle">As for</span> me, I am a <span class="text-noun">student</span>.' },
+                    { jp: 'これ<span class="text-particle">は</span>本です。', ro: 'Kore <span class="text-particle">wa</span> hon desu.', en: '<span class="text-particle">As for</span> this, it is a <span class="text-noun">book</span>.' },
+                    { jp: '今日<span class="text-particle">は</span>暑いです。', ro: 'Kyou <span class="text-particle">wa</span> atsui desu.', en: '<span class="text-particle">As for</span> today, it is hot.' }
+                ]
+            },
+            {
+                id: 'ga',
+                title: 'が (ga)',
+                subtitle: 'Subject Marker',
+                description: 'Marks the specific subject of an action or state. Focuses on the "who" or "what" that is doing the action.',
+                uses: [
+                    'Emphasis on the Subject',
+                    'Used in Questions with Interrogative Words (Who, What)',
+                    'Used with Adjectives to mark what is [adjective]',
+                    'Used with "Want" (欲しい) and "Can" (できます) forms'
+                ],
+                notes: 'If "wa" marks the topic (general), "ga" marks the subject (specific). Use "ga" when introducing new information.',
+                examples: [
+                    { jp: '猫<span class="text-particle">が</span>います。', ro: 'Neko <span class="text-particle">ga</span> imasu.', en: 'There is a <span class="text-noun">cat</span> (specifically a cat).' },
+                    { jp: '誰<span class="text-particle">が</span>来ましたか。', ro: 'Dare <span class="text-particle">ga</span> kimashita ka?', en: '<span class="text-noun">Who</span> came?' },
+                    { jp: '車<span class="text-particle">が</span>欲しいです。', ro: 'Kuruma <span class="text-particle">ga</span> hoshii desu.', en: 'I <span class="text-verb">want</span> a <span class="text-noun">car</span>.' }
+                ]
+            },
+            {
+                id: 'wo',
+                title: 'を (wo/o)',
+                subtitle: 'Direct Object Marker',
+                description: 'Marks the direct object that receives the action of a transitive verb.',
+                uses: [
+                    'Direct Object Marker',
+                    'With Movement Verbs (leaving a place)',
+                    'With Verbs of Experience (seeing, hearing)',
+                ],
+                notes: 'Written as "wo" but pronounced as "o". It connects the thing being acted upon to the verb.',
+                examples: [
+                    { jp: 'ご飯<span class="text-particle">を</span>食べます。', ro: 'Gohan <span class="text-particle">wo</span> tabemasu.', en: 'I <span class="text-verb">eat</span> <span class="text-noun">rice</span>.' },
+                    { jp: '本<span class="text-particle">を</span>読みます。', ro: 'Hon <span class="text-particle">wo</span> yomimasu.', en: 'I <span class="text-verb">read</span> a <span class="text-noun">book</span>.' },
+                    { jp: '日本<span class="text-particle">を</span>離れます。', ro: 'Nihon <span class="text-particle">wo</span> hanaremasu.', en: 'I <span class="text-verb">leave</span> <span class="text-noun">Japan</span>.' }
+                ]
+            },
+            {
+                id: 'ni',
+                title: 'に (ni)',
+                subtitle: 'Time & Direction Marker',
+                description: 'Indicates points in time, destinations, or the location of existence.',
+                uses: [
+                    'Indicating Direction or Destination',
+                    'Indicating Specific Time',
+                    'Indicating Location of Existence (with います/あります)',
+                    'Marking the Indirect Object (Recipient)'
+                ],
+                notes: 'Use "ni" for specific times (like 3 o\'clock) but not for relative times (like tomorrow).',
+                examples: [
+                    { jp: '学校<span class="text-particle">に</span>行きます。', ro: 'Gakkou <span class="text-particle">ni</span> ikimasu.', en: 'I <span class="text-verb">go</span> <span class="text-particle">to</span> <span class="text-noun">school</span>.' },
+                    { jp: '五時<span class="text-particle">に</span>起きます。', ro: 'Go-ji <span class="text-particle">ni</span> okimasu.', en: 'I <span class="text-verb">wake up</span> <span class="text-particle">at</span> <span class="text-noun">5 o\'clock</span>.' },
+                    { jp: '机の上に本<span class="text-particle">に</span>あります。', ro: 'Tsukue no ue ni hon ga arimasu.', en: 'There is a <span class="text-noun">book</span> <span class="text-particle">on</span> the table.' }
+                ]
+            },
+            {
+                id: 'de',
+                title: 'で (de)',
+                subtitle: 'Location & Means Marker',
+                description: 'Indicates where an action takes place, or the method/means used to do something.',
+                uses: [
+                    'Indicate the Location of an Action',
+                    'Indicating Means or Method (by bus, with a pen)',
+                    'Indicating Cause or Reason',
+                    'Indicating Scope or Limits'
+                ],
+                notes: 'Difference from "ni": "ni" is for where something *is*, "de" is for where an *action happens*.',
+                examples: [
+                    { jp: '図書館<span class="text-particle">で</span>勉強します。', ro: 'Toshokan <span class="text-particle">de</span> benkyou shimasu.', en: 'I <span class="text-verb">study</span> <span class="text-particle">at</span> the <span class="text-noun">library</span>.' },
+                    { jp: 'バス<span class="text-particle">で</span>行きます。', ro: 'Basu <span class="text-particle">de</span> ikimasu.', en: 'I <span class="text-verb">go</span> <span class="text-particle">by</span> <span class="text-noun">bus</span>.' },
+                    { jp: 'ペン<span class="text-particle">で</span>書きます。', ro: 'Pen <span class="text-particle">de</span> kakimasu.', en: 'I <span class="text-verb">write</span> <span class="text-particle">with</span> a <span class="text-noun">pen</span>.' }
+                ]
+            },
+            {
+                id: 'he',
+                title: 'へ (e)',
+                subtitle: 'Direction Marker',
+                description: 'Indicates the direction of a movement. Emphasizes the journey rather than just the destination.',
+                uses: [
+                    'Indicating Direction or Destination',
+                    'Indicating a Goal',
+                    'Used with Verbs of Giving or Sending'
+                ],
+                notes: 'Written as "he" but pronounced "e". It is more poetic and directional than "ni".',
+                examples: [
+                    { jp: '家<span class="text-particle">へ</span>帰ります。', ro: 'Ie <span class="text-particle">e</span> kaerimasu.', en: 'I\'m <span class="text-verb">returning</span> <span class="text-particle">home</span>.' },
+                    { jp: '日本<span class="text-particle">へ</span>ようこそ！', ro: 'Nihon <span class="text-particle">e</span> youkoso!', en: 'Welcome <span class="text-particle">to</span> <span class="text-noun">Japan</span>!' }
+                ]
+            },
+            {
+                id: 'to',
+                title: 'と (to)',
+                subtitle: 'And / With',
+                description: 'Used to list nouns (exhaustive list) or to indicate doing something with someone.',
+                uses: [
+                    'Connecting Nouns (exhaustive "And")',
+                    'Indicating Companionship ("With")',
+                    'Marking Direct Quotation'
+                ],
+                notes: 'Unlike "ya", using "to" implies the list is complete.',
+                examples: [
+                    { jp: '肉<span class="text-particle">と</span>魚を食べます。', ro: 'Niku <span class="text-particle">to</span> sakana wo tabemasu.', en: 'I <span class="text-verb">eat</span> <span class="text-noun">meat</span> <span class="text-particle">and</span> <span class="text-noun">fish</span>.' },
+                    { jp: '友達<span class="text-particle">と</span>遊びます。', ro: 'Tomodachi <span class="text-particle">to</span> asobimasu.', en: 'I <span class="text-verb">play</span> <span class="text-particle">with</span> <span class="text-noun">friends</span>.' }
+                ]
+            },
+            {
+                id: 'no',
+                title: 'の (no)',
+                subtitle: 'Possession Marker',
+                description: 'Indicates possession, belonging, or connects two nouns to provide more detail.',
+                uses: [
+                    'Possession (My, Your, etc.)',
+                    'Descriptions or Explanations',
+                    'Nominalization (turning verbs into nouns)'
+                ],
+                notes: 'It works like "\'s" in English (A no B = A\'s B).',
+                examples: [
+                    { jp: '私<span class="text-particle">の</span>車です。', ro: 'Watashi <span class="text-particle">no</span> kuruma desu.', en: 'It is <span class="text-noun">my</span> <span class="text-noun">car</span>.' },
+                    { jp: '日本語<span class="text-particle">の</span>本。', ro: 'Nihongo <span class="text-particle">no</span> hon.', en: 'A <span class="text-noun">book</span> <span class="text-particle">of</span> <span class="text-noun">Japanese</span>.' }
+                ]
+            },
+            {
+                id: 'mo',
+                title: 'も (mo)',
+                subtitle: 'Also / Too',
+                description: 'Used to mean "also" or "too". It replaces は, が, or を.',
+                uses: [
+                    'Adding to a List ("Also")',
+                    'Neither / Nor (in negative sentences)',
+                    'Emphasizing quantity ("As many as")'
+                ],
+                notes: 'You cannot use "wa" and "mo" together; "mo" replaces it.',
+                examples: [
+                    { jp: '私<span class="text-particle">も</span>行きます。', ro: 'Watashi <span class="text-particle">mo</span> ikimasu.', en: 'I <span class="text-verb">am</span> <span class="text-particle">also</span> <span class="text-verb">going</span>.' },
+                    { jp: 'りんご<span class="text-particle">も</span>あります。', ro: 'Ringo <span class="text-particle">mo</span> arimasu.', en: 'There <span class="text-verb">is</span> <span class="text-particle">also</span> an <span class="text-noun">apple</span>.' }
+                ]
+            },
+            {
+                id: 'ya',
+                title: 'や (ya)',
+                subtitle: 'Non-exhaustive "And"',
+                description: 'Used to list nouns when the list is not complete (meaning "A, B, and others").',
+                uses: [
+                    'Listing Examples',
+                    'Implying there are more items that are not mentioned'
+                ],
+                notes: 'Often used with "nado" (など) at the end of the list.',
+                examples: [
+                    { jp: '本<span class="text-particle">や</span>ペンがあります。', ro: 'Hon <span class="text-particle">ya</span> pen ga arimasu.', en: 'There are <span class="text-noun">books</span>, <span class="text-noun">pens</span>, <span class="text-particle">and [other things]</span>.' }
+                ]
+            },
+            {
+                id: 'kara',
+                title: 'から (kara)',
+                subtitle: 'From / Starting Point',
+                description: 'Indicates the starting point in time or space. Also used to mean "because".',
+                uses: [
+                    'From a Place',
+                    'From a Time',
+                    'Explaining the Cause or Reason (Because)',
+                    'Meaning "After" (since doing something)'
+                ],
+                notes: 'Pairs with "made" for "from... until...".',
+                examples: [
+                    { jp: '日本<span class="text-particle">から</span>来ました。', ro: 'Nihon <span class="text-particle">kara</span> kimashita.', en: 'I came <span class="text-particle">from</span> <span class="text-noun">Japan</span>.' },
+                    { jp: '九時<span class="text-particle">から</span>です。', ro: 'Kuji <span class="text-particle">kara</span> desu.', en: 'It is <span class="text-particle">from</span> <span class="text-noun">9 o\'clock</span>.' }
+                ]
+            },
+            {
+                id: 'made',
+                title: 'まで (made)',
+                subtitle: 'Until / End Point',
+                description: 'Indicates the end point in time or space.',
+                uses: [
+                    'Until a Place',
+                    'Until a Point in Time',
+                    'Expressing Extent'
+                ],
+                notes: 'It marks the limit or boundary.',
+                examples: [
+                    { jp: '東京<span class="text-particle">まで</span>。', ro: 'Toukyou <span class="text-particle">made</span>.', en: '<span class="text-particle">Until</span> <span class="text-noun">Tokyo</span>.' },
+                    { jp: '三時<span class="text-particle">まで</span>働きます。', ro: 'San-ji <span class="text-particle">made</span> hatarakimasu.', en: 'I <span class="text-verb">work</span> <span class="text-particle">until</span> <span class="text-noun">3 o\'clock</span>.' }
+                ]
+            },
+            {
+                id: 'ne',
+                title: 'ね (ne)',
+                subtitle: 'Confirmation Marker',
+                description: 'A sentence-ending particle used to seek agreement or confirm shared information.',
+                uses: [
+                    'Seeking Confirmation ("Right?")',
+                    'Softening the Statement',
+                    'Expressing Shared Understanding'
+                ],
+                notes: 'Similar to "isn\'t it?" or "right?" in English.',
+                examples: [
+                    { jp: '美味しいです<span class="text-particle">ね</span>。', ro: 'Oishii desu <span class="text-particle">ne</span>.', en: 'It\'s delicious, <span class="text-particle">isn\'t it?</span>' },
+                    { jp: 'そうですね。', ro: 'Sou desu <span class="text-particle">ne</span>.', en: 'That\'s right, <span class="text-particle">isn\'t it?</span>' }
+                ]
+            },
+            {
+                id: 'yo',
+                title: 'よ (yo)',
+                subtitle: 'Emphasis Marker',
+                description: 'A sentence-ending particle used to provide new information or add emphasis.',
+                uses: [
+                    'Providing New Information to the listener',
+                    'Giving Advice or Instruction',
+                    'Strong Assertion'
+                ],
+                notes: 'It adds a sense of "I\'m telling you" or an exclamation point.',
+                examples: [
+                    { jp: 'あれは猫ですよ。', ro: 'Are wa neko desu <span class="text-particle">yo</span>.', en: 'That is a cat, <span class="text-particle">you know</span>!' },
+                    { jp: '行きます<span class="text-particle">よ</span>！', ro: 'Ikimasu <span class="text-particle">yo</span>!', en: 'I\'m <span class="text-verb">going</span> (for sure)!' }
+                ]
+            },
+            {
+                id: 'ka',
+                title: 'か (ka)',
+                subtitle: 'Question Marker',
+                description: 'The standard particle used to turn a statement into a question.',
+                uses: [
+                    'Yes / No Questions',
+                    'Information-seeking Questions',
+                    'Rhetorical Questions'
+                ],
+                notes: 'In polite Japanese, you don\'t need a question mark (?) because "ka" already indicates a question.',
+                examples: [
+                    { jp: '元気です<span class="text-particle">か</span>。', ro: 'Genki desu <span class="text-particle">ka</span>.', en: 'Are you well?' },
+                    { jp: '何です<span class="text-particle">か</span>。', ro: 'Nan desu <span class="text-particle">ka</span>.', en: 'What is it?' }
+                ]
             }
-            document.querySelectorAll('.topic-item').forEach(item => item.classList.remove('active'));
-            if (element) element.classList.add('active');
+        ];
 
-            currentLessonIndex = lessonIds.indexOf(id);
-            const lesson = lessons[id];
+        let currentIdx = 0;
+
+        function renderSidebar() {
+            const list = document.getElementById('sidebar-list');
+            list.innerHTML = lessons.map((l, i) => `
+                <li class="topic-item ${i === currentIdx ? 'active' : ''}" onclick="setLesson(${i})">
+                    <span>${l.title}</span>
+                    <small>${l.subtitle}</small>
+                </li>
+            `).join('');
+        }
+
+        function setLesson(index) {
+            currentIdx = index;
+            renderSidebar();
+
+            const lesson = lessons[currentIdx];
             const wrapper = document.getElementById('book-pages-wrapper');
-
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = lesson;
-
-            const header = tempDiv.querySelector('.lesson-header').outerHTML;
-            const intro = tempDiv.querySelector('p').outerHTML;
-            const formation = tempDiv.querySelector('.formation-box').outerHTML;
-            const grid = tempDiv.querySelector('.grammar-grid');
-            const gridHtml = grid ? grid.outerHTML : '';
 
             wrapper.innerHTML = `
                 <div class="book-page">
-                    ${header}
-                    ${intro}
-                    ${formation}
+                    <div style="margin-bottom: 2rem;">
+                        <span style="color: var(--primary-color); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Particle Lesson ${currentIdx + 1}</span>
+                        <h1 style="font-size: 3rem; color: #1e293b; margin-top: 0.5rem;">${lesson.title}</h1>
+                        <p style="font-size: 1.2rem; color: #64748b; font-weight: 500;">${lesson.subtitle}</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: #1e293b; margin-bottom: 1rem;">Core Usage</h3>
+                        <p style="line-height: 1.6; color: #475569;">${lesson.description}</p>
+                    </div>
+
+                    <div class="note-box">
+                        <h4>💡 Teacher's Note</h4>
+                        <p style="font-size: 0.95rem; line-height: 1.5;">${lesson.notes}</p>
+                    </div>
+
+                    <div>
+                        <h3 style="color: #1e293b; margin-bottom: 1rem;">Specific Uses</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            ${lesson.uses.map(use => `
+                                <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 0.8rem; color: #475569;">
+                                    <span style="color: var(--primary-color); margin-top: 2px;">•</span>
+                                    <span>${use}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
                 </div>
+
                 <div class="book-page">
-                    <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Examples & Usage</h3>
-                    ${gridHtml}
+                    <h3 style="color: #1e293b; margin-bottom: 1.5rem;">Practical Examples</h3>
+                    <div class="examples-container">
+                        ${lesson.examples.map(ex => `
+                            <div class="example-item">
+                                <p style="font-family: 'Noto Sans JP', sans-serif; font-size: 1.4rem; margin-bottom: 0.4rem; color: #1e293b;">${ex.jp}</p>
+                                <p style="font-style: italic; color: #64748b; font-size: 0.95rem; margin-bottom: 0.8rem;">${ex.ro}</p>
+                                <p style="color: #000000; font-weight: 500; font-size: 1.1rem;">${ex.en}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div style="margin-top: 3rem; padding: 1.5rem; background: #f1f5f9; border-radius: 16px;">
+                        <p style="font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Pro Tip:</p>
+                        <p style="font-size: 0.9rem; color: #475569; line-height: 1.5;">
+                            Try using these colors to identify roles! 
+                            <span class="text-noun">Nouns are Blue</span>, 
+                            <span class="text-verb">Verbs are Green</span>, and 
+                            <span class="text-particle">Particles are Red</span>.
+                        </p>
+                    </div>
                 </div>
             `;
 
-            // Update nav visibility
-            document.querySelector('.book-nav.prev').style.display = currentLessonIndex > 0 ? 'flex' : 'none';
-            document.querySelector('.book-nav.next').style.display = currentLessonIndex < lessonIds.length - 1 ? 'flex' : 'none';
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentIdx === 0;
+            document.getElementById('nextBtn').disabled = currentIdx === lessons.length - 1;
+
+            // Scroll to top
+            document.querySelectorAll('.book-page').forEach(p => p.scrollTop = 0);
         }
 
         function navigateLesson(direction) {
-            const nextIndex = currentLessonIndex + direction;
-            if (nextIndex >= 0 && nextIndex < lessonIds.length) {
-                showLesson(lessonIds[nextIndex]);
+            const next = currentIdx + direction;
+            if (next >= 0 && next < lessons.length) {
+                setLesson(next);
             }
         }
 
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            showLesson('wa-ga', document.querySelector('.topic-item'));
+            setLesson(0);
         });
-
-
     </script>
 </body>
 
