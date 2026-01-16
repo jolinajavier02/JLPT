@@ -308,251 +308,96 @@
     <script>
         const lessons = [
             {
-                id: 'wa',
-                title: 'は (wa)',
-                subtitle: 'Topic Marker',
-                description: 'Marks the topic of the sentence. It translates roughly to "As for..." or "Regarding...".',
-                uses: [
-                    'Marking the Topic of the Sentence',
-                    'Contrast and Comparison (A is X, but B is Y)',
-                    'Emphasizing or Clarifying the Subject',
-                    'Used in Negative Sentences for emphasis',
-                ],
+                id: 'wa-topic',
+                title: 'は (wa) Particle - Topic Marker',
+                subtitle: 'Marking the Topic of the Sentence',
+                description: 'The は (wa) particle is one of the most fundamental and frequently used particles in Japanese. It functions primarily as a topic marker, but its usage can extend beyond this simple role.<br><br>は is used to denote the topic of the sentence. It tells the listener what the sentence will be about, which can be different from the grammatical subject.',
                 notes: 'While written as "ha", it is pronounced "wa" when used as a particle. It establishes what the conversation is about.',
                 examples: [
-                    { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">は</span><ruby>学生<rt>がくせい</rt></ruby>です。', ro: 'Watashi <span class="text-particle">wa</span> gakusei desu.', en: '<span class="text-particle">As for</span> me, I <span class="text-verb">am</span> a <span class="text-noun">student</span>.' },
-                    { jp: 'これ<span class="text-particle">は</span><ruby>本<rt>ほん</rt></ruby>です。', ro: 'Kore <span class="text-particle">wa</span> hon desu.', en: '<span class="text-particle">As for</span> this, it <span class="text-verb">is</span> a <span class="text-noun">book</span>.' },
-                    { jp: '<ruby>今日<rt>きょう</rt></ruby><span class="text-particle">は</span><ruby>暑<rt>あつ</rt></ruby>いです。', ro: 'Kyou <span class="text-particle">wa</span> atsui desu.', en: '<span class="text-particle">As for</span> today, it <span class="text-verb">is</span> hot.' }
+                    { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">は</span><ruby>学生<rt>がくせい</rt></ruby>です。', ro: 'Watashi <span class="text-particle">wa</span> gakusei desu.', en: 'I <span class="text-verb">am</span> a <span class="text-noun">student</span>.', note: '<span class="text-particle">は</span> marks "I" as the topic, and the sentence provides information about "I".' },
+                    { jp: '<ruby>日本<rt>にほん</rt></ruby><ruby>語<rt>ご</rt></ruby><span class="text-particle">は</span><ruby>難<rt>むずか</rt></ruby>しいです。', ro: 'Nihongo <span class="text-particle">wa</span> muzukashii desu.', en: '<span class="text-noun">Japanese</span> <span class="text-verb">is</span> difficult.', note: '<span class="text-particle">は</span> marks "Japanese" as the topic of difficulty.' },
+                    { jp: '<ruby>猫<rt>ねこ</rt></ruby><span class="text-particle">は</span>かわいいです。', ro: 'Neko <span class="text-particle">wa</span> kawaii desu.', en: '<span class="text-noun">Cats</span> <span class="text-verb">are</span> cute.', note: '<span class="text-particle">は</span> indicates "cats" as the topic being described as cute.' }
                 ]
             },
             {
-                id: 'ga',
-                title: 'が (ga)',
-                subtitle: 'Subject Marker',
-                description: 'Marks the specific subject of an action or state. Focuses on the "who" or "what" that is doing the action.',
-                uses: [
-                    'Emphasis on the Subject',
-                    'Used in Questions with Interrogative Words (Who, What)',
-                    'Used with Adjectives to mark what is [adjective]',
-                    'Used with "Want" (欲しい) and "Can" (できます) forms'
-                ],
-                notes: 'If "wa" marks the topic (general), "ga" marks the subject (specific). Use "ga" when introducing new information.',
+                id: 'wa-contrast',
+                title: 'は (wa) - Contrast and Comparison',
+                subtitle: 'Contrasting Different Topics',
+                description: 'は is used to contrast or compare different topics within a sentence. When comparing or contrasting, は helps to set up the comparison.',
+                notes: 'In these cases, は is used twice or in a way that implies a comparison with something else.',
                 examples: [
-                    { jp: '<ruby>猫<rt>ねこ</rt></ruby><span class="text-particle">が</span>います。', ro: 'Neko <span class="text-particle">ga</span> imasu.', en: 'There <span class="text-verb">is</span> a <span class="text-noun">cat</span> (specifically a cat).' },
-                    { jp: '<ruby>誰<rt>だれ</rt></ruby><span class="text-particle">が</span><ruby>来<rt>き</rt></ruby>ましたか。', ro: 'Dare <span class="text-particle">ga</span> kimashita ka?', en: '<span class="text-noun">Who</span> <span class="text-verb">is it that</span> came?' },
-                    { jp: '<ruby>車<rt>くるま</rt></ruby><span class="text-particle">が</span><ruby>欲<rt>ほ</rt></ruby>しいです。', ro: 'Kuruma <span class="text-particle">ga</span> hoshii desu.', en: 'I <span class="text-verb">want</span> a <span class="text-noun">car</span>.' }
+                    { jp: '<ruby>犬<rt>いぬ</rt></ruby><span class="text-particle">は</span><ruby>好<rt>す</rt></ruby>きですが、<ruby>猫<rt>ねこ</rt></ruby><span class="text-particle">は</span><ruby>嫌<rt>きら</rt></ruby>いです。', ro: 'Inu <span class="text-particle">wa</span> suki desu ga, neko <span class="text-particle">wa</span> kirai desu.', en: 'I <span class="text-verb">like</span> <span class="text-noun">dogs</span>, but I <span class="text-verb">dislike</span> <span class="text-noun">cats</span>.', note: '<span class="text-particle">は</span> contrasts "dogs" and "cats" in terms of preference.' },
+                    { jp: '<ruby>夏<rt>なつ</rt></ruby><span class="text-particle">は</span><ruby>暑<rt>あつ</rt></ruby>いですが、<ruby>冬<rt>ふゆ</rt></ruby><span class="text-particle">は</span><ruby>寒<rt>寒</rt></ruby>いです。', ro: 'Natsu <span class="text-particle">wa</span> atsui desu ga, fuyu <span class="text-particle">wa</span> samui desu.', en: '<span class="text-noun">Summer</span> <span class="text-verb">is</span> hot, but <span class="text-noun">winter</span> <span class="text-verb">is</span> cold.', note: '<span class="text-particle">は</span> contrasts "summer" and "winter" in terms of temperature.' },
+                    { jp: '<ruby>私<rt>わたし</rt></ruby>の<ruby>弟<rt>おとうと</rt></ruby><span class="text-particle">は</span><ruby>英語<rt>えいご</rt></ruby><span class="text-particle">が</span><ruby>得意<rt>とくい</rt></ruby>ですが、<ruby>私<rt>わたし</rt></ruby><span class="text-particle">は</span><ruby>苦手<rt>にがて</rt></ruby>です。', ro: 'Watashi no otouto <span class="text-particle">wa</span> eigo ga tokui desu ga, watashi <span class="text-particle">wa</span> nigate desu.', en: 'My younger brother <span class="text-verb">is</span> good at <span class="text-noun">English</span>, but I <span class="text-verb">am not</span>.', note: '<span class="text-particle">は</span> contrasts the English proficiency of "my younger brother" and "me".' },
+                    { jp: '<ruby>日本<rt>にほん</rt></ruby><span class="text-particle">は</span><ruby>遠<rt>とお</rt></ruby>いですが、<ruby>韓国<rt>かんこく</rt></ruby><span class="text-particle">は</span><ruby>近<rt>ちか</rt></ruby>いです。', ro: 'Nihon <span class="text-particle">wa</span> tooi desu ga, Kankoku <span class="text-particle">wa</span> chikai desu.', en: '<span class="text-noun">Japan</span> <span class="text-verb">is</span> far, but <span class="text-noun">Korea</span> <span class="text-verb">is</span> near.', note: '<span class="text-particle">は</span> is used to contrast "Japan" and "Korea" in terms of distance.' }
                 ]
             },
             {
-                id: 'wo',
-                title: 'を (wo/o)',
-                subtitle: 'Direct Object Marker',
-                description: 'Marks the direct object that receives the action of a transitive verb.',
-                uses: [
-                    'Direct Object Marker',
-                    'With Movement Verbs (leaving a place)',
-                    'With Verbs of Experience (seeing, hearing)',
-                ],
-                notes: 'Written as "wo" but pronounced as "o". It connects the thing being acted upon to the verb.',
+                id: 'wa-emphasis',
+                title: 'は (wa) - Emphasizing or Clarifying the Subject',
+                subtitle: 'Clarifying the Topic',
+                description: 'は can be used to emphasize or clarify what is being talked about, even if it\'s not the grammatical subject.',
+                notes: 'This usage helps focus the listener\'s attention on a specific part of the statement.',
                 examples: [
-                    { jp: 'ご<ruby>飯<rt>はん</rt></ruby><span class="text-particle">を</span><ruby>食<rt>た</rt></ruby>べます。', ro: 'Gohan <span class="text-particle">wo</span> tabemasu.', en: 'I <span class="text-verb">eat</span> <span class="text-noun">rice</span>.' },
-                    { jp: '<ruby>本<rt>ほん</rt></ruby><span class="text-particle">を</span><ruby>読<rt>よ</rt></ruby>みます。', ro: 'Hon <span class="text-particle">wo</span> yomimasu.', en: 'I <span class="text-verb">read</span> a <span class="text-noun">book</span>.' },
-                    { jp: '<ruby>日本<rt>にほん</rt></ruby><span class="text-particle">を</span><ruby>離<rt>はな</rt></ruby>れます。', ro: 'Nihon <span class="text-particle">wo</span> hanaremasu.', en: 'I <span class="text-verb">leave</span> <span class="text-noun">Japan</span>.' }
+                    { jp: 'この<ruby>店<rt>みせ</rt></ruby><span class="text-particle">は</span>サービスがいいです。', ro: 'Kono mise <span class="text-particle">wa</span> saabisu ga ii desu.', en: 'This <span class="text-noun">store</span> <span class="text-verb">has</span> good <span class="text-noun">service</span>.', note: '<span class="text-particle">は</span> emphasizes "this store" in terms of its service quality.' },
+                    { jp: '<ruby>旅行<rt>りょこう</rt></ruby><span class="text-particle">は</span><ruby>楽<rt>たの</rt></ruby>しみです。', ro: 'Ryokou <span class="text-particle">wa</span> tanoshimi desu.', en: 'The <span class="text-noun">trip</span> <span class="text-verb">is</span> something I\'m looking forward to.', note: '<span class="text-particle">は</span> emphasizes "the trip" and its significance to the speaker.' },
+                    { jp: '<ruby>勉強<rt>べんきょう</rt></ruby><span class="text-particle">は</span><ruby>大切<rt>たいせつ</rt></ruby>です。', ro: 'Benkyou <span class="text-particle">wa</span> taisetsu desu.', en: '<span class="text-noun">Studying</span> <span class="text-verb">is</span> important.', note: '<span class="text-particle">は</span> emphasizes the importance of "studying".' },
+                    { jp: 'これは<ruby>私<rt>わたし</rt></ruby>のスマホです。', ro: 'Kore wa watashi no sumaho desu.', en: 'This <span class="text-verb">is</span> my <span class="text-noun">smartphone</span>.', note: '<span class="text-particle">は</span> clarifies that "this" is the speaker\'s smartphone.' }
                 ]
             },
             {
-                id: 'ni',
-                title: 'に (ni)',
-                subtitle: 'Time & Direction Marker',
-                description: 'Indicates points in time, destinations, or the location of existence.',
-                uses: [
-                    'Indicating Direction or Destination',
-                    'Indicating Specific Time',
-                    'Indicating Location of Existence (with います/あります)',
-                    'Marking the Indirect Object (Recipient)'
-                ],
-                notes: 'Use "ni" for specific times (like 3 o\'clock) but not for relative times (like tomorrow).',
+                id: 'wa-structures',
+                title: 'は (wa) - Marking the Topic in Different Sentence Structures',
+                subtitle: 'Diverse Sentence Patterns',
+                description: 'は can be used with different sentence structures, including questions, statements, and even with specific verb forms.',
+                notes: 'It adaptively marks the topic across various grammatical patterns.',
                 examples: [
-                    { jp: '<ruby>学校<rt>がっこう</rt></ruby><span class="text-particle">に</span><ruby>行<rt>い</rt></ruby>きます。', ro: 'Gakkou <span class="text-particle">ni</span> ikimasu.', en: 'I <span class="text-verb">go</span> <span class="text-particle">to</span> <span class="text-noun">school</span>.' },
-                    { jp: '<ruby>五時<rt>ごじ</rt></ruby><span class="text-particle">に</span><ruby>起<rt>お</rt></ruby>きます。', ro: 'Go-ji <span class="text-particle">ni</span> okimasu.', en: 'I <span class="text-verb">wake up</span> <span class="text-particle">at</span> <span class="text-noun">5 o\'clock</span>.' },
-                    { jp: '<ruby>机<rt>つくえ</rt></ruby>の<ruby>上<rt>うえ</rt></ruby>に<ruby>本<rt>ほん</rt></ruby><span class="text-particle">が</span>あります。', ro: 'Tsukue no ue ni hon ga arimasu.', en: 'There <span class="text-verb">is</span> a <span class="text-noun">book</span> <span class="text-particle">on</span> the table.' }
+                    { jp: 'この<ruby>問題<rt>もんどい</rt></ruby><span class="text-particle">は</span>どう<ruby>思<rt>おも</rt></ruby>いますか。', ro: 'Kono mondai <span class="text-particle">wa</span> dou omoimasu ka?', en: 'What do you <span class="text-verb">think</span> about <span class="text-particle">this</span> <span class="text-noun">problem</span>?', note: '<span class="text-particle">は</span> marks "this problem" as the topic of the question.' },
+                    { jp: '<ruby>彼<rt>かれ</rt></ruby><span class="text-particle">は</span><ruby>毎日<rt>まいにち</rt></ruby><ruby>走<rt>はし</rt></ruby>ります。', ro: 'Kare <span class="text-particle">wa</span> mainichi hashirimasu.', en: 'He <span class="text-verb">runs</span> every day.', note: '<span class="text-particle">は</span> denotes "he" as the topic performing the action.' },
+                    { jp: '<ruby>天気<rt>てんき</rt></ruby><span class="text-particle">は</span>どうですか。', ro: 'Tenki <span class="text-particle">wa</span> dou desu ka?', en: 'How <span class="text-verb">is</span> the <span class="text-noun">weather</span>?', note: '<span class="text-particle">は</span> marks "the weather" as the topic being inquired about.' },
+                    { jp: 'その<ruby>計画<rt>けいかく</rt></ruby><span class="text-particle">は</span>すでに<ruby>始<rt>はじ</rt></ruby>まっています。', ro: 'Sono keikaku <span class="text-particle">wa</span> sude ni hajimatte imasu.', en: 'That <span class="text-noun">plan</span> <span class="text-verb">has</span> already started.', note: '<span class="text-particle">は</span> emphasizes the status of "that plan".' }
                 ]
             },
             {
-                id: 'de',
-                title: 'で (de)',
-                subtitle: 'Location & Means Marker',
-                description: 'Indicates where an action takes place, or the method/means used to do something.',
-                uses: [
-                    'Indicate the Location of an Action',
-                    'Indicating Means or Method (by bus, with a pen)',
-                    'Indicating Cause or Reason',
-                    'Indicating Scope or Limits'
-                ],
-                notes: 'Difference from "ni": "ni" is for where something *is*, "de" is for where an *action happens*.',
+                id: 'wa-neg',
+                title: 'は (wa) - in Negative Sentences',
+                subtitle: 'Emphasis in Negation',
+                description: 'When used in negative sentences, は emphasizes that something does not apply to the topic. This is different from が, which can be used more generally.',
+                notes: 'The use of は can imply that while "this" isn\'t liked, other things might be.',
                 examples: [
-                    { jp: '<ruby>図書館<rt>としょかん</rt></ruby><span class="text-particle">で</span><ruby>勉強<rt>べんきょう</rt></ruby>します。', ro: 'Toshokan <span class="text-particle">de</span> benkyou shimasu.', en: 'I <span class="text-verb">study</span> <span class="text-particle">at</span> the <span class="text-noun">library</span>.' },
-                    { jp: 'バス<span class="text-particle">で</span><ruby>行<rt>い</rt></ruby>きます。', ro: 'Basu <span class="text-particle">de</span> ikimasu.', en: 'I <span class="text-verb">go</span> <span class="text-particle">by</span> <span class="text-noun">bus</span>.' },
-                    { jp: 'ペン<span class="text-particle">で</span><ruby>書<rt>か</rt></ruby>きます。', ro: 'Pen <span class="text-particle">de</span> kakimasu.', en: 'I <span class="text-verb">write</span> <span class="text-particle">with</span> a <span class="text-noun">pen</span>.' }
+                    { jp: 'これは<ruby>好<rt>す</rt></ruby>きじゃありません。', ro: 'Kore wa suki ja arimasen.', en: 'I <span class="text-verb">don\'t</span> <span class="text-verb">like</span> this.', note: 'The use of <span class="text-particle">は</span> emphasizes "this" specifically as something not liked.' }
                 ]
             },
             {
-                id: 'he',
-                title: 'へ (e)',
-                subtitle: 'Direction Marker',
-                description: 'Indicates the direction of a movement. Emphasizes the journey rather than just the destination.',
-                uses: [
-                    'Indicating Direction or Destination',
-                    'Indicating a Goal',
-                    'Used with Verbs of Giving or Sending'
-                ],
-                notes: 'Written as "he" but pronounced "e". It is more poetic and directional than "ni".',
+                id: 'wa-time',
+                title: 'は (wa) - with Time Expressions',
+                subtitle: 'Specific Time Focus',
+                description: 'When は is used with time expressions, it indicates specific attention to that time, often implying some contrast with other times.',
+                notes: 'This suggests that other days may not be holidays, but tomorrow specifically is.',
                 examples: [
-                    { jp: '<ruby>家<rt>いえ</rt></ruby><span class="text-particle">へ</span><ruby>帰<rt>かえ</rt></ruby>ります。', ro: 'Ie <span class="text-particle">e</span> kaerimasu.', en: 'I\'m <span class="text-verb">returning</span> <span class="text-particle">home</span>.' },
-                    { jp: '<ruby>日本<rt>にほん</rt></ruby><span class="text-particle">へ</span>ようこそ！', ro: 'Nihon <span class="text-particle">e</span> youkoso!', en: 'Welcome <span class="text-particle">to</span> <span class="text-noun">Japan</span>!' }
+                    { jp: '<ruby>今日<rt>きょう</rt></ruby><span class="text-particle">は</span><ruby>時間<rt>じかん</rt></ruby><span class="text-particle">が</span>ありません。', ro: 'Kyou <span class="text-particle">wa</span> jikan ga arimasen.', en: 'As for today, I <span class="text-verb">don\'t</span> <span class="text-verb">have</span> <span class="text-noun">time</span>.', note: 'It implies that the speaker doesn\'t have time today, though they might have time on another day.' },
+                    { jp: '<ruby>明日<rt>あした</rt></ruby><span class="text-particle">は</span><ruby>休<rt>やす</rt></ruby>みです。', ro: 'Ashita <span class="text-particle">wa</span> yasumi desu.', en: 'As for tomorrow, it\'s a <span class="text-noun">holiday</span>.', note: 'This suggests that other days may not be holidays, but tomorrow specifically is.' }
                 ]
             },
             {
-                id: 'to',
-                title: 'と (to)',
-                subtitle: 'And / With',
-                description: 'Used to list nouns (exhaustive list) or to indicate doing something with someone.',
-                uses: [
-                    'Connecting Nouns (exhaustive "And")',
-                    'Indicating Companionship ("With")',
-                    'Marking Direct Quotation'
-                ],
-                notes: 'Unlike "ya", using "to" implies the list is complete.',
+                id: 'wa-obj',
+                title: 'は (wa) - with Objects',
+                subtitle: 'Direct Object Emphasis',
+                description: 'は can be used to mark direct objects (normally marked with を) in order to emphasize or contrast them. This usage shifts focus from the verb to the object itself.',
+                notes: 'Focuses on the contrast between liking fish and not eating much meat.',
                 examples: [
-                    { jp: '<ruby>肉<rt>にく</rt></ruby><span class="text-particle">と</span><ruby>魚<rt>さかな</rt></ruby><span class="text-particle">を</span><ruby>食<rt>た</rt></ruby>べます。', ro: 'Niku <span class="text-particle">to</span> sakana wo tabemasu.', en: 'I <span class="text-verb">eat</span> <span class="text-noun">meat</span> <span class="text-particle">and</span> <span class="text-noun">fish</span>.' },
-                    { jp: '<ruby>友達<rt>ともだち</rt></ruby><span class="text-particle">と</span><ruby>遊<rt>あそ</rt></ruby>びます。', ro: 'Tomodachi <span class="text-particle">to</span> asobimasu.', en: 'I <span class="text-verb">play</span> <span class="text-particle">with</span> <span class="text-noun">friends</span>.' }
+                    { jp: '<ruby>肉<rt>にく</rt></ruby><span class="text-particle">は</span><ruby>食<rt>た</rt></ruby>べます。', ro: 'Niku <span class="text-particle">wa</span> tabemasu.', en: 'I <span class="text-verb">eat</span> <span class="text-noun">meat</span> (but not something else).', note: 'I eat meat (but not something else).' },
+                    { jp: '<ruby>魚<rt>さかな</rt></ruby><span class="text-particle">は</span><ruby>好<rt>す</rt></ruby>きですけど、<ruby>肉<rt>にく</rt></ruby><span class="text-particle">は</span>あまり<ruby>食<rt>た</rt></ruby>べません。', ro: 'Sakana <span class="text-particle">wa</span> suki desu kedo, niku <span class="text-particle">wa</span> amari tabemasen.', en: 'I <span class="text-verb">like</span> <span class="text-noun">fish</span>, but I <span class="text-verb">don\'t eat</span> <span class="text-noun">meat</span> very much.', note: '<span class="text-particle">は</span> focuses on the contrast between liking fish and not eating much meat.' }
                 ]
             },
             {
-                id: 'no',
-                title: 'の (no)',
-                subtitle: 'Possession Marker',
-                description: 'Indicates possession, belonging, or connects two nouns to provide more detail.',
-                uses: [
-                    'Possession (My, Your, etc.)',
-                    'Descriptions or Explanations',
-                    'Nominalization (turning verbs into nouns)'
-                ],
-                notes: 'It works like "\'s" in English (A no B = A\'s B).',
+                id: 'wa-ques',
+                title: 'は (wa) - in Questions',
+                subtitle: 'Topic Focus in Inquiry',
+                description: 'When used in questions, it often marks the topic rather than the subject, focusing the question on that topic without necessarily introducing new information.',
+                notes: 'Focusing on the "you" as the topic being asked.',
                 examples: [
-                    { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">の</span><ruby>車<rt>くるま</rt></ruby>です。', ro: 'Watashi <span class="text-particle">no</span> kuruma desu.', en: 'It is <span class="text-noun">my</span> <span class="text-noun">car</span>.' },
-                    { jp: '<ruby>日本語<rt>にほんご</rt></ruby><span class="text-particle">の</span><ruby>本<rt>ほん</rt></ruby>。', ro: 'Nihongo <span class="text-particle">no</span> hon.', en: 'A <span class="text-noun">book</span> <span class="text-particle">of</span> <span class="text-noun">Japanese</span>.' }
-                ]
-            },
-            {
-                id: 'mo',
-                title: 'も (mo)',
-                subtitle: 'Also / Too',
-                description: 'Used to mean "also" or "too". It replaces は, が, or を.',
-                uses: [
-                    'Adding to a List ("Also")',
-                    'Neither / Nor (in negative sentences)',
-                    'Emphasizing quantity ("As many as")'
-                ],
-                notes: 'You cannot use "wa" and "mo" together; "mo" replaces it.',
-                examples: [
-                    { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">も</span><ruby>行<rt>い</rt></ruby>きます。', ro: 'Watashi <span class="text-particle">mo</span> ikimasu.', en: 'I <span class="text-verb">am</span> <span class="text-particle">also</span> <span class="text-verb">going</span>.' },
-                    { jp: 'りんご<span class="text-particle">も</span>あります。', ro: 'Ringo <span class="text-particle">mo</span> arimasu.', en: 'There <span class="text-verb">is</span> <span class="text-particle">also</span> an <span class="text-noun">apple</span>.' }
-                ]
-            },
-            {
-                id: 'ya',
-                title: 'や (ya)',
-                subtitle: 'Non-exhaustive "And"',
-                description: 'Used to list nouns when the list is not complete (meaning "A, B, and others").',
-                uses: [
-                    'Listing Examples',
-                    'Implying there are more items that are not mentioned'
-                ],
-                notes: 'Often used with "nado" (など) at the end of the list.',
-                examples: [
-                    { jp: '<ruby>本<rt>ほん</rt></ruby><span class="text-particle">や</span>ペンがあります。', ro: 'Hon <span class="text-particle">ya</span> pen ga arimasu.', en: 'There are <span class="text-noun">books</span>, <span class="text-noun">pens</span>, <span class="text-particle">and [other things]</span>.' }
-                ]
-            },
-            {
-                id: 'kara',
-                title: 'から (kara)',
-                subtitle: 'From / Starting Point',
-                description: 'Indicates the starting point in time or space. Also used to mean "because".',
-                uses: [
-                    'From a Place',
-                    'From a Time',
-                    'Explaining the Cause or Reason (Because)',
-                    'Meaning "After" (since doing something)'
-                ],
-                notes: 'Pairs with "made" for "from... until...".',
-                examples: [
-                    { jp: '<ruby>日本<rt>にほん</rt></ruby><span class="text-particle">から</span><ruby>来<rt>き</rt></ruby>ました。', ro: 'Nihon <span class="text-particle">kara</span> kimashita.', en: 'I came <span class="text-particle">from</span> <span class="text-noun">Japan</span>.' },
-                    { jp: '<ruby>九時<rt>くじ</rt></ruby><span class="text-particle">から</span>です。', ro: 'Kuji <span class="text-particle">kara</span> desu.', en: 'It is <span class="text-particle">from</span> <span class="text-noun">9 o\'clock</span>.' }
-                ]
-            },
-            {
-                id: 'made',
-                title: 'まで (made)',
-                subtitle: 'Until / End Point',
-                description: 'Indicates the end point in time or space.',
-                uses: [
-                    'Until a Place',
-                    'Until a Point in Time',
-                    'Expressing Extent'
-                ],
-                notes: 'It marks the limit or boundary.',
-                examples: [
-                    { jp: '<ruby>東京<rt>とうきょう</rt></ruby><span class="text-particle">まで</span>。', ro: 'Toukyou <span class="text-particle">made</span>.', en: '<span class="text-particle">Until</span> <span class="text-noun">Tokyo</span>.' },
-                    { jp: '<ruby>三時<rt>さんじ</rt></ruby><span class="text-particle">まで</span><ruby>働<rt>はたら</rt></ruby>きます。', ro: 'San-ji <span class="text-particle">made</span> hatarakimasu.', en: 'I <span class="text-verb">work</span> <span class="text-particle">until</span> <span class="text-noun">3 o\'clock</span>.' }
-                ]
-            },
-            {
-                id: 'ne',
-                title: 'ね (ne)',
-                subtitle: 'Confirmation Marker',
-                description: 'A sentence-ending particle used to seek agreement or confirm shared information.',
-                uses: [
-                    'Seeking Confirmation ("Right?")',
-                    'Softening the Statement',
-                    'Expressing Shared Understanding'
-                ],
-                notes: 'Similar to "isn\'t it?" or "right?" in English.',
-                examples: [
-                    { jp: '<ruby>美味<rt>おい</rt></ruby>しいです<span class="text-particle">ね</span>。', ro: 'Oishii desu <span class="text-particle">ne</span>.', en: 'It\'s delicious, <span class="text-particle">isn\'t it?</span>' },
-                    { jp: 'そうですね。', ro: 'Sou desu <span class="text-particle">ne</span>.', en: 'That\'s right, <span class="text-particle">isn\'t it?</span>' }
-                ]
-            },
-            {
-                id: 'yo',
-                title: 'よ (yo)',
-                subtitle: 'Emphasis Marker',
-                description: 'A sentence-ending particle used to provide new information or add emphasis.',
-                uses: [
-                    'Providing New Information to the listener',
-                    'Giving Advice or Instruction',
-                    'Strong Assertion'
-                ],
-                notes: 'It adds a sense of "I\'m telling you" or an exclamation point.',
-                examples: [
-                    { jp: 'あれは<ruby>猫<rt>ねこ</rt></ruby>ですよ。', ro: 'Are wa neko desu <span class="text-particle">yo</span>.', en: 'That is a cat, <span class="text-particle">you know</span>!' },
-                    { jp: '<ruby>行<rt>い</rt></ruby>きます<span class="text-particle">よ</span>！', ro: 'Ikimasu <span class="text-particle">yo</span>!', en: 'I\'m <span class="text-verb">going</span> (<span class="text-particle">for sure</span>)!' }
-                ]
-            },
-            {
-                id: 'ka',
-                title: 'か (ka)',
-                subtitle: 'Question Marker',
-                description: 'The standard particle used to turn a statement into a question.',
-                uses: [
-                    'Yes / No Questions',
-                    'Information-seeking Questions',
-                    'Rhetorical Questions'
-                ],
-                notes: 'In polite Japanese, you don\'t need a question mark (?) because "ka" already indicates a question.',
-                examples: [
-                    { jp: '<ruby>元気<rt>げんき</rt></ruby>です<span class="text-particle">か</span>。', ro: 'Genki desu <span class="text-particle">ka</span>.', en: '<span class="text-verb">Is</span> it <span class="text-particle">that</span> you are well?' },
-                    { jp: '<ruby>何<rt>なに</rt></ruby>です<span class="text-particle">か</span>。', ro: 'Nan desu <span class="text-particle">ka</span>.', en: '<span class="text-noun">What</span> <span class="text-verb">is</span> it?' }
+                    { jp: 'あなた<span class="text-particle">は</span><ruby>何<rt>なに</rt></ruby><span class="text-particle">を</span>しますか？', ro: 'Anata <span class="text-particle">wa</span> nani o shimasu ka?', en: 'As for you, what <span class="text-verb">will</span> you <span class="text-verb">do</span>?', note: 'As for you, what will you do?' }
                 ]
             }
         ];
@@ -563,7 +408,7 @@
             const list = document.getElementById('sidebar-list');
             list.innerHTML = lessons.map((l, i) => `
                 <li class="topic-item ${i === currentIdx ? 'active' : ''}" onclick="setLesson(${i})">
-                    <span>${l.title}</span>
+                    <span>${l.title.split(' - ')[0]}</span>
                     <small>${l.subtitle}</small>
                 </li>
             `).join('');
@@ -579,50 +424,41 @@
             wrapper.innerHTML = `
                 <div class="book-page">
                     <div style="margin-bottom: 2rem;">
-                        <span style="color: var(--primary-color); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Particle Lesson ${currentIdx + 1}</span>
-                        <h1 style="font-size: 3rem; color: #1e293b; margin-top: 0.5rem;">${lesson.title}</h1>
-                        <p style="font-size: 1.2rem; color: #64748b; font-weight: 500;">${lesson.subtitle}</p>
+                        <span style="color: var(--primary-color); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Particle wa Example</span>
+                        <h1 style="font-size: 2.2rem; color: #1e293b; margin-top: 0.5rem; line-height: 1.2;">${lesson.title}</h1>
+                        <p style="font-size: 1.1rem; color: #64748b; font-weight: 500;">${lesson.subtitle}</p>
                     </div>
 
                     <div style="margin-bottom: 2rem;">
-                        <h3 style="color: #1e293b; margin-bottom: 1rem;">Core Usage</h3>
+                        <h3 style="color: #1e293b; margin-bottom: 1rem;">Description</h3>
                         <p style="line-height: 1.6; color: #475569;">${lesson.description}</p>
                     </div>
 
                     <div class="note-box">
-                        <h4>💡 Teacher's Note</h4>
-                        <p style="font-size: 0.95rem; line-height: 1.5;">${lesson.notes}</p>
-                    </div>
-
-                    <div>
-                        <h3 style="color: #1e293b; margin-bottom: 1rem;">Specific Uses</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            ${lesson.uses.map(use => `
-                                <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 0.8rem; color: #475569;">
-                                    <span style="color: var(--primary-color); margin-top: 2px;">•</span>
-                                    <span>${use}</span>
-                                </li>
-                            `).join('')}
-                        </ul>
+                        <h4 style="margin: 0; margin-bottom: 0.5rem;">💡 Notes</h4>
+                        <p style="font-size: 0.95rem; line-height: 1.5; margin: 0;">${lesson.notes}</p>
                     </div>
                 </div>
 
                 <div class="book-page">
-                    <h3 style="color: #1e293b; margin-bottom: 1.5rem;">Practical Examples</h3>
+                    <h3 style="color: #1e293b; margin-bottom: 1.5rem;">Example</h3>
                     <div class="examples-container">
-                        ${lesson.examples.map(ex => `
-                            <div class="example-item">
-                                <p style="font-family: 'Noto Sans JP', sans-serif; font-size: 1.4rem; margin-bottom: 0.4rem; color: #1e293b;">${ex.jp}</p>
-                                <p style="font-style: italic; color: #64748b; font-size: 0.95rem; margin-bottom: 0.8rem;">${ex.ro}</p>
-                                <p style="color: #000000; font-weight: 500; font-size: 1.1rem;">${ex.en}</p>
+                        ${lesson.examples.map((ex, i) => `
+                            <div class="example-item" style="margin-bottom: 1.5rem; border-bottom: 1px dashed #e2e8f0; padding-bottom: 1rem;">
+                                <p style="font-family: 'Noto Sans JP', sans-serif; font-size: 1.4rem; margin-bottom: 0.4rem; color: #1e293b; line-height: 1.4;">${ex.jp}</p>
+                                <p style="font-style: italic; color: #64748b; font-size: 0.95rem; margin-bottom: 0.6rem;">${ex.ro}</p>
+                                <p style="color: #000000; font-weight: 500; font-size: 1.05rem; margin-bottom: 0.6rem;">${ex.en}</p>
+                                <div style="font-size: 0.85rem; color: #64748b; background: #f8fafc; padding: 0.5rem 0.8rem; border-radius: 8px;">
+                                    ${ex.note}
+                                </div>
                             </div>
                         `).join('')}
                     </div>
 
-                    <div style="margin-top: 3rem; padding: 1.5rem; background: #f1f5f9; border-radius: 16px;">
-                        <p style="font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Pro Tip:</p>
-                        <p style="font-size: 0.9rem; color: #475569; line-height: 1.5;">
-                            Try using these colors to identify roles! 
+                    <div style="margin-top: 2rem; padding: 1.2rem; background: #f1f5f9; border-radius: 16px;">
+                        <p style="font-weight: 700; color: #1e293b; margin-bottom: 0.3rem; font-size: 0.9rem;">Pro Tip:</p>
+                        <p style="font-size: 0.85rem; color: #475569; line-height: 1.4;">
+                            Use these colors: 
                             <span class="text-noun">Nouns are Blue</span>, 
                             <span class="text-verb">Verbs are Green</span>, and 
                             <span class="text-particle">Particles are Red</span>.
