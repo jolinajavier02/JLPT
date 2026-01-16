@@ -309,6 +309,7 @@
         const lessons = [
             {
                 id: 'wa-topic',
+                group: 'wa',
                 title: 'は (wa) Particle - Topic Marker',
                 subtitle: 'Marking the Topic of the Sentence',
                 description: 'The は (wa) particle is one of the most fundamental and frequently used particles in Japanese. It functions primarily as a topic marker, but its usage can extend beyond this simple role.<br><br>は is used to denote the topic of the sentence. It tells the listener what the sentence will be about, which can be different from the grammatical subject.',
@@ -321,6 +322,7 @@
             },
             {
                 id: 'wa-contrast',
+                group: 'wa',
                 title: 'は (wa) - Contrast and Comparison',
                 subtitle: 'Contrasting Different Topics',
                 description: 'は is used to contrast or compare different topics within a sentence. When comparing or contrasting, は helps to set up the comparison.',
@@ -334,6 +336,7 @@
             },
             {
                 id: 'wa-emphasis',
+                group: 'wa',
                 title: 'は (wa) - Emphasizing or Clarifying the Subject',
                 subtitle: 'Clarifying the Topic',
                 description: 'は can be used to emphasize or clarify what is being talked about, even if it\'s not the grammatical subject.',
@@ -347,6 +350,7 @@
             },
             {
                 id: 'ga',
+                group: 'ga',
                 title: 'が (ga)',
                 subtitle: 'Subject Marker',
                 description: 'Marks the specific subject of an action or state. Focuses on the "who" or "what" that is doing the action.',
@@ -359,6 +363,7 @@
             },
             {
                 id: 'wo',
+                group: 'wo',
                 title: 'を (wo/o)',
                 subtitle: 'Direct Object Marker',
                 description: 'Marks the direct object that receives the action of a transitive verb.',
@@ -370,6 +375,7 @@
             },
             {
                 id: 'ni',
+                group: 'ni',
                 title: 'に (ni)',
                 subtitle: 'Time & Direction Marker',
                 description: 'Indicates points in time, destinations, or the location of existence.',
@@ -381,6 +387,7 @@
             },
             {
                 id: 'de',
+                group: 'de',
                 title: 'で (de)',
                 subtitle: 'Location & Means Marker',
                 description: 'Indicates where an action takes place, or the method/means used to do something.',
@@ -392,6 +399,7 @@
             },
             {
                 id: 'he',
+                group: 'he',
                 title: 'へ (e)',
                 subtitle: 'Direction Marker',
                 description: 'Indicates the direction of a movement. Emphasizes the journey rather than just the destination.',
@@ -402,6 +410,7 @@
             },
             {
                 id: 'to',
+                group: 'to',
                 title: 'と (to)',
                 subtitle: 'And / With',
                 description: 'Used to list nouns (exhaustive list) or to indicate doing something with someone.',
@@ -412,6 +421,7 @@
             },
             {
                 id: 'no',
+                group: 'no',
                 title: 'の (no)',
                 subtitle: 'Possession Marker',
                 description: 'Indicates possession, belonging, or connects two nouns to provide more detail.',
@@ -422,6 +432,7 @@
             },
             {
                 id: 'mo',
+                group: 'mo',
                 title: 'も (mo)',
                 subtitle: 'Also / Too',
                 description: 'Used to mean "also" or "too". It replaces は, が, or を.',
@@ -432,6 +443,7 @@
             },
             {
                 id: 'ya',
+                group: 'ya',
                 title: 'や (ya)',
                 subtitle: 'Non-exhaustive "And"',
                 description: 'Used to list nouns when the list is not complete (meaning "A, B, and others").',
@@ -442,6 +454,7 @@
             },
             {
                 id: 'kara',
+                group: 'kara',
                 title: 'から (kara)',
                 subtitle: 'From / Starting Point',
                 description: 'Indicates the starting point in time or space. Also used to mean "because".',
@@ -452,6 +465,7 @@
             },
             {
                 id: 'made',
+                group: 'made',
                 title: 'まで (made)',
                 subtitle: 'Until / End Point',
                 description: 'Indicates the end point in time or space.',
@@ -462,6 +476,7 @@
             },
             {
                 id: 'ne',
+                group: 'ne',
                 title: 'ね (ne)',
                 subtitle: 'Confirmation Marker',
                 description: 'A sentence-ending particle used to seek agreement or confirm shared information.',
@@ -472,6 +487,7 @@
             },
             {
                 id: 'yo',
+                group: 'yo',
                 title: 'よ (yo)',
                 subtitle: 'Emphasis Marker',
                 description: 'A sentence-ending particle used to provide new information or add emphasis.',
@@ -482,6 +498,7 @@
             },
             {
                 id: 'ka',
+                group: 'ka',
                 title: 'か (ka)',
                 subtitle: 'Question Marker',
                 description: 'The standard particle used to turn a statement into a question.',
@@ -496,12 +513,26 @@
 
         function renderSidebar() {
             const list = document.getElementById('sidebar-list');
-            list.innerHTML = lessons.map((l, i) => `
-                <li class="topic-item ${i === currentIdx ? 'active' : ''}" onclick="setLesson(${i})">
-                    <span>${l.title.split(' - ')[0]}</span>
-                    <small>${l.subtitle}</small>
+            const groupedIndices = [];
+            const seenGroups = new Set();
+
+            lessons.forEach((l, i) => {
+                if (!seenGroups.has(l.group)) {
+                    seenGroups.add(l.group);
+                    groupedIndices.push(i);
+                }
+            });
+
+            list.innerHTML = groupedIndices.map(idx => {
+                const l = lessons[idx];
+                const isGroupActive = lessons[currentIdx].group === l.group;
+                const cleanTitle = l.title.includes(' - ') ? l.title.split(' - ')[0] : (l.title.includes(' Particle') ? l.title.split(' Particle')[0] : l.title);
+                return `
+                <li class="topic-item ${isGroupActive ? 'active' : ''}" onclick="setLesson(${idx})">
+                    <span>${cleanTitle}</span>
                 </li>
-            `).join('');
+            `;
+            }).join('');
         }
 
         function setLesson(index) {
@@ -509,12 +540,16 @@
             renderSidebar();
 
             const lesson = lessons[currentIdx];
+            const groupPages = lessons.filter(l => l.group === lesson.group);
+            const pageIdx = groupPages.indexOf(lesson) + 1;
             const wrapper = document.getElementById('book-pages-wrapper');
 
             wrapper.innerHTML = `
                 <div class="book-page">
                     <div style="margin-bottom: 2rem;">
-                        <span style="color: var(--primary-color); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Particle wa Example</span>
+                        <span style="color: var(--primary-color); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">
+                            Particle Category ${groupPages.length > 1 ? `(Page ${pageIdx} of ${groupPages.length})` : ''}
+                        </span>
                         <h1 style="font-size: 2.2rem; color: #1e293b; margin-top: 0.5rem; line-height: 1.2;">${lesson.title}</h1>
                         <p style="font-size: 1.1rem; color: #64748b; font-weight: 500;">${lesson.subtitle}</p>
                     </div>
