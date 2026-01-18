@@ -411,15 +411,68 @@
                 ]
             },
             {
-                id: 'wo',
+                id: 'wo-direct',
                 group: 'wo',
-                title: 'を (wo/o)',
-                subtitle: 'Direct Object Marker',
-                description: 'Marks the direct object that receives the action of a transitive verb.',
-                notes: 'Written as "wo" but pronounced as "o". It connects the thing being acted upon to the verb.',
+                title: 'を (wo/o) - Direct Object Marker',
+                subtitle: 'Marking the Receiver of Action',
+                description: 'The most common use of を is to mark the direct object of a verb in a sentence, showing what the action is being done to.',
+                notes: 'Written as "wo" but pronounced "o". It connects the thing being acted upon to the verb.',
                 examples: [
-                    { jp: 'ご<ruby>飯<rt>はん</rt></ruby><span class="text-particle">を</span><ruby>食<rt>た</rt></ruby>べます。', ro: 'Gohan <span class="text-particle">wo</span> tabemasu.', en: 'I <span class="text-verb">eat</span> <span class="text-noun">rice</span>.', note: 'Rice is the object being eaten.' },
-                    { jp: '<ruby>本<rt>ほん</rt></ruby><span class="text-particle">を</span><ruby>読<rt>よ</rt></ruby>みます。', ro: 'Hon <span class="text-particle">wo</span> yomimasu.', en: 'I <span class="text-verb">read</span> a <span class="text-noun">book</span>.', note: 'Book is the object being read.' }
+                    { jp: '<ruby>本<rt>ほん</rt></ruby><span class="text-particle">を</span><ruby>読<rt>よ</rt></ruby>みます。', ro: 'Hon <span class="text-particle">wo</span> yomimasu.', en: 'I <span class="text-verb">read</span> a <span class="text-noun">book</span>.', note: 'The <span class="text-noun">book</span> is the direct object of the verb "to read".' },
+                    { jp: 'ご<ruby>飯<rt>はん</rt></ruby><span class="text-particle">を</span><ruby>食<rt>た</rt></ruby>べます。', ro: 'Gohan <span class="text-particle">wo</span> tabemasu.', en: 'I <span class="text-verb">eat</span> <span class="text-noun">rice</span>.', note: '<span class="text-noun">Rice</span> is the direct object of the verb "to eat".' },
+                    { jp: '<ruby>彼女<rt>かのじょ</rt></ruby><span class="text-particle">は</span><ruby>日本語<rt>にほんご</rt></ruby><span class="text-particle">を</span><ruby>習<rt>なら</rt></ruby>っています。', ro: 'Kanojo wa Nihongo <span class="text-particle">wo</span> naratte imasu.', en: 'She <span class="text-verb">is learning</span> <span class="text-noun">Japanese</span>.', note: '<span class="text-noun">Japanese</span> is the direct object of the verb "to learn".' }
+                ]
+            },
+            {
+                id: 'wo-movement',
+                group: 'wo',
+                title: 'を (wo/o) - Movement Verbs',
+                subtitle: 'Indicating Path and Place',
+                description: 'When used with movement verbs like 歩く (to walk), 走る (to run), and 渡る (to cross), を indicates the path or place being moved through.',
+                notes: 'It differentiates between "at" a place (de) and "through/along" a place (wo).',
+                examples: [
+                    { jp: '<ruby>公園<rt>こうえん</rt></ruby><span class="text-particle">を</span><ruby>歩<rt>ある</rt></ruby>きます。', ro: 'Kouen <span class="text-particle">wo</span> arukimasu.', en: 'I <span class="text-verb">walk through</span> the <span class="text-noun">park</span>.', note: 'Marks "park" as the location being walked through.' },
+                    { jp: '<ruby>道<rt>みち</rt></ruby><span class="text-particle">を</span><ruby>走<rt>はし</rt></ruby>ります。', ro: 'Michi <span class="text-particle">wo</span> hashirimasu.', en: 'I <span class="text-verb">run along</span> the <span class="text-noun">road</span>.', note: 'Marks "road" as the place being run on.' },
+                    { jp: '<ruby>川<rt>かわ</rt></ruby><span class="text-particle">を</span><ruby>渡<rt>わた</rt></ruby>ります。', ro: 'Kawa <span class="text-particle">wo</span> watarimasu.', en: 'I <span class="text-verb">cross</span> the <span class="text-noun">river</span>.', note: 'Marks "river" as the object of crossing.' }
+                ]
+            },
+            {
+                id: 'wo-experience',
+                group: 'wo',
+                title: 'を (wo/o) - Verbs of Experience',
+                subtitle: 'Sensing and Perceiving',
+                description: 'When used with verbs of experience like 見る (to see), 聞く (to hear), and 感じる (to feel), を marks what is being experienced.',
+                notes: 'Commonly used to describe sensations or observations.',
+                examples: [
+                    { jp: '<ruby>鳥<rt>とり</rt></ruby><span class="text-particle">を</span><ruby>見<rt>み</rt></ruby>ます。', ro: 'Tori <span class="text-particle">wo</span> mimasu.', en: 'I <span class="text-verb">see</span> a <span class="text-noun">bird</span>.', note: 'Marks "bird" as the object being seen.' },
+                    { jp: '<ruby>音楽<rt>おんがく</rt></ruby><span class="text-particle">を</span><ruby>聞<rt>き</rt></ruby>きます。', ro: 'Ongaku <span class="text-particle">wo</span> kikimasu.', en: 'I <span class="text-verb">listen to</span> <span class="text-noun">music</span>.', note: 'Marks "music" as the object being heard.' },
+                    { jp: '<ruby>風<rt>かぜ</rt></ruby><span class="text-particle">を</span><ruby>感<rt>かん</rt></ruby>じます。', ro: 'Kaze <span class="text-particle">wo</span> kanjimasu.', en: 'I <span class="text-verb">feel</span> the <span class="text-noun">wind</span>.', note: 'Marks "wind" as the object being felt.' }
+                ]
+            },
+            {
+                id: 'wo-action',
+                group: 'wo',
+                title: 'を (wo/o) - Object of Action',
+                subtitle: 'Creation and Usage',
+                description: 'When を is used with transitive verbs like 使う (to use) or 作る (to make), it marks the object being acted upon.',
+                notes: 'Essential for showing which tool is used or what item is created.',
+                examples: [
+                    { jp: '<ruby>車<rt>くるま</rt></ruby><span class="text-particle">を</span><ruby>使<rt>つか</rt></ruby>います。', ro: 'Kuruma <span class="text-particle">wo</span> tsukaimasu.', en: 'I <span class="text-verb">use</span> a <span class="text-noun">car</span>.', note: 'Marks "car" as the object being used.' },
+                    { jp: 'ケーキ<span class="text-particle">を</span><ruby>作<rt>つく</rt></ruby>ります。', ro: 'Keiki <span class="text-particle">wo</span> tsukurimasu.', en: 'I <span class="text-verb">make</span> a <span class="text-noun">cake</span>.', note: 'Marks "cake" as the object being made.' },
+                    { jp: '<ruby>友達<rt>ともだち</rt></ruby><span class="text-particle">を</span><ruby>呼<rt>よ</rt></ruby>びます。', ro: 'Tomodachi <span class="text-particle">wo</span> yobimasu.', en: 'I <span class="text-verb">call</span> a <span class="text-noun">friend</span>.', note: 'Marks "friend" as the object being called.' }
+                ]
+            },
+            {
+                id: 'wo-passive',
+                group: 'wo',
+                title: 'を (wo/o) - Passive Verbs',
+                subtitle: 'Objects in Passive Voice',
+                description: 'When を is used with passive verbs, it marks the object that undergoes the action or was affected by an event.',
+                notes: 'This structure highlights the thing that was stolen, broken, etc.',
+                examples: [
+                    { jp: '<ruby>財布<rt>さいふ</rt></ruby><span class="text-particle">を</span><ruby>盗<rt>ぬす</rt></ruby>まれました。', ro: 'Saifu <span class="text-particle">wo</span> nusumaremashita.', en: 'My <span class="text-noun">wallet</span> <span class="text-verb">was stolen</span>.', note: 'Marks "wallet" as the object that was stolen.' },
+                    { jp: '<ruby>先生<rt>せんせい</rt></ruby><span class="text-particle">に</span><ruby>宿題<rt>しゅくだい</rt></ruby><span class="text-particle">を</span><ruby>叱<rt>しか</rt></ruby>られました。', ro: 'Sensei ni shukudai <span class="text-particle">wo</span> shikararemashita.', en: 'I <span class="text-verb">was scolded</span> by the <span class="text-noun">teacher</span> for my <span class="text-noun">homework</span>.', note: 'Marks "homework" as the object of scolding.' },
+                    { jp: '<ruby>自転車<rt>じてんしゃ</rt></ruby><span class="text-particle">を</span><ruby>壊<rt>こわ</rt></ruby>されました。', ro: 'Jitensha <span class="text-particle">wo</span> kowasaremashita.', en: 'My <span class="text-noun">bicycle</span> <span class="text-verb">was broken</span>.', note: 'Marks "bicycle" as the object that was broken.' }
                 ]
             },
             {
