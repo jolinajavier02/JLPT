@@ -349,16 +349,65 @@
                 ]
             },
             {
-                id: 'ga',
+                id: 'ga-subject',
                 group: 'ga',
-                title: 'が (ga)',
-                subtitle: 'Subject Marker',
-                description: 'Marks the specific subject of an action or state. Focuses on the "who" or "what" that is doing the action.',
-                notes: 'If "wa" marks the topic (general), "ga" marks the subject (specific). Use "ga" when introducing new information.',
+                title: 'が (ga) - Subject Marker & Emphasis',
+                subtitle: 'Identifying the Subject and Adding Focus',
+                description: 'The particle が (ga) is primarily used to mark the subject of a sentence—the person or thing that performs the action or exists in a certain state. It focuses on the "who" or "what" specifically.',
+                notes: 'Use が when you want to emphasize the subject (e.g., "I am the one who...") or when introducing something new to the conversation.',
                 examples: [
-                    { jp: '<ruby>猫<rt>ねこ</rt></ruby><span class="text-particle">が</span>います。', ro: 'Neko <span class="text-particle">ga</span> imasu.', en: 'There <span class="text-verb">is</span> a <span class="text-noun">cat</span> (specifically a cat).', note: 'Focus is on the cat as the subject.' },
-                    { jp: '<ruby>誰<rt>だれ</rt></ruby><span class="text-particle">が</span><ruby>来<rt>き</rt></ruby>ましたか。', ro: 'Dare <span class="text-particle">ga</span> kimashita ka?', en: '<span class="text-noun">Who</span> <span class="text-verb">is it that</span> came?', note: 'Questioning the specific subject.' },
-                    { jp: '<ruby>車<rt>くるま</rt></ruby><span class="text-particle">が</span><ruby>欲<rt>ほ</rt></ruby>しいです。', ro: 'Kuruma <span class="text-particle">ga</span> hoshii desu.', en: 'I <span class="text-verb">want</span> a <span class="text-noun">car</span>.', note: 'Marks what is wanted.' }
+                    { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">が</span>やります。', ro: 'Watashi <span class="text-particle">ga</span> yarimasu.', en: 'I <span class="text-verb">will do</span> it.', note: 'Emphasizes that *I* (not someone else) will do it.' },
+                    { jp: '<ruby>彼女<rt>かのじょ</rt></ruby><span class="text-particle">が</span><ruby>試合<rt>しあい</rt></ruby><span class="text-particle">に</span><ruby>勝<rt>か</rt></ruby>ちました。', ro: 'Kanojo <span class="text-particle">ga</span> shiai <span class="text-particle">に</span> <ruby>勝<rt>か</rt></ruby>ちました。', en: 'She <span class="text-verb">won</span> the <span class="text-noun">game</span>.', note: 'Highlights her as the subject of the victory.' }
+                ]
+            },
+            {
+                id: 'ga-questions',
+                group: 'ga',
+                title: 'が (ga) - Questions & Adjectives',
+                subtitle: 'Interrogatives and Describing Sensations',
+                description: 'が is mandatory when the subject is an interrogative word like "who" (dare) or "what" (nani). It is also commonly used with adjectives to mark the thing being described.',
+                notes: 'When asking "who" or "what" did something, always use が, never は.',
+                examples: [
+                    { jp: '<ruby>誰<rt>だれ</rt></ruby><span class="text-particle">が</span><ruby>来<rt>き</rt></ruby>ましたか。', ro: 'Dare <span class="text-particle">ga</span> kimashita ka?', en: '<span class="text-noun">Who</span> <span class="text-verb">came</span>?', note: 'Used to mark the unknown subject in a question.' },
+                    { jp: '<ruby>猫<rt>ねこ</rt></ruby><span class="text-particle">が</span>かわいいです。', ro: 'Neko <span class="text-particle">ga</span> kawaii desu.', en: 'The <span class="text-noun">cat</span> <span class="text-verb">is</span> cute.', note: 'Marks the subject "cat" being described as cute.' },
+                    { jp: '<ruby>天気<rt>てんき</rt></ruby><span class="text-particle">が</span><ruby>悪<rt>わる</rt></ruby>いです。', ro: 'Tenki <span class="text-particle">ga</span> warui desu.', en: 'The <span class="text-noun">weather</span> <span class="text-verb">is</span> bad.', note: 'Emphasizes the subject "weather".' }
+                ]
+            },
+            {
+                id: 'ga-descriptive',
+                group: 'ga',
+                title: 'が (ga) - Descriptive & Wants',
+                subtitle: 'New Information and Expressing Desire',
+                description: 'が is used in descriptive sentences to introduce new items or existence. It is also the standard particle for the object of desire (hoshii) or things you want to do (-tai).',
+                notes: 'When expressing "I want X", X is marked with が.',
+                examples: [
+                    { jp: 'あそこに<ruby>店<rt>みせ</rt></ruby><span class="text-particle">が</span>あります。', ro: 'Asoko ni <span class="text-noun">mise</span> <span class="text-particle">ga</span> arimasu.', en: 'There <span class="text-verb">is</span> a <span class="text-noun">shop</span> over there.', note: 'Introduces the existence of the shop as something new.' },
+                    { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">は</span><ruby>新<rt>あたら</rt></ruby>しい<ruby>車<rt>くるま</rt></ruby><span class="text-particle">が</span><ruby>欲<rt>ほ</rt></ruby>しいです。', ro: 'Watashi <span class="text-particle">wa</span> atarashii <span class="text-noun">kuruma</span> <span class="text-particle">ga</span> hoshii desu.', en: 'I <span class="text-verb">want</span> a new <span class="text-noun">car</span>.', note: 'Marks the object of desire.' },
+                    { jp: '<ruby>子供<rt>こども</rt></ruby>たちはケーキ<span class="text-particle">が</span><ruby>食<rt>た</rt></ruby>べたいです。', ro: 'Kodomo-tachi <span class="text-particle">wa</span> <span class="text-noun">keiki</span> <span class="text-particle">ga</span> tabetai desu.', en: 'The <span class="text-noun">children</span> <span class="text-verb">want to eat</span> <span class="text-noun">cake</span>.', note: 'Marks the thing the children want to eat.' }
+                ]
+            },
+            {
+                id: 'ga-complex',
+                group: 'ga',
+                title: 'が (ga) - Complex Sentences & "But"',
+                subtitle: 'Subordinate Clauses and Conjunctions',
+                description: 'In complex sentences, が often marks the subject of a subordinate clause. Additionally, が can act as a conjunction meaning "but" to connect two contrasting ideas.',
+                notes: 'As a conjunction, が is placed at the end of the first clause.',
+                examples: [
+                    { jp: '<ruby>彼<rt>かれ</rt></ruby><span class="text-particle">が</span><ruby>言<rt>い</rt></ruby>ったことは<ruby>本当<rt>ほんとう</rt></ruby>です。', ro: 'Kare <span class="text-particle">ga</span> itta koto <span class="text-particle">wa</span> hontou desu.', en: 'What he <span class="text-verb">said</span> <span class="text-verb">is</span> true.', note: 'Marks "he" as the subject of the clause "what he said".' },
+                    { jp: '<ruby>日本語<rt>にほんご</rt></ruby><span class="text-particle">は</span><ruby>難<rt>むずか</rt></ruby>しいです<span class="text-particle">が</span>、<ruby>面白<rt>おもしろ</rt></ruby>いです。', ro: 'Nihongo <span class="text-particle">wa</span> muzukashii desu <span class="text-particle">ga</span>, omoshiroi desu.', en: '<span class="text-noun">Japanese</span> <span class="text-verb">is</span> difficult, <span class="text-particle">but</span> interesting.', note: 'Functions as a conjunction meaning "but".' }
+                ]
+            },
+            {
+                id: 'wa-ga-comparison',
+                group: 'ga',
+                title: 'は (wa) vs が (ga)',
+                subtitle: 'Topic vs Subject',
+                description: 'The difference between は and が is one of the most fundamental challenges in Japanese. Generally, は marks the topic (what the sentence is about), while が marks the specific subject (the "who" or "what").',
+                notes: 'Think of は as "as for..." and が as pointing a finger at the specific person/thing.',
+                examples: [
+                    { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">は</span><ruby>学生<rt>がくせい</rt></ruby>です。', ro: 'Watashi <span class="text-particle">wa</span> gakusei desu.', en: 'I (topic) <span class="text-verb">am</span> a <span class="text-noun">student</span>.', note: 'Focus is on the information that I am a student.' },
+                    { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">が</span><ruby>学生<rt>がくせい</rt></ruby>です。', ro: 'Watashi <span class="text-particle">ga</span> gakusei desu.', en: 'It is I <span class="text-verb">who is</span> the <span class="text-noun">student</span>.', note: 'Focus is on *who* the student is (it is me).' }
                 ]
             },
             {
