@@ -424,6 +424,10 @@
         const BATCH_SIZE = 100;
         let currentKanjiIndex = 0;
 
+        // Caches
+        const kanjiCache = {};
+        const svgCache = {};
+
         // Kana Map (Same as before)
         const kanaMap = {
             'あ': 'a', 'い': 'i', 'う': 'u', 'え': 'e', 'お': 'o', 'か': 'ka', 'き': 'ki', 'く': 'ku', 'け': 'ke', 'こ': 'ko',
@@ -680,7 +684,15 @@
             document.getElementById('detail-meaning').textContent = 'Loading...';
             document.getElementById('detail-onyomi').textContent = '-';
             document.getElementById('detail-kunyomi').textContent = '-';
-            document.getElementById('stroke-container').innerHTML = 'Loading...';
+
+            // Start Stroke Order Load IMMEDIATELY (Parallel)
+            loadStrokeOrder(char);
+
+            // Check Cache for API data
+            if (kanjiCache[char]) {
+                renderKanjiDetails(kanjiCache[char]);
+                return;
+            }
 
             try {
                 // Fetch Kanji Details
@@ -688,21 +700,24 @@
                 if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
 
-                document.getElementById('detail-meaning').textContent = data.meanings.join(', ');
-
-                const onReadings = data.on_readings || [];
-                const kunReadings = data.kun_readings || [];
-
-                const onRomaji = onReadings.map(r => `${r} (${toRomaji(r)})`).join(', ');
-                const kunRomaji = kunReadings.map(r => `${r} (${toRomaji(r)})`).join(', ');
-                document.getElementById('detail-onyomi').textContent = onRomaji || '-';
-                document.getElementById('detail-kunyomi').textContent = kunRomaji || '-';
-
-                loadStrokeOrder(char);
+                kanjiCache[char] = data; // Cache it
+                renderKanjiDetails(data);
             } catch (error) {
                 console.error('Error fetching kanji details:', error);
                 document.getElementById('detail-meaning').textContent = 'Error loading data';
             }
+        }
+
+        function renderKanjiDetails(data) {
+            document.getElementById('detail-meaning').textContent = data.meanings.join(', ');
+
+            const onReadings = data.on_readings || [];
+            const kunReadings = data.kun_readings || [];
+
+            const onRomaji = onReadings.map(r => `${r} (${toRomaji(r)})`).join(', ');
+            const kunRomaji = kunReadings.map(r => `${r} (${toRomaji(r)})`).join(', ');
+            document.getElementById('detail-onyomi').textContent = onRomaji || '-';
+            document.getElementById('detail-kunyomi').textContent = kunRomaji || '-';
         }
 
         function showGrid() {
@@ -723,21 +738,38 @@
             const container = document.getElementById('stroke-container');
             container.innerHTML = '<span style="color: #ccc;">Loading...</span>';
             const hex = getUnicodeHex(char);
-            const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+
+            // Check Cache
+            if (svgCache[char]) {
+                renderSvg(svgCache[char]);
+                return;
+            }
+
+            // Use jsDelivr CDN for faster GitHub access
+            const url = `https://cdn.jsdelivr.net/gh/KanjiVG/kanjivg@master/kanji/${hex}.svg`;
 
             fetch(url)
-                .then(res => res.text())
+                .then(res => {
+                    if (!res.ok) throw new Error("Failed to load SVG");
+                    return res.text();
+                })
                 .then(svgData => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(svgData, "image/svg+xml");
-                    const svgElement = doc.querySelector("svg");
-                    if (svgElement) {
-                        container.innerHTML = "";
-                        container.appendChild(svgElement);
-                        animateStrokes();
-                    } else { container.innerHTML = "No animation"; }
+                    svgCache[char] = svgData; // Cache it
+                    renderSvg(svgData);
                 })
                 .catch(() => container.innerHTML = "No animation");
+        }
+
+        function renderSvg(svgData) {
+            const container = document.getElementById('stroke-container');
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(svgData, "image/svg+xml");
+            const svgElement = doc.querySelector("svg");
+            if (svgElement) {
+                container.innerHTML = "";
+                container.appendChild(svgElement);
+                animateStrokes();
+            } else { container.innerHTML = "No animation"; }
         }
 
         function animateStrokes() {
