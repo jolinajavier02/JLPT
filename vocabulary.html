@@ -252,6 +252,18 @@
                 padding: 1.5rem;
             }
         }
+
+        .vocab-section-title {
+            width: 100%;
+            grid-column: 1 / -1;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
     </style>
 </head>
 
@@ -308,7 +320,7 @@
             // --- HOME ---
             // Rooms & Spaces
 
-            { en: "residence", jp: "住まい", furigana: "すまい", romaji: "sumai", cat: "home" },
+            { en: "residence", jp: "住まい", furigana: "すまい", romaji: "sumai", cat: "home", section: "Rooms & Spaces" },
             { en: "room", jp: "部屋", furigana: "へや", romaji: "heya", cat: "home" },
             { en: "bedroom", jp: "寝室", furigana: "しんしつ", romaji: "shinshitsu", cat: "home" },
             { en: "kitchen", jp: "台所", furigana: "だいどころ", romaji: "daidokoro", cat: "home" },
@@ -360,7 +372,8 @@
             { en: "utility room", jp: "", furigana: "ユーティリティルーム", romaji: "yuutiritiruumu", cat: "home" },
             { en: "maid’s room", jp: "お手伝いさんの部屋", furigana: "おてつだいさんのへや", romaji: "otetsudaisan no heya", cat: "home" },
             // Furniture
-            { en: "bed", jp: "", furigana: "ベッド", romaji: "beddo", cat: "home" },
+            // Furniture
+            { en: "bed", jp: "", furigana: "ベッド", romaji: "beddo", cat: "home", section: "Furniture" },
             { en: "futon", jp: "布団", furigana: "ふとん", romaji: "futon", cat: "home" },
             { en: "pillow", jp: "枕", furigana: "まくら", romaji: "makura", cat: "home" },
             { en: "blanket", jp: "毛布", furigana: "もうふ", romaji: "moufu", cat: "home" },
@@ -406,7 +419,7 @@
             { en: "folding chair", jp: "折りたたみ椅子", furigana: "おりたたみいす", romaji: "oritatamiisu", cat: "home" },
             { en: "wall shelf", jp: "", furigana: "ウォールシェルフ", romaji: "woorusherufu", cat: "home" },
             // Appliances
-            { en: "refrigerator", jp: "冷蔵庫", furigana: "れいぞうこ", romaji: "reizouko", cat: "home" },
+            { en: "refrigerator", jp: "冷蔵庫", furigana: "れいぞうこ", romaji: "reizouko", cat: "home", section: "Appliances" },
             { en: "freezer", jp: "冷凍庫", furigana: "れいとうこ", romaji: "reitouko", cat: "home" },
             { en: "microwave", jp: "電子レンジ", furigana: "でんしれんじ", romaji: "denshirenji", cat: "home" },
             { en: "oven", jp: "", furigana: "オーブン", romaji: "oobun", cat: "home" },
@@ -424,7 +437,7 @@
             { en: "humidifier", jp: "加湿器", furigana: "かしつき", romaji: "kashitsuki", cat: "home" },
             { en: "air purifier", jp: "空気清浄機", furigana: "くうきせいじょうき", romaji: "kuukiseijouki", cat: "home" },
             // Kitchenware
-            { en: "plate", jp: "皿", furigana: "さら", romaji: "sara", cat: "home" },
+            { en: "plate", jp: "皿", furigana: "さら", romaji: "sara", cat: "home", section: "Kitchenware" },
             { en: "cup", jp: "", furigana: "コップ", romaji: "koppu", cat: "home" },
             { en: "chopsticks", jp: "箸", furigana: "はし", romaji: "hashi", cat: "home" },
             { en: "spoon", jp: "", furigana: "スプーン", romaji: "supuun", cat: "home" },
@@ -458,7 +471,7 @@
             { en: "bottle", jp: "瓶", furigana: "びん", romaji: "bin", cat: "home" },
             { en: "lunch box", jp: "弁当箱", furigana: "べんとうばこ", romaji: "bentoubako", cat: "home" },
             // Toiletries
-            { en: "key", jp: "鍵", furigana: "かぎ", romaji: "kagi", cat: "home" },
+            { en: "key", jp: "鍵", furigana: "かぎ", romaji: "kagi", cat: "home", section: "Toiletries & Essentials" },
             { en: "trash can", jp: "", furigana: "ゴミ箱", romaji: "gomibako", cat: "home" },
             { en: "trash bag", jp: "ゴミ袋", furigana: "ごみぶくろ", romaji: "gomibukuro", cat: "home" },
             { en: "bucket", jp: "", furigana: "バケツ", romaji: "baketsu", cat: "home" },
@@ -495,7 +508,7 @@
             { en: "scale", jp: "体重計", furigana: "たいじゅうけい", romaji: "taijuukei", cat: "home" },
             { en: "medicine cabinet", jp: "薬棚", furigana: "くすりだな", romaji: "kusuridana", cat: "home" },
             // Chores & Actions
-            { en: "cleaning", jp: "掃除", furigana: "そうじ", romaji: "souji", cat: "home" },
+            { en: "cleaning", jp: "掃除", furigana: "そうじ", romaji: "souji", cat: "home", section: "Chores & Actions" },
             { en: "laundry", jp: "洗濯", furigana: "せんたく", romaji: "sentaku", cat: "home" },
             { en: "cooking", jp: "料理", furigana: "りょうり", romaji: "ryouri", cat: "home" },
             { en: "tidy up", jp: "片付ける", furigana: "かたづける", romaji: "katadukeru", cat: "home" },
@@ -528,7 +541,7 @@
             { en: "pliers", jp: "", furigana: "ペンチ", romaji: "penchi", cat: "home" },
             { en: "drill", jp: "", furigana: "ドリル", romaji: "doriru", cat: "home" },
             // Living Actions
-            { en: "live", jp: "住む", furigana: "すむ", romaji: "sumu", cat: "home" },
+            { en: "live", jp: "住む", furigana: "すむ", romaji: "sumu", cat: "home", section: "Living Actions" },
             { en: "move house", jp: "引っ越す", furigana: "ひっこす", romaji: "hikkosu", cat: "home" },
 
             { en: "open", jp: "開ける", furigana: "あける", romaji: "akeru", cat: "home" },
@@ -539,7 +552,7 @@
             { en: "relax", jp: "", furigana: "くつろぐ", romaji: "kutsurogu", cat: "home" },
             // Utilities
 
-            { en: "hot water", jp: "お湯", furigana: "おゆ", romaji: "oyu", cat: "home" },
+            { en: "hot water", jp: "お湯", furigana: "おゆ", romaji: "oyu", cat: "home", section: "Utilities" },
             { en: "electricity", jp: "電気", furigana: "でんき", romaji: "denki", cat: "home" },
             { en: "gas", jp: "", furigana: "ガス", romaji: "gasu", cat: "home" },
             { en: "power supply", jp: "電源", furigana: "でんげん", romaji: "dengen", cat: "home" },
@@ -576,7 +589,7 @@
             { en: "plug in", jp: "コンセントを差し込む", furigana: "こんせんとをさしこむ", romaji: "konsento o sashikomu", cat: "home" },
             { en: "unplug", jp: "コンセントを抜く", furigana: "こんせんとをぬく", romaji: "konsento o nuku", cat: "home" },
             // House Types
-            { en: "house", jp: "家", furigana: "いえ", romaji: "ie", cat: "home" },
+            { en: "house", jp: "家", furigana: "いえ", romaji: "ie", cat: "home", section: "House Types" },
             { en: "detached house", jp: "一軒家", furigana: "いっけんや", romaji: "ikkenya", cat: "home" },
             { en: "apartment", jp: "", furigana: "アパート", romaji: "apaato", cat: "home" },
             { en: "condominium", jp: "", furigana: "マンション", romaji: "manshon", cat: "home" },
@@ -585,7 +598,7 @@
             { en: "rental", jp: "賃貸", furigana: "ちんたい", romaji: "chintai", cat: "home" },
             { en: "owned home", jp: "持ち家", furigana: "もちいえ", romaji: "mochiie", cat: "home" },
             // Safety & Maintenance
-            { en: "repair", jp: "修理", furigana: "しゅうり", romaji: "shuuri", cat: "home" },
+            { en: "repair", jp: "修理", furigana: "しゅうり", romaji: "shuuri", cat: "home", section: "Safety & Maintenance" },
             { en: "inspection", jp: "点検", furigana: "てんけん", romaji: "tenken", cat: "home" },
             { en: "break", jp: "壊れる", furigana: "こわれる", romaji: "kowareru", cat: "home" },
             { en: "fix", jp: "直す", furigana: "なおす", romaji: "naosu", cat: "home" },
@@ -594,7 +607,7 @@
             { en: "security", jp: "防犯", furigana: "ぼうはん", romaji: "bouhan", cat: "home" },
             { en: "lock", jp: "鍵をかける", furigana: "かぎをかける", romaji: "kagiwokakeru", cat: "home" },
             // Descriptions
-            { en: "spacious", jp: "広い", furigana: "ひろい", romaji: "hiroi", cat: "home" },
+            { en: "spacious", jp: "広い", furigana: "ひろい", romaji: "hiroi", cat: "home", section: "Descriptions" },
             { en: "narrow", jp: "狭い", furigana: "せまい", romaji: "semai", cat: "home" },
             { en: "new", jp: "新しい", furigana: "あたらしい", romaji: "atarashii", cat: "home" },
             { en: "old", jp: "古い", furigana: "ふるい", romaji: "furui", cat: "home" },
@@ -603,7 +616,7 @@
             { en: "quiet", jp: "静か", furigana: "しずか", romaji: "shizuka", cat: "home" },
             { en: "convenient", jp: "便利", furigana: "べんり", romaji: "benri", cat: "home" },
             // Family (Merged into Home)
-            { en: "family", jp: "家族", furigana: "かぞく", romaji: "kazoku", cat: "home" },
+            { en: "family", jp: "家族", furigana: "かぞく", romaji: "kazoku", cat: "home", section: "Family" },
             { en: "father", jp: "父", furigana: "ちち", romaji: "chichi", cat: "home" },
             { en: "mother", jp: "母", furigana: "はは", romaji: "haha", cat: "home" },
             { en: "parents", jp: "両親", furigana: "りょうしん", romaji: "ryoushin", cat: "home" },
@@ -623,7 +636,7 @@
 
             // --- NUMBERS ---
             // Cardinal Numbers
-            { en: "zero", jp: "零", furigana: "れい", romaji: "rei", cat: "numbers" },
+            { en: "zero", jp: "零", furigana: "れい", romaji: "rei", cat: "numbers", section: "Cardinal Numbers" },
             { en: "one", jp: "一", furigana: "いち", romaji: "ichi", cat: "numbers" },
             { en: "two", jp: "二", furigana: "に", romaji: "ni", cat: "numbers" },
             { en: "three", jp: "三", furigana: "さん", romaji: "san", cat: "numbers" },
@@ -665,14 +678,14 @@
             { en: "hundred million", jp: "億", furigana: "おく", romaji: "oku", cat: "numbers" },
             { en: "one billion", jp: "十億", furigana: "じゅうおく", romaji: "juuoku", cat: "numbers" },
             // Sequence
-            { en: "first / number one", jp: "一番", furigana: "いちばん", romaji: "ichiban", cat: "numbers" },
+            { en: "first / number one", jp: "一番", furigana: "いちばん", romaji: "ichiban", cat: "numbers", section: "Sequence" },
             { en: "second", jp: "二番", furigana: "にばん", romaji: "niban", cat: "numbers" },
             { en: "third", jp: "三番", furigana: "さんばん", romaji: "sanban", cat: "numbers" },
             { en: "first (initial)", jp: "最初", furigana: "さいしょ", romaji: "saisho", cat: "numbers" },
             { en: "last", jp: "最後", furigana: "さいご", romaji: "saigo", cat: "numbers" },
             { en: "next", jp: "次", furigana: "つぎ", romaji: "tsugi", cat: "numbers" },
             // Counters
-            { en: "one person", jp: "一人", furigana: "ひとり", romaji: "hitori", cat: "numbers" },
+            { en: "one person", jp: "一人", furigana: "ひとり", romaji: "hitori", cat: "numbers", section: "Counters" },
             { en: "two people", jp: "二人", furigana: "ふたり", romaji: "futari", cat: "numbers" },
             { en: "three people", jp: "三人", furigana: "さんにん", romaji: "sannin", cat: "numbers" },
             { en: "four people", jp: "四人", furigana: "よにん", romaji: "yonin", cat: "numbers" },
@@ -738,7 +751,7 @@
             { en: "20 years old", jp: "二十歳", furigana: "はたち", romaji: "hatachi", cat: "numbers" },
             { en: "30 years old", jp: "三十歳", furigana: "さんじゅっさい", romaji: "sanjussai", cat: "numbers" },
             // Quantity/Comparison
-            { en: "many", jp: "", furigana: "たくさん", romaji: "takusan", cat: "numbers" },
+            { en: "many", jp: "", furigana: "たくさん", romaji: "takusan", cat: "numbers", section: "Quantity & Comparison" },
             { en: "a little", jp: "少し", furigana: "すこし", romaji: "sukoshi", cat: "numbers" },
             { en: "all", jp: "全部", furigana: "ぜんぶ", romaji: "zenbu", cat: "numbers" },
             { en: "half", jp: "半分", furigana: "はんぶん", romaji: "hanbun", cat: "numbers" },
@@ -746,7 +759,7 @@
 
             // --- CLOTHING ---
             // Types
-            { en: "clothes", jp: "服", furigana: "ふく", romaji: "fuku", cat: "clothing" },
+            { en: "clothes", jp: "服", furigana: "ふく", romaji: "fuku", cat: "clothing", section: "Types of Clothing" },
             { en: "shirt", jp: "", furigana: "シャツ", romaji: "shatsu", cat: "clothing" },
             { en: "T-shirt", jp: "", furigana: "Tシャツ", romaji: "tiishatsu", cat: "clothing" },
             { en: "polo shirt", jp: "", furigana: "ポロシャツ", romaji: "poroshatsu", cat: "clothing" },
@@ -977,19 +990,19 @@
             { en: "loungewear", jp: "", furigana: "ラウンジウェア", romaji: "raunjiwea", cat: "clothing" },
             { en: "umbrella", jp: "傘", furigana: "かさ", romaji: "kasa", cat: "clothing" },
             // Actions
-            { en: "wear (upper)", jp: "着る", furigana: "きる", romaji: "kiru", cat: "clothing" },
+            { en: "wear (upper)", jp: "着る", furigana: "きる", romaji: "kiru", cat: "clothing", section: "Actions" },
             { en: "wear (lower)", jp: "履く", furigana: "はく", romaji: "haku", cat: "clothing" },
             { en: "wear (head)", jp: "被る", furigana: "かぶる", romaji: "kaburu", cat: "clothing" },
             { en: "take off", jp: "脱ぐ", furigana: "ぬぐ", romaji: "nugu", cat: "clothing" },
             // Descriptions
-            { en: "tight", jp: "", furigana: "きつい", romaji: "kitsui", cat: "clothing" },
+            { en: "tight", jp: "", furigana: "きつい", romaji: "kitsui", cat: "clothing", section: "Descriptions" },
             { en: "loose", jp: "緩い", furigana: "ゆるい", romaji: "yurui", cat: "clothing" },
             { en: "new", jp: "新しい", furigana: "あたらしい", romaji: "atarashii", cat: "clothing" },
             { en: "old", jp: "古い", furigana: "ふるい", romaji: "furui", cat: "clothing" },
 
             // --- MOVEMENT ---
             // Verbs
-            { en: "go", jp: "行く", furigana: "いく", romaji: "iku", cat: "movement" },
+            { en: "go", jp: "行く", furigana: "いく", romaji: "iku", cat: "movement", section: "Verbs of Movement" },
             { en: "come", jp: "来る", furigana: "くる", romaji: "kuru", cat: "movement" },
             { en: "return (home)", jp: "帰る", furigana: "かえる", romaji: "kaeru", cat: "movement" },
             { en: "return (place)", jp: "戻る", furigana: "もどる", romaji: "modoru", cat: "movement" },
@@ -1027,7 +1040,7 @@
             { en: "go to school", jp: "通学する", furigana: "つうがくする", romaji: "tsuugakusuru", cat: "movement" },
             { en: "transfer (trains)", jp: "乗り換える", furigana: "のりかえる", romaji: "norikaeru", cat: "movement" },
             { en: "depart (vehicle)", jp: "発車する", furigana: "はっしゃする", romaji: "hasshasuru", cat: "movement" },
-            { en: "up", jp: "上", furigana: "うえ", romaji: "ue", cat: "movement" },
+            { en: "up", jp: "上", furigana: "うえ", romaji: "ue", cat: "movement", section: "Direction & Position" },
             { en: "down", jp: "下", furigana: "した", romaji: "shita", cat: "movement" },
             { en: "front", jp: "前", furigana: "まえ", romaji: "mae", cat: "movement" },
             { en: "back", jp: "後ろ", furigana: "うしろ", romaji: "ushiro", cat: "movement" },
@@ -1047,7 +1060,7 @@
             { en: "bridge", jp: "橋", furigana: "はし", romaji: "hashi", cat: "movement" },
             { en: "road", jp: "道", furigana: "みち", romaji: "michi", cat: "movement" },
             { en: "street", jp: "通り", furigana: "とおり", romaji: "toori", cat: "movement" },
-            { en: "fast", jp: "早く", furigana: "はやく", romaji: "hayaku", cat: "movement" },
+            { en: "fast", jp: "早く", furigana: "はやく", romaji: "hayaku", cat: "movement", section: "Speed & Manner" },
             { en: "slow", jp: "遅く", furigana: "おそく", romaji: "osoku", cat: "movement" },
             { en: "slowly", jp: "", furigana: "ゆっくり", romaji: "yukkuri", cat: "movement" },
             { en: "hurry", jp: "急ぐ", furigana: "いそぐ", romaji: "isogu", cat: "movement" },
@@ -1057,17 +1070,17 @@
             { en: "gently", jp: "", furigana: "そっと", romaji: "sotto", cat: "movement" },
             { en: "suddenly", jp: "突然", furigana: "とつぜん", romaji: "totsuzen", cat: "movement" },
             { en: "gradually", jp: "徐々に", furigana: "じょじょに", romaji: "jojoni", cat: "movement" },
-            { en: "I’m going", jp: "行ってきます", furigana: "いってきます", romaji: "ittekimasu", cat: "movement" },
+            { en: "I’m going", jp: "行ってきます", furigana: "いってきます", romaji: "ittekimasu", cat: "movement", section: "Greetings (Movement)" },
             { en: "Take care", jp: "行ってらっしゃい", furigana: "いってらっしゃい", romaji: "itterasshai", cat: "movement" },
             { en: "I’m home", jp: "ただいま", furigana: "ただいま", romaji: "tadaima", cat: "movement" },
             { en: "Welcome back", jp: "おかえりなさい", furigana: "おかえりなさい", romaji: "okaerinasai", cat: "movement" },
-            { en: "go out", jp: "出かける", furigana: "でかける", romaji: "dekakeru", cat: "movement" },
+            { en: "go out", jp: "出かける", furigana: "でかける", romaji: "dekakeru", cat: "movement", section: "Going Out & Visiting" },
             { en: "return home", jp: "帰宅する", furigana: "きたくする", romaji: "kitakusuru", cat: "movement" },
             { en: "go out (formal)", jp: "外出する", furigana: "がいしゅつする", romaji: "gaishutsusuru", cat: "movement" },
             { en: "visit", jp: "訪れる", furigana: "おとずれる", romaji: "otozureru", cat: "movement" },
             { en: "gather", jp: "集まる", furigana: "あつまる", romaji: "atsumaru", cat: "movement" },
             { en: "part / separate", jp: "別れる", furigana: "わかれる", romaji: "wakareru", cat: "movement" },
-            { en: "north", jp: "北", furigana: "きた", romaji: "kita", cat: "movement" },
+            { en: "north", jp: "北", furigana: "きた", romaji: "kita", cat: "movement", section: "Compass Directions" },
             { en: "east", jp: "東", furigana: "ひがし", romaji: "higashi", cat: "movement" },
             { en: "south", jp: "南", furigana: "みなみ", romaji: "minami", cat: "movement" },
             { en: "west", jp: "西", furigana: "にし", romaji: "nishi", cat: "movement" },
@@ -1086,7 +1099,7 @@
 
             // --- FOOD ---
             // Meals & Basics
-            { en: "cooked rice", jp: "ご飯", furigana: "ごはん", romaji: "gohan", cat: "food" },
+            { en: "cooked rice", jp: "ご飯", furigana: "ごはん", romaji: "gohan", cat: "food", section: "Meals & Basics" },
             { en: "bread", jp: "", furigana: "パン", romaji: "pan", cat: "food" },
             { en: "noodles", jp: "麺", furigana: "めん", romaji: "men", cat: "food" },
             { en: "ramen", jp: "", furigana: "ラーメン", romaji: "raamen", cat: "food" },
@@ -1102,7 +1115,7 @@
             { en: "sandwich", jp: "", furigana: "サンドイッチ", romaji: "sandoicchi", cat: "food" },
             { en: "set meal", jp: "定食", furigana: "ていしょく", romaji: "teishoku", cat: "food" },
             // Meat & Dairy
-            { en: "meat", jp: "肉", furigana: "にく", romaji: "niku", cat: "food" },
+            { en: "meat", jp: "肉", furigana: "にく", romaji: "niku", cat: "food", section: "Meat & Dairy" },
             { en: "beef", jp: "牛肉", furigana: "ぎゅうにく", romaji: "gyuuniku", cat: "food" },
             { en: "pork", jp: "豚肉", furigana: "ぶたにく", romaji: "butaniku", cat: "food" },
             { en: "chicken", jp: "鶏肉", furigana: "とりにく", romaji: "toriniku", cat: "food" },
@@ -1118,7 +1131,7 @@
             { en: "cheese", jp: "", furigana: "チーズ", romaji: "chiizu", cat: "food" },
             { en: "yogurt", jp: "", furigana: "ヨーグルト", romaji: "yooguruto", cat: "food" },
             // Fish & Seafood
-            { en: "fish", jp: "魚", furigana: "さかな", romaji: "sakana", cat: "food" },
+            { en: "fish", jp: "魚", furigana: "さかな", romaji: "sakana", cat: "food", section: "Fish & Seafood" },
             { en: "salmon", jp: "鮭", furigana: "さけ", romaji: "sake", cat: "food" },
             { en: "tuna", jp: "", furigana: "まぐろ", romaji: "maguro", cat: "food" },
             { en: "mackerel", jp: "鯖", furigana: "さば", romaji: "saba", cat: "food" },
@@ -1134,7 +1147,7 @@
             { en: "sushi", jp: "寿司", furigana: "すし", romaji: "sushi", cat: "food" },
             { en: "grilled fish", jp: "焼き魚", furigana: "やきざかな", romaji: "yakizakana", cat: "food" },
             // Vegetables
-            { en: "vegetables", jp: "野菜", furigana: "やさい", romaji: "yasai", cat: "food" },
+            { en: "vegetables", jp: "野菜", furigana: "やさい", romaji: "yasai", cat: "food", section: "Vegetables" },
             { en: "cabbage", jp: "", furigana: "キャベツ", romaji: "kyabetsu", cat: "food" },
             { en: "lettuce", jp: "", furigana: "レタス", romaji: "retasu", cat: "food" },
             { en: "tomato", jp: "", furigana: "トマト", romaji: "tomato", cat: "food" },
@@ -1150,7 +1163,7 @@
             { en: "spinach", jp: "ほうれん草", furigana: "ほうれんそう", romaji: "hourensou", cat: "food" },
             { en: "mushroom", jp: "", furigana: "きのこ", romaji: "kinoko", cat: "food" },
             // Fruit
-            { en: "fruit", jp: "果物", furigana: "くだもの", romaji: "kudamono", cat: "food" },
+            { en: "fruit", jp: "果物", furigana: "くだもの", romaji: "kudamono", cat: "food", section: "Fruit" },
             { en: "apple", jp: "", furigana: "りんご", romaji: "ringo", cat: "food" },
             { en: "banana", jp: "", furigana: "バナナ", romaji: "banana", cat: "food" },
             { en: "mandarin orange", jp: "", furigana: "みかん", romaji: "mikan", cat: "food" },
@@ -1166,7 +1179,7 @@
             { en: "cherry", jp: "", furigana: "さくらんぼ", romaji: "sakuranbo", cat: "food" },
             { en: "watermelon", jp: "", furigana: "スイカ", romaji: "suika", cat: "food" },
             // Snacks & Sweets
-            { en: "snacks / sweets", jp: "お菓子", furigana: "おかし", romaji: "okashi", cat: "food" },
+            { en: "snacks / sweets", jp: "お菓子", furigana: "おかし", romaji: "okashi", cat: "food", section: "Snacks & Sweets" },
             { en: "cake", jp: "", furigana: "ケーキ", romaji: "keeki", cat: "food" },
             { en: "cookies", jp: "", furigana: "クッキー", romaji: "kukkii", cat: "food" },
             { en: "chocolate", jp: "", furigana: "チョコレート", romaji: "chokoreeto", cat: "food" },
@@ -1182,7 +1195,7 @@
             { en: "nuts", jp: "", furigana: "ナッツ", romaji: "nattsu", cat: "food" },
             { en: "popcorn", jp: "", furigana: "ポップコーン", romaji: "poppukoon", cat: "food" },
             // Drinks
-            { en: "drinks", jp: "飲み物", furigana: "のみもの", romaji: "nomimono", cat: "food" },
+            { en: "drinks", jp: "飲み物", furigana: "のみもの", romaji: "nomimono", cat: "food", section: "Drinks" },
             { en: "water", jp: "水", furigana: "みず", romaji: "mizu", cat: "food" },
             { en: "tea", jp: "お茶", furigana: "おちゃ", romaji: "ocha", cat: "food" },
             { en: "green tea", jp: "緑茶", furigana: "りょくちゃ", romaji: "ryokucha", cat: "food" },
@@ -1198,7 +1211,7 @@
             { en: "soup", jp: "", furigana: "スープ", romaji: "suupu", cat: "food" },
             { en: "miso soup", jp: "味噌汁", furigana: "みそしる", romaji: "misoshiru", cat: "food" },
             // Alcohol
-            { en: "alcohol", jp: "お酒", furigana: "おさけ", romaji: "osake", cat: "food" },
+            { en: "alcohol", jp: "お酒", furigana: "おさけ", romaji: "osake", cat: "food", section: "Alcohol" },
             { en: "beer", jp: "", furigana: "ビール", romaji: "biiru", cat: "food" },
             { en: "sake", jp: "日本酒", furigana: "にほんしゅ", romaji: "nihonshu", cat: "food" },
             { en: "shochu", jp: "焼酎", furigana: "しょうちゅう", romaji: "shouchuu", cat: "food" },
@@ -1209,7 +1222,7 @@
             { en: "cocktail", jp: "", furigana: "カクテル", romaji: "kakuteru", cat: "food" },
             { en: "highball", jp: "", furigana: "ハイボール", romaji: "haibooru", cat: "food" },
             // Seasonings
-            { en: "salt", jp: "塩", furigana: "しお", romaji: "shio", cat: "food" },
+            { en: "salt", jp: "塩", furigana: "しお", romaji: "shio", cat: "food", section: "Seasonings" },
             { en: "sugar", jp: "砂糖", furigana: "さとう", romaji: "satou", cat: "food" },
             { en: "soy sauce", jp: "醤油", furigana: "しょうゆ", romaji: "shouyu", cat: "food" },
             { en: "miso", jp: "味噌", furigana: "みそ", romaji: "miso", cat: "food" },
@@ -1225,7 +1238,7 @@
             { en: "mustard", jp: "", furigana: "マスタード", romaji: "masutaado", cat: "food" },
             { en: "wasabi", jp: "", furigana: "わさび", romaji: "wasabi", cat: "food" },
             // Actions
-            { en: "eat", jp: "食べる", furigana: "たべる", romaji: "taberu", cat: "food" },
+            { en: "eat", jp: "食べる", furigana: "たべる", romaji: "taberu", cat: "food", section: "Actions" },
             { en: "drink", jp: "飲む", furigana: "のむ", romaji: "nomu", cat: "food" },
             { en: "cook", jp: "料理する", furigana: "りょうりする", romaji: "ryourisuru", cat: "food" },
             { en: "order", jp: "注文する", furigana: "ちゅうもんする", romaji: "chuumonsuru", cat: "food" },
@@ -1236,7 +1249,7 @@
             // Tableware
 
             // Taste & Flavor
-            { en: "delicious", jp: "美味しい", furigana: "おいしい", romaji: "oishii", cat: "food" },
+            { en: "delicious", jp: "美味しい", furigana: "おいしい", romaji: "oishii", cat: "food", section: "Taste & Flavor" },
             { en: "taste / flavor", jp: "味", furigana: "あじ", romaji: "aji", cat: "food" },
             { en: "bad-tasting", jp: "", furigana: "まずい", romaji: "mazui", cat: "food" },
             { en: "sweet", jp: "甘い", furigana: "あまい", romaji: "amai", cat: "food" },
@@ -1257,7 +1270,7 @@
             { en: "fishy smell/taste", jp: "生臭い", furigana: "なまぐさい", romaji: "namagusai", cat: "food" },
             { en: "aftertaste", jp: "後味", furigana: "あとあじ", romaji: "atoaji", cat: "food" },
             // Texture
-            { en: "texture", jp: "食感", furigana: "しょっかん", romaji: "shokkan", cat: "food" },
+            { en: "texture", jp: "食感", furigana: "しょっかん", romaji: "shokkan", cat: "food", section: "Texture" },
             { en: "soft", jp: "柔らかい", furigana: "やわらかい", romaji: "yawarakai", cat: "food" },
             { en: "hard", jp: "硬い", furigana: "かたい", romaji: "katai", cat: "food" },
             { en: "crispy", jp: "", furigana: "サクサク", romaji: "sakusaku", cat: "food" },
@@ -1273,7 +1286,7 @@
             { en: "rough", jp: "", furigana: "ザラザラ", romaji: "zarazara", cat: "food" },
             { en: "jiggly", jp: "", furigana: "ぷるぷる", romaji: "purupuru", cat: "food" },
             // Colors
-            { en: "color", jp: "色", furigana: "いろ", romaji: "iro", cat: "food" },
+            { en: "color", jp: "色", furigana: "いろ", romaji: "iro", cat: "food", section: "Colors" },
             { en: "white", jp: "白", furigana: "しろ", romaji: "shiro", cat: "food" },
             { en: "black", jp: "黒", furigana: "くろ", romaji: "kuro", cat: "food" },
             { en: "red", jp: "赤", furigana: "あか", romaji: "aka", cat: "food" },
@@ -1293,7 +1306,7 @@
             { en: "light (color)", jp: "薄い", furigana: "うすい", romaji: "usui", cat: "food" },
             { en: "dark / deep", jp: "濃い", furigana: "こい", romaji: "koi", cat: "food" },
             // Temperature
-            { en: "temperature", jp: "温度", furigana: "おんど", romaji: "ondo", cat: "food" },
+            { en: "temperature", jp: "温度", furigana: "おんど", romaji: "ondo", cat: "food", section: "Temperature" },
             { en: "hot (touch)", jp: "熱い", furigana: "あつい", romaji: "atsui", cat: "food" },
             { en: "warm", jp: "暖かい", furigana: "あたたかい", romaji: "atatakai", cat: "food" },
             { en: "cold (touch)", jp: "冷たい", furigana: "つめたい", romaji: "tsumetai", cat: "food" },
@@ -1307,7 +1320,7 @@
             { en: "piping hot", jp: "熱々", furigana: "あつあつ", romaji: "atsuatsu", cat: "food" },
             { en: "ice-cold", jp: "", furigana: "キンキン", romaji: "kinkin", cat: "food" },
             // Smell
-            { en: "smell", jp: "匂い", furigana: "におい", romaji: "nioi", cat: "food" },
+            { en: "smell", jp: "匂い", furigana: "におい", romaji: "nioi", cat: "food", section: "Smell" },
             { en: "fragrance", jp: "香り", furigana: "かおり", romaji: "kaori", cat: "food" },
             { en: "good smell", jp: "", furigana: "いい匂い", romaji: "ii nioi", cat: "food" },
             { en: "smelly", jp: "臭い", furigana: "くさい", romaji: "kusai", cat: "food" },
@@ -1316,7 +1329,7 @@
             { en: "burnt smell", jp: "焦げた匂い", furigana: "こげたにおい", romaji: "kogeta nioi", cat: "food" },
             { en: "fresh smell", jp: "新鮮な匂い", furigana: "しんせんなにおい", romaji: "shinsen na nioi", cat: "food" },
             // Appearance & State
-            { en: "appearance", jp: "見た目", furigana: "みため", romaji: "mitame", cat: "food" },
+            { en: "appearance", jp: "見た目", furigana: "みため", romaji: "mitame", cat: "food", section: "Appearance & State" },
             { en: "fresh", jp: "新鮮", furigana: "しんせん", romaji: "shinsen", cat: "food" },
             { en: "old (food)", jp: "古い", furigana: "ふるい", romaji: "furui", cat: "food" },
             { en: "raw", jp: "生", furigana: "なま", romaji: "nama", cat: "food" },
@@ -1327,7 +1340,7 @@
             { en: "fully ripe", jp: "完熟", furigana: "かんじゅく", romaji: "kanjuku", cat: "food" },
             { en: "burn (verb)", jp: "焦げる", furigana: "こげる", romaji: "kogeru", cat: "food" },
             // Preferences
-            { en: "like", jp: "好き", furigana: "すき", romaji: "suki", cat: "food" },
+            { en: "like", jp: "好き", furigana: "すき", romaji: "suki", cat: "food", section: "Preferences" },
             { en: "dislike", jp: "嫌い", furigana: "きらい", romaji: "kirai", cat: "food" },
             { en: "love", jp: "大好き", furigana: "だいすき", romaji: "daisuki", cat: "food" },
             { en: "not good at", jp: "苦手", furigana: "にがて", romaji: "nigate", cat: "food" },
@@ -1340,7 +1353,7 @@
 
             // --- BODY ---
             // Parts
-            { en: "body", jp: "体", furigana: "からだ", romaji: "karada", cat: "body" },
+            { en: "body", jp: "体", furigana: "からだ", romaji: "karada", cat: "body", section: "Parts" },
             { en: "head", jp: "頭", furigana: "あたま", romaji: "atama", cat: "body" },
             { en: "hair", jp: "髪", furigana: "かみ", romaji: "kami", cat: "body" },
             { en: "face", jp: "顔", furigana: "かお", romaji: "kao", cat: "body" },
@@ -1371,7 +1384,7 @@
             { en: "heel", jp: "", furigana: "かかと", romaji: "kakato", cat: "body" },
             { en: "toes", jp: "つま先", furigana: "つまさき", romaji: "tsumasaki", cat: "body" },
             // Internal Organs
-            { en: "internal organs", jp: "内臓", furigana: "ないぞう", romaji: "naizou", cat: "body" },
+            { en: "internal organs", jp: "内臓", furigana: "ないぞう", romaji: "naizou", cat: "body", section: "Internal Organs" },
             { en: "heart", jp: "心臓", furigana: "しんぞう", romaji: "shinzou", cat: "body" },
             { en: "lungs", jp: "肺", furigana: "はい", furigana: "はい", romaji: "hai", cat: "body" },
             { en: "stomach (organ)", jp: "胃", furigana: "い", romaji: "i", cat: "body" },
@@ -1387,7 +1400,7 @@
             { en: "skin", jp: "皮膚", furigana: "ひふ", romaji: "hifu", cat: "body" },
             { en: "immunity", jp: "免疫", furigana: "めんえき", romaji: "men'eki", cat: "body" },
             // Health & Illness
-            { en: "health", jp: "健康", furigana: "けんこう", romaji: "kenkou", cat: "body" },
+            { en: "health", jp: "健康", furigana: "けんこう", romaji: "kenkou", cat: "body", section: "Health & Illness" },
             { en: "illness", jp: "病気", furigana: "びょうき", romaji: "byouki", cat: "body" },
             { en: "painful", jp: "痛い", furigana: "いたい", romaji: "itai", cat: "body" },
             { en: "headache", jp: "頭痛", furigana: "ずつう", romaji: "zutsuu", cat: "body" },
@@ -1407,7 +1420,7 @@
             { en: "to swell", jp: "腫れる", furigana: "はれる", romaji: "hareru", cat: "body" },
             { en: "tired / sluggish", jp: "", furigana: "だるい", romaji: "darui", cat: "body" },
             // Medical
-            { en: "doctor", jp: "医者", furigana: "いしゃ", romaji: "isha", cat: "body" },
+            { en: "doctor", jp: "医者", furigana: "いしゃ", romaji: "isha", cat: "body", section: "Medical" },
             { en: "nurse", jp: "看護師", furigana: "かんごし", romaji: "kangoshi", cat: "body" },
             { en: "hospital", jp: "病院", furigana: "びょういん", romaji: "byouin", cat: "body" },
             { en: "clinic", jp: "", furigana: "クリニック", romaji: "kurinikku", cat: "body" },
@@ -1423,7 +1436,7 @@
             { en: "discharge", jp: "退院", furigana: "たいいん", romaji: "taiin", cat: "body" },
             { en: "ambulance", jp: "救急車", furigana: "きゅうきゅうしゃ", romaji: "kyuukyuusha", cat: "body" },
             // Actions
-            { en: "take (medicine)", jp: "飲む", furigana: "のむ", romaji: "nomu", cat: "body" },
+            { en: "take (medicine)", jp: "飲む", furigana: "のむ", romaji: "nomu", cat: "body", section: "Actions" },
             { en: "apply (ointment)", jp: "塗る", furigana: "ぬる", romaji: "nuru", cat: "body" },
             { en: "stick / apply", jp: "貼る", furigana: "はる", romaji: "haru", cat: "body" },
             { en: "to inject", jp: "注射する", furigana: "ちゅうしゃする", romaji: "chuushasuru", cat: "body" },
@@ -1434,7 +1447,7 @@
             { en: "to disinfect", jp: "消毒する", furigana: "しょうどくする", romaji: "shoudokusuru", cat: "body" },
 
             // Health Management
-            { en: "health management", jp: "健康管理", furigana: "けんこうかんり", romaji: "kenkoukanri", cat: "body" },
+            { en: "health management", jp: "健康管理", furigana: "けんこうかんり", romaji: "kenkoukanri", cat: "body", section: "Health Management" },
             { en: "exercise", jp: "運動", furigana: "うんどう", romaji: "undou", cat: "body" },
             { en: "stretching", jp: "", furigana: "ストレッチ", romaji: "sutorecchi", cat: "body" },
             { en: "running", jp: "", furigana: "ランニング", romaji: "ranningu", cat: "body" },
@@ -1450,7 +1463,7 @@
             { en: "diet (lifestyle)", jp: "食生活", furigana: "しょくせいかつ", romaji: "shokuseikatsu", cat: "body" },
             { en: "balance", jp: "", furigana: "バランス", romaji: "baransu", cat: "body" },
             // Emergency & Senses
-            { en: "Help!", jp: "助けて！", furigana: "たすけて", romaji: "tasukete", cat: "body" },
+            { en: "Help!", jp: "助けて！", furigana: "たすけて", romaji: "tasukete", cat: "body", section: "Emergency & Senses" },
             { en: "It hurts", jp: "", furigana: "痛いです", romaji: "itai desu", cat: "body" },
             { en: "I feel sick", jp: "気分が悪い", furigana: "きぶんがわるい", romaji: "kibun ga warui", cat: "body" },
             { en: "to collapse", jp: "倒れる", furigana: "たおれる", romaji: "taoreru", cat: "body" },
@@ -1476,7 +1489,7 @@
             { en: "to feel", jp: "感じる", furigana: "かんじる", romaji: "kanjiru", cat: "body" },
             // Hygiene
 
-            { en: "to brush teeth", jp: "歯を磨く", furigana: "はをみがく", romaji: "ha o migaku", cat: "body" },
+            { en: "to brush teeth", jp: "歯を磨く", furigana: "はをみがく", romaji: "ha o migaku", cat: "body", section: "Hygiene" },
             { en: "take a shower", jp: "浴びる", furigana: "あびる", romaji: "abiru", cat: "body" },
 
             { en: "to wipe body", jp: "体を拭く", furigana: "からだをふく", romaji: "karada o fuku", cat: "body" },
@@ -1486,7 +1499,7 @@
 
             { en: "put on clothes", jp: "着る", furigana: "きる", romaji: "kiru", cat: "body" },
             // Daily Routine
-            { en: "to wake up", jp: "起きる", furigana: "おきる", romaji: "okiru", cat: "body" },
+            { en: "to wake up", jp: "起きる", furigana: "おきる", romaji: "okiru", cat: "body", section: "Daily Routine" },
             { en: "to breathe", jp: "呼吸する", furigana: "こきゅうする", romaji: "kokyuusuru", cat: "body" },
             { en: "deep breath", jp: "深呼吸", furigana: "しんこきゅう", romaji: "shinkokyuu", cat: "body" },
             { en: "to meditate", jp: "瞑想する", furigana: "めいそうする", romaji: "meisousuru", cat: "body" },
@@ -1494,7 +1507,7 @@
             { en: "nutrition", jp: "栄養", furigana: "eiyou", romaji: "eiyou", cat: "body" },
             { en: "balanced diet", jp: "バランスの良い食事", furigana: "ばらんすのよいしょくじ", romaji: "baransu no yoi shokuji", cat: "body" },
             // More Illnesses
-            { en: "flu", jp: "", furigana: "インフルエンザ", romaji: "infuruenza", cat: "body" },
+            { en: "flu", jp: "", furigana: "インフルエンザ", romaji: "infuruenza", cat: "body", section: "More Illnesses" },
             { en: "fever (onset)", jp: "発熱", furigana: "はつねつ", romaji: "hatsunetsu", cat: "body" },
             { en: "atopy / eczema", jp: "", furigana: "アトピー", romaji: "atopii", cat: "body" },
             { en: "hay fever", jp: "花粉症", furigana: "かふんしょう", romaji: "kafunshou", cat: "body" },
@@ -1502,7 +1515,7 @@
             { en: "bruise", jp: "打撲", furigana: "だぼく", romaji: "daboku", cat: "body" },
             { en: "sprain", jp: "捻挫", furigana: "ねんざ", romaji: "nenza", cat: "body" },
             // More Exercise
-            { en: "calisthenics", jp: "体操", furigana: "たいそう", romaji: "taisou", cat: "body" },
+            { en: "calisthenics", jp: "体操", furigana: "たいそう", romaji: "taisou", cat: "body", section: "More Exercise" },
             { en: "jogging", jp: "", furigana: "ジョギング", romaji: "jogingu", cat: "body" },
             { en: "pilates", jp: "", furigana: "ピラティス", romaji: "piratisu", cat: "body" },
             { en: "abs / sit-ups", jp: "腹筋", furigana: "ふっきん", romaji: "fukkin", cat: "body" },
@@ -1512,7 +1525,7 @@
             { en: "sports", jp: "", furigana: "スポーツ", romaji: "supootsu", cat: "body" },
             { en: "cycling", jp: "自転車", furigana: "じてんしゃ", romaji: "jitensha", cat: "body" },
             // Mind & Emotion
-            { en: "mind / spirit", jp: "精神", furigana: "せいしん", romaji: "seishin", cat: "body" },
+            { en: "mind / spirit", jp: "精神", furigana: "せいしん", romaji: "seishin", cat: "body", section: "Mind & Emotion" },
             { en: "heart / mind", jp: "心", furigana: "こころ", romaji: "kokoro", cat: "body" },
             { en: "stress", jp: "", furigana: "ストレス", romaji: "sutoresu", cat: "body" },
             { en: "anxiety", jp: "不安", furigana: "ふあん", romaji: "fuan", cat: "body" },
@@ -1528,7 +1541,7 @@
             { en: "lack of sleep", jp: "睡眠不足", furigana: "すいみんぶそく", romaji: "suiminbusoku", cat: "body" },
             { en: "psychology", jp: "心理", furigana: "しんり", romaji: "shinri", cat: "body" },
             // Equipment
-            { en: "thermometer", jp: "体温計", furigana: "たいおんけい", romaji: "taionkei", cat: "body" },
+            { en: "thermometer", jp: "体温計", furigana: "たいおんけい", romaji: "taionkei", cat: "body", section: "Medical Equipment" },
             { en: "blood pressure monitor", jp: "血圧計", furigana: "けつあつけい", romaji: "ketsuatsukei", cat: "body" },
             { en: "stethoscope", jp: "聴診器", furigana: "ちょうしんき", romaji: "choushinki", cat: "body" },
             { en: "wheelchair", jp: "車椅子", furigana: "くるまいす", romaji: "kurumaisu", cat: "body" },
@@ -1545,7 +1558,7 @@
 
             // --- WORK ---
             // Office Spaces
-            { en: "office", jp: "事務所", furigana: "じむしょ", romaji: "jimusho", cat: "work" },
+            { en: "office", jp: "事務所", furigana: "じむしょ", romaji: "jimusho", cat: "work", section: "Office Spaces" },
             { en: "office (loanword)", jp: "", furigana: "オフィス", romaji: "ofisu", cat: "work" },
             { en: "meeting room", jp: "会議室", furigana: "かいぎしつ", romaji: "kaigishitsu", cat: "work" },
             { en: "reception room", jp: "応接室", furigana: "おうせつしつ", romaji: "ousetsushitsu", cat: "work" },
@@ -1561,7 +1574,7 @@
             { en: "copy room", jp: "コピー室", furigana: "コピーしつ", romaji: "kopii shitsu", cat: "work" },
             { en: "printing room", jp: "印刷室", furigana: "いんさつしつ", romaji: "insatsushitsu", cat: "work" },
             // Furniture & Equipment
-            { en: "chair", jp: "椅子", furigana: "いす", romaji: "isu", cat: "work" },
+            { en: "chair", jp: "椅子", furigana: "いす", romaji: "isu", cat: "work", section: "Furniture & Equipment" },
             { en: "swivel chair", jp: "回転椅子", furigana: "かいてんいす", romaji: "kaiten'isu", cat: "work" },
             { en: "desk", jp: "机", furigana: "つくえ", romaji: "tsukue", cat: "work" },
             { en: "bookshelf", jp: "書棚", furigana: "しょだな", romaji: "shodana", cat: "work" },
@@ -1582,7 +1595,7 @@
             { en: "scanner", jp: "", furigana: "スキャナー", romaji: "sukyanaa", cat: "work" },
             { en: "shredder", jp: "", furigana: "シュレッダー", romaji: "shureddaa", cat: "work" },
             // Stationery
-            { en: "stationery", jp: "文房具", furigana: "ぶんぼうぐ", romaji: "bunbougu", cat: "work" },
+            { en: "stationery", jp: "文房具", furigana: "ぶんぼうぐ", romaji: "bunbougu", cat: "work", section: "Stationery" },
             { en: "pen", jp: "", furigana: "ペン", romaji: "pen", cat: "work" },
             { en: "pencil", jp: "鉛筆", furigana: "えんぴつ", romaji: "enpitsu", cat: "work" },
             { en: "mechanical pencil", jp: "", furigana: "シャープペン", romaji: "shaapupen", cat: "work" },
@@ -1597,12 +1610,12 @@
             { en: "staple pin", jp: "針", furigana: "はり", romaji: "hari", cat: "work" },
             { en: "ruler", jp: "定規", furigana: "じょうぎ", romaji: "jougi", cat: "work" },
             { en: "seal / stamp", jp: "印鑑", furigana: "いんかん", romaji: "inkan", cat: "work" },
-            { en: "envelope", jp: "封筒", furigana: "ふうとう", romaji: "fuutou", cat: "work" },
+            { en: "envelope", jp: "封筒", furigana: "ふうとう", romaji: "fuutou", cat: "work", section: "Supplies" },
             { en: "business card", jp: "名刺", furigana: "めいし", romaji: "meishi", cat: "work" },
             { en: "calendar", jp: "", furigana: "カレンダー", romaji: "karendaa", cat: "work" },
             { en: "calculator", jp: "電卓", furigana: "でんたく", romaji: "dentaku", cat: "work" },
             // Roles & People
-            { en: "employee", jp: "社員", furigana: "しゃいん", romaji: "shain", cat: "work" },
+            { en: "employee", jp: "社員", furigana: "しゃいん", romaji: "shain", cat: "work", section: "Roles & People" },
             { en: "company worker", jp: "会社員", furigana: "かいしゃいん", romaji: "kaishain", cat: "work" },
             { en: "company president", jp: "社長", furigana: "しゃちょう", romaji: "shachou", cat: "work" },
             { en: "department manager", jp: "部長", furigana: "ぶちょう", romaji: "buchou", cat: "work" },
@@ -1621,7 +1634,7 @@
             { en: "lawyer", jp: "弁護士", furigana: "べんごし", romaji: "bengoshi", cat: "work" },
             { en: "doctor (professional)", jp: "医師", furigana: "いし", romaji: "ishi", cat: "work" },
             // Employment Types
-            { en: "part-time job", jp: "", furigana: "アルバイト", romaji: "arubaito", cat: "work" },
+            { en: "part-time job", jp: "", furigana: "アルバイト", romaji: "arubaito", cat: "work", section: "Employment Types" },
             { en: "temporary staff", jp: "派遣社員", furigana: "はけんしゃいん", romaji: "hakenshain", cat: "work" },
             { en: "contract employee", jp: "契約社員", furigana: "けいやくしゃいん", romaji: "keiyakushain", cat: "work" },
             { en: "full-time employee", jp: "正社員", furigana: "せいしゃいん", romaji: "seishain", cat: "work" },
@@ -1632,7 +1645,7 @@
             { en: "trainee", jp: "研修生", furigana: "けんしゅうせい", romaji: "kenshuusei", cat: "work" },
             { en: "volunteer", jp: "", furigana: "ボランティア", romaji: "borantia", cat: "work" },
             // Actions
-            { en: "to work", jp: "働く", furigana: "はたらく", romaji: "hataraku", cat: "work" },
+            { en: "to work", jp: "働く", furigana: "はたらく", romaji: "hataraku", cat: "work", section: "Actions" },
             { en: "to take a break", jp: "休む", furigana: "やすむ", romaji: "yasumu", cat: "work" },
             { en: "to go to work", jp: "出勤する", furigana: "しゅっきんする", romaji: "shukkinsuru", cat: "work" },
             { en: "to leave work", jp: "退勤する", furigana: "たいきんする", romaji: "taikinsuru", cat: "work" },
@@ -1667,7 +1680,7 @@
             { en: "to hand over work", jp: "仕事を引き継ぐ", furigana: "しごとをひきつぐ", romaji: "shigoto o hikitsugu", cat: "work" },
             { en: "to report a mistake", jp: "ミスを報告する", furigana: "ミスをほうこくする", romaji: "misu o houkoku suru", cat: "work" },
             // Time & Terms
-            { en: "working hours", jp: "勤務時間", furigana: "きんむじかん", romaji: "kinmujikan", cat: "work" },
+            { en: "working hours", jp: "勤務時間", furigana: "きんむじかん", romaji: "kinmujikan", cat: "work", section: "Time & Terms" },
             { en: "starting time", jp: "出勤時間", furigana: "しゅっきんじかん", romaji: "shukkinjikan", cat: "work" },
             { en: "leaving time", jp: "退勤時間", furigana: "たいきんじかん", romaji: "taikinjikan", cat: "work" },
             { en: "lunch break", jp: "昼休み", furigana: "ひるやすみ", romaji: "hiruyasumi", cat: "work" },
@@ -1682,7 +1695,7 @@
             { en: "leaving early", jp: "早退", furigana: "そうたい", romaji: "soutai", cat: "work" },
             { en: "deadline", jp: "締め切り", furigana: "しめきり", romaji: "shimekiri", cat: "work" },
             // Documents & Materials
-            { en: "email", jp: "", furigana: "メール", romaji: "meeru", cat: "work" },
+            { en: "email", jp: "", furigana: "メール", romaji: "meeru", cat: "work", section: "Documents & Materials" },
             { en: "attachment", jp: "添付ファイル", furigana: "てんぷファイル", romaji: "tenpu fairu", cat: "work" },
             { en: "document / text", jp: "文章", furigana: "ぶんしょう", romaji: "bunshou", cat: "work" },
             { en: "report (doc)", jp: "報告書", furigana: "ほうこくしょ", romaji: "houkokusho", cat: "work" },
@@ -1702,13 +1715,13 @@
             { en: "guidance", jp: "案内", furigana: "あんない", romaji: "annai", cat: "work" },
             { en: "materials / docs", jp: "資料", furigana: "しりょう", romaji: "shiryou", cat: "work" },
             // Business Phrases
-            { en: "greeting", jp: "挨拶", furigana: "あいさつ", romaji: "aisatsu", cat: "work" },
+            { en: "greeting", jp: "挨拶", furigana: "あいさつ", romaji: "aisatsu", cat: "work", section: "Business Phrases" },
             { en: "Thank you (work)", jp: "お疲れ様です", furigana: "おつかれさまです", romaji: "otsukaresama desu", cat: "work" },
             { en: "Please take care", jp: "よろしくお願いします", furigana: "よろしくおねがいします", romaji: "yoroshiku onegaishimasu", cat: "work" },
             { en: "Leaving before you", jp: "お先に失礼します", furigana: "おさきにしつれいします", romaji: "osaki ni shitsurei shimasu", cat: "work" },
             { en: "Excuse me / Goodbye", jp: "失礼します", furigana: "しつれいします", romaji: "shitsurei shimasu", cat: "work" },
             // Status & Performance
-            { en: "in a meeting", jp: "会議中", furigana: "かいぎちゅう", romaji: "kaigichuu", cat: "work" },
+            { en: "in a meeting", jp: "会議中", furigana: "かいぎちゅう", romaji: "kaigichuu", cat: "work", section: "Status & Performance" },
             { en: "no smoking", jp: "禁煙", furigana: "きんえん", romaji: "kin'en", cat: "work" },
             { en: "diligence", jp: "勤勉", furigana: "きんべん", romaji: "kinben", cat: "work" },
             { en: "goal / target", jp: "目標", furigana: "もくひょう", romaji: "mokuhyou", cat: "work" },
@@ -1719,7 +1732,7 @@
 
             // --- EMOTIONS ---
             // Positive & Happiness
-            { en: "happy / glad", jp: "嬉しい", furigana: "うれしい", romaji: "ureshii", cat: "emotions" },
+            { en: "happy / glad", jp: "嬉しい", furigana: "うれしい", romaji: "ureshii", cat: "emotions", section: "Positive & Happiness" },
             { en: "fun / enjoyable", jp: "楽しい", furigana: "たのしい", romaji: "tanoshii", cat: "emotions" },
             { en: "happiness", jp: "幸せ", furigana: "しあわせ", romaji: "shiawase", cat: "emotions" },
             { en: "to be delighted", jp: "喜ぶ", furigana: "よろこぶ", romaji: "yorokobu", cat: "emotions" },
@@ -1738,7 +1751,7 @@
             { en: "to smile", jp: "微笑む", furigana: "ほほえむ", romaji: "hohoemu", cat: "emotions" },
             { en: "refreshing", jp: "爽快", furigana: "そうかい", romaji: "soukai", cat: "emotions" },
             // Negative & Sadness
-            { en: "sad", jp: "悲しい", furigana: "かなしい", romaji: "kanashii", cat: "emotions" },
+            { en: "sad", jp: "悲しい", furigana: "かなしい", romaji: "kanashii", cat: "emotions", section: "Negative & Sadness" },
             { en: "lonely", jp: "寂しい", furigana: "さびしい", romaji: "sabishii", cat: "emotions" },
             { en: "painful / distressing", jp: "苦しい", furigana: "くるしい", romaji: "kurushii", cat: "emotions" },
             { en: "angry", jp: "怒る", furigana: "おこる", romaji: "okoru", cat: "emotions" },
@@ -1759,7 +1772,7 @@
             { en: "empty / meaningless", jp: "虚しい", furigana: "むなしい", romaji: "munashii", cat: "emotions" },
             { en: "painful / tough", jp: "つらい", furigana: "つらい", romaji: "tsurai", cat: "emotions" },
             // Anger & Frustration
-            { en: "anger / rage", jp: "怒り", furigana: "いかり", romaji: "ikari", cat: "emotions" },
+            { en: "anger / rage", jp: "怒り", furigana: "いかり", romaji: "ikari", cat: "emotions", section: "Anger & Frustration" },
             { en: "irritation", jp: "苛立ち", furigana: "いらだち", romaji: "iradachi", cat: "emotions" },
             { en: "dissatisfaction", jp: "不満", furigana: "ふまん", romaji: "fuman", cat: "emotions" },
             { en: "indignation", jp: "憤り", furigana: "いきどおり", romaji: "ikidoori", cat: "emotions" },
@@ -1770,7 +1783,7 @@
             { en: "fuming", jp: "ぷんぷんする", furigana: "ぷんぷんする", romaji: "punpunsuru", cat: "emotions" },
             { en: "vexed / regretful", jp: "悔しい", furigana: "くやしい", romaji: "kuyashii", cat: "emotions" },
             // Surprise & Shock
-            { en: "surprised", jp: "驚く", furigana: "おどろく", romaji: "odoroku", cat: "emotions" },
+            { en: "surprised", jp: "驚く", furigana: "おどろく", romaji: "odoroku", cat: "emotions", section: "Surprise & Shock" },
             { en: "surprised (casual)", jp: "", furigana: "びっくりする", romaji: "bikkurisuru", cat: "emotions" },
             { en: "shocked / stunned", jp: "愕然とする", furigana: "がくぜんとする", romaji: "gakuzentousuru", cat: "emotions" },
             { en: "impressed", jp: "感心する", furigana: "かんしんする", romaji: "kanshinsuru", cat: "emotions" },
@@ -1786,7 +1799,7 @@
             { en: "what a thing!", jp: "なんてことだ", furigana: "なんてことだ", romaji: "nante koto da", cat: "emotions" },
             { en: "no way / unbelievable", jp: "まさか", furigana: "まさか", romaji: "masaka", cat: "emotions" },
             // Love & Affection
-            { en: "love", jp: "愛", furigana: "あい", romaji: "ai", cat: "emotions" },
+            { en: "love", jp: "愛", furigana: "あい", romaji: "ai", cat: "emotions", section: "Love & Affection" },
             { en: "like", jp: "好き", furigana: "すき", romaji: "suki", cat: "emotions" },
             { en: "really like", jp: "大好き", furigana: "だいすき", romaji: "daisuki", cat: "emotions" },
             { en: "romantic love", jp: "恋", furigana: "こい", romaji: "koi", cat: "emotions" },
@@ -1804,7 +1817,7 @@
             { en: "sympathy", jp: "同情", furigana: "どうじょう", romaji: "doujou", cat: "emotions" },
             { en: "enchanted / dreamy", jp: "うっとり", furigana: "うっとり", romaji: "uttori", cat: "emotions" },
             // Fear & Anxiety
-            { en: "scary / afraid", jp: "怖い", furigana: "こわい", romaji: "kowai", cat: "emotions" },
+            { en: "scary / afraid", jp: "怖い", furigana: "こわい", romaji: "kowai", cat: "emotions", section: "Fear & Anxiety" },
             { en: "terrifying", jp: "恐ろしい", furigana: "おそろしい", romaji: "osoroshii", cat: "emotions" },
             { en: "worried / concern", jp: "心配", furigana: "しんぱい", romaji: "shinpai", cat: "emotions" },
             { en: "unease / anxiety", jp: "不安", furigana: "ふあん", romaji: "fuan", cat: "emotions" },
@@ -1818,7 +1831,7 @@
             { en: "helpless / insecure", jp: "心細い", furigana: "こころぼそい", romaji: "kokorobosoi", cat: "emotions" },
             { en: "shiver / horrified", jp: "ゾッとする", furigana: "ゾッとする", romaji: "zo tto suru", cat: "emotions" },
             // Calm & Satisfaction
-            { en: "calm / relaxed", jp: "落ち着く", furigana: "おちつく", romaji: "ochitsuku", cat: "emotions" },
+            { en: "calm / relaxed", jp: "落ち着く", furigana: "おちつく", romaji: "ochitsuku", cat: "emotions", section: "Calm & Satisfaction" },
             { en: "okay / fine", jp: "平気", furigana: "へいき", romaji: "heiki", cat: "emotions" },
             { en: "indifferent", jp: "無関心", furigana: "むかんしん", romaji: "mukanshin", cat: "emotions" },
             { en: "satisfied", jp: "満足", furigana: "まんぞく", romaji: "manzoku", cat: "emotions" },
@@ -1836,7 +1849,7 @@
             { en: "fulfilled / content", jp: "満たされる", furigana: "みたされる", romaji: "mitasareru", cat: "emotions" },
             { en: "relief / comfort", jp: "安堵", furigana: "あんど", romaji: "ando", cat: "emotions" },
             // Embarrassment & Regret
-            { en: "blush", jp: "赤面する", furigana: "せきめんする", romaji: "sekimensuru", cat: "emotions" },
+            { en: "blush", jp: "赤面する", furigana: "せきめんする", romaji: "sekimensuru", cat: "emotions", section: "Embarrassment & Regret" },
             { en: "awkward", jp: "気まずい", furigana: "きまずい", romaji: "kimazui", cat: "emotions" },
             { en: "flustered", jp: "焦る", furigana: "あせる", romaji: "aseru", cat: "emotions" },
             { en: "sorry / guilty", jp: "申し訳ない", furigana: "もうしわけない", romaji: "moushiwakenai", cat: "emotions" },
@@ -1844,7 +1857,7 @@
             { en: "lacking confidence", jp: "自信がない", furigana: "じしんがない", romaji: "jishin ga nai", cat: "emotions" },
             { en: "regret (noun)", jp: "悔い", furigana: "くい", romaji: "kui", cat: "emotions" },
             // Motivation & Determination
-            { en: "looking forward to", jp: "楽しみ", furigana: "たのしみ", romaji: "tanoshimi", cat: "emotions" },
+            { en: "looking forward to", jp: "楽しみ", furigana: "たのしみ", romaji: "tanoshimi", cat: "emotions", section: "Motivation & Determination" },
             { en: "motivation", jp: "やる気", furigana: "やるき", romaji: "yaruki", cat: "emotions" },
             { en: "enthusiastic", jp: "熱心", furigana: "ねっしん", romaji: "nesshin", cat: "emotions" },
             { en: "interesting", jp: "興味深い", furigana: "きょうみぶかい", romaji: "kyoumibukai", cat: "emotions" },
@@ -1857,7 +1870,7 @@
             { en: "determination", jp: "決意", furigana: "けつい", romaji: "ketsui", cat: "emotions" },
             { en: "hope / aspiration", jp: "希望", furigana: "きぼう", romaji: "kibou", cat: "emotions" },
             // Complex Feelings
-            { en: "frustrating / impatient", jp: "もどかしい", furigana: "もどかしい", romaji: "modokashii", cat: "emotions" },
+            { en: "frustrating / impatient", jp: "もどかしい", furigana: "もどかしい", romaji: "modokashii", cat: "emotions", section: "Complex Feelings" },
             { en: "bittersweet / poignant", jp: "切なさ", furigana: "せつなさ", romaji: "setsunasa", cat: "emotions" },
             { en: "heartache", jp: "胸が痛い", furigana: "むねがいたい", romaji: "mune ga itai", cat: "emotions" },
             { en: "feeling burdened", jp: "気が重い", furigana: "きがおもい", romaji: "ki ga omoi", cat: "emotions" },
@@ -1870,7 +1883,7 @@
             // Devices
             // --- TECHNOLOGY ---
             // Devices & Hardware
-            { en: "computer", jp: "計算機", furigana: "コンピューター", romaji: "konpyuutaa", cat: "tech" },
+            { en: "computer", jp: "計算機", furigana: "コンピューター", romaji: "konpyuutaa", cat: "tech", section: "Devices & Hardware" },
             { en: "PC", jp: "", furigana: "パソコン", romaji: "pasokon", cat: "tech" },
             { en: "laptop", jp: "", furigana: "ノートパソコン", romaji: "nooto pasokon", cat: "tech" },
             { en: "tablet", jp: "", furigana: "タブレット", romaji: "taburetto", cat: "tech" },
@@ -1891,7 +1904,7 @@
             { en: "headphones", jp: "", furigana: "ヘッドフォン", romaji: "heddofon", cat: "tech" },
             { en: "microphone", jp: "", furigana: "マイク", romaji: "maiku", cat: "tech" },
             // Software & Apps
-            { en: "software", jp: "", furigana: "ソフトウェア", romaji: "sofutowea", cat: "tech" },
+            { en: "software", jp: "", furigana: "ソフトウェア", romaji: "sofutowea", cat: "tech", section: "Software & Apps" },
             { en: "application / app", jp: "", furigana: "アプリ", romaji: "apuri", cat: "tech" },
             { en: "operating system", jp: "", furigana: "オペレーティングシステム", romaji: "opereetingu shisutemu", cat: "tech" },
             { en: "program", jp: "", furigana: "プログラム", romaji: "puroguramu", cat: "tech" },
@@ -1902,7 +1915,7 @@
             { en: "SNS", jp: "", furigana: "SNS", romaji: "esuenuuesu", cat: "tech" },
             { en: "chat", jp: "", furigana: "チャット", romaji: "chatto", cat: "tech" },
             // Internet & Network
-            { en: "internet", jp: "", furigana: "インターネット", romaji: "intaanetto", cat: "tech" },
+            { en: "internet", jp: "", furigana: "インターネット", romaji: "intaanetto", cat: "tech", section: "Internet & Network" },
             { en: "Wi-Fi", jp: "", furigana: "Wi-Fi", romaji: "waifai", cat: "tech" },
             { en: "network", jp: "", furigana: "ネットワーク", romaji: "nettowaaku", cat: "tech" },
             { en: "LAN", jp: "", furigana: "LAN", romaji: "ran", cat: "tech" },
@@ -1919,7 +1932,7 @@
             { en: "search", jp: "検索", furigana: "けんさく", romaji: "kensaku", cat: "tech" },
             { en: "search engine", jp: "検索エンジン", furigana: "けんさくエンジン", romaji: "kensaku enjin", cat: "tech" },
             // Electronics & Gadgets
-            { en: "home electronics", jp: "家電", furigana: "かでん", romaji: "kaden", cat: "tech" },
+            { en: "home electronics", jp: "家電", furigana: "かでん", romaji: "kaden", cat: "tech", section: "Electronics & Gadgets" },
             { en: "TV", jp: "", furigana: "テレビ", romaji: "terebi", cat: "tech" },
             { en: "radio", jp: "", furigana: "ラジオ", romaji: "rajio", cat: "tech" },
             { en: "camera", jp: "", furigana: "カメラ", romaji: "kamera", cat: "tech" },
@@ -1935,7 +1948,7 @@
             { en: "mobile battery", jp: "", furigana: "モバイルバッテリー", romaji: "mobairu batterii", cat: "tech" },
             { en: "VR", jp: "", furigana: "VR", romaji: "bui aaru", cat: "tech" },
             // Operations & Actions
-            { en: "to operate", jp: "操作する", furigana: "そうさする", romaji: "sousasuru", cat: "tech" },
+            { en: "to operate", jp: "操作する", furigana: "そうさする", romaji: "sousasuru", cat: "tech", section: "Operations & Actions" },
             { en: "to start up", jp: "起動する", furigana: "きどうする", romaji: "kidousuru", cat: "tech" },
             { en: "to shut down", jp: "終了する", furigana: "しゅうりょうする", romaji: "shuuryousuru", cat: "tech" },
             { en: "to set / configure", jp: "設定する", furigana: "せっていする", romaji: "setteisuru", cat: "tech" },
@@ -1955,7 +1968,7 @@
             { en: "to uninstall", jp: "", furigana: "アンインストールする", romaji: "an'insutoorusuru", cat: "tech" },
             { en: "to restart", jp: "再起動する", furigana: "さいきどうする", romaji: "saikidousuru", cat: "tech" },
             // Security & Accounts
-            { en: "password", jp: "", furigana: "パスワード", romaji: "pasuwaado", cat: "tech" },
+            { en: "password", jp: "", furigana: "パスワード", romaji: "pasuwaado", cat: "tech", section: "Security & Accounts" },
             { en: "username", jp: "ユーザー名", furigana: "ユーザーめい", romaji: "yuuzaamei", cat: "tech" },
             { en: "account", jp: "", furigana: "アカウント", romaji: "akaunto", cat: "tech" },
             { en: "encryption", jp: "暗号", furigana: "あんごう", romaji: "angou", cat: "tech" },
@@ -1975,7 +1988,7 @@
             { en: "ransomware", jp: "", furigana: "ランサムウェア", romaji: "ransamuwea", cat: "tech" },
             { en: "access control", jp: "権限管理", furigana: "けんげんかんり", romaji: "kengen kanri", cat: "tech" },
             // Advanced Tech & Concepts
-            { en: "AI", jp: "人工知能", furigana: "じんこうちのう", romaji: "jinkou chinou", cat: "tech" },
+            { en: "AI", jp: "人工知能", furigana: "じんこうちのう", romaji: "jinkou chinou", cat: "tech", section: "Advanced Tech & Concepts" },
             { en: "robotics", jp: "", furigana: "ロボティクス", romaji: "robotikusu", cat: "tech" },
             { en: "IoT", jp: "", furigana: "IoT", romaji: "ai oo tii", cat: "tech" },
             { en: "big data", jp: "", furigana: "ビッグデータ", romaji: "biggu deeta", cat: "tech" },
@@ -2027,7 +2040,7 @@
             { en: "3D printer", jp: "", furigana: "3Dプリンター", romaji: "surii dii purintaa", cat: "tech" },
             { en: "VR goggles", jp: "", furigana: "VRゴーグル", romaji: "bui aaru googuru", cat: "tech" },
             // Communication & Media
-            { en: "web conference", jp: "Web会議", furigana: "Webかいぎ", romaji: "webu kaigi", cat: "tech" },
+            { en: "web conference", jp: "Web会議", furigana: "Webかいぎ", romaji: "webu kaigi", cat: "tech", section: "Communication & Media" },
             { en: "video call", jp: "ビデオ通話", furigana: "ビデオつうわ", romaji: "bideo tsuuwa", cat: "tech" },
             { en: "online meeting", jp: "", furigana: "オンラインミーティング", romaji: "onrain miiteingu", cat: "tech" },
             { en: "attachment", jp: "添付ファイル", furigana: "てんぷファイル", romaji: "tenpu fairu", cat: "tech" },
@@ -2061,6 +2074,15 @@
             });
 
             filtered.forEach((v, index) => {
+                // Section Header
+                if (v.section) {
+                    const header = document.createElement('h2');
+                    header.className = 'vocab-section-title animate-slide-in';
+                    header.textContent = v.section;
+                    header.style.animationDelay = `${index * 0.02}s`;
+                    grid.appendChild(header);
+                }
+
                 const card = document.createElement('div');
                 card.className = 'vocab-card animate-slide-in';
                 card.style.animationDelay = `${index * 0.02}s`;
