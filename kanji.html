@@ -688,6 +688,9 @@
             // Start Stroke Order Load IMMEDIATELY (Parallel)
             loadStrokeOrder(char);
 
+            // Prefetch neighbors (Background)
+            prefetchNeighbors(char);
+
             // Check Cache for API data
             if (kanjiCache[char]) {
                 renderKanjiDetails(kanjiCache[char]);
@@ -734,9 +737,20 @@
             return hex;
         }
 
-        function loadStrokeOrder(char) {
+        function loadStrokeOrder(char, isPrefetch = false) {
+            // If caching/prefetching, don't update DOM if not current char
+            if (isPrefetch && char !== document.getElementById('detail-char').textContent) {
+                // Just fetch to cache
+                const hex = getUnicodeHex(char);
+                if (svgCache[char]) return; // Already cached
+                const url = `https://cdn.jsdelivr.net/gh/KanjiVG/kanjivg@master/kanji/${hex}.svg`;
+                fetch(url).then(r => r.ok ? r.text() : null).then(d => { if (d) svgCache[char] = d; });
+                return;
+            }
+
             const container = document.getElementById('stroke-container');
-            container.innerHTML = '<span style="color: #ccc;">Loading...</span>';
+            if (!isPrefetch) container.innerHTML = '<span style="color: #ccc;">Loading...</span>';
+
             const hex = getUnicodeHex(char);
 
             // Check Cache
@@ -773,13 +787,28 @@
         }
 
         function animateStrokes() {
-            const paths = document.querySelectorAll('.stroke-placeholder path');
+            const container = document.getElementById('stroke-container');
+            if (!container) return;
+            const paths = Array.from(container.querySelectorAll('path')); // Specific scope
+
+            // 1. READ: Get all lengths first (forces layout)
+            const lengths = paths.map(path => path.getTotalLength());
+
+            // 2. WRITE: Apply styles (invalidates layout, but no more reads)
             paths.forEach((path, index) => {
-                const length = path.getTotalLength();
-                path.style.strokeDasharray = length;
-                path.style.strokeDashoffset = length;
+                path.style.strokeDasharray = lengths[index];
+                path.style.strokeDashoffset = lengths[index];
                 path.style.animation = `draw 1s linear forwards ${index * 0.8}s`;
             });
+        }
+
+        function prefetchNeighbors(char) {
+            const idx = allKanjiList.indexOf(char);
+            if (idx === -1) return;
+            // Next
+            if (idx < allKanjiList.length - 1) loadStrokeOrder(allKanjiList[idx + 1], true);
+            // Prev
+            if (idx > 0) loadStrokeOrder(allKanjiList[idx - 1], true);
         }
 
         function replayAnimation() {
