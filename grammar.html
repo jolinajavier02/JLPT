@@ -108,6 +108,62 @@
             color: #b45309;
         }
 
+        /* Conjugation Table Styles */
+        .conjugation-container {
+            margin-top: 2rem;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .conjugation-title {
+            background: #f8fafc;
+            padding: 0.8rem 1.2rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .conjugation-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .conjugation-table th,
+        .conjugation-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .conjugation-table th {
+            background: #fcfcfc;
+            color: var(--text-light);
+            font-weight: 600;
+            width: 30%;
+        }
+
+        .conjugation-table tr:last-child td,
+        .conjugation-table tr:last-child th {
+            border-bottom: none;
+        }
+
+        .conj-pos {
+            color: #166534;
+            font-weight: 600;
+        }
+
+        .conj-neg {
+            color: #9f1239;
+            font-weight: 600;
+        }
+
         .example-list {
             display: flex;
             flex-direction: column;
@@ -357,6 +413,12 @@
                 structure: ['Noun', 'が', '欲しい'],
                 meaning: 'Expresses a desire to have or want a tangible object.',
                 notes: 'Used only for <strong>tangible things</strong>, not actions. The desired object takes the <strong>が</strong> particle. To express wanting to <em>do</em> something, use the Verb+たい form instead.',
+                conjugations: [
+                    { form: 'Present Positive', val: '欲しいです', class: 'conj-pos' },
+                    { form: 'Present Negative', val: '欲しくないです', class: 'conj-neg' },
+                    { form: 'Past Positive', val: '欲しかったです', class: 'conj-pos' },
+                    { form: 'Past Negative', val: '欲しくなかったです', class: 'conj-neg' }
+                ],
                 examples: [
                     { jp: '新しい<ruby>車<rt>くるま</rt></ruby><span class="text-particle">が</span><ruby>欲<rt>ほ</rt></ruby>しいです。', ro: 'Atarashii <span class="text-noun">kuruma</span> <span class="text-particle">ga</span> <span class="text-verb">hoshii</span> desu.', en: 'I <span class="text-verb">want</span> a new <span class="text-noun">car</span>.' },
                     { jp: '<ruby>水<rt>みず</rt></ruby><span class="text-particle">が</span><ruby>欲<rt>ほ</rt></ruby>しい。', ro: '<span class="text-noun">Mizu</span> <span class="text-particle">ga</span> <span class="text-verb">hoshii</span>.', en: 'I <span class="text-verb">want</span> <span class="text-noun">water</span>.' },
@@ -370,6 +432,12 @@
                 structure: ['Noun', 'に', 'Verb'],
                 meaning: 'Indicates the destination, target, or location toward which an action is directed.',
                 notes: '<strong>に</strong> marks the destination with motion verbs (go, come, return). It also marks the target/recipient of actions. Unlike <em>で</em> (location of action), <em>に</em> focuses on the point of arrival or state.',
+                conjugations: [
+                    { form: 'Present Positive', val: '行きます', class: 'conj-pos' },
+                    { form: 'Present Negative', val: '行きません', class: 'conj-neg' },
+                    { form: 'Past Positive', val: '行きました', class: 'conj-pos' },
+                    { form: 'Past Negative', val: '行きませんでした', class: 'conj-neg' }
+                ],
                 examples: [
                     { jp: '<ruby>学校<rt>がっこう</rt></ruby><span class="text-particle">に</span><ruby>行<rt>い</rt></ruby>きます。', ro: '<span class="text-noun">Gakkou</span> <span class="text-particle">ni</span> <span class="text-verb">ikimasu</span>.', en: 'I <span class="text-verb">go</span> <span class="text-particle">to</span> <span class="text-noun">school</span>.' },
                     { jp: '<ruby>友達<rt>ともだち</rt></ruby><span class="text-particle">に</span><ruby>会<rt>あ</rt></ruby>います。', ro: '<span class="text-noun">Tomodachi</span> <span class="text-particle">ni</span> <span class="text-verb">aimasu</span>.', en: 'I <span class="text-verb">meet</span> (<span class="text-particle">with</span>) my <span class="text-noun">friend</span>.' },
@@ -383,6 +451,12 @@
                 structure: ['Noun (Recipient)', 'に', 'Noun 2 (Object)', 'を', 'Verb'],
                 meaning: 'Indicates both the indirect object (recipient) and the direct object of an action.',
                 notes: 'Commonly used with verbs of <strong>giving, teaching, lending, or showing</strong>. <em>に</em> marks who receives it, while <em>を</em> marks what is being given.',
+                conjugations: [
+                    { form: 'Present Positive', val: 'あげます / 貸します', class: 'conj-pos' },
+                    { form: 'Present Negative', val: 'あげません / 貸しません', class: 'conj-neg' },
+                    { form: 'Past Positive', val: 'あげました / 貸しました', class: 'conj-pos' },
+                    { form: 'Past Negative', val: 'あげませんでした / 貸しませんでした', class: 'conj-neg' }
+                ],
                 examples: [
                     { jp: '<ruby>先生<rt>せんせい</rt></ruby><span class="text-particle">に</span><ruby>質問<rt>しつもん</rt></ruby><span class="text-particle">を</span>します。', ro: '<span class="text-noun">Sensei</span> <span class="text-particle">ni</span> <span class="text-noun">shitsumon</span> <span class="text-particle">wo</span> <span class="text-verb">shimasu</span>.', en: 'I <span class="text-verb">ask</span> the <span class="text-noun">teacher</span> a <span class="text-noun">question</span>.' },
                     { jp: '<ruby>母<rt>はは</rt></ruby><span class="text-particle">に</span>プレゼント<span class="text-particle">を</span>あげました。', ro: '<span class="text-noun">Haha</span> <span class="text-particle">ni</span> <span class="text-noun">purezento</span> <span class="text-particle">wo</span> <span class="text-verb">agemashita</span>.', en: 'I <span class="text-verb">gave</span> my <span class="text-noun">mother</span> a <span class="text-noun">present</span>.' },
@@ -396,6 +470,12 @@
                 structure: ['Noun', 'を', 'Verb'],
                 meaning: 'Marks the direct object that receives the action of a transitive verb.',
                 notes: '<strong>を</strong> (pronounced "o") is the most common way to link a verb to its object. It is only used with transitive verbs (verbs that act on something).',
+                conjugations: [
+                    { form: 'Present Positive', val: '食べます / 読みます', class: 'conj-pos' },
+                    { form: 'Present Negative', val: '食べません / 読みません', class: 'conj-neg' },
+                    { form: 'Past Positive', val: '食べました / 読みました', class: 'conj-pos' },
+                    { form: 'Past Negative', val: '食べませんでした / 読みませんでした', class: 'conj-neg' }
+                ],
                 examples: [
                     { jp: 'ご<ruby>飯<rt>はん</rt></ruby><span class="text-particle">を</span><ruby>食<rt>た</rt></ruby>べます。', ro: '<span class="text-noun">Gohan</span> <span class="text-particle">wo</span> <span class="text-verb">tabemasu</span>.', en: 'I <span class="text-verb">eat</span> <span class="text-noun">rice/a meal</span>.' },
                     { jp: '<ruby>日本語<rt>にほんご</rt></ruby><span class="text-particle">を</span><ruby>勉強<rt>べんきょう</rt></ruby>します。', ro: '<span class="text-noun">Nihongo</span> <span class="text-particle">wo</span> <span class="text-verb">benkyou shimasu</span>.', en: 'I <span class="text-verb">study</span> <span class="text-noun">Japanese</span>.' },
@@ -422,6 +502,12 @@
                 structure: ['Noun 1', 'は', 'Noun 2', 'が', 'Adjective'],
                 meaning: 'Describes a specific attribute, body part, or quality of the main subject.',
                 notes: 'The overall topic is already marked by <strong>は</strong>, while the specific part being described is marked by <strong>が</strong>. This is the standard way to talk about heights, body parts, or preferences.',
+                conjugations: [
+                    { form: 'Present Positive', val: '高いです', class: 'conj-pos' },
+                    { form: 'Present Negative', val: '高くないです', class: 'conj-neg' },
+                    { form: 'Past Positive', val: '高かったです', class: 'conj-pos' },
+                    { form: 'Past Negative', val: '高くなかったです', class: 'conj-neg' }
+                ],
                 examples: [
                     { jp: '<ruby>象<rt>ぞう</rt></ruby><span class="text-particle">は</span><ruby>鼻<rt>はな</rt></ruby><span class="text-particle">が</span><ruby>長<rt>なが</rt></ruby>いです。', ro: '<span class="text-noun">Zou</span> <span class="text-particle">wa</span> <span class="text-noun">hana</span> <span class="text-particle">ga</span> <span class="text-adj">nagai</span> desu.', en: '<span class="text-noun">Elephants</span> <span class="text-verb">have</span> <span class="text-adj">long</span> <span class="text-noun">trunks</span>.' },
                     { jp: '<ruby>私<rt>わたし</rt></ruby><span class="text-particle">は</span><ruby>頭<rt>あたま</rt></ruby><span class="text-particle">が</span><ruby>痛<rt>いた</rt></ruby>いです。', ro: '<span class="text-noun">Watashi</span> <span class="text-particle">wa</span> <span class="text-noun">atama</span> <span class="text-particle">ga</span> <span class="text-adj">itai</span> desu.', en: 'I <span class="text-verb">have</span> a <span class="text-noun">headache</span> (<span class="text-noun">My head</span> <span class="text-verb">hurts</span>).' },
@@ -435,6 +521,12 @@
                 structure: ['Time Noun', 'までに', 'Verb'],
                 meaning: 'Indicates a deadline by which an action must be completed.',
                 notes: '<strong>までに</strong> means "by [time]". Don\'t confuse it with <em>まで (until)</em>. <em>まで</em> describes a continuous action up to a point, while <em>までに</em> describes a one-time completion before a deadline.',
+                conjugations: [
+                    { form: 'Present Positive', val: '帰ります / 終わります', class: 'conj-pos' },
+                    { form: 'Present Negative', val: '帰りません / 終わりません', class: 'conj-neg' },
+                    { form: 'Past Positive', val: '帰りました / 終わりました', class: 'conj-pos' },
+                    { form: 'Past Negative', val: '帰りませんでした / 終わりませんでした', class: 'conj-neg' }
+                ],
                 examples: [
                     { jp: '5<ruby>時<rt>じ</rt></ruby><span class="text-particle">までに</span><ruby>帰<rt>かえ</rt></ruby>ります。', ro: '<span class="text-noun">5-ji</span> <span class="text-particle">made ni</span> <span class="text-verb">kaerimasu</span>.', en: 'I\'ll <span class="text-verb">return</span> <span class="text-particle">by</span> <span class="text-noun">5 o\'clock</span>.' },
                     { jp: '<ruby>明日<rt>あした</rt></ruby><span class="text-particle">までに</span><ruby>宿題<rt>しゅくだい</rt></ruby><span class="text-particle">を</span><ruby>出<rt>だ</rt></ruby>してください。', ro: '<span class="text-noun">Ashita</span> <span class="text-particle">made ni</span> <span class="text-noun">shukudai</span> <span class="text-particle">wo</span> <span class="text-verb">dashite kudasai</span>.', en: 'Please <span class="text-verb">submit</span> <span class="text-noun">homework</span> <span class="text-particle">by</span> <span class="text-noun">tomorrow</span>.' },
@@ -448,6 +540,12 @@
                 structure: ['Noun', 'が', 'できます'],
                 meaning: 'Expresses ability (can do) or possibility.',
                 notes: 'Indicates a natural ability or a learned skill. <strong>できます</strong> can also mean something is "completed" or "ready" (e.g., Dinner is ready).',
+                conjugations: [
+                    { form: 'Present Positive', val: 'できます', class: 'conj-pos' },
+                    { form: 'Present Negative', val: 'できません', class: 'conj-neg' },
+                    { form: 'Past Positive', val: 'できました', class: 'conj-pos' },
+                    { form: 'Past Negative', val: 'できませんでした', class: 'conj-neg' }
+                ],
                 examples: [
                     { jp: '<ruby>日本語<rt>にほんご</rt></ruby><span class="text-particle">が</span>できます。', ro: '<span class="text-noun">Nihongo</span> <span class="text-particle">ga</span> <span class="text-verb">dekimasu</span>.', en: 'I <span class="text-verb">can</span> <span class="text-verb">speak</span> <span class="text-noun">Japanese</span>.' },
                     { jp: '<ruby>料理<rt>りょうり</rt></ruby><span class="text-particle">が</span>できます。', ro: '<span class="text-noun">Ryouri</span> <span class="text-particle">ga</span> <span class="text-verb">dekimasu</span>.', en: 'I <span class="text-verb">can</span> <span class="text-verb">cook</span>.' },
@@ -461,6 +559,12 @@
                 structure: ['Noun', 'の', '前に'],
                 meaning: 'Indicates that one thing happens before another.',
                 notes: 'Always use <strong>の</strong> to connect a noun to <em>前に</em>. If using a verb, use the <strong>Dictionary Form</strong> directly before <em>前に</em>. The opposite is <em>後で (ato de)</em>.',
+                conjugations: [
+                    { form: 'Present Positive', val: '磨きます / 洗います', class: 'conj-pos' },
+                    { form: 'Present Negative', val: '磨きません / 洗いません', class: 'conj-neg' },
+                    { form: 'Past Positive', val: '磨きました / 洗いました', class: 'conj-pos' },
+                    { form: 'Past Negative', val: '磨きませんでした / 洗いませんでした', class: 'conj-neg' }
+                ],
                 examples: [
                     { jp: '<ruby>寝<rt>ね</rt></ruby>る<span class="text-particle">前に</span><ruby>歯<rt>は</rt></ruby><span class="text-particle">を</span><ruby>磨<rt>みが</rt></ruby>きます。', ro: '<span class="text-verb">Neru</span> <span class="text-particle">mae ni</span> <span class="text-noun">ha</span> <span class="text-particle">wo</span> <span class="text-verb">migakimasu</span>.', en: 'I <span class="text-verb">brush</span> my <span class="text-noun">teeth</span> <span class="text-particle">before</span> <span class="text-verb">sleeping</span>.' },
                     { jp: '<ruby>試験<rt>しけん</rt></ruby><span class="text-particle">の前に</span><ruby>勉強<rt>べんきょう</rt></ruby>します。', ro: '<span class="text-noun">Shiken</span> <span class="text-particle">no mae ni</span> <span class="text-verb">benkyou shimasu</span>.', en: 'I <span class="text-verb">study</span> <span class="text-particle">before</span> the <span class="text-noun">exam</span>.' },
@@ -474,6 +578,12 @@
                 structure: ['Noun', 'に', 'なります'],
                 meaning: 'Expresses a change or transformation of state.',
                 notes: 'Indicates a result of a change. <strong>に</strong> marks the final state. It can be used with nouns or Na-adjectives. For I-adjectives, the \'i\' changes to \'ku\' (e.g. <em>あつくなります</em>).',
+                conjugations: [
+                    { form: 'Present Positive', val: 'なります', class: 'conj-pos' },
+                    { form: 'Present Negative', val: 'なりません', class: 'conj-neg' },
+                    { form: 'Past Positive', val: 'なりました', class: 'conj-pos' },
+                    { form: 'Past Negative', val: 'なりませんでした', class: 'conj-neg' }
+                ],
                 examples: [
                     { jp: '<ruby>先生<rt>せんせい</rt></ruby><span class="text-particle">に</span>なります。', ro: '<span class="text-noun">Sensei</span> <span class="text-particle">ni</span> <span class="text-verb">narimasu</span>.', en: 'I <span class="text-verb">will</span> <span class="text-verb">become</span> a <span class="text-noun">teacher</span>.' },
                     { jp: '<ruby>春<rt>はる</rt></ruby><span class="text-particle">に</span>なりました。', ro: '<span class="text-noun">Haru</span> <span class="text-particle">ni</span> <span class="text-verb">narimashita</span>.', en: 'It <span class="text-verb">has</span> <span class="text-verb">become</span> <span class="text-noun">spring</span>.' },
@@ -538,9 +648,25 @@
                     </div>
 
                     <div class="note-box">
-                        <strong>💡 Teacher's Note:</strong><br>
+                        <strong>💡 Teacher\'s Note:</strong><br>
                         ${lesson.notes}
                     </div>
+
+                    ${lesson.conjugations ? `
+                    <div class="conjugation-container">
+                        <div class="conjugation-title">
+                            <span>🔄 Conjugation Table</span>
+                        </div>
+                        <table class="conjugation-table">
+                            ${lesson.conjugations.map(c => `
+                                <tr>
+                                    <th>${c.form}</th>
+                                    <td class="${c.class}">${c.val}</td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    </div>
+                    ` : ''}
                 </div>
                 <div class="book-page animate-fade-in">
                     <div class="lesson-header">
